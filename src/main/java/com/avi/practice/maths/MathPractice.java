@@ -40,4 +40,28 @@ final class MathPractice {
         Collections.sort(factors);
         return factors;
     }
+
+    final int isPrime(final int A) {
+        if (A == 1) {
+            return 0;
+        }
+        if (A == 2 || A == 3) {
+            return 1;
+        }
+        if (A % 2 == 0 || A % 3 == 0) {
+            return 0;
+        }
+        final double sqrt = Math.sqrt(A);
+        for (int i = 5; i <= sqrt; i = i + 6) {
+            if (A % i == 0) {
+                return 0;
+            }
+        }
+        for (int i = 7; i <= sqrt; i = i + 6) {
+            if (A % i == 0) {
+                return 0;
+            }
+        }
+        return 1;
+    }
 }

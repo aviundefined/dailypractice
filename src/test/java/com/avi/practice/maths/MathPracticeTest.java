@@ -120,4 +120,19 @@ public class MathPracticeTest {
             Assert.assertEquals(expected, tool.allFactorsOptimized(a));
         }
     }
+
+    @Test
+    public void isPrime() {
+            Assert.assertEquals(0, tool.isPrime(1));
+            Assert.assertEquals(1, tool.isPrime(2));
+            Assert.assertEquals(1, tool.isPrime(3));
+            Assert.assertEquals(1, tool.isPrime(5));
+            Assert.assertEquals(1, tool.isPrime(7));
+            Assert.assertEquals(0, tool.isPrime(9));
+            Assert.assertEquals(1, tool.isPrime(11));
+            Assert.assertEquals(1, tool.isPrime(13));
+            Assert.assertEquals(0, tool.isPrime(15));
+            Assert.assertEquals(1, tool.isPrime(17));
+            Assert.assertEquals(1, tool.isPrime(19));
+    }
 }
