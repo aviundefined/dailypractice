@@ -358,4 +358,50 @@ public class ArrayPracticeTest {
             Assert.assertArrayEquals(expected, wave);
         }
     }
+
+    @Test
+    public void waveApproach2() {
+        {
+            final int[] a = {1, 2, 3, 4};
+            tool.printArr(a);
+            final int[] expected = {2, 1, 4, 3};
+            final int[] wave = tool.waveApproach2(a);
+            tool.printArr(wave);
+            Assert.assertArrayEquals(expected, wave);
+        }
+
+        {
+            final int[] a = {5, 1, 3, 2, 4};
+            tool.printArr(a);
+            final int[] expected = {2, 1, 4, 3, 5};
+            final int[] wave = tool.waveApproach2(a);
+            tool.printArr(wave);
+            Assert.assertArrayEquals(expected, wave);
+        }
+    }
+
+    @Test
+    public void compareWaveAndWaveApproach2() {
+        final int n = randInt();
+        for (int i = 0; i <= n; i++) {
+            final int[] a = randIntArr();
+            final int[] wave = tool.wave(a);
+            final int[] waveApproach2 = tool.waveApproach2(a);
+            Assert.assertArrayEquals(waveApproach2, wave);
+        }
+
+    }
+
+    private static int randInt() {
+        return (int) (Math.random() * 1000) + 10;
+    }
+
+    private static int[] randIntArr() {
+        final int n = randInt();
+        final int[] a = new int[n];
+        for (int i = 0; i <= n - 1; i++) {
+            a[i] = randInt();
+        }
+        return a;
+    }
 }

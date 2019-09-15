@@ -351,4 +351,14 @@ class ArrayPractice {
         }
         return A;
     }
+
+    final int[] waveApproach2(int[] a) {
+        Arrays.sort(a);
+        for (int i = 0; i < a.length - 1; i = i + 2) {
+            int temp = a[i];
+            a[i] = a[i + 1];
+            a[i + 1] = temp;
+        }
+        return a;
+    }
 }
