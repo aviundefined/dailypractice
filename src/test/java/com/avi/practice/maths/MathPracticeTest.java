@@ -358,4 +358,50 @@ public class MathPracticeTest {
             Assert.assertEquals(String.valueOf(a), 1, tool.isPalindrome(a));
         }
     }
+
+    @Test
+    public void reverseInteger() {
+        {
+            final int a = 1234;
+            final int expected = 4321;
+            Assert.assertEquals(String.valueOf(a), expected, tool.reverseInteger(a));
+        }
+
+        {
+            final int a = 12345;
+            final int expected = 54321;
+            Assert.assertEquals(String.valueOf(a), expected, tool.reverseInteger(a));
+        }
+
+        {
+            final int a = 4;
+            final int expected = 4;
+            Assert.assertEquals(String.valueOf(a), expected, tool.reverseInteger(a));
+        }
+
+        {
+            final int a = 12;
+            final int expected = 21;
+            Assert.assertEquals(String.valueOf(a), expected, tool.reverseInteger(a));
+        }
+
+        {
+            final int a = 0;
+            final int expected = 0;
+            Assert.assertEquals(String.valueOf(a), expected, tool.reverseInteger(a));
+        }
+
+        {
+            final int a = -1234567891;
+            final int expected = -1987654321;
+            Assert.assertEquals(String.valueOf(a), expected, tool.reverseInteger(a));
+
+        }
+        {
+            final int a =  -1146467285;
+            final int expected = 0;
+            Assert.assertEquals(String.valueOf(a), expected, tool.reverseInteger(a));
+
+        }
+    }
 }

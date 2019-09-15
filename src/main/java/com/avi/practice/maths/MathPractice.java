@@ -154,4 +154,24 @@ final class MathPractice {
         }
         return 1;
     }
+
+    final int reverseInteger(final int A) {
+        final boolean isNegative = A < 0;
+        final char[] chars = String.valueOf(Math.abs(A)).toCharArray();
+        final int n = chars.length;
+        int l = 0, r = n - 1;
+        while (l <= r) {
+            final char tmp = chars[l];
+            chars[l] = chars[r];
+            chars[r] = tmp;
+            l++;
+            r--;
+        }
+        try {
+            final int reversed = Integer.parseInt(new String(chars));
+            return isNegative ? -1 * reversed : reversed;
+        } catch (final NumberFormatException e) {
+            return 0;
+        }
+    }
 }
