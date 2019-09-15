@@ -91,7 +91,7 @@ final class MathPractice {
         return primes;
     }
 
-    final String findDigitsInBinary(int A) {
+    final String decimalToBinary(int A) {
         if (A == 0) {
             return "0";
         }
