@@ -259,9 +259,9 @@ class ArrayPractice {
         return rightSplVals;
     }
 
+    static final int FOUND = 1;
+    static final int NOT_FOUND = -1;
     final int nobleInteger(int[] A) {
-        final int FOUND = 1;
-        final int NOT_FOUND = -1;
         Arrays.sort(A);
         final int n = A.length;
         // Base case, if last entry after the sorting is 0 then already FOUND

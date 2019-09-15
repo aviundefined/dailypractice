@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.avi.practice.arrays.ArrayPractice.FOUND;
+import static com.avi.practice.arrays.ArrayPractice.NOT_FOUND;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
@@ -248,15 +250,15 @@ public class ArrayPracticeTest {
     public void nobleInteger() {
         {
             final int[] a = {5, 6, 2};
-            Assert.assertEquals(1, tool.nobleInteger(a));
+            Assert.assertEquals(FOUND, tool.nobleInteger(a));
         }
         {
             final int[] a = {1, 2, 7, 0, 9, 3, 6, 0, 6};
-            Assert.assertEquals(-1, tool.nobleInteger(a));
+            Assert.assertEquals(NOT_FOUND, tool.nobleInteger(a));
         }
         {
             final int[] a = {-4, -2, 0, -1, -6};
-            Assert.assertEquals(1, tool.nobleInteger(a));
+            Assert.assertEquals(FOUND, tool.nobleInteger(a));
         }
     }
 }
