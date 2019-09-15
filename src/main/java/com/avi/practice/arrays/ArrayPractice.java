@@ -261,6 +261,7 @@ class ArrayPractice {
 
     static final int FOUND = 1;
     static final int NOT_FOUND = -1;
+
     final int nobleInteger(int[] A) {
         Arrays.sort(A);
         final int n = A.length;
@@ -282,6 +283,21 @@ class ArrayPractice {
                 lastDuplicate = 0;
             }
             if (map.get(i) == A[i]) {
+                return FOUND;
+            }
+        }
+        return NOT_FOUND;
+    }
+
+    final int nobleIntegerApproach2(int[] A) {
+        Arrays.sort(A);
+        final int n = A.length;
+        for (int i = 0; i <= n - 1; i++) {
+            // Handle duplicates
+            if (i < n - 1 && A[i] == A[i + 1]) {
+                continue;
+            }
+            if (A[i] == n - 1 - i) {
                 return FOUND;
             }
         }
