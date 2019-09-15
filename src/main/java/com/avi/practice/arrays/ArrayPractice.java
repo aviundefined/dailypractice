@@ -321,4 +321,34 @@ class ArrayPractice {
         }
         return B;
     }
+
+    enum Action {
+        GT,
+        LT
+    }
+
+    final int[] wave(int[] A) {
+        final int n = A.length;
+        Arrays.sort(A);
+        Action action = Action.GT;
+        for (int i = 1; i <= n - 1; i++) {
+            if (action == Action.GT) {
+                if (A[i - 1] < A[i]) {
+                    final int tmp = A[i];
+                    A[i] = A[i - 1];
+                    A[i - 1] = tmp;
+                }
+                action = Action.LT;
+            } else //noinspection ConstantConditions
+                if (action == Action.LT) {
+                    if (A[i - 1] > A[i]) {
+                        final int tmp = A[i];
+                        A[i] = A[i - 1];
+                        A[i - 1] = tmp;
+                    }
+                    action = Action.GT;
+                }
+        }
+        return A;
+    }
 }

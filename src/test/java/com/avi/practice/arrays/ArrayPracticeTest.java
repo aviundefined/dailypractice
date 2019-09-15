@@ -337,4 +337,25 @@ public class ArrayPracticeTest {
             }
         }
     }
+
+    @Test
+    public void wave() {
+        {
+            final int[] a = {1, 2, 3, 4};
+            tool.printArr(a);
+            final int[] expected = {2, 1, 4, 3};
+            final int[] wave = tool.wave(a);
+            tool.printArr(wave);
+            Assert.assertArrayEquals(expected, wave);
+        }
+
+        {
+            final int[] a = {5, 1, 3, 2, 4};
+            tool.printArr(a);
+            final int[] expected = {2, 1, 4, 3, 5};
+            final int[] wave = tool.wave(a);
+            tool.printArr(wave);
+            Assert.assertArrayEquals(expected, wave);
+        }
+    }
 }
