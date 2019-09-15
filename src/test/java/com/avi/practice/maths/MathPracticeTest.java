@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -271,6 +272,21 @@ public class MathPracticeTest {
             final String binary = tool.decimalToBinary(a);
             Assert.assertEquals("101100101", binary);
             Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+    }
+
+    @Test
+    public void fizzBuzz() {
+        {
+            final int a = 5;
+            final List<String> expected = Arrays.asList("1","2","Fizz","4","Buzz");
+            Assert.assertEquals(expected, tool.fizzBuzz(a));
+        }
+
+        {
+            final int a = 17;
+            final List<String> expected = Arrays.asList("1","2","Fizz","4","Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14", "FizzBuzz", "16", "17");
+            Assert.assertEquals(expected, tool.fizzBuzz(a));
         }
     }
 }
