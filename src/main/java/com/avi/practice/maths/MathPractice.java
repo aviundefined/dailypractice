@@ -26,7 +26,6 @@ final class MathPractice {
 
     final List<Integer> allFactorsOptimized(final int A) {
         final ArrayList<Integer> factors = new ArrayList<>();
-
         final double sqrt = Math.sqrt(A);
         for (int i = 1; i <= sqrt; i++) {
             if (A % i == 0) {
