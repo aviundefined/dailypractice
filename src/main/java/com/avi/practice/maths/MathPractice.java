@@ -65,4 +65,27 @@ final class MathPractice {
         }
         return 1;
     }
+
+    final ArrayList<Integer> sieve(int A) {
+        final ArrayList<Integer> primes = new ArrayList<>();
+        if (A < 2) {
+            return primes;
+        }
+        primes.add(2);
+        if (A >= 3) {
+            primes.add(3);
+        }
+        for (int i = 5; i <= A; i = i + 6) {
+            if (isPrime(i) == 1) {
+                primes.add(i);
+            }
+        }
+        for (int i = 7; i <= A; i = i + 6) {
+            if (isPrime(i) == 1) {
+                primes.add(i);
+            }
+        }
+        Collections.sort(primes);
+        return primes;
+    }
 }

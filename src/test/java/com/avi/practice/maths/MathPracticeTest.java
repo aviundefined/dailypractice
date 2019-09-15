@@ -135,4 +135,74 @@ public class MathPracticeTest {
             Assert.assertEquals(1, tool.isPrime(17));
             Assert.assertEquals(1, tool.isPrime(19));
     }
+    @Test
+    public void sieve() {
+        {
+            final int a = 1;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
+            final int a = 2;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
+            final int a = 3;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            primes.add(3);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
+            final int a = 5;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            primes.add(3);
+            primes.add(5);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
+            final int a = 7;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            primes.add(3);
+            primes.add(5);
+            primes.add(7);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
+            final int a = 9;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            primes.add(3);
+            primes.add(5);
+            primes.add(7);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
+            final int a = 11;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            primes.add(3);
+            primes.add(5);
+            primes.add(7);
+            primes.add(11);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
+            final int a = 19;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            primes.add(3);
+            primes.add(5);
+            primes.add(7);
+            primes.add(11);
+            primes.add(13);
+            primes.add(17);
+            primes.add(19);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+    }
 }
