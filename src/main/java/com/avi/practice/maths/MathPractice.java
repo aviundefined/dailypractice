@@ -75,6 +75,7 @@ final class MathPractice {
         if (A >= 3) {
             primes.add(3);
         }
+        // prime numbers are always of type 6n - 1 and 6n + 1
         for (int i = 5; i <= A; i = i + 6) {
             if (isPrime(i) == 1) {
                 primes.add(i);

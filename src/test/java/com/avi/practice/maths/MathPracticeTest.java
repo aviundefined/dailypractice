@@ -123,18 +123,19 @@ public class MathPracticeTest {
 
     @Test
     public void isPrime() {
-            Assert.assertEquals(0, tool.isPrime(1));
-            Assert.assertEquals(1, tool.isPrime(2));
-            Assert.assertEquals(1, tool.isPrime(3));
-            Assert.assertEquals(1, tool.isPrime(5));
-            Assert.assertEquals(1, tool.isPrime(7));
-            Assert.assertEquals(0, tool.isPrime(9));
-            Assert.assertEquals(1, tool.isPrime(11));
-            Assert.assertEquals(1, tool.isPrime(13));
-            Assert.assertEquals(0, tool.isPrime(15));
-            Assert.assertEquals(1, tool.isPrime(17));
-            Assert.assertEquals(1, tool.isPrime(19));
+        Assert.assertEquals(0, tool.isPrime(1));
+        Assert.assertEquals(1, tool.isPrime(2));
+        Assert.assertEquals(1, tool.isPrime(3));
+        Assert.assertEquals(1, tool.isPrime(5));
+        Assert.assertEquals(1, tool.isPrime(7));
+        Assert.assertEquals(0, tool.isPrime(9));
+        Assert.assertEquals(1, tool.isPrime(11));
+        Assert.assertEquals(1, tool.isPrime(13));
+        Assert.assertEquals(0, tool.isPrime(15));
+        Assert.assertEquals(1, tool.isPrime(17));
+        Assert.assertEquals(1, tool.isPrime(19));
     }
+
     @Test
     public void sieve() {
         {
@@ -156,7 +157,22 @@ public class MathPracticeTest {
             Assert.assertEquals(primes, tool.sieve(a));
         }
         {
+            final int a = 4;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            primes.add(3);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
             final int a = 5;
+            final ArrayList<Integer> primes = new ArrayList<>();
+            primes.add(2);
+            primes.add(3);
+            primes.add(5);
+            Assert.assertEquals(primes, tool.sieve(a));
+        }
+        {
+            final int a = 6;
             final ArrayList<Integer> primes = new ArrayList<>();
             primes.add(2);
             primes.add(3);
