@@ -3,6 +3,7 @@ package com.avi.practice.maths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by navinash on 15/09/19.
@@ -88,5 +89,39 @@ final class MathPractice {
         }
         Collections.sort(primes);
         return primes;
+    }
+
+    final String findDigitsInBinary(int A) {
+        if (A == 0) {
+            return "0";
+        }
+        final Stack<Integer> stack = new Stack<>();
+        while (A > 0) {
+            final int remainder = A % 2;
+            A = A / 2;
+            stack.add(remainder);
+        }
+
+        final StringBuilder b = new StringBuilder();
+        while (!stack.isEmpty()) {
+            b.append(stack.pop());
+        }
+        return b.toString();
+    }
+
+    final int binaryToDecimal(final String binary) {
+        int decimal = 0;
+        int bin = Integer.parseInt(binary);
+        if (bin == 0) {
+            return 0;
+        }
+        int i = 0;
+        while (bin > 0) {
+            final int remainder = bin % 10;
+            bin = bin / 10;
+            decimal = decimal + (remainder * (int) Math.pow(2, i));
+            i++;
+        }
+        return decimal;
     }
 }

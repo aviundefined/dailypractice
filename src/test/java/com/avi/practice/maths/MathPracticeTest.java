@@ -221,4 +221,56 @@ public class MathPracticeTest {
             Assert.assertEquals(primes, tool.sieve(a));
         }
     }
+
+    @Test
+    public void decimalToBinaryViceVersa() {
+        {
+            final int a = 0;
+            final String binary = tool.findDigitsInBinary(a);
+            Assert.assertEquals("0", binary);
+            Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+        {
+            final int a = 1;
+            final String binary = tool.findDigitsInBinary(a);
+            Assert.assertEquals("1", binary);
+            Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+        {
+            final int a = 2;
+            final String binary = tool.findDigitsInBinary(a);
+            Assert.assertEquals("10", binary);
+            Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+        {
+            final int a = 3;
+            final String binary = tool.findDigitsInBinary(a);
+            Assert.assertEquals("11", binary);
+            Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+        {
+            final int a = 4;
+            final String binary = tool.findDigitsInBinary(a);
+            Assert.assertEquals("100", binary);
+            Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+        {
+            final int a = 6;
+            final String binary = tool.findDigitsInBinary(a);
+            Assert.assertEquals("110", binary);
+            Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+        {
+            final int a = 7;
+            final String binary = tool.findDigitsInBinary(a);
+            Assert.assertEquals("111", binary);
+            Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+        {
+            final int a = 357;
+            final String binary = tool.findDigitsInBinary(a);
+            Assert.assertEquals("101100101", binary);
+            Assert.assertEquals(a, tool.binaryToDecimal(binary));
+        }
+    }
 }
