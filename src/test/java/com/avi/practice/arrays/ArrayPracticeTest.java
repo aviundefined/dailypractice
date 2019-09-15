@@ -1,5 +1,6 @@
 package com.avi.practice.arrays;
 
+import com.avi.practice.arrays.ArrayPractice.Interval;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -392,10 +393,76 @@ public class ArrayPracticeTest {
 
     }
 
-    private static int randInt() {
-        return (int) (Math.random() * 1000) + 10;
+    @Test
+    public void mergeOverlappingIntervals() {
+        final Interval[] arr = new Interval[4];
+        arr[0] = new Interval(6, 8);
+        arr[1] = new Interval(1, 9);
+        arr[2] = new Interval(2, 4);
+        arr[3] = new Interval(4, 7);
+        tool.printArr(arr);
+        final Interval[] nonOverlappingIntervals = tool.getMergedNonOverlappingIntervals(arr);
+        tool.printArr(nonOverlappingIntervals);
+        System.out.println("================================");
+        final int n = randInt(10);
+        for (int i = 0; i <= n; i++) {
+            final int m = randInt(10);
+            final Interval[] intervals = new Interval[m];
+            for (int j = 0; j < m; j++) {
+                final int s = randInt(100);
+                final Interval interval = new Interval(s, s + randInt(4));
+                intervals[j] = interval;
+            }
+            tool.printArr(intervals);
+            System.out.println("---------------------");
+            tool.printArr(tool.getMergedNonOverlappingIntervals(intervals));
+            System.out.println("================================");
+        }
     }
 
+
+    @Test
+    public void compareInsertIntoNonOverlappingIntervals() {
+        final int n = randInt(10);
+        for (int i = 0; i <= n; i++) {
+            final int m = randInt(10);
+            final List<Interval> intervals = new ArrayList<>();
+            for (int j = 0; j < m; j++) {
+                final int s = randInt(100);
+                intervals.add(new Interval(s, s + randInt(4)));
+            }
+            final int start = randInt();
+            final Interval newInterval = new Interval(start, start + randInt(5));
+            System.out.println(intervals);
+            final List<Interval> intervals1 = tool.insertIntoNonOverlappingIntervals(intervals, newInterval);
+            final List<Interval> intervals2 = tool.insertIntoNonOverlappingIntervalsApproach2(intervals, newInterval);
+            Assert.assertEquals(intervals1, intervals2);
+        }
+    }
+
+    @Test
+    public void insertIntoNonOverlappingIntervals() {
+        /*
+         * Input : Set : [1, 2], [6, 9]
+         *         New interval : [3, 5]
+         * Output : [1, 2], [3, 5], [6, 9]
+         */
+        final Interval i1= new Interval(1, 2);
+        final Interval i2= new Interval(6, 9);
+        final Interval newInterval = new Interval(3, 5);
+        final List<Interval> intervals = new ArrayList<>();
+        intervals.add(i1);
+        intervals.add(i2);
+        final List<Interval> merged = tool.insertIntoNonOverlappingIntervals(intervals, newInterval);
+        System.out.println(merged);
+    }
+    private static int randInt() {
+        return randInt(1000);
+    }
+
+    private static int randInt(final int n) {
+        return (int) (Math.random() * n) + 5;
+    }
     private static int[] randIntArr() {
         final int n = randInt();
         final int[] a = new int[n];

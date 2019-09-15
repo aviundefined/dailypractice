@@ -4,10 +4,13 @@ package com.avi.practice.arrays;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Stack;
 
 /**
  * Created by navinash on 14/09/19.
@@ -185,6 +188,22 @@ class ArrayPractice {
         System.out.println();
     }
 
+    final void printArr(final Object[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1) {
+                System.out.print(arr[i]);
+            } else {
+                System.out.print(arr[i] + ",");
+
+            }
+        }
+        System.out.println();
+    }
+
+    final boolean isEmpty(Object[] intervals) {
+        return intervals == null || intervals.length == 0;
+    }
+
 
     final int maxSpecialProduct(int[] A) {
         final int n = A.length;
@@ -360,5 +379,105 @@ class ArrayPractice {
             a[i + 1] = temp;
         }
         return a;
+    }
+
+    final List<Interval> insertIntoNonOverlappingIntervals(final List<Interval> intervals, final Interval newInterval) {
+        final List<Interval> copyIntervals = new ArrayList<>(intervals);
+        copyIntervals.add(newInterval);
+        final int n = copyIntervals.size();
+        final Interval[] merged = getMergedNonOverlappingIntervals(copyIntervals.toArray(new Interval[n]));
+        if (isEmpty(merged)) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(Arrays.asList(merged));
+    }
+
+    final List<Interval> insertIntoNonOverlappingIntervalsApproach2(List<Interval> intervals, Interval newInterval) {
+        //noinspection UnnecessaryLocalVariable
+        final Interval current = newInterval;
+        int i = 0;
+        while (i < intervals.size()) {
+            Interval in = intervals.get(i);
+            if (in.end < current.start) {
+                i++;
+            } else if (in.start > current.end) {
+                intervals.add(i, current);
+                break;
+            } else {
+                current.start = Math.min(in.start, current.start);
+                current.end = Math.max(in.end, current.end);
+                intervals.remove(i);
+            }
+        }
+        if (i == intervals.size()) {
+            intervals.add(current);
+        }
+        return intervals;
+    }
+
+    final Interval[] getMergedNonOverlappingIntervals(final Interval[] intervals) {
+        if (isEmpty(intervals) || intervals.length == 1) {
+            return intervals;
+        }
+        final int n = intervals.length;
+        // sort the array first
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o.start));
+        // after sorting on start of interval, there can be only two cases
+        //   1) second interval is non overlapping with first one i.e first.end < second.start: simply push in stack
+        //   2) second interval is overlapping with first one i.e first.end < second.end, then update end of stack top element
+        final Stack<Interval> stack = new Stack<>();
+        stack.push(intervals[0]);
+        for (int i = 1; i <= n - 1; i++) {
+            final Interval top = stack.peek();
+            // current interval doesn't overlap with top of the stack, so simply push it
+            final Interval curr = intervals[i];
+            if (top.end < curr.start) {
+                stack.push(curr);
+            } else if (top.end < curr.end) {
+                top.end = curr.end;
+            }
+        }
+
+        int i = stack.size() - 1;
+        final Interval[] nonOverlappingIntervals = new Interval[stack.size()];
+        while (!stack.isEmpty()) {
+            nonOverlappingIntervals[i] = stack.pop();
+            i--;
+        }
+        return nonOverlappingIntervals;
+    }
+
+    static final class Interval {
+        int start;
+        int end;
+
+        Interval() {
+            start = 0;
+            end = 0;
+        }
+
+        Interval(final int s, final int e) {
+            start = s;
+            end = e;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Interval interval = (Interval) o;
+            return start == interval.start &&
+                    end == interval.end;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(start, end);
+        }
+
+        @Override
+        public String toString() {
+            return "(" + start + "," + end + ")";
+        }
     }
 }
