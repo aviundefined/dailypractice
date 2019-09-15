@@ -2,9 +2,11 @@ package com.avi.practice.arrays;
 
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,6 +15,9 @@ import java.util.Map;
  * -- VMware Confidential
  */
 class ArrayPractice {
+
+    static final int FOUND = 1;
+    static final int NOT_FOUND = -1;
 
     /**
      * Input:
@@ -259,9 +264,6 @@ class ArrayPractice {
         return rightSplVals;
     }
 
-    static final int FOUND = 1;
-    static final int NOT_FOUND = -1;
-
     final int nobleInteger(int[] A) {
         Arrays.sort(A);
         final int n = A.length;
@@ -302,5 +304,21 @@ class ArrayPractice {
             }
         }
         return NOT_FOUND;
+    }
+
+    final List<List<Integer>> performOps(List<List<Integer>> A) {
+        final List<List<Integer>> B = new ArrayList<>();
+        for (int i = 0; i < A.size(); i++) {
+            B.add(new ArrayList<>());
+
+            for (int j = 0; j < A.get(i).size(); j++) {
+                B.get(i).add(0);
+            }
+
+            for (int j = 0; j < A.get(i).size(); j++) {
+                B.get(i).set(A.get(i).size() - 1 - j, A.get(i).get(j));
+            }
+        }
+        return B;
     }
 }
