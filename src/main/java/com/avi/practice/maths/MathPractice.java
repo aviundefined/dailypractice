@@ -140,4 +140,18 @@ final class MathPractice {
         }
         return list;
     }
+
+    final int isPalindrome(int A) {
+        final char[] chars = String.valueOf(A).toCharArray();
+        final int n = chars.length;
+        int l = 0, r = n - 1;
+        while (l <= r) {
+            if (chars[l] != chars[r]) {
+                return 0;
+            }
+            l++;
+            r--;
+        }
+        return 1;
+    }
 }

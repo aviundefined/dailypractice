@@ -289,4 +289,24 @@ public class MathPracticeTest {
             Assert.assertEquals(expected, tool.fizzBuzz(a));
         }
     }
+
+    @Test
+    public void   isPalindrome() {
+        {
+            final int a = 9;
+            Assert.assertEquals(String.valueOf(a), 1, tool.isPalindrome(a));
+        }
+        {
+            final int a = 12121;
+            Assert.assertEquals(String.valueOf(a), 1, tool.isPalindrome(a));
+        }
+        {
+            final int a = 123;
+            Assert.assertEquals(String.valueOf(a), 0, tool.isPalindrome(a));
+        }
+        {
+            final int a = 121121;
+            Assert.assertEquals(String.valueOf(a), 1, tool.isPalindrome(a));
+        }
+    }
 }
