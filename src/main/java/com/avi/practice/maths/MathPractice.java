@@ -43,15 +43,16 @@ final class MathPractice {
 
     final int isPrime(final int A) {
         if (A == 1) {
-            return 0;
+            return 0; // base case 1 not a prime
         }
         if (A == 2 || A == 3) {
-            return 1;
+            return 1; // base case 2 and 3 are prime
         }
         if (A % 2 == 0 || A % 3 == 0) {
-            return 0;
+            return 0; // check divisibility of 2 and 3 as a base case
         }
         final double sqrt = Math.sqrt(A);
+        // prime numbers are of type 6n - 1 and 6n + 1 so only check the divisibility from those numbers
         for (int i = 5; i <= sqrt; i = i + 6) {
             if (A % i == 0) {
                 return 0;
