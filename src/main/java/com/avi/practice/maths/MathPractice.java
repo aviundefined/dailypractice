@@ -43,7 +43,7 @@ final class MathPractice {
     }
 
     final int isPrime(final int A) {
-        if (A == 1) {
+        if (A <= 1) {
             return 0; // base case 1 not a prime
         }
         if (A == 2 || A == 3) {
