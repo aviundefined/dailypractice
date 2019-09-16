@@ -174,4 +174,58 @@ final class MathPractice {
             return 0;
         }
     }
+
+    final int gcdBySubtractionRecursion(final int A, final int B) {
+        if (A == 0 && B == 0) {
+            return 0;
+        }
+        if (A == 0) {
+            return B;
+        }
+        if (B == 0) {
+            return A;
+        }
+        if (A > B) {
+            return gcdBySubtractionRecursion(A - B, B);
+        } else {
+            return gcdBySubtractionRecursion(A, B - A);
+        }
+    }
+
+    final int gcdBySubtraction(final int A, final int B) {
+        if (A == 0 && B == 0) {
+            return 0;
+        }
+        if (A == 0) {
+            return B;
+        }
+        if (B == 0) {
+            return A;
+        }
+        int max = Math.max(A, B);
+        int min = Math.min(A, B);
+        int gcd = max - min;
+        while (min > 0) {
+            gcd = min;
+            min = max - min;
+            min = Math.min(min, gcd);
+            max = Math.max(min, gcd);
+        }
+        return gcd;
+    }
+
+    final int gcdByModuloRecursion(final int A, final int B) {
+        final int a = Math.max(A, B);
+        final int b = Math.min(A, B);
+        if (a == 0 && b == 0) {
+            return 0;
+        }
+        if (b == 0) {
+            return a;
+        }
+        if (a == 0) {
+            return b;
+        }
+        return gcdByModuloRecursion(b, a % b);
+    }
 }
