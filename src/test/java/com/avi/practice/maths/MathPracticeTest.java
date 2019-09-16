@@ -624,88 +624,144 @@ public class MathPracticeTest {
             final String a = "A";
             final int expected = 1;
             final int actual = tool.titleToNumber(a);
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "B";
             final int expected = 2;
             final int actual = tool.titleToNumber(a);
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "Z";
             final int expected = 26;
             final int actual = tool.titleToNumber(a);
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "AA";
             final int expected = 27;
             final int actual = tool.titleToNumber(a);
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "AB";
             final int expected = 28;
             final int actual = tool.titleToNumber(a);
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "AY";
             final int expected = 51;
             final int actual = tool.titleToNumber(a);
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "AZ";
             final int expected = 52;
             final int actual = tool.titleToNumber(a);
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
+        }
+        {
+            final String a = "BZ";
+            final int expected = 78;
+            final int actual = tool.titleToNumber(a);
+            final String title = tool.numberToTitle(actual);
+            Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
 
         {
             final String a = "A";
             final int expected = 1;
             final int actual = tool.titleToNumber(a.toLowerCase());
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "B";
             final int expected = 2;
             final int actual = tool.titleToNumber(a.toLowerCase());
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "Z";
             final int expected = 26;
             final int actual = tool.titleToNumber(a.toLowerCase());
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "AA";
             final int expected = 27;
             final int actual = tool.titleToNumber(a.toLowerCase());
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "AB";
             final int expected = 28;
             final int actual = tool.titleToNumber(a.toLowerCase());
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "AY";
             final int expected = 51;
             final int actual = tool.titleToNumber(a.toLowerCase());
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
         }
         {
             final String a = "AZ";
             final int expected = 52;
             final int actual = tool.titleToNumber(a.toLowerCase());
+            final String title = tool.numberToTitle(actual);
             Assert.assertEquals(expected, actual);
+            Assert.assertEquals(a, title);
+        }
+
+        {
+            final int a = 943566;
+            final String title = tool.numberToTitle(a);
+            final int number = tool.titleToNumber(title);
+            Assert.assertEquals("BAQTZ", title);
+            Assert.assertEquals(a, number);
         }
     }
+
+    @Test
+    public void testExcelColumnsTitles() {
+        final int n = randInt();
+        for (int i = 0; i <= n; i++) {
+            final int a = randInt(10000);
+            final String title = tool.numberToTitle(a);
+            final int number = tool.titleToNumber(title);
+            Assert.assertEquals(a, number);
+        }
+    }
+
     private static int randInt() {
         return randInt(1000);
     }

@@ -45,6 +45,38 @@ final class MathPractice {
         charToVal.put("Z", 26);
     }
 
+    private static final Map<Integer, String> valToChar = new HashMap<>();
+
+    static {
+        valToChar.put(1, "A");
+        valToChar.put(2, "B");
+        valToChar.put(3, "C");
+        valToChar.put(4, "D");
+        valToChar.put(5, "E");
+        valToChar.put(6, "F");
+        valToChar.put(7, "G");
+        valToChar.put(8, "H");
+        valToChar.put(9, "I");
+        valToChar.put(10, "J");
+        valToChar.put(11, "K");
+        valToChar.put(12, "L");
+        valToChar.put(13, "M");
+        valToChar.put(14, "N");
+        valToChar.put(15, "O");
+        valToChar.put(16, "P");
+        valToChar.put(17, "Q");
+        valToChar.put(18, "R");
+        valToChar.put(19, "S");
+        valToChar.put(20, "T");
+        valToChar.put(21, "U");
+        valToChar.put(22, "V");
+        valToChar.put(23, "W");
+        valToChar.put(24, "X");
+        valToChar.put(25, "Y");
+        valToChar.put(26, "Z");
+    }
+
+
     final List<Integer> allFactors(final int A) {
         final ArrayList<Integer> factors = new ArrayList<>();
         for (int i = 1; i <= (A / 2 + 1); i++) {
@@ -304,5 +336,29 @@ final class MathPractice {
             j++;
         }
         return col;
+    }
+
+    final String numberToTitle(int A) {
+        if (A <= 0) {
+            return "0";
+        }
+        if (A <= 26) {
+            return valToChar.get(A);
+        }
+        final Stack<String> stack = new Stack<>();
+        while (A > 0) {
+            final int remainder = A % 26;
+            A = A / 26;
+            if (remainder == 0) {
+                A--;
+            }
+            stack.add(valToChar.get(remainder == 0 ? 26 : remainder));
+        }
+
+        final StringBuilder b = new StringBuilder();
+        while (!stack.isEmpty()) {
+            b.append(stack.pop());
+        }
+        return b.toString();
     }
 }
