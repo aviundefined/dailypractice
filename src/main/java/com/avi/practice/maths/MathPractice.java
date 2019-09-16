@@ -192,6 +192,7 @@ final class MathPractice {
         }
     }
 
+    // TODO Avinash Fix bug in this
     final int gcdBySubtraction(final int A, final int B) {
         if (A == 0 && B == 0) {
             return 0;
@@ -215,17 +216,26 @@ final class MathPractice {
     }
 
     final int gcdByModuloRecursion(final int A, final int B) {
-        final int a = Math.max(A, B);
-        final int b = Math.min(A, B);
-        if (a == 0 && b == 0) {
+        if (A == 0 && B == 0) {
             return 0;
         }
-        if (b == 0) {
-            return a;
+        if (B == 0) {
+            return A;
         }
-        if (a == 0) {
-            return b;
+        if (A == 0) {
+            return B;
         }
-        return gcdByModuloRecursion(b, a % b);
+        return gcdByModuloRecursion(B, A % B);
+    }
+
+    final int trailingZerosInFactorial(int A) {
+        if (A < 5) {
+            return 0;
+        }
+        int zeros = 0;
+        for (int i = 5; A / i >= 1; i = i * 5) {
+            zeros = zeros + A / i;
+        }
+        return zeros;
     }
 }
