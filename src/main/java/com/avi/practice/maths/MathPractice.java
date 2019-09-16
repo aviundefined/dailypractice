@@ -228,6 +228,25 @@ final class MathPractice {
         return gcdByModuloRecursion(B, A % B);
     }
 
+    final int gcdByModuloIteration(int A,  int B) {
+        if (A == 0 && B == 0) {
+            return 0;
+        }
+        if (B == 0) {
+            return A;
+        }
+        if (A == 0) {
+            return B;
+        }
+
+        while(B > 0) {
+            int tmp = B;
+            B = A % B;
+            A = tmp;
+        }
+        return A;
+    }
+
     final int trailingZerosInFactorial(int A) {
         if (A < 5) {
             return 0;

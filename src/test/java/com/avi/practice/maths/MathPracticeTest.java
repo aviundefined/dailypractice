@@ -414,8 +414,10 @@ public class MathPracticeTest {
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
             final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
 //            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
         {
@@ -423,10 +425,12 @@ public class MathPracticeTest {
             final int b = 0;
             final int expected = 9;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
 //            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
         {
@@ -434,10 +438,12 @@ public class MathPracticeTest {
             final int b = 6;
             final int expected = 6;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
 //            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
         {
@@ -445,10 +451,12 @@ public class MathPracticeTest {
             final int b = 20;
             final int expected = 5;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
 //            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
         {
@@ -456,10 +464,12 @@ public class MathPracticeTest {
             final int b = 20;
             final int expected = 5;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
 //            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
 
@@ -468,10 +478,12 @@ public class MathPracticeTest {
             final int b = 15;
             final int expected = 5;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
 //            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
 
@@ -480,10 +492,12 @@ public class MathPracticeTest {
             final int b = 72;
             final int expected = 36;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
 //            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
 
@@ -492,10 +506,12 @@ public class MathPracticeTest {
             final int b = 36;
             final int expected = 12;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
 //            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
 
@@ -504,10 +520,12 @@ public class MathPracticeTest {
             final int b = 1779;
             final int expected = 1;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
           //  Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
 
@@ -516,10 +534,12 @@ public class MathPracticeTest {
             final int b = 3097;
             final int expected = 1;
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
-            final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
+           final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), expected, gcdByModuloRecursion);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
        //     Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
     }
@@ -533,7 +553,9 @@ public class MathPracticeTest {
             final int gcdBySubtraction = tool.gcdBySubtraction(a, b);
             final int gcdBySubtractionRecursion = tool.gcdBySubtractionRecursion(a, b);
             final int gcdByModuloRecursion = tool.gcdByModuloRecursion(a, b);
+            final int gcdByModuloIteration = tool.gcdByModuloIteration(a, b);
             Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdByModuloRecursion);
+            Assert.assertEquals(String.format("(%d, %d)", a, b), gcdByModuloIteration, gcdByModuloRecursion);
       //      Assert.assertEquals(String.format("(%d, %d)", a, b), gcdBySubtractionRecursion, gcdBySubtraction);
         }
     }
