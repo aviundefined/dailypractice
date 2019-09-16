@@ -392,29 +392,6 @@ class ArrayPractice {
         return new ArrayList<>(Arrays.asList(merged));
     }
 
-    final List<Interval> insertIntoNonOverlappingIntervalsApproach2(List<Interval> intervals, Interval newInterval) {
-        //noinspection UnnecessaryLocalVariable
-        final Interval current = newInterval;
-        int i = 0;
-        while (i < intervals.size()) {
-            Interval in = intervals.get(i);
-            if (in.end < current.start) {
-                i++;
-            } else if (in.start > current.end) {
-                intervals.add(i, current);
-                break;
-            } else {
-                current.start = Math.min(in.start, current.start);
-                current.end = Math.max(in.end, current.end);
-                intervals.remove(i);
-            }
-        }
-        if (i == intervals.size()) {
-            intervals.add(current);
-        }
-        return intervals;
-    }
-
     final Interval[] getMergedNonOverlappingIntervals(final Interval[] intervals) {
         if (isEmpty(intervals) || intervals.length == 1) {
             return intervals;

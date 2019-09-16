@@ -435,8 +435,7 @@ public class ArrayPracticeTest {
             final Interval newInterval = new Interval(start, start + randInt(5));
             System.out.println(intervals);
             final List<Interval> intervals1 = tool.insertIntoNonOverlappingIntervals(intervals, newInterval);
-            final List<Interval> intervals2 = tool.insertIntoNonOverlappingIntervalsApproach2(intervals, newInterval);
-            Assert.assertEquals(intervals1, intervals2);
+            System.out.println(intervals1);
         }
     }
 
