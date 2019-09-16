@@ -2,7 +2,9 @@ package com.avi.practice.maths;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -11,6 +13,37 @@ import java.util.Stack;
  * -- VMware Confidential
  */
 final class MathPractice {
+
+    private static final Map<String, Integer> charToVal = new HashMap<>();
+
+    static {
+        charToVal.put("A", 1);
+        charToVal.put("B", 2);
+        charToVal.put("C", 3);
+        charToVal.put("D", 4);
+        charToVal.put("E", 5);
+        charToVal.put("F", 6);
+        charToVal.put("G", 7);
+        charToVal.put("H", 8);
+        charToVal.put("I", 9);
+        charToVal.put("J", 10);
+        charToVal.put("K", 11);
+        charToVal.put("L", 12);
+        charToVal.put("M", 13);
+        charToVal.put("N", 14);
+        charToVal.put("O", 15);
+        charToVal.put("P", 16);
+        charToVal.put("Q", 17);
+        charToVal.put("R", 18);
+        charToVal.put("S", 19);
+        charToVal.put("T", 20);
+        charToVal.put("U", 21);
+        charToVal.put("V", 22);
+        charToVal.put("W", 23);
+        charToVal.put("X", 24);
+        charToVal.put("Y", 25);
+        charToVal.put("Z", 26);
+    }
 
     final List<Integer> allFactors(final int A) {
         final ArrayList<Integer> factors = new ArrayList<>();
@@ -192,7 +225,6 @@ final class MathPractice {
         }
     }
 
-    // TODO Avinash Fix bug in this
     final int gcdBySubtraction(final int A, final int B) {
         if (A == 0 && B == 0) {
             return 0;
@@ -203,16 +235,20 @@ final class MathPractice {
         if (B == 0) {
             return A;
         }
-        int max = Math.max(A, B);
-        int min = Math.min(A, B);
-        int gcd = max - min;
-        while (min > 0) {
-            gcd = min;
-            min = max - min;
-            min = Math.min(min, gcd);
-            max = Math.max(min, gcd);
+        int a = Math.max(A, B);
+        int b = Math.min(A, B);
+        while (b > 0) {
+            int tmp1 = b;
+            b = a - b;
+            a = tmp1;
+            if (b <= 0) {
+                break;
+            }
+            int tmp2 = a;
+            a = Math.max(tmp2, b);
+            b = Math.min(tmp2, b);
         }
-        return gcd;
+        return a;
     }
 
     final int gcdByModuloRecursion(final int A, final int B) {
@@ -228,7 +264,7 @@ final class MathPractice {
         return gcdByModuloRecursion(B, A % B);
     }
 
-    final int gcdByModuloIteration(int A,  int B) {
+    final int gcdByModuloIteration(int A, int B) {
         if (A == 0 && B == 0) {
             return 0;
         }
@@ -239,7 +275,7 @@ final class MathPractice {
             return B;
         }
 
-        while(B > 0) {
+        while (B > 0) {
             int tmp = B;
             B = A % B;
             A = tmp;
@@ -256,5 +292,17 @@ final class MathPractice {
             zeros = zeros + A / i;
         }
         return zeros;
+    }
+
+    final int titleToNumber(final String A) {
+        final char[] chars = A.toCharArray();
+        int col = 0;
+        final int n = A.length();
+        int j = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            col = col + ((int) Math.pow(26, j) * charToVal.get(String.valueOf(chars[i]).toUpperCase()));
+            j++;
+        }
+        return col;
     }
 }
