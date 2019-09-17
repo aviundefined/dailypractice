@@ -361,4 +361,30 @@ final class MathPractice {
         }
         return b.toString();
     }
+
+    final ArrayList<Integer> primeSum(int A) {
+        final ArrayList<Integer> result = new ArrayList<>();
+        if (A <= 2) {
+            return result;
+        }
+        if (A == 4) {
+            result.add(2);
+            result.add(2);
+            return result;
+        }
+
+        if (A % 2 != 0) {
+            return result;
+        }
+        final ArrayList<Integer> primes = sieve(A);
+        for (final int prime : primes) {
+            final int diff = A - prime;
+            if (primes.contains(diff)) {
+                result.add(prime);
+                result.add(diff);
+                return result;
+            }
+        }
+        return result;
+    }
 }

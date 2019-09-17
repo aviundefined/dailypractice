@@ -762,6 +762,44 @@ public class MathPracticeTest {
         }
     }
 
+    @Test
+    public void primeSum(){
+        {
+            final int a = 4;
+            final ArrayList<Integer> expected = new ArrayList<>();
+            expected.add(2);
+            expected.add(2);
+            final ArrayList<Integer> actual = tool.primeSum(a);
+            Assert.assertEquals(expected, actual);
+        }
+
+        {
+            final int a = 6;
+            final ArrayList<Integer> expected = new ArrayList<>();
+            expected.add(3);
+            expected.add(3);
+            final ArrayList<Integer> actual = tool.primeSum(a);
+            Assert.assertEquals(expected, actual);
+        }
+
+        {
+            final int a = 8;
+            final ArrayList<Integer> expected = new ArrayList<>();
+            expected.add(3);
+            expected.add(5);
+            final ArrayList<Integer> actual = tool.primeSum(a);
+            Assert.assertEquals(expected, actual);
+        }
+
+        {
+            final int a = 100;
+            final ArrayList<Integer> expected = new ArrayList<>();
+            expected.add(3);
+            expected.add(97);
+            final ArrayList<Integer> actual = tool.primeSum(a);
+            Assert.assertEquals(expected, actual);
+        }
+    }
     private static int randInt() {
         return randInt(1000);
     }
