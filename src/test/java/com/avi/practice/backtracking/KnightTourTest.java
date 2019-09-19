@@ -33,14 +33,15 @@ public class KnightTourTest {
     @Test
     public void testAll() {
         for (int i = 0; i <= 8; i++) {
+            final boolean solve = tour.solve(i);
             if (i == 0 ||
                     i == 2
                     || i == 3
                     || i == 4
             ) {
-                Assert.assertFalse(String.valueOf(i), tour.solve(i));
+                Assert.assertFalse(String.valueOf(i), solve);
             } else {
-                Assert.assertTrue(String.valueOf(i), tour.solve(i));
+                Assert.assertTrue(String.valueOf(i), solve);
             }
         }
     }

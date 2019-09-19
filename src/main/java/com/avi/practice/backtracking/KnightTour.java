@@ -14,6 +14,7 @@ final class KnightTour {
 
     final boolean solve(final int n) {
         if (n == 0) {
+            System.out.println("No solution found for grid: " + n);
             return false; // if grid size is 0 then return false
         }
         final int[][] sol = new int[n][n];
@@ -28,6 +29,7 @@ final class KnightTour {
             CommonUtils.printMatrix(sol);
             return true;
         }
+        System.out.println("No solution found for grid: " + n);
         return false;
     }
 
