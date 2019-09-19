@@ -62,6 +62,48 @@ final class Maze {
 
     }
 
+    final int countPaths(final int[][] maze) {
+        System.out.println();
+        if (maze == null || maze.length == 0 || maze[0].length == 0) {
+            System.out.println("Maze is null or empty");
+            System.out.println();
+            return 0;
+        }
+        final int m = maze.length;
+        final int n = maze[0].length;
+        CommonUtils.printMatrix(maze);
+        if (maze[0][0] == 0 || maze[m - 1][n - 1] == 0) {
+            System.out.println("No Solution found");
+            return 0;
+        }
+        final int[][] sol = new int[m][n];
+        sol[0][0] = 1;
+        for (int i = 1; i < m; i++) {
+            if (maze[i][0] == 1) {
+                sol[i][0] = 1;
+            } else {
+                break;
+            }
+        }
+        for (int j = 1; j < n; j++) {
+            if (maze[0][j] == 1) {
+                sol[0][j] = 1;
+            } else {
+                break;
+            }
+        }
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (maze[i][j] == 1) {
+                    sol[i][j] = sol[i - 1][j] + sol[i][j - 1];
+                }
+            }
+        }
+        CommonUtils.printMatrix(sol);
+        return Math.max(sol[m - 1][n - 1], 0);
+
+    }
+
     private boolean _solve(
             final Coordinate start,
             final Coordinate end,

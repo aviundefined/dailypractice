@@ -45,7 +45,7 @@ public class MazeTest {
 
         {
             final int[][] maze = {
-                    {1, 0, 0, 0},
+                    {1, 0, 1, 0},
                     {1, 1, 0, 1},
                     {0, 1, 0, 0},
                     {1, 1, 1, 1}
@@ -84,7 +84,7 @@ public class MazeTest {
 
         {
             final int[][] maze = {
-                    {1, 0, 0, 0},
+                    {1, 1, 0, 0},
                     {1, 1, 0, 1},
                     {0, 1, 0, 0},
                     {1, 1, 0, 1}
@@ -119,6 +119,87 @@ public class MazeTest {
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
             Assert.assertFalse(solve);
             Assert.assertFalse(solveUsingSolutionMatrix);
+        }
+    }
+
+    @Test
+    public void countPath() {
+        {
+            final int[][] maze = {};
+            final int numPaths = solver.countPaths(maze);
+            Assert.assertEquals(0, numPaths);
+        }
+
+        {
+            final int[][] maze = null;
+            final int numPaths = solver.countPaths(maze);
+            Assert.assertEquals(0, numPaths);
+        }
+
+        {
+            final int[][] maze = {
+                    {1, 0, 1, 0},
+                    {1, 1, 0, 1},
+                    {0, 1, 0, 0},
+                    {1, 1, 1, 1}
+            };
+            final int numPaths = solver.countPaths(maze);
+            Assert.assertEquals(1, numPaths);
+        }
+
+        {
+            final int[][] maze = {
+                    {1, 0, 0, 0, 1},
+                    {1, 1, 0, 1, 1},
+                    {0, 1, 0, 0, 1},
+                    {1, 1, 1, 1, 1}
+            };
+            final int numPaths = solver.countPaths(maze);
+            Assert.assertEquals(1, numPaths);
+        }
+
+        {
+            final int[][] maze = {
+                    {1, 1, 0, 0, 1},
+                    {1, 1, 0, 1, 1},
+                    {1, 1, 0, 0, 1},
+                    {1, 1, 1, 1, 1}
+            };
+            final int numPaths = solver.countPaths(maze);
+            Assert.assertEquals(4, numPaths);
+        }
+
+        {
+            final int[][] maze = {
+                    {1, 0, 0, 0},
+                    {1, 1, 0, 1},
+                    {0, 1, 0, 0},
+                    {1, 1, 0, 1}
+            };
+            final int numPaths = solver.countPaths(maze);
+            Assert.assertEquals(0, numPaths);
+        }
+
+        {
+            final int[][] maze = {
+                    {1, 0, 0, 0},
+                    {1, 1, 0, 1},
+                    {0, 1, 0, 0},
+                    {1, 1, 1, 0}
+            };
+            final int numPaths = solver.countPaths(maze);
+            Assert.assertEquals(0, numPaths);
+        }
+
+        {
+            final int[][] maze = {
+                    {1, 0, 0, 0, 1},
+                    {1, 1, 0, 1, 1},
+                    {0, 0, 0, 0, 1},
+                    {1, 1, 1, 1, 1}
+            };
+            final int numPaths = solver.countPaths(maze);
+            Assert.assertEquals(0, numPaths);
         }
     }
 }
