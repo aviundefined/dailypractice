@@ -8,18 +8,14 @@ import com.avi.practice.utils.CommonUtils;
  * -- VMware Confidential
  */
 final class KnightTour {
+    private static final int[] xMove = {2, 1, -1, -2, -2, -1, 1, 2};
+    private static final int[] yMove = {1, 2, 2, 1, -1, -2, -2, -1};
     private static final int NOT_SET = -1;
-    private final int n;
-    private final int[] xMove;
-    private final int[] yMove;
 
-    KnightTour(final int n, final int[] xMove, final int[] yMove) {
-        this.n = n;
-        this.xMove = xMove;
-        this.yMove = yMove;
-    }
-
-    final boolean solve() {
+    final boolean solve(final int n) {
+        if (n == 0) {
+            return false; // if grid size is 0 then return false
+        }
         final int[][] sol = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -27,23 +23,24 @@ final class KnightTour {
             }
         }
         sol[0][0] = 0;
-        if (_solve(0, 0, 1, sol)) {
+        if (_solve(0, 0, 1, sol, n)) {
+            System.out.println("Solution found for grid: " + n);
             CommonUtils.printMatrix(sol);
             return true;
         }
         return false;
     }
 
-    private boolean _solve(final int x, final int y, final int numMove, final int[][] sol) {
+    private boolean _solve(final int x, final int y, final int numMove, final int[][] sol, final int n) {
         if (numMove == n * n) {
             return true; // solution found
         }
         for (int i = 0; i < xMove.length; i++) {
             final int nextX = x + xMove[i];
             final int nextY = y + yMove[i];
-            if (_isSafe(nextX, nextY, sol)) {
+            if (_isSafe(nextX, nextY, sol, n)) {
                 sol[nextX][nextY] = numMove;
-                if (_solve(nextX, nextY, numMove + 1, sol)) {
+                if (_solve(nextX, nextY, numMove + 1, sol, n)) {
                     return true;
                 } else {
                     sol[nextX][nextY] = NOT_SET;
@@ -53,7 +50,7 @@ final class KnightTour {
         return false;
     }
 
-    private boolean _isSafe(final int x, final int y, final int[][] sol) {
+    private boolean _isSafe(final int x, final int y, final int[][] sol, final int n) {
         //noinspection RedundantIfStatement
         if (x >= 0 && x < n // x in bound
                 && y >= 0 && y < n // y in bound

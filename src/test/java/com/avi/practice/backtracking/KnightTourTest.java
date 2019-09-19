@@ -12,23 +12,36 @@ import org.junit.Test;
  */
 public class KnightTourTest {
 
-    private KnightTour tour8;
+    private KnightTour tour;
 
     @Before
     public void setup() {
-        final int[] xMove = {2, 1, -1, -2, -2, -1, 1, 2};
-        final int[] yMove = {1, 2, 2, 1, -1, -2, -2, -1};
-        tour8 = new KnightTour(8, xMove, yMove);
+        tour = new KnightTour();
     }
 
     @After
     public void tearDown() {
-        tour8 = null;
+        tour = null;
     }
 
     @Test
     public void solve() {
-        final boolean solve = tour8.solve();
+        final boolean solve = tour.solve(8);
         Assert.assertTrue(solve);
+    }
+
+    @Test
+    public void testAll() {
+        for (int i = 0; i <= 8; i++) {
+            if (i == 0 ||
+                    i == 2
+                    || i == 3
+                    || i == 4
+            ) {
+                Assert.assertFalse(String.valueOf(i), tour.solve(i));
+            } else {
+                Assert.assertTrue(String.valueOf(i), tour.solve(i));
+            }
+        }
     }
 }
