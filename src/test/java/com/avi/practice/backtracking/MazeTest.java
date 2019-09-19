@@ -28,6 +28,22 @@ public class MazeTest {
     @Test
     public void testMaze() {
         {
+            final int[][] maze = {};
+            final boolean solve = solver.solve(maze);
+            final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            Assert.assertFalse(solve);
+            Assert.assertFalse(solveUsingSolutionMatrix);
+        }
+
+        {
+            final int[][] maze = null;
+            final boolean solve = solver.solve(maze);
+            final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            Assert.assertFalse(solve);
+            Assert.assertFalse(solveUsingSolutionMatrix);
+        }
+
+        {
             final int[][] maze = {
                     {1, 0, 0, 0},
                     {1, 1, 0, 1},
@@ -35,7 +51,9 @@ public class MazeTest {
                     {1, 1, 1, 1}
             };
             final boolean solve = solver.solve(maze);
+            final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
             Assert.assertTrue(solve);
+            Assert.assertTrue(solveUsingSolutionMatrix);
         }
 
         {
@@ -46,7 +64,9 @@ public class MazeTest {
                     {1, 1, 1, 1, 1}
             };
             final boolean solve = solver.solve(maze);
+            final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
             Assert.assertTrue(solve);
+            Assert.assertTrue(solveUsingSolutionMatrix);
         }
 
         {
@@ -57,7 +77,9 @@ public class MazeTest {
                     {1, 1, 1, 1, 1}
             };
             final boolean solve = solver.solve(maze);
+            final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
             Assert.assertTrue(solve);
+            Assert.assertTrue(solveUsingSolutionMatrix);
         }
 
         {
@@ -68,7 +90,9 @@ public class MazeTest {
                     {1, 1, 0, 1}
             };
             final boolean solve = solver.solve(maze);
+            final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
             Assert.assertFalse(solve);
+            Assert.assertFalse(solveUsingSolutionMatrix);
         }
 
         {
@@ -79,7 +103,9 @@ public class MazeTest {
                     {1, 1, 1, 0}
             };
             final boolean solve = solver.solve(maze);
+            final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
             Assert.assertFalse(solve);
+            Assert.assertFalse(solveUsingSolutionMatrix);
         }
 
         {
@@ -90,7 +116,9 @@ public class MazeTest {
                     {1, 1, 1, 1, 1}
             };
             final boolean solve = solver.solve(maze);
+            final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
             Assert.assertFalse(solve);
+            Assert.assertFalse(solveUsingSolutionMatrix);
         }
     }
 }

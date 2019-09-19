@@ -37,6 +37,31 @@ final class Maze {
 
     }
 
+    final boolean solveUsingSolutionMatrix(final int[][] maze) {
+        System.out.println();
+        if (maze == null || maze.length == 0 || maze[0].length == 0) {
+            System.out.println("Maze is null or empty");
+            System.out.println();
+            return false;
+        }
+        final int m = maze.length;
+        final int n = maze[0].length;
+        CommonUtils.printMatrix(maze);
+        if (maze[0][0] == 0 || maze[m - 1][n - 1] == 0) {
+            System.out.println("No Solution found");
+            return false;
+        }
+        final int[][] sol = new int[m][n];
+        if (_solve(new Coordinate(0, 0), new Coordinate(m - 1, n - 1), maze, sol)) {
+            System.out.println("Solution");
+            CommonUtils.printMatrix(sol);
+            return true;
+        }
+        System.out.println("No Solution found");
+        return false;
+
+    }
+
     private boolean _solve(
             final Coordinate start,
             final Coordinate end,
@@ -54,6 +79,28 @@ final class Maze {
                 return true;
             }
             sol.remove(start);
+            return false;
+        }
+        return false;
+    }
+
+    private boolean _solve(
+            final Coordinate start,
+            final Coordinate end,
+            final int[][] maze,
+            final int[][] sol) {
+        if (start.equals(end)) {
+            sol[start.x][start.y] = 1;
+            return true;
+        }
+
+        if (_isSafe(start.x, start.y, maze)) {
+            sol[start.x][start.y] = 1;
+            if (_solve(new Coordinate(start.x + 1, start.y), end, maze, sol)
+                    || _solve(new Coordinate(start.x, start.y + 1), end, maze, sol)) {
+                return true;
+            }
+            sol[start.x][start.y] = 0;
             return false;
         }
         return false;
