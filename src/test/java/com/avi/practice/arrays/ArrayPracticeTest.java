@@ -1,6 +1,7 @@
 package com.avi.practice.arrays;
 
 import com.avi.practice.arrays.ArrayPractice.Interval;
+import com.avi.practice.utils.CommonUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -143,27 +144,27 @@ public class ArrayPracticeTest {
     public void spiralOrder() {
         {
             final int[] spiral = tool.spiralOrder(M_3_X_3);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrder(M_4_X_4);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrder(M_5_X_5);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrder(M_4_X_3);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrder(M_3_X_4);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrder(M_5_X_3);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
     }
 
@@ -171,27 +172,27 @@ public class ArrayPracticeTest {
     public void spiralOrderApproach2() {
         {
             final int[] spiral = tool.spiralOrderApproach2(M_3_X_3);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrderApproach2(M_4_X_4);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrderApproach2(M_5_X_5);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrderApproach2(M_4_X_3);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrderApproach2(M_3_X_4);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
         {
             final int[] spiral = tool.spiralOrderApproach2(M_5_X_3);
-            tool.printArr(spiral);
+            CommonUtils.printArr(spiral);
         }
     }
 
@@ -200,27 +201,27 @@ public class ArrayPracticeTest {
         final ArrayPractice tool = new ArrayPractice();
         {
             final int[] zigZag = tool.zigZagOrder(M_3_X_3);
-            tool.printArr(zigZag);
+            CommonUtils.printArr(zigZag);
         }
         {
             final int[] zigZag = tool.zigZagOrder(M_4_X_4);
-            tool.printArr(zigZag);
+            CommonUtils.printArr(zigZag);
         }
         {
             final int[] zigZag = tool.zigZagOrder(M_5_X_5);
-            tool.printArr(zigZag);
+            CommonUtils.printArr(zigZag);
         }
         {
             final int[] zigZag = tool.zigZagOrder(M_4_X_3);
-            tool.printArr(zigZag);
+            CommonUtils.printArr(zigZag);
         }
         {
             final int[] zigZag = tool.zigZagOrder(M_3_X_4);
-            tool.printArr(zigZag);
+            CommonUtils.printArr(zigZag);
         }
         {
             final int[] zigZag = tool.zigZagOrder(M_5_X_3);
-            tool.printArr(zigZag);
+            CommonUtils.printArr(zigZag);
         }
     }
 
@@ -343,19 +344,19 @@ public class ArrayPracticeTest {
     public void wave() {
         {
             final int[] a = {1, 2, 3, 4};
-            tool.printArr(a);
+            CommonUtils.printArr(a);
             final int[] expected = {2, 1, 4, 3};
             final int[] wave = tool.wave(a);
-            tool.printArr(wave);
+            CommonUtils.printArr(wave);
             Assert.assertArrayEquals(expected, wave);
         }
 
         {
             final int[] a = {5, 1, 3, 2, 4};
-            tool.printArr(a);
+            CommonUtils.printArr(a);
             final int[] expected = {2, 1, 4, 3, 5};
             final int[] wave = tool.wave(a);
-            tool.printArr(wave);
+            CommonUtils.printArr(wave);
             Assert.assertArrayEquals(expected, wave);
         }
     }
@@ -364,19 +365,19 @@ public class ArrayPracticeTest {
     public void waveApproach2() {
         {
             final int[] a = {1, 2, 3, 4};
-            tool.printArr(a);
+            CommonUtils.printArr(a);
             final int[] expected = {2, 1, 4, 3};
             final int[] wave = tool.waveApproach2(a);
-            tool.printArr(wave);
+            CommonUtils.printArr(wave);
             Assert.assertArrayEquals(expected, wave);
         }
 
         {
             final int[] a = {5, 1, 3, 2, 4};
-            tool.printArr(a);
+            CommonUtils.printArr(a);
             final int[] expected = {2, 1, 4, 3, 5};
             final int[] wave = tool.waveApproach2(a);
-            tool.printArr(wave);
+            CommonUtils.printArr(wave);
             Assert.assertArrayEquals(expected, wave);
         }
     }
@@ -400,9 +401,9 @@ public class ArrayPracticeTest {
         arr[1] = new Interval(1, 9);
         arr[2] = new Interval(2, 4);
         arr[3] = new Interval(4, 7);
-        tool.printArr(arr);
+        CommonUtils.printArr(arr);
         final Interval[] nonOverlappingIntervals = tool.getMergedNonOverlappingIntervals(arr);
-        tool.printArr(nonOverlappingIntervals);
+        CommonUtils.printArr(nonOverlappingIntervals);
         System.out.println("================================");
         final int n = randInt(10);
         for (int i = 0; i <= n; i++) {
@@ -413,9 +414,9 @@ public class ArrayPracticeTest {
                 final Interval interval = new Interval(s, s + randInt(4));
                 intervals[j] = interval;
             }
-            tool.printArr(intervals);
+            CommonUtils.printArr(intervals);
             System.out.println("---------------------");
-            tool.printArr(tool.getMergedNonOverlappingIntervals(intervals));
+            CommonUtils.printArr(tool.getMergedNonOverlappingIntervals(intervals));
             System.out.println("================================");
         }
     }

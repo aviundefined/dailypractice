@@ -176,30 +176,6 @@ class ArrayPractice {
         return min;
     }
 
-    final void printArr(final int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            if (i == arr.length - 1) {
-                System.out.print(arr[i]);
-            } else {
-                System.out.print(arr[i] + ",");
-
-            }
-        }
-        System.out.println();
-    }
-
-    final void printArr(final Object[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            if (i == arr.length - 1) {
-                System.out.print(arr[i]);
-            } else {
-                System.out.print(arr[i] + ",");
-
-            }
-        }
-        System.out.println();
-    }
-
     final boolean isEmpty(Object[] intervals) {
         return intervals == null || intervals.length == 0;
     }
