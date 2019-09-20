@@ -1,7 +1,5 @@
 package com.avi.practice.backtracking;
 
-import com.avi.practice.utils.CommonUtils;
-
 /**
  * Created by navinash on 20/09/19.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -37,14 +35,16 @@ final class StringPermutation {
             return;
         }
         System.out.println(String.format("Print all permutations of string [%s] of length [%s]", String.valueOf(chars), k));
-        final char[] sol = new char[k];
-        _permutations(0, k, sol);
+        _permutations(0, k);
         System.out.println();
     }
 
     private void _permutations(final int idx, final int k) {
         if (idx == k) {
-            CommonUtils.printArr(chars);
+            for (int j = 0; j < k; j++) {
+                System.out.print(chars[j] + " ");
+            }
+            System.out.println();
             return;
         }
 
@@ -52,27 +52,6 @@ final class StringPermutation {
             _swap(idx, i);
             _permutations(idx + 1, k);
             _swap(idx, i);
-        }
-    }
-
-    private void _permutations(final int idx, final int k, final char[] sol) {
-        if (idx == k) {
-            CommonUtils.printArr(sol);
-            return;
-        }
-
-        for (int i = idx; i < n; i++) {
-            _swap(idx, i);
-            //noinspection ManualArrayCopy
-            for (int j = 0; j < k; j++) {
-                sol[j] = chars[j];
-            }
-            _permutations(idx + 1, k, sol);
-            _swap(idx, i);
-            //noinspection ManualArrayCopy
-            for (int j = 0; j < k; j++) {
-                sol[j] = chars[j];
-            }
         }
     }
 
