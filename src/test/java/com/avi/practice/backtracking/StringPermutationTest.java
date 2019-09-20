@@ -14,20 +14,46 @@ public class StringPermutationTest {
         {
             final String s = "abc";
             final StringPermutation solver = new StringPermutation(s);
-            solver.printAll();;
+            solver.printAll();
         }
 
         {
             final String s = "abcd";
             final StringPermutation solver = new StringPermutation(s);
-            solver.printAll();;
+            solver.printAll();
         }
 
         {
             final String s = "abcde";
             final StringPermutation solver = new StringPermutation(s);
-            solver.printAll();;
+            solver.printAll();
+        }
+    }
+
+    @Test
+    public void printOfLengthK() {
+        {
+            final String s = "abc";
+            final StringPermutation solver = new StringPermutation(s);
+            for (int i = 1; i < s.length(); i++) {
+                solver.printOfLengthK(i);
+            }
         }
 
+        {
+            final String s = "abcd";
+            final StringPermutation solver = new StringPermutation(s);
+            for (int i = 1; i < s.length(); i++) {
+                solver.printOfLengthK(i);
+            }
+        }
+
+        {
+            final String s = "abcde";
+            final StringPermutation solver = new StringPermutation(s);
+            for (int i = 1; i < s.length(); i++) {
+                solver.printOfLengthK(i);
+            }
+        }
     }
 }

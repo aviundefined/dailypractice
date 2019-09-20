@@ -27,20 +27,52 @@ final class StringPermutation {
             return;
         }
         System.out.println("Print all permutations of string: " + String.valueOf(chars));
-        _permutations(0);
+        _permutations(0, n);
         System.out.println();
     }
 
-    private void _permutations(int idx) {
-        if (idx == n) {
+    void printOfLengthK(final int k) {
+        if (this.chars == null || this.chars.length == 0) {
+            System.out.println("String is empty. No Permutation exists");
+            return;
+        }
+        System.out.println(String.format("Print all permutations of string [%s] of length [%s]", String.valueOf(chars), k));
+        final char[] sol = new char[k];
+        _permutations(0, k, sol);
+        System.out.println();
+    }
+
+    private void _permutations(final int idx, final int k) {
+        if (idx == k) {
             CommonUtils.printArr(chars);
             return;
         }
 
         for (int i = idx; i < n; i++) {
             _swap(idx, i);
-            _permutations(idx + 1);
+            _permutations(idx + 1, k);
             _swap(idx, i);
+        }
+    }
+
+    private void _permutations(final int idx, final int k, final char[] sol) {
+        if (idx == k) {
+            CommonUtils.printArr(sol);
+            return;
+        }
+
+        for (int i = idx; i < n; i++) {
+            _swap(idx, i);
+            //noinspection ManualArrayCopy
+            for (int j = 0; j < k; j++) {
+                sol[j] = chars[j];
+            }
+            _permutations(idx + 1, k, sol);
+            _swap(idx, i);
+            //noinspection ManualArrayCopy
+            for (int j = 0; j < k; j++) {
+                sol[j] = chars[j];
+            }
         }
     }
 
