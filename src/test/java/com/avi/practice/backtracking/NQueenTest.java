@@ -107,5 +107,21 @@ public class NQueenTest {
             final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
             Assert.assertTrue(msg, isNQueenSolved);
         }
+        {
+            final int numQueen = 9;
+            final int rows = 9;
+            final int cols = 9;
+            final String msg = String.format("numQueen=%d, grid=%d x %d", numQueen, rows, cols);
+            final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
+            Assert.assertTrue(msg, isNQueenSolved);
+        }
+        {
+            final int numQueen = 10;
+            final int rows = 10;
+            final int cols = 10;
+            final String msg = String.format("numQueen=%d, grid=%d x %d", numQueen, rows, cols);
+            final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
+            Assert.assertTrue(msg, isNQueenSolved);
+        }
     }
 }
