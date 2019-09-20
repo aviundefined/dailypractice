@@ -67,5 +67,45 @@ public class NQueenTest {
             final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
             Assert.assertTrue(msg, isNQueenSolved);
         }
+        {
+            final int numQueen = 4;
+            final int rows = 4;
+            final int cols = 5;
+            final String msg = String.format("numQueen=%d, grid=%d x %d", numQueen, rows, cols);
+            final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
+            Assert.assertTrue(msg, isNQueenSolved);
+        }
+        {
+            final int numQueen = 4;
+            final int rows = 5;
+            final int cols = 4;
+            final String msg = String.format("numQueen=%d, grid=%d x %d", numQueen, rows, cols);
+            final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
+            Assert.assertTrue(msg, isNQueenSolved);
+        }
+        {
+            final int numQueen = 4;
+            final int rows = 5;
+            final int cols = 5;
+            final String msg = String.format("numQueen=%d, grid=%d x %d", numQueen, rows, cols);
+            final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
+            Assert.assertTrue(msg, isNQueenSolved);
+        }
+        {
+            final int numQueen = 5;
+            final int rows = 5;
+            final int cols = 5;
+            final String msg = String.format("numQueen=%d, grid=%d x %d", numQueen, rows, cols);
+            final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
+            Assert.assertTrue(msg, isNQueenSolved);
+        }
+        {
+            final int numQueen = 8;
+            final int rows = 8;
+            final int cols = 8;
+            final String msg = String.format("numQueen=%d, grid=%d x %d", numQueen, rows, cols);
+            final boolean isNQueenSolved = solver.solve(numQueen, rows, cols);
+            Assert.assertTrue(msg, isNQueenSolved);
+        }
     }
 }

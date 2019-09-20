@@ -32,7 +32,7 @@ final class NQueen {
         // In the current column, if we find a row for which there is no clash, we mark this row and column as part
         // of the solution. If we do not find such a row due to clashes then we backtrack and return false.
         if (_solve(board, 0, numQueen, rows, cols)) {
-            System.out.println("Solution found. Printing board configuration");
+            System.out.println(String.format("Solution found for number of queens=%s and board: %s x %s Printing board configuration", numQueen, rows, cols));
             CommonUtils.printMatrix(board);
             return true;
         }
@@ -41,7 +41,7 @@ final class NQueen {
     }
 
     private boolean _solve(final int[][] board, final int col, final int numQueen, final int rows, final int cols) {
-        if (col >= numQueen) {
+        if (col == numQueen) {
             return true;
         }
         for (int i = 0; i < rows; i++) {
