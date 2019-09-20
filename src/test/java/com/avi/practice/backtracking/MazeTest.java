@@ -31,16 +31,20 @@ public class MazeTest {
             final int[][] maze = {};
             final boolean solve = solver.solve(maze);
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            final boolean solveUsingCountPath = solver.solveUsingCountPath(maze);
             Assert.assertFalse(solve);
             Assert.assertFalse(solveUsingSolutionMatrix);
+            Assert.assertFalse(solveUsingCountPath);
         }
 
         {
             final int[][] maze = null;
             final boolean solve = solver.solve(maze);
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            final boolean solveUsingCountPath = solver.solveUsingCountPath(maze);
             Assert.assertFalse(solve);
             Assert.assertFalse(solveUsingSolutionMatrix);
+            Assert.assertFalse(solveUsingCountPath);
         }
 
         {
@@ -52,8 +56,10 @@ public class MazeTest {
             };
             final boolean solve = solver.solve(maze);
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            final boolean solveUsingCountPath = solver.solveUsingCountPath(maze);
             Assert.assertTrue(solve);
             Assert.assertTrue(solveUsingSolutionMatrix);
+            Assert.assertTrue(solveUsingCountPath);;
         }
 
         {
@@ -65,8 +71,10 @@ public class MazeTest {
             };
             final boolean solve = solver.solve(maze);
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            final boolean solveUsingCountPath = solver.solveUsingCountPath(maze);
             Assert.assertTrue(solve);
             Assert.assertTrue(solveUsingSolutionMatrix);
+            Assert.assertTrue(solveUsingCountPath);
         }
 
         {
@@ -78,8 +86,10 @@ public class MazeTest {
             };
             final boolean solve = solver.solve(maze);
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            final boolean solveUsingCountPath = solver.solveUsingCountPath(maze);
             Assert.assertTrue(solve);
             Assert.assertTrue(solveUsingSolutionMatrix);
+            Assert.assertTrue(solveUsingCountPath);
         }
 
         {
@@ -91,8 +101,10 @@ public class MazeTest {
             };
             final boolean solve = solver.solve(maze);
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            final boolean solveUsingCountPath = solver.solveUsingCountPath(maze);
             Assert.assertFalse(solve);
             Assert.assertFalse(solveUsingSolutionMatrix);
+            Assert.assertFalse(solveUsingCountPath);
         }
 
         {
@@ -104,8 +116,10 @@ public class MazeTest {
             };
             final boolean solve = solver.solve(maze);
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            final boolean solveUsingCountPath = solver.solveUsingCountPath(maze);
             Assert.assertFalse(solve);
             Assert.assertFalse(solveUsingSolutionMatrix);
+            Assert.assertFalse(solveUsingCountPath);
         }
 
         {
@@ -117,8 +131,10 @@ public class MazeTest {
             };
             final boolean solve = solver.solve(maze);
             final boolean solveUsingSolutionMatrix = solver.solveUsingSolutionMatrix(maze);
+            final boolean solveUsingCountPath = solver.solveUsingCountPath(maze);
             Assert.assertFalse(solve);
             Assert.assertFalse(solveUsingSolutionMatrix);
+            Assert.assertFalse(solveUsingCountPath);
         }
     }
 

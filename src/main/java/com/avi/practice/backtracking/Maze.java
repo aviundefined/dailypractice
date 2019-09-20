@@ -62,6 +62,16 @@ final class Maze {
 
     }
 
+    final boolean solveUsingCountPath(final int[][] maze) {
+        System.out.println();
+        if (maze == null || maze.length == 0 || maze[0].length == 0) {
+            System.out.println("Maze is null or empty");
+            System.out.println();
+            return false;
+        }
+        return countPaths(maze) > 0;
+    }
+
     final int countPaths(final int[][] maze) {
         System.out.println();
         if (maze == null || maze.length == 0 || maze[0].length == 0) {
