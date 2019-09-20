@@ -64,4 +64,8 @@ public final class CommonUtils {
         }
         System.out.println();
     }
+
+    public static boolean isEmpty(int[] arr) {
+        return arr == null || arr.length == 0;
+    }
 }
