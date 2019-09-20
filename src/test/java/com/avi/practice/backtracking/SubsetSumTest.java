@@ -43,6 +43,15 @@ public class SubsetSumTest {
 
     @Test
     public void solve4() {
+        int[] a = {3, 2, 6, 1};
+        final SubsetSum solver = new SubsetSum(a);
+        final int target = 6;
+        final Collection<List<Integer>> subsetSums = solver.solve(target);
+        System.out.println("Solutions: " + subsetSums);
+    }
+
+    @Test
+    public void solve5() {
         int[] a = {3, 2, 7, 1, -1, 2};
         final SubsetSum solver = new SubsetSum(a);
         final int target = 6;
