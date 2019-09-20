@@ -143,7 +143,6 @@ final class Maze {
                 return true;
             }
             sol[start.x][start.y] = 0;
-            return false;
         }
         return false;
     }

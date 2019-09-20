@@ -44,9 +44,8 @@ final class KnightTour {
                 sol[nextX][nextY] = numMove;
                 if (_solve(nextX, nextY, numMove + 1, sol, n)) {
                     return true;
-                } else {
-                    sol[nextX][nextY] = NOT_SET;
                 }
+                sol[nextX][nextY] = NOT_SET;
             }
         }
         return false;
