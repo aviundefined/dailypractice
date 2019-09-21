@@ -108,6 +108,9 @@ final class BinarySearch {
         return arr[floorIdx];
     }
 
+    /**
+     * Returns value greater or equal to x
+     */
     final int ceiling(final int x) {
         final int ceilingIdx = _ceilingIndex(x);
         if (ceilingIdx == NOT_FOUND) {
@@ -126,13 +129,14 @@ final class BinarySearch {
             } else if (arr[mid] > x) {
                 if (mid == 0) {
                     return mid;
-                } else if (mid > 0) {
-                    if (arr[mid - 1] == x) {
-                        return mid - 1;
-                    } else if (arr[mid - 1] < x) {
-                        return mid;
+                } else //noinspection ConstantConditions
+                    if (mid > 0) {
+                        if (arr[mid - 1] == x) {
+                            return mid - 1;
+                        } else if (arr[mid - 1] < x) {
+                            return mid;
+                        }
                     }
-                }
                 right = mid - 1;
             } else if (arr[mid] < x) {
                 left = mid + 1;
