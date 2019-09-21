@@ -114,6 +114,27 @@ final class BinarySearch {
         return minIdx;
     }
 
+    final int findFirstIndexApproach2(final int x) {
+        int left = 0;
+        int right = n - 1;
+        int first = Integer.MAX_VALUE;
+        while (left <= right) {
+            final int mid = (left + right) / 2;
+            if (arr[mid] == x) {
+                first = Math.min(first, mid);
+                right = mid - 1;
+            } else if (x < arr[mid]) {
+                right = mid - 1;
+            } else if (x > arr[mid]) {
+                left = mid + 1;
+            }
+        }
+        if (first == Integer.MAX_VALUE) {
+            return NOT_FOUND;
+        }
+        return first;
+    }
+
     final int findLastIterative(final int x) {
         int idx = _findIterative(0, n - 1, x);
         // if not found then simply return it
@@ -129,6 +150,33 @@ final class BinarySearch {
             }
         }
         return maxIdx;
+    }
+
+    final int findLastIndexApproach2(final int x) {
+        int left = 0;
+        int right = n - 1;
+        int last = Integer.MIN_VALUE;
+        while (left <= right) {
+            if (left == right) {
+                if (arr[left] == x) {
+                    last = Math.max(last, left);
+                }
+                break;
+            }
+            final int mid = (left + right) / 2;
+            if (arr[mid] == x && last < mid) {
+                last = mid;
+                right = mid + 1;
+            } else if (x < arr[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        if (last == Integer.MIN_VALUE) {
+            return NOT_FOUND;
+        }
+        return last;
     }
 
     /**

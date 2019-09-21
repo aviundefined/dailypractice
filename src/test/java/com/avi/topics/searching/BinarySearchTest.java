@@ -65,11 +65,15 @@ public class BinarySearchTest {
             final int findIterative = solver.findIterative(x);
             final int findFirstIterative = solver.findFirstIterative(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), find, findFirst);
             Assert.assertEquals(String.valueOf(x), findLast, findFirst);
             Assert.assertEquals(String.valueOf(x), find, findIterative);
             Assert.assertEquals(String.valueOf(x), find, findFirstIterative);
             Assert.assertEquals(String.valueOf(x), find, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), find, findFirstIndexApproach2);
+            Assert.assertEquals(String.valueOf(x), find, findLastIndexApproach2);
         }
         {
             final int x = arr[0];
@@ -79,11 +83,15 @@ public class BinarySearchTest {
             final int findIterative = solver.findIterative(x);
             final int findFirstIterative = solver.findFirstIterative(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), find, findFirst);
             Assert.assertEquals(String.valueOf(x), findLast, findFirst);
             Assert.assertEquals(String.valueOf(x), find, findIterative);
             Assert.assertEquals(String.valueOf(x), find, findFirstIterative);
             Assert.assertEquals(String.valueOf(x), find, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), find, findFirstIndexApproach2);
+            Assert.assertEquals(String.valueOf(x), find, findLastIndexApproach2);
         }
         {
             final int x = arr[n - 1];
@@ -93,11 +101,15 @@ public class BinarySearchTest {
             final int findIterative = solver.findIterative(x);
             final int findFirstIterative = solver.findFirstIterative(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), find, findFirst);
             Assert.assertEquals(String.valueOf(x), findLast, findFirst);
             Assert.assertEquals(String.valueOf(x), find, findIterative);
             Assert.assertEquals(String.valueOf(x), find, findFirstIterative);
             Assert.assertEquals(String.valueOf(x), find, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), find, findFirstIndexApproach2);
+            Assert.assertEquals(String.valueOf(x), find, findLastIndexApproach2);
         }
         {
             final int x = arr[3];
@@ -107,11 +119,15 @@ public class BinarySearchTest {
             final int findIterative = solver.findIterative(x);
             final int findFirstIterative = solver.findFirstIterative(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), find, findFirst);
             Assert.assertEquals(String.valueOf(x), findLast, findFirst);
             Assert.assertEquals(String.valueOf(x), find, findIterative);
             Assert.assertEquals(String.valueOf(x), find, findFirstIterative);
             Assert.assertEquals(String.valueOf(x), find, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), find, findFirstIndexApproach2);
+            Assert.assertEquals(String.valueOf(x), find, findLastIndexApproach2);
         }
         {
             final int x = 50;
@@ -121,11 +137,15 @@ public class BinarySearchTest {
             final int findIterative = solver.findIterative(x);
             final int findFirstIterative = solver.findFirstIterative(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), find, findFirst);
             Assert.assertEquals(String.valueOf(x), findLast, findFirst);
             Assert.assertEquals(String.valueOf(x), find, findIterative);
             Assert.assertEquals(String.valueOf(x), find, findFirstIterative);
             Assert.assertEquals(String.valueOf(x), find, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), find, findFirstIndexApproach2);
+            Assert.assertEquals(String.valueOf(x), find, findLastIndexApproach2);
         }
         {
             final int x = 1;
@@ -135,11 +155,15 @@ public class BinarySearchTest {
             final int findIterative = solver.findIterative(x);
             final int findFirstIterative = solver.findFirstIterative(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), find, findFirst);
             Assert.assertEquals(String.valueOf(x), findLast, findFirst);
             Assert.assertEquals(String.valueOf(x), find, findIterative);
             Assert.assertEquals(String.valueOf(x), find, findFirstIterative);
             Assert.assertEquals(String.valueOf(x), find, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), find, findFirstIndexApproach2);
+            Assert.assertEquals(String.valueOf(x), find, findLastIndexApproach2);
         }
     }
 
@@ -304,6 +328,8 @@ public class BinarySearchTest {
             final int x = 1;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 0, index);
         }
@@ -311,6 +337,8 @@ public class BinarySearchTest {
             final int x = 2;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 2, index);
         }
@@ -318,6 +346,8 @@ public class BinarySearchTest {
             final int x = 3;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 3, index);
         }
@@ -325,6 +355,8 @@ public class BinarySearchTest {
             final int x = 4;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 5, index);
         }
@@ -332,6 +364,8 @@ public class BinarySearchTest {
             final int x = 10;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 6, index);
         }
@@ -339,6 +373,8 @@ public class BinarySearchTest {
             final int x = 40;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 9, index);
         }
@@ -346,6 +382,8 @@ public class BinarySearchTest {
             final int x = 50;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 10, index);
         }
@@ -353,6 +391,8 @@ public class BinarySearchTest {
             final int x = 60;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 12, index);
         }
@@ -360,6 +400,8 @@ public class BinarySearchTest {
             final int x = 70;
             final int index = solver.findFirstRecursive(x);
             final int findFirstIterative = solver.findFirstIterative(x);
+            final int findFirstIndexApproach2 = solver.findFirstIndexApproach2(x);
+            Assert.assertEquals(String.valueOf(x), findFirstIterative, findFirstIndexApproach2);
             Assert.assertEquals(String.valueOf(x), findFirstIterative, index);
             Assert.assertEquals(String.valueOf(x), 14, index);
         }
@@ -376,63 +418,90 @@ public class BinarySearchTest {
             final int x = 1;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 1, index);
         }
         {
             final int x = 2;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 2, index);
         }
         {
             final int x = 3;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 4, index);
         }
         {
             final int x = 4;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 5, index);
         }
         {
             final int x = 10;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 8, index);
         }
         {
             final int x = 40;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 9, index);
         }
         {
             final int x = 50;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 11, index);
         }
         {
             final int x = 60;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 13, index);
         }
         {
             final int x = 70;
             final int index = solver.findLastRecursive(x);
             final int findLastIterative = solver.findLastIterative(x);
+            final int findLastIndexApproach2 = solver.findLastIndexApproach2(x);
             Assert.assertEquals(String.valueOf(x), index, findLastIterative);
+            Assert.assertEquals(String.valueOf(x), index, findLastIndexApproach2);
+            System.out.println("Done with: " + x);
             Assert.assertEquals(String.valueOf(x), 16, index);
         }
     }
