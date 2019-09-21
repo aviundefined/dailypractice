@@ -21,6 +21,31 @@ final class BinarySearch {
         this.n = arr.length;
     }
 
+    final int rotatedSearch(final int key) {
+        int left = 0;
+        int right = n - 1;
+        while (left <= right) {
+            final int mid = (left + right) / 2;
+            if (arr[mid] == key) {
+                return mid;
+            }
+            if (arr[left] <= arr[mid]) {
+                if (key >= arr[left] && key <= arr[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                if (key >= arr[mid] && key <= arr[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return NOT_FOUND;
+    }
+
     final int findRecursive(final int x) {
         return _findRecursive(0, n - 1, x);
     }

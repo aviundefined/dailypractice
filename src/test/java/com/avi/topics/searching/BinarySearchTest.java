@@ -908,4 +908,39 @@ public class BinarySearchTest {
             Assert.assertEquals(String.valueOf(x), expected, actual);
         }
     }
+
+    @Test
+    public void rotatedSearch1() {
+        final int[] arr = {5, 6, 7, 8, 10, 11, 1, 2, 4};
+        final BinarySearch solver = new BinarySearch(arr);
+        CommonUtils.printArr(arr);
+        for (int i = 0; i < arr.length; i++) {
+            final int actual = solver.rotatedSearch(arr[i]);
+            Assert.assertEquals(String.valueOf(arr[i]), i, actual);
+        }
+        {
+            final int key = 0;
+            final int expected = -1;
+            final int actual = solver.rotatedSearch(key);
+            Assert.assertEquals(String.valueOf(key), expected, actual);
+        }
+        {
+            final int key = 3;
+            final int expected = -1;
+            final int actual = solver.rotatedSearch(key);
+            Assert.assertEquals(String.valueOf(key), expected, actual);
+        }
+        {
+            final int key = 9;
+            final int expected = -1;
+            final int actual = solver.rotatedSearch(key);
+            Assert.assertEquals(String.valueOf(key), expected, actual);
+        }
+        {
+            final int key = 13;
+            final int expected = -1;
+            final int actual = solver.rotatedSearch(key);
+            Assert.assertEquals(String.valueOf(key), expected, actual);
+        }
+    }
 }
