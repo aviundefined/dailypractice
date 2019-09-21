@@ -66,6 +66,32 @@ public class SearchQuestionsTest {
                 System.out.println("Rotation point: " + arr[actual]);
             }
         }
+
+        {
+            final int[] arr = {18, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17};
+            CommonUtils.printArr(arr);
+            final int expected = 1;
+            final int actual = SearchQuestions.rotationPoint(arr);
+            Assert.assertEquals(expected, actual);
+            if (actual == -1) {
+                System.out.println("Rotation point not found");
+            } else {
+                System.out.println("Rotation point: " + arr[actual]);
+            }
+        }
+
+        {
+            final int[] arr = {6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 1};
+            CommonUtils.printArr(arr);
+            final int expected = 11;
+            final int actual = SearchQuestions.rotationPoint(arr);
+            Assert.assertEquals(expected, actual);
+            if (actual == -1) {
+                System.out.println("Rotation point not found");
+            } else {
+                System.out.println("Rotation point: " + arr[actual]);
+            }
+        }
     }
 
     @Test
