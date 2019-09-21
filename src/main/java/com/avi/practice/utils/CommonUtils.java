@@ -79,4 +79,22 @@ public final class CommonUtils {
     public static boolean isEmpty(int[] arr) {
         return arr == null || arr.length == 0;
     }
+
+    public static void swap(final int[] arr, int i, int j) {
+        final int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    public static void swap(final char[] arr, int i, int j) {
+        final char tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    public static void swap(final Object[] arr, int i, int j) {
+        final Object tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
 }
