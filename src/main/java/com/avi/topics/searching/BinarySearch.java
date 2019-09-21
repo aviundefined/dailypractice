@@ -97,6 +97,41 @@ final class BinarySearch {
         return maxIdx;
     }
 
+    final int floor(final int x) {
+        final int floorIdx = _floorIndex(x);
+        if (floorIdx == NOT_FOUND) {
+            return Integer.MAX_VALUE; // indicator that not found
+        }
+        return arr[floorIdx];
+    }
+
+    private int _floorIndex(int x) {
+        int left = 0;
+        int right = n - 1;
+
+        while (left <= right) {
+            final int mid = (left + right) / 2;
+            if (arr[mid] == x) {
+                return mid;
+            } else if (arr[mid] > x) {
+                right = mid - 1;
+            } else if (arr[mid] < x) {
+                if (mid == n - 1) {
+                    return mid;
+                } else if (mid < n - 1) {
+                    if (arr[mid + 1] == x) {
+                        return mid + 1;
+                    }
+                    if (arr[mid + 1] > x) {
+                        return mid;
+                    }
+                }
+                left = mid + 1;
+            }
+        }
+        return NOT_FOUND;
+    }
+
     private int _findRecursive(final int left, final int right, final int x) {
         if (right < left) {
             return NOT_FOUND;

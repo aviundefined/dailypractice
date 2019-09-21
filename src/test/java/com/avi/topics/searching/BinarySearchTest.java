@@ -436,4 +436,116 @@ public class BinarySearchTest {
             Assert.assertEquals(String.valueOf(x), 16, index);
         }
     }
+
+    @Test
+    public void floorWithoutDuplicates() {
+        final int[] arr = {2, 3, 4, 10, 40};
+        final BinarySearch solver = new BinarySearch(arr);
+        System.out.print("Find floor in arr: ");
+        CommonUtils.printArr(arr);
+        {
+            final int x = 1;
+            final int expected = Integer.MAX_VALUE;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 2;
+            final int expected = 2;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 3;
+            final int expected = 3;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 4;
+            final int expected = 4;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 5;
+            final int expected = 4;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 6;
+            final int expected = 4;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 7;
+            final int expected = 4;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 8;
+            final int expected = 4;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 9;
+            final int expected = 4;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 10;
+            final int expected = 10;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 11;
+            final int expected = 10;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 16;
+            final int expected = 10;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 21;
+            final int expected = 10;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 38;
+            final int expected = 10;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 40;
+            final int expected = 40;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+        {
+            final int x = 45;
+            final int expected = 40;
+            final int floor = solver.floor(x);
+            Assert.assertEquals(String.valueOf(x), expected, floor);
+        }
+    }
+
+    @Test
+    public void floorWithDuplicates() {
+        final int[] arr = {1, 1, 2, 3, 3, 4, 10, 10, 10, 40, 50, 50, 60, 60, 70, 70, 70};
+        final BinarySearch solver = new BinarySearch(arr);
+        System.out.print("Find floor in arr: ");
+        CommonUtils.printArr(arr);
+    }
 }
