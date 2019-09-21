@@ -29,6 +29,15 @@ final class BinarySearch {
         return _findIterative(0, n - 1, x);
     }
 
+    final int occurrences(final int x) {
+        final int firstIndex = findFirstIterative(x);
+        if (firstIndex == NOT_FOUND) {
+            return 0;
+        }
+        final int lastIndex = findLastIterative(x);
+        return lastIndex - firstIndex + 1;
+    }
+
     final int findFirstRecursive(final int x) {
         int idx = _findRecursive(0, n - 1, x);
         // if not found then simply return it

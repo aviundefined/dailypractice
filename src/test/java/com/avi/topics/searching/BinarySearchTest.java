@@ -823,4 +823,89 @@ public class BinarySearchTest {
             Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
         }
     }
+
+    @Test
+    public void occurrences() {
+        final int[] arr = {1, 1, 2, 3, 3, 4, 10, 10, 10, 40, 50, 50, 60, 60, 70, 70, 70};
+        final BinarySearch solver = new BinarySearch(arr);
+        System.out.print("Find occurrences in arr: ");
+        {
+            final int x = 0;
+            final int expected = 0;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 1;
+            final int expected = 2;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 2;
+            final int expected = 1;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 3;
+            final int expected = 2;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 4;
+            final int expected = 1;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 5;
+            final int expected = 0;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 10;
+            final int expected = 3;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 20;
+            final int expected = 0;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 35;
+            final int expected = 0;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 50;
+            final int expected = 2;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 60;
+            final int expected = 2;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 70;
+            final int expected = 3;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+        {
+            final int x = 74;
+            final int expected = 0;
+            final int actual = solver.occurrences(x);
+            Assert.assertEquals(String.valueOf(x), expected, actual);
+        }
+    }
 }
