@@ -1,6 +1,7 @@
 package com.avi.topics.searching;
 
 
+import com.avi.practice.utils.CommonUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -123,5 +124,17 @@ public class LinearSearchTest {
             Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
             Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
         }
+    }
+
+    @Test
+    public void peak() {
+        final int[] arr = {1, 3, 20, 4, 1, 0};
+        final LinearSearch solver = new LinearSearch(arr);
+        CommonUtils.printArr(arr);
+        final int peakLinearSearch = solver.peakLinearSearch();
+        final int peakBinarySearch = solver.peakBinarySearch();
+        Assert.assertEquals(20, peakLinearSearch);
+        Assert.assertEquals(peakLinearSearch, peakBinarySearch);
+
     }
 }
