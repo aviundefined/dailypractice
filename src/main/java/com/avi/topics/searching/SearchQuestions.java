@@ -49,4 +49,56 @@ final class SearchQuestions {
         }
         return -1;
     }
+
+    static int rotationPoint(final int[] arr) {
+        if (CommonUtils.isEmpty(arr)) {
+            return -1;
+        }
+        final int n = arr.length;
+        if (n == 1) {
+            return -1;
+        }
+        if (arr[0] < arr[n - 1]) {
+            return -1;
+        }
+        int left = 0;
+        int right = n - 1;
+        while (left <= right) {
+            if (left == right) {
+                return left;
+            }
+            final int mid = (left + right) / 2;
+            if (arr[mid] < arr[right]) { // left side is sorted rotation point is on right side
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    static int rotatedSearch(final int[] arr, final int key) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            final int mid = (left + right) / 2;
+            if (arr[mid] == key) {
+                return mid;
+            }
+            if (arr[left] <= arr[mid]) {
+                if (key >= arr[left] && key <= arr[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                if (key >= arr[mid] && key <= arr[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
 }

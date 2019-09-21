@@ -910,7 +910,7 @@ public class BinarySearchTest {
     }
 
     @Test
-    public void rotatedSearch1() {
+    public void rotatedSearch() {
         final int[] arr = {5, 6, 7, 8, 10, 11, 1, 2, 4};
         final BinarySearch solver = new BinarySearch(arr);
         CommonUtils.printArr(arr);
