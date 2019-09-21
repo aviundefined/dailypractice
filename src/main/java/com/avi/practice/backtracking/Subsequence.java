@@ -56,11 +56,6 @@ final class Subsequence {
         }
 
         for (int i = idx; i < n; i++) {
-            final List<Integer> candidate = new ArrayList<>();
-            for (int j = 0; j < length; j++) {
-                candidate.add(arr[j]);
-            }
-            Collections.sort(candidate);
             CommonUtils.swap(arr, idx, i);
             _ofLengthK(idx + 1, length, subsequences);
             CommonUtils.swap(arr, idx, i);
