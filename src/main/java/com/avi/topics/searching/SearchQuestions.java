@@ -64,9 +64,6 @@ final class SearchQuestions {
         int left = 0;
         int right = n - 1;
         while (left <= right) {
-            if (left == right) {
-                return left;
-            }
             final int mid = (left + right) / 2;
             if ((mid > 0 && arr[mid] < arr[mid - 1]) && (mid < n - 1 && arr[mid] < arr[mid + 1])) {
                 return mid;
