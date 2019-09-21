@@ -1,5 +1,7 @@
 package com.avi.practice.utils;
 
+import java.util.Collection;
+
 /**
  * Created by navinash on 19/09/19.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -96,5 +98,9 @@ public final class CommonUtils {
         final Object tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
+    }
+
+    public static boolean isEmpty(final Collection<Integer> col) {
+        return col == null || col.isEmpty();
     }
 }
