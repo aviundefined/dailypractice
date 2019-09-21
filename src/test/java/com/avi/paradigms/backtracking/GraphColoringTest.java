@@ -1,4 +1,4 @@
-package com.avi.practice.backtracking;
+package com.avi.paradigms.backtracking;
 
 
 import org.junit.Assert;

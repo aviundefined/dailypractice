@@ -1,4 +1,4 @@
-package com.avi.practice.backtracking;
+package com.avi.paradigms.backtracking;
 
 /**
  * Created by navinash on 20/09/19.

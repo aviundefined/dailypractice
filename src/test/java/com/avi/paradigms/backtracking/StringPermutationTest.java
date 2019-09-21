@@ -1,5 +1,6 @@
-package com.avi.practice.backtracking;
+package com.avi.paradigms.backtracking;
 
+import com.avi.paradigms.backtracking.StringPermutation;
 import org.junit.Test;
 
 /**

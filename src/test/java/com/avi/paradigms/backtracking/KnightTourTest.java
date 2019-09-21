@@ -1,5 +1,6 @@
-package com.avi.practice.backtracking;
+package com.avi.paradigms.backtracking;
 
+import com.avi.paradigms.backtracking.KnightTour;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
