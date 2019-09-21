@@ -25,6 +25,40 @@ final class BinarySearch {
         return _find(0, n - 1, x);
     }
 
+    int findFirst(final int x) {
+        int idx = _find(0, n - 1, x);
+        // if not found then simply return it
+        if (idx == NOT_FOUND) {
+            return idx;
+        }
+        int minIdx = idx;
+        // x found at idx , not try to find smaller idx
+        while (idx != NOT_FOUND) {
+            idx = _find(0, idx - 1, x);
+            if (idx != NOT_FOUND) {
+                minIdx = idx;
+            }
+        }
+        return minIdx;
+    }
+
+    int findLast(final int x) {
+        int idx = _find(0, n - 1, x);
+        // if not found then simply return it
+        if (idx == NOT_FOUND) {
+            return idx;
+        }
+        int maxIdx = idx;
+        // x found at idx , not try to find largest idx
+        while (idx != NOT_FOUND) {
+            idx = _find(idx + 1, n - 1, x);
+            if (idx != NOT_FOUND) {
+                maxIdx = idx;
+            }
+        }
+        return maxIdx;
+    }
+
     private int _find(final int left, final int right, final int x) {
         if (right < left) {
             return NOT_FOUND;
