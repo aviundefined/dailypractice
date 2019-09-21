@@ -97,12 +97,48 @@ final class BinarySearch {
         return maxIdx;
     }
 
+    /**
+     * Returns value less or equal to x
+     */
     final int floor(final int x) {
         final int floorIdx = _floorIndex(x);
         if (floorIdx == NOT_FOUND) {
-            return Integer.MAX_VALUE; // indicator that not found
+            return Integer.MAX_VALUE; // indicator that floor not found
         }
         return arr[floorIdx];
+    }
+
+    final int ceiling(final int x) {
+        final int ceilingIdx = _ceilingIndex(x);
+        if (ceilingIdx == NOT_FOUND) {
+            return Integer.MIN_VALUE; // indicator that ceiling not found
+        }
+        return arr[ceilingIdx];
+    }
+
+    private int _ceilingIndex(final int x) {
+        int left = 0;
+        int right = n - 1;
+        while (left <= right) {
+            final int mid = (left + right) / 2;
+            if (arr[mid] == x) {
+                return mid;
+            } else if (arr[mid] > x) {
+                if (mid == 0) {
+                    return mid;
+                } else if (mid > 0) {
+                    if (arr[mid - 1] == x) {
+                        return mid - 1;
+                    } else if (arr[mid - 1] < x) {
+                        return mid;
+                    }
+                }
+                right = mid - 1;
+            } else if (arr[mid] < x) {
+                left = mid + 1;
+            }
+        }
+        return NOT_FOUND;
     }
 
     private int _floorIndex(int x) {

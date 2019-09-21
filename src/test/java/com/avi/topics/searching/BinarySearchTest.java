@@ -542,10 +542,285 @@ public class BinarySearchTest {
     }
 
     @Test
+    public void ceilingWithoutDuplicates() {
+        final int[] arr = {2, 3, 4, 10, 40};
+        final BinarySearch solver = new BinarySearch(arr);
+        System.out.print("Find floor in arr: ");
+        CommonUtils.printArr(arr);
+        {
+            final int x = 1;
+            final int expected = 2;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 2;
+            final int expected = 2;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 3;
+            final int expected = 3;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 4;
+            final int expected = 4;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 5;
+            final int expected = 10;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 6;
+            final int expected = 10;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 7;
+            final int expected = 10;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 8;
+            final int expected = 10;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 9;
+            final int expected = 10;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 10;
+            final int expected = 10;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 11;
+            final int expected = 40;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 16;
+            final int expected = 40;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 21;
+            final int expected = 40;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 38;
+            final int expected = 40;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 40;
+            final int expected = 40;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+        {
+            final int x = 45;
+            final int expected = Integer.MIN_VALUE;
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expected, ceiling);
+        }
+    }
+
+    @Test
     public void floorWithDuplicates() {
         final int[] arr = {1, 1, 2, 3, 3, 4, 10, 10, 10, 40, 50, 50, 60, 60, 70, 70, 70};
         final BinarySearch solver = new BinarySearch(arr);
         System.out.print("Find floor in arr: ");
         CommonUtils.printArr(arr);
+        {
+            final int x = 0;
+            final int expectedFloor = Integer.MAX_VALUE;
+            final int expectedCeiling = 1;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 1;
+            final int expectedFloor = 1;
+            final int expectedCeiling = 1;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 2;
+            final int expectedFloor = 2;
+            final int expectedCeiling = 2;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 3;
+            final int expectedFloor = 3;
+            final int expectedCeiling = 3;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 4;
+            final int expectedFloor = 4;
+            final int expectedCeiling = 4;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 5;
+            final int expectedFloor = 4;
+            final int expectedCeiling = 10;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 8;
+            final int expectedFloor = 4;
+            final int expectedCeiling = 10;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 10;
+            final int expectedFloor = 10;
+            final int expectedCeiling = 10;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 20;
+            final int expectedFloor = 10;
+            final int expectedCeiling = 40;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 33;
+            final int expectedFloor = 10;
+            final int expectedCeiling = 40;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 40;
+            final int expectedFloor = 40;
+            final int expectedCeiling = 40;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 44;
+            final int expectedFloor = 40;
+            final int expectedCeiling = 50;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 45;
+            final int expectedFloor = 40;
+            final int expectedCeiling = 50;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 49;
+            final int expectedFloor = 40;
+            final int expectedCeiling = 50;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 55;
+            final int expectedFloor = 50;
+            final int expectedCeiling = 60;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 60;
+            final int expectedFloor = 60;
+            final int expectedCeiling = 60;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 67;
+            final int expectedFloor = 60;
+            final int expectedCeiling = 70;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 70;
+            final int expectedFloor = 70;
+            final int expectedCeiling = 70;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 78;
+            final int expectedFloor = 70;
+            final int expectedCeiling = Integer.MIN_VALUE;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
     }
 }
