@@ -40,4 +40,18 @@ public class SubsequenceTest {
             System.out.println(sub);
         }
     }
+
+
+    @Test
+    public void all1() {
+        final int[] arr = {2, 3, 4, 5, 5, 1, 1, 2};
+        System.out.print("Print all subsequences of arr: ");
+        CommonUtils.printArr(arr);
+        final Subsequence solver = new Subsequence(arr);
+        final Collection<List<Integer>> all = solver.all();
+        for (final List<Integer> sub : all) {
+            System.out.println(sub);
+        }
+        System.out.println();
+    }
 }
