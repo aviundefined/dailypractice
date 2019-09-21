@@ -21,11 +21,11 @@ final class BinarySearch {
         this.n = arr.length;
     }
 
-    int find(final int x) {
+    final int find(final int x) {
         return _find(0, n - 1, x);
     }
 
-    int findFirst(final int x) {
+    final int findFirst(final int x) {
         int idx = _find(0, n - 1, x);
         // if not found then simply return it
         if (idx == NOT_FOUND) {
@@ -42,7 +42,7 @@ final class BinarySearch {
         return minIdx;
     }
 
-    int findLast(final int x) {
+    final int findLast(final int x) {
         int idx = _find(0, n - 1, x);
         // if not found then simply return it
         if (idx == NOT_FOUND) {
