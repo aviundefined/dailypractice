@@ -68,6 +68,9 @@ final class SearchQuestions {
                 return left;
             }
             final int mid = (left + right) / 2;
+            if ((mid > 0 && arr[mid] < arr[mid - 1]) && (mid < n - 1 && arr[mid] < arr[mid + 1])) {
+                return mid;
+            }
             if (arr[mid] < arr[right]) { // left side is sorted rotation point is on right side
                 right = mid;
             } else {
