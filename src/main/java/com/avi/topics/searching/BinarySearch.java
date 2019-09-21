@@ -21,12 +21,16 @@ final class BinarySearch {
         this.n = arr.length;
     }
 
-    final int find(final int x) {
-        return _find(0, n - 1, x);
+    final int findRecursive(final int x) {
+        return _findRecursive(0, n - 1, x);
     }
 
-    final int findFirst(final int x) {
-        int idx = _find(0, n - 1, x);
+    final int findIterative(final int x) {
+        return _findIterative(0, n - 1, x);
+    }
+
+    final int findFirstRecursive(final int x) {
+        int idx = _findRecursive(0, n - 1, x);
         // if not found then simply return it
         if (idx == NOT_FOUND) {
             return idx;
@@ -34,7 +38,7 @@ final class BinarySearch {
         int minIdx = idx;
         // x found at idx , not try to find smaller idx
         while (idx != NOT_FOUND) {
-            idx = _find(0, idx - 1, x);
+            idx = _findRecursive(0, idx - 1, x);
             if (idx != NOT_FOUND) {
                 minIdx = idx;
             }
@@ -42,8 +46,8 @@ final class BinarySearch {
         return minIdx;
     }
 
-    final int findLast(final int x) {
-        int idx = _find(0, n - 1, x);
+    final int findLastRecursive(final int x) {
+        int idx = _findRecursive(0, n - 1, x);
         // if not found then simply return it
         if (idx == NOT_FOUND) {
             return idx;
@@ -51,7 +55,7 @@ final class BinarySearch {
         int maxIdx = idx;
         // x found at idx , not try to find largest idx
         while (idx != NOT_FOUND) {
-            idx = _find(idx + 1, n - 1, x);
+            idx = _findRecursive(idx + 1, n - 1, x);
             if (idx != NOT_FOUND) {
                 maxIdx = idx;
             }
@@ -59,7 +63,41 @@ final class BinarySearch {
         return maxIdx;
     }
 
-    private int _find(final int left, final int right, final int x) {
+    final int findFirstIterative(final int x) {
+        int idx = _findIterative(0, n - 1, x);
+        // if not found then simply return it
+        if (idx == NOT_FOUND) {
+            return idx;
+        }
+        int minIdx = idx;
+        // x found at idx , not try to find smaller idx
+        while (idx != NOT_FOUND) {
+            idx = _findIterative(0, idx - 1, x);
+            if (idx != NOT_FOUND) {
+                minIdx = idx;
+            }
+        }
+        return minIdx;
+    }
+
+    final int findLastIterative(final int x) {
+        int idx = _findIterative(0, n - 1, x);
+        // if not found then simply return it
+        if (idx == NOT_FOUND) {
+            return idx;
+        }
+        int maxIdx = idx;
+        // x found at idx , not try to find largest idx
+        while (idx != NOT_FOUND) {
+            idx = _findIterative(idx + 1, n - 1, x);
+            if (idx != NOT_FOUND) {
+                maxIdx = idx;
+            }
+        }
+        return maxIdx;
+    }
+
+    private int _findRecursive(final int left, final int right, final int x) {
         if (right < left) {
             return NOT_FOUND;
         }
@@ -68,10 +106,29 @@ final class BinarySearch {
             return mid;
         }
         if (arr[mid] > x) {
-            return _find(left, mid - 1, x);
+            return _findRecursive(left, mid - 1, x);
         }
         if (arr[mid] < x) {
-            return _find(mid + 1, right, x);
+            return _findRecursive(mid + 1, right, x);
+        }
+        return NOT_FOUND;
+    }
+
+    private int _findIterative(int left, int right, final int x) {
+        if (right < left) {
+            return NOT_FOUND;
+        }
+        while (left <= right) {
+            final int mid = (left + right) / 2;
+            if (arr[mid] == x) {
+                return mid;
+            }
+            if (arr[mid] > x) {
+                right = mid - 1;
+            }
+            if (arr[mid] < x) {
+                left = mid + 1;
+            }
         }
         return NOT_FOUND;
     }
