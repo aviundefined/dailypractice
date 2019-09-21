@@ -82,4 +82,46 @@ public class LinearSearchTest {
             Assert.assertEquals(String.valueOf(x), 11, firstIndex);
         }
     }
+
+    @Test
+    public void floorAndCeiling() {
+        final int[] arr = {5, 6, 8, 9, 6, 5, 5, 6};
+        final LinearSearch solver = new LinearSearch(arr);
+        {
+            final int x = 7;
+            final int expectedFloor = 6;
+            final int expectedCeiling = 8;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 6;
+            final int expectedFloor = 6;
+            final int expectedCeiling = 6;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 10;
+            final int expectedFloor = 9;
+            final int expectedCeiling = Integer.MIN_VALUE;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+        {
+            final int x = 4;
+            final int expectedFloor = Integer.MAX_VALUE;
+            final int expectedCeiling = 5;
+            final int floor = solver.floor(x);
+            final int ceiling = solver.ceiling(x);
+            Assert.assertEquals(String.valueOf(x), expectedFloor, floor);
+            Assert.assertEquals(String.valueOf(x), expectedCeiling, ceiling);
+        }
+    }
 }

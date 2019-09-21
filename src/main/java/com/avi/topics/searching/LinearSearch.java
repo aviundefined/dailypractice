@@ -39,4 +39,37 @@ final class LinearSearch {
         }
         return lastIdx;
     }
+
+    /**
+     * Returns value less or equal to x
+     */
+    final int floor(final int x) {
+        int floor = Integer.MIN_VALUE;
+        for (int a : arr) {
+            if (a <= x) {
+                floor = Math.max(floor, a);
+            }
+        }
+        if (floor == Integer.MIN_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        return floor;
+    }
+
+    /**
+     * Returns value greater or equal to x
+     */
+    final int ceiling(final int x) {
+        int ceiling = Integer.MAX_VALUE;
+        for (int a : arr) {
+            if (a >= x) {
+                ceiling = Math.min(ceiling, a);
+            }
+        }
+        if (ceiling == Integer.MAX_VALUE) {
+            return Integer.MIN_VALUE;
+        }
+        return ceiling;
+    }
+
 }
