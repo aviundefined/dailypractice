@@ -1,0 +1,69 @@
+package com.avi.paradigms.dp;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Created by navinash on 22/09/19.
+ * Copyright 2019 VMware, Inc.  All rights reserved.
+ * -- VMware Confidential
+ */
+public class FibonacciNumberTest {
+
+    @Test
+    public void fibnoacci() {
+        final FibonacciNumber solver = new FibonacciNumber();
+        {
+            final int n = 2;
+            final int expected = 1;
+            final int fibonacci = solver.fibnoacci(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibonacci);
+        }
+        {
+            final int n = 3;
+            final int expected = 2;
+            final int fibonacci = solver.fibnoacci(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibonacci);
+        }
+        {
+            final int n = 9;
+            final int expected = 34;
+            final int fibonacci = solver.fibnoacci(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibonacci);
+        }
+    }
+
+
+    @Test
+    public void fibnoacciConstantSpace() {
+        final FibonacciNumber solver = new FibonacciNumber();
+        {
+            final int n = 2;
+            final int expected = 1;
+            final int fibnoacciConstantSpace = solver.fibnoacci(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibnoacciConstantSpace);
+        }
+        {
+            final int n = 3;
+            final int expected = 2;
+            final int fibnoacciConstantSpace = solver.fibnoacci(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibnoacciConstantSpace);
+        }
+        {
+            final int n = 9;
+            final int expected = 34;
+            final int fibnoacciConstantSpace = solver.fibnoacci(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibnoacciConstantSpace);
+        }
+    }
+
+    @Test
+    public void compareFibonacci() {
+        final FibonacciNumber solver = new FibonacciNumber();
+        for (int i = 0; i <= 100; i++) {
+            final int fibonacci = solver.fibnoacci(i);
+            final int fibnoacciConstantSpace = solver.fibnoacci(i);
+            Assert.assertEquals(String.valueOf(i), fibonacci, fibnoacciConstantSpace);
+        }
+    }
+}
