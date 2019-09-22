@@ -151,6 +151,53 @@ public class SearchQuestionsTest {
         }
     }
 
+    @Test
+    public void findPivot() {
+        {
+            final int[] a = {3, 4, 5, 1, 2};
+            CommonUtils.printArr(a);
+            final int expected = 2;
+            final int pivot = SearchQuestions.findPivot(a);
+            if (expected != pivot) {
+                if (pivot == -1) {
+                    System.out.println(String.format("Expected pivot: {%s} but pivot not found", a[expected]));
+                } else {
+                    System.out.println(String.format("Expected pivot: {%s}, Found Pivot: {%s}", a[expected], a[pivot]));
+                }
+            }
+            Assert.assertEquals(String.valueOf(a[expected]), expected, pivot);
+        }
+        {
+            final int[] a = {5, 6, 7, 8, 10, 11, 1, 2, 4};
+            CommonUtils.printArr(a);
+            final int expected = 5;
+            final int pivot = SearchQuestions.findPivot(a);
+            if (expected != pivot) {
+                if (pivot == -1) {
+                    System.out.println(String.format("Expected pivot: {%s} but pivot not found", a[expected]));
+                } else {
+                    System.out.println(String.format("Expected pivot: {%s}, Found Pivot: {%s}", a[expected], a[pivot]));
+                }
+            }
+            Assert.assertEquals(String.valueOf(a[expected]), expected, pivot);
+        }
+
+        {
+            final int[] a = {4, 5, 6, 7, 8, 9, 1, 2, 3};
+            CommonUtils.printArr(a);
+            final int expected = 5;
+            final int pivot = SearchQuestions.findPivot(a);
+            if (expected != pivot) {
+                if (pivot == -1) {
+                    System.out.println(String.format("Expected pivot: {%s} but pivot not found", a[expected]));
+                } else {
+                    System.out.println(String.format("Expected pivot: {%s}, Found Pivot: {%s}", a[expected], a[pivot]));
+                }
+            }
+            Assert.assertEquals(String.valueOf(a[expected]), expected, pivot);
+        }
+    }
+
     private static int randInt() {
         return randInt(1000);
     }

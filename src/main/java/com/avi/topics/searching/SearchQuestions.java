@@ -15,6 +15,36 @@ final class SearchQuestions {
 
     }
 
+    static int findPivot(final int[] a) {
+        final int n = CommonUtils.isEmpty(a) ? 0 : a.length;
+        // if 0 or 1 element no pivot possible
+        if (n <= 1) {
+            return -1;
+        }
+
+        // if first element is smaller than last element then no pivot possible
+        if (a[0] < a[n - 1]) {
+            return -1;
+        }
+
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            if (left == right) {
+                return left;
+            }
+            final int mid = (left + right) / 2;
+            if ((mid == 0 || a[mid] > a[mid - 1]) && (mid == n - 1 || a[mid] > a[mid + 1])) {
+                return mid;
+            }
+            if (a[left] <= a[mid]) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        return -1;
+    }
+
     static int findListInList(final List<Integer> parent, final List<Integer> target) {
         if (CommonUtils.isEmpty(parent) || CommonUtils.isEmpty(target)) {
             return -1;
