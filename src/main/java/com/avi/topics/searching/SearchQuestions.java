@@ -2,6 +2,7 @@ package com.avi.topics.searching;
 
 import com.avi.practice.utils.CommonUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -256,4 +257,55 @@ final class SearchQuestions {
         }
         return arr[n / 2];
     }
+
+    static ClosetToZeroSumResult findClosetToZeroSum(final int[] arr) {
+        final int n = CommonUtils.isEmpty(arr) ? 0 : arr.length;
+        if (n < 2) {
+            return null;
+        }
+        if (n == 2) {
+            return new ClosetToZeroSumResult(arr[0], arr[1]);
+        }
+        Arrays.sort(arr);
+        ClosetToZeroSumResult result = null;
+        int minDiff = Integer.MAX_VALUE;
+        int left = 0, right = n - 1;
+        while (left < right) {
+            final int sum = arr[left] + arr[right];
+            if (sum == 0) {
+                result = new ClosetToZeroSumResult(arr[left], arr[right]);
+                break;
+            }
+            if (Math.abs(sum) < minDiff) {
+                minDiff = Math.abs(sum);
+                result = new ClosetToZeroSumResult(arr[left], arr[right]);
+            }
+            if (sum > 0) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return result;
+    }
+
+    static final class ClosetToZeroSumResult {
+        private final int ele1;
+        private final int ele2;
+
+        private ClosetToZeroSumResult(final int ele1, final int ele2) {
+            this.ele1 = ele1;
+            this.ele2 = ele2;
+        }
+
+        final int sum() {
+            return ele1 + ele2;
+        }
+
+        @Override
+        public String toString() {
+            return "{" + ele1 + "," + ele2 + ") -> " + Math.abs(ele1 + ele2);
+        }
+    }
+
 }

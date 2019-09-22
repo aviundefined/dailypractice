@@ -1,6 +1,7 @@
 package com.avi.topics.searching;
 
 import com.avi.practice.utils.CommonUtils;
+import com.avi.topics.searching.SearchQuestions.ClosetToZeroSumResult;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -253,6 +254,19 @@ public class SearchQuestionsTest {
             final double medianActual = SearchQuestions.medianSortedArraysEqualSize(arr1, arr2);
             System.out.println(expected + " --> " + medianActual);
             Assert.assertEquals(expected, medianActual, 0.0);
+        }
+    }
+
+    @Test
+    public void findClosetToZeroSum() {
+        {
+            final int[] arr = {1, 60, -10, 70, -80, 85};
+            CommonUtils.printArr(arr);
+            final int expected = 5;
+            final ClosetToZeroSumResult result = SearchQuestions.findClosetToZeroSum(arr);
+            Assert.assertNotNull(result);
+            Assert.assertEquals(result.toString(), expected, result.sum());
+            System.out.println(result);
         }
     }
 
