@@ -198,6 +198,31 @@ public class SearchQuestionsTest {
         }
     }
 
+    @Test
+    public void medianSortedArraysEqualSize() {
+        {
+            final int[] arr1 = {1, 2, 3, 6};
+            final int[] arr2 = {4, 6, 8, 10};
+            CommonUtils.printArr(arr1);
+            CommonUtils.printArr(arr2);
+            final double expected = 5;
+            final double medianActual = SearchQuestions.medianSortedArraysEqualSize(arr1, arr2);
+            System.out.println(expected + " --> " + medianActual);
+        }
+
+        {
+
+            final int[] arr1 = {1, 12, 15, 26, 38};
+            final int[] arr2 = {2, 13, 17, 30, 45};
+
+            CommonUtils.printArr(arr1);
+            CommonUtils.printArr(arr2);
+            final double expected = 16;
+            final double medianActual = SearchQuestions.medianSortedArraysEqualSize(arr1, arr2);
+            System.out.println(expected + " --> " + medianActual);
+        }
+    }
+
     private static int randInt() {
         return randInt(1000);
     }

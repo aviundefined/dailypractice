@@ -155,4 +155,105 @@ final class SearchQuestions {
         }
         return xorOfAllN ^ xorOfArr;
     }
+
+    static double medianSortedArraysEqualSize(final int[] arr1, final int[] arr2) {
+        final int n1 = CommonUtils.isEmpty(arr1) ? 0 : arr1.length;
+        final int n2 = CommonUtils.isEmpty(arr1) ? 0 : arr2.length;
+        if (n1 != n2) {
+            throw new IllegalArgumentException(String.format("This method can be used only for equal size of array. Arrays sizes are [%d], [%d]", n1, n2));
+        }
+        if (n1 == 0) {
+            return -1;
+        }
+        return _medianSortedArraysEqualSize(arr1, arr2, n1);
+    }
+
+    private static double _medianSortedArraysEqualSize(final int[] arr1, final int[] arr2, final int n) {
+        if (n == 0) {
+            return -1;
+        }
+        if (n == 1) {
+            return (double) (arr1[0] + arr2[0]) / 2;
+        }
+        if (n == 2) {
+            return (double) ((Math.max(arr1[0], arr2[0])) + Math.min(arr1[1], arr2[1])) / 2;
+        }
+
+        final double m1 = _median(arr1);
+        final double m2 = _median(arr2);
+        if (m1 == m2) {
+            return m1;
+        }
+
+        if (m1 > m2) {
+            if (n % 2 == 0) {
+                // n = 6, so 0, 1, 2 & 3, 4, 5
+                final int mid = n / 2 - 1; // 2
+                final int[] newArr1 = new int[mid + 1];
+                for (int i = 0; i <= mid; i++) {
+                    newArr1[i] = arr1[i];
+                }
+                final int[] newArr2 = new int[mid + 1];
+                for (int i = 0; i <= mid; i++) {
+                    newArr2[i] = arr1[mid + 1 + i];
+                }
+                return _medianSortedArraysEqualSize(newArr1, newArr2, mid + 1);
+            } else {
+                // n = 7 so 0, 1, 2, 3 & 3, 4, 5, 6
+                final int mid = n / 2;
+                final int[] newArr1 = new int[mid + 1];
+                for (int i = 0; i <= mid; i++) {
+                    newArr1[i] = arr1[i];
+                }
+                final int[] newArr2 = new int[mid + 1];
+                for (int i = 0; i <= mid; i++) {
+                    newArr2[i] = arr2[mid + i];
+                }
+                return _medianSortedArraysEqualSize(newArr1, newArr2, mid + 1);
+            }
+        } else {
+            if (n % 2 == 0) {
+                // n = 6, so 0, 1, 2 & 3, 4, 5
+                final int mid = n / 2 - 1; // 2
+                final int[] newArr1 = new int[mid + 1];
+                for (int i = 0; i <= mid; i++) {
+                    newArr1[i] = arr1[mid + 1 + i];
+                }
+                final int[] newArr2 = new int[mid + 1];
+                for (int i = 0; i <= mid; i++) {
+                    newArr2[i] = arr2[i];
+                }
+                return _medianSortedArraysEqualSize(newArr1, newArr2, mid + 1);
+            } else {
+                // n = 7 so 0, 1, 2, 3 & 3, 4, 5, 6
+                final int mid = n / 2;
+                final int[] newArr1 = new int[mid + 1];
+                for (int i = 0; i <= mid; i++) {
+                    newArr1[i] = arr1[mid + i];
+                }
+                final int[] newArr2 = new int[mid + 1];
+                for (int i = 0; i <= mid; i++) {
+                    newArr2[i] = arr2[i];
+                }
+                return _medianSortedArraysEqualSize(newArr1, newArr2, mid + 1);
+            }
+        }
+    }
+
+    private static double _median(final int[] arr) {
+        final int n = CommonUtils.isEmpty(arr) ? 0 : arr.length;
+        if (n == 0) {
+            return -1;
+        }
+        if (n == 1) {
+            return arr[0];
+        }
+        if (n == 2) {
+            return (double) (arr[0] + arr[1]) / 2;
+        }
+        if (n % 2 == 0) {
+            return (double) (arr[n / 2 - 1] + arr[n / 2]) / 2;
+        }
+        return arr[n / 2];
+    }
 }
