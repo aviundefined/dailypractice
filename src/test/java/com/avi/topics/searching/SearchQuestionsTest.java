@@ -208,6 +208,7 @@ public class SearchQuestionsTest {
             final double expected = 5;
             final double medianActual = SearchQuestions.medianSortedArraysEqualSize(arr1, arr2);
             System.out.println(expected + " --> " + medianActual);
+            Assert.assertEquals(expected, medianActual, 0.0);
         }
 
         {
@@ -220,6 +221,7 @@ public class SearchQuestionsTest {
             final double expected = 16;
             final double medianActual = SearchQuestions.medianSortedArraysEqualSize(arr1, arr2);
             System.out.println(expected + " --> " + medianActual);
+            Assert.assertEquals(expected, medianActual, 0.0);
         }
     }
 
