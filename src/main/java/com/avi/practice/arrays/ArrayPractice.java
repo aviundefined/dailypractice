@@ -368,6 +368,37 @@ class ArrayPractice {
         return new ArrayList<>(Arrays.asList(merged));
     }
 
+    final ArrayList<Interval> getMergedNonOverlappingIntervals(final ArrayList<Interval> intervals) {
+        if (intervals == null || intervals.size() == 1) {
+            return intervals;
+        }
+        final int n = intervals.size();
+        // sort the array first
+        intervals.sort(Comparator.comparingInt(o -> o.start));
+        // after sorting on start of interval, there can be only two cases
+        //   1) second interval is non overlapping with first one i.e first.end < second.start: simply push in stack
+        //   2) second interval is overlapping with first one i.e first.end < second.end, then update end of stack top element
+        final Stack<Interval> stack = new Stack<>();
+        stack.push(intervals.get(0));
+        for (int i = 1; i <= n - 1; i++) {
+            final Interval top = stack.peek();
+            // current interval doesn't overlap with top of the stack, so simply push it
+            final Interval curr = intervals.get(i);
+            if (top.end < curr.start) {
+                stack.push(curr);
+            } else if (top.end < curr.end) {
+                top.end = curr.end;
+            }
+        }
+
+        final ArrayList<Interval> nonOverlappingIntervals = new ArrayList<>(stack.size());
+        while (!stack.isEmpty()) {
+            nonOverlappingIntervals.add(stack.pop());
+        }
+        nonOverlappingIntervals.sort(Comparator.comparingInt(o -> o.start));
+        return nonOverlappingIntervals;
+    }
+
     final Interval[] getMergedNonOverlappingIntervals(final Interval[] intervals) {
         if (isEmpty(intervals) || intervals.length == 1) {
             return intervals;
