@@ -50,7 +50,7 @@ final class SearchQuestions {
         return -1;
     }
 
-    static int rotationPoint(final int[] arr) {
+    static int findMinimumElementInRotatedSortedArray(final int[] arr) {
         if (CommonUtils.isEmpty(arr)) {
             return -1;
         }
@@ -68,10 +68,10 @@ final class SearchQuestions {
                 return left;
             }
             final int mid = (left + right) / 2;
-            if (arr[mid] < arr[right]) { // left side is sorted rotation point is on right side
-                right = mid;
+            if (arr[mid] < arr[right]) {
+                right = mid; // means arr[mid] to arr[right] is sorted so min point can be between left to mid
             } else {
-                left = mid + 1;
+                left = mid + 1; // if arr[mid] == right or arr[mid] > arr[right] in both the cases min will be in mid + 1 to right
             }
         }
         return -1;
