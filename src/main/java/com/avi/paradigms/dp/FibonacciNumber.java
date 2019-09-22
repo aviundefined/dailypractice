@@ -20,7 +20,7 @@ final class FibonacciNumber {
         return fib[n];
     }
 
-    final int fibobacciConstantSpace(final int n) {
+    final int fibonacciConstantSpace(final int n) {
         if (n == 0) {
             return 0;
         }

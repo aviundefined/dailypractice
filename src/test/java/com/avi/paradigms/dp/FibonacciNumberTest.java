@@ -40,19 +40,19 @@ public class FibonacciNumberTest {
         {
             final int n = 2;
             final int expected = 1;
-            final int fibonacciConstantSpace = solver.fibobacciConstantSpace(n);
+            final int fibonacciConstantSpace = solver.fibonacciConstantSpace(n);
             Assert.assertEquals(String.valueOf(n), expected, fibonacciConstantSpace);
         }
         {
             final int n = 3;
             final int expected = 2;
-            final int fibonacciConstantSpace = solver.fibobacciConstantSpace(n);
+            final int fibonacciConstantSpace = solver.fibonacciConstantSpace(n);
             Assert.assertEquals(String.valueOf(n), expected, fibonacciConstantSpace);
         }
         {
             final int n = 9;
             final int expected = 34;
-            final int fibonacciConstantSpace = solver.fibobacciConstantSpace(n);
+            final int fibonacciConstantSpace = solver.fibonacciConstantSpace(n);
             Assert.assertEquals(String.valueOf(n), expected, fibonacciConstantSpace);
         }
     }
@@ -62,7 +62,7 @@ public class FibonacciNumberTest {
         final FibonacciNumber solver = new FibonacciNumber();
         for (int i = 0; i <= 100; i++) {
             final int fibonacci = solver.fibonacci(i);
-            final int fibonacciConstantSpace = solver.fibobacciConstantSpace(i);
+            final int fibonacciConstantSpace = solver.fibonacciConstantSpace(i);
             Assert.assertEquals(String.valueOf(i), fibonacci, fibonacciConstantSpace);
         }
     }
