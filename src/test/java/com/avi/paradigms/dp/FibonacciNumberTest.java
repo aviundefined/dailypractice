@@ -40,20 +40,20 @@ public class FibonacciNumberTest {
         {
             final int n = 2;
             final int expected = 1;
-            final int fibnoacciConstantSpace = solver.fibnoacci(n);
-            Assert.assertEquals(String.valueOf(n), expected, fibnoacciConstantSpace);
+            final int fibonacciConstantSpace = solver.fibobacciConstantSpace(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibonacciConstantSpace);
         }
         {
             final int n = 3;
             final int expected = 2;
-            final int fibnoacciConstantSpace = solver.fibnoacci(n);
-            Assert.assertEquals(String.valueOf(n), expected, fibnoacciConstantSpace);
+            final int fibonacciConstantSpace = solver.fibobacciConstantSpace(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibonacciConstantSpace);
         }
         {
             final int n = 9;
             final int expected = 34;
-            final int fibnoacciConstantSpace = solver.fibnoacci(n);
-            Assert.assertEquals(String.valueOf(n), expected, fibnoacciConstantSpace);
+            final int fibonacciConstantSpace = solver.fibobacciConstantSpace(n);
+            Assert.assertEquals(String.valueOf(n), expected, fibonacciConstantSpace);
         }
     }
 
@@ -62,8 +62,8 @@ public class FibonacciNumberTest {
         final FibonacciNumber solver = new FibonacciNumber();
         for (int i = 0; i <= 100; i++) {
             final int fibonacci = solver.fibnoacci(i);
-            final int fibnoacciConstantSpace = solver.fibnoacci(i);
-            Assert.assertEquals(String.valueOf(i), fibonacci, fibnoacciConstantSpace);
+            final int fibonacciConstantSpace = solver.fibobacciConstantSpace(i);
+            Assert.assertEquals(String.valueOf(i), fibonacci, fibonacciConstantSpace);
         }
     }
 }

@@ -14,16 +14,13 @@ final class FibonacciNumber {
         final int[] fib = new int[n + 1];
         fib[0] = 0;
         fib[1] = 1;
-        if (n <= 1) {
-            return fib[n];
-        }
         for (int i = 2; i <= n; i++) {
             fib[i] = fib[i - 1] + fib[i - 2];
         }
         return fib[n];
     }
 
-    final int fibnoacciConstantSpace(final int n) {
+    final int fibobacciConstantSpace(final int n) {
         if (n == 0) {
             return 0;
         }
