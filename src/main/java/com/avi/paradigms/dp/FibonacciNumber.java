@@ -7,7 +7,7 @@ package com.avi.paradigms.dp;
  */
 final class FibonacciNumber {
 
-    final int fibnoacci(final int n) {
+    final int fibonacci(final int n) {
         if (n <= 1) {
             return n;
         }
