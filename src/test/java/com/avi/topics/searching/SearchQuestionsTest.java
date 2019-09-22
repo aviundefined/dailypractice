@@ -221,6 +221,39 @@ public class SearchQuestionsTest {
             System.out.println(expected + " --> " + medianActual);
             Assert.assertEquals(expected, medianActual, 0.0);
         }
+
+        {
+            final int[] arr1 = {1, 12, 15, 16, 38};
+            final int[] arr2 = {2, 13, 17, 30, 45};
+            CommonUtils.printArr(arr1);
+            CommonUtils.printArr(arr2);
+            final double expected = 15.5;
+            final double medianActual = SearchQuestions.medianSortedArraysEqualSize(arr1, arr2);
+            System.out.println(expected + " --> " + medianActual);
+            Assert.assertEquals(expected, medianActual, 0.0);
+        }
+
+        {
+            final int[] arr1 = {1, 12, 15, 26, 38, 50};
+            final int[] arr2 = {2, 13, 17, 30, 45, 48};
+            CommonUtils.printArr(arr1);
+            CommonUtils.printArr(arr2);
+            final double expected = 21.5;
+            final double medianActual = SearchQuestions.medianSortedArraysEqualSize(arr1, arr2);
+            System.out.println(expected + " --> " + medianActual);
+            Assert.assertEquals(expected, medianActual, 0.0);
+        }
+
+        {
+            final int[] arr1 = {1, 12, 15, 26, 38, 50, 53};
+            final int[] arr2 = {2, 13, 17, 26, 45, 48, 55};
+            CommonUtils.printArr(arr1);
+            CommonUtils.printArr(arr2);
+            final double expected = 26;
+            final double medianActual = SearchQuestions.medianSortedArraysEqualSize(arr1, arr2);
+            System.out.println(expected + " --> " + medianActual);
+            Assert.assertEquals(expected, medianActual, 0.0);
+        }
     }
 
     private static int randInt() {
