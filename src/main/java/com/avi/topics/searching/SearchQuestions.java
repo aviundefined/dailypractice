@@ -101,4 +101,28 @@ final class SearchQuestions {
         }
         return -1;
     }
+
+    static int findMissingNumberSumApproach(final int[] arr) {
+        final int n = arr.length + 1;
+        final int sum = (n * (n + 1)) / 2;
+        int arrSum = 0;
+        for (final int a : arr) {
+            arrSum += a;
+        }
+        return sum - arrSum;
+    }
+
+    static int findMissingNumberXORApproach(final int[] arr) {
+        final int n = arr.length;
+        int xorOfAllN = 1;
+        for (int i = 2; i <= n + 1; i++) {
+            xorOfAllN = xorOfAllN ^ i;
+        }
+
+        int xorOfArr = arr[0];
+        for (int i = 1; i < n; i++) {
+            xorOfArr = xorOfArr ^ arr[i];
+        }
+        return xorOfAllN ^ xorOfArr;
+    }
 }

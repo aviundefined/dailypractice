@@ -127,4 +127,35 @@ public class SearchQuestionsTest {
             Assert.assertEquals(String.valueOf(key), expected, actual);
         }
     }
+
+    @Test
+    public void findMissingNumber() {
+        {
+            final int[] arr = {1, 2, 3, 5, 6, 7};
+            CommonUtils.printArr(arr);
+            final int expected = 4;
+            final int sumApproach = SearchQuestions.findMissingNumberSumApproach(arr);
+            final int xorApproach = SearchQuestions.findMissingNumberXORApproach(arr);
+            Assert.assertEquals(expected, sumApproach);
+            Assert.assertEquals(expected, xorApproach);
+        }
+
+        {
+            final int[] arr = {2, 1, 3, 4, 6, 7};
+            CommonUtils.printArr(arr);
+            final int expected = 5;
+            final int sumApproach = SearchQuestions.findMissingNumberSumApproach(arr);
+            final int xorApproach = SearchQuestions.findMissingNumberXORApproach(arr);
+            Assert.assertEquals(expected, sumApproach);
+            Assert.assertEquals(expected, xorApproach);
+        }
+    }
+
+    private static int randInt() {
+        return randInt(1000);
+    }
+
+    private static int randInt(final int n) {
+        return (int) (Math.random() * n);
+    }
 }
