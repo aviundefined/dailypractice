@@ -154,29 +154,19 @@ final class BinarySearch {
 
     final int findLastIndexApproach2(final int x) {
         int left = 0;
-        int right = n - 1;
-        int last = Integer.MIN_VALUE;
-        while (left <= right) {
-            if (left == right) {
-                if (arr[left] == x) {
-                    last = Math.max(last, left);
-                }
-                break;
-            }
-            final int mid = (left + right) / 2;
-            if (arr[mid] == x && last < mid) {
-                last = mid;
-                right = mid + 1;
-            } else if (x < arr[mid]) {
-                right = mid - 1;
+        int right = n;
+        while (right - left > 1) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] <= x) {
+                left = mid;
             } else {
-                left = mid + 1;
+                right = mid;
             }
         }
-        if (last == Integer.MIN_VALUE) {
-            return NOT_FOUND;
+        if (arr[left] == x) {
+            return left;
         }
-        return last;
+        return NOT_FOUND;
     }
 
     /**
