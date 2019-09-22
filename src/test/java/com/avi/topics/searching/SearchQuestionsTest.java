@@ -212,10 +212,8 @@ public class SearchQuestionsTest {
         }
 
         {
-
             final int[] arr1 = {1, 12, 15, 26, 38};
             final int[] arr2 = {2, 13, 17, 30, 45};
-
             CommonUtils.printArr(arr1);
             CommonUtils.printArr(arr2);
             final double expected = 16;
