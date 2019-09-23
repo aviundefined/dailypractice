@@ -103,4 +103,12 @@ public final class CommonUtils {
     public static boolean isEmpty(final Collection<Integer> col) {
         return col == null || col.isEmpty();
     }
+
+    public static int max(final int a, final int b, final int c) {
+        return Math.max(Math.max(a, b), c);
+    }
+
+    public static int min(final int a, final int b, final int c) {
+        return Math.min(Math.min(a, b), c);
+    }
 }
