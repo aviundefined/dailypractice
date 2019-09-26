@@ -7,6 +7,10 @@ package com.avi.paradigms.dp;
  */
 final class BinomialCoefficient {
 
+    /**
+     * Time:  O(n * k)
+     * Space: O(n * K)
+     */
     final int nCk(final int n, final int k) {
         if (k > n) {
             throw new RuntimeException("k {" + k + "} should be less than n {" + n + "}");

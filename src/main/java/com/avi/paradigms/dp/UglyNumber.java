@@ -9,6 +9,10 @@ import com.avi.practice.utils.CommonUtils;
  */
 final class UglyNumber {
 
+    /**
+     * Time:  O(n)
+     * Space: O(n)
+     */
     final int uglyNumber(final int n) {
         if (n == 0) {
             return 0;

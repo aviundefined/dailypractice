@@ -7,6 +7,10 @@ package com.avi.paradigms.dp;
  */
 final class CatalanNumber {
 
+    /**
+     * Time:  O(n)
+     * Space: O(n)
+     */
     final int catalan(final int n) {
         if (n == 0 || n == 1) {
             return 1;
