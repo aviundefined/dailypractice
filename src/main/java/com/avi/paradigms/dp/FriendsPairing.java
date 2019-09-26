@@ -11,8 +11,8 @@ final class FriendsPairing {
         if (numberOfPeople == 0 || numberOfPeople == 1 || numberOfPeople == 2) {
             return numberOfPeople; // base cases if 0 people then there is no way to pair, if one people then there is only way to pair the he is single, // for 2 - {(1), (2)}, {(1,2)}
         }
-
         final int[] pairs = new int[numberOfPeople + 1];
+        // populate base cases
         pairs[0] = 0;
         pairs[1] = 1;
         pairs[2] = 2;
