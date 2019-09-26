@@ -43,5 +43,17 @@ public class FriendsPairingTest {
             final int actual = solver.pairs(numberOfPeople);
             Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
         }
+        {
+            final int numberOfPeople = 5;
+            final int expected = 26;
+            final int actual = solver.pairs(numberOfPeople);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+        }
+        {
+            final int numberOfPeople = 6;
+            final int expected = 76;
+            final int actual = solver.pairs(numberOfPeople);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+        }
     }
 }
