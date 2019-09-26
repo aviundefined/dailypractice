@@ -16,6 +16,10 @@ final class CoinChange {
         this.m = CommonUtils.isEmpty(coins) ? 0 : this.coins.length;
     }
 
+    /**
+     * Time: O(coins * sum)
+     * Space: O(coins * sum)
+     */
     final int change(final int sum) {
         final int[][] change = new int[m + 1][sum + 1];
         // if sum = 0, then always have one solution

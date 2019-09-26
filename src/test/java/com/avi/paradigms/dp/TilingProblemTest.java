@@ -20,5 +20,12 @@ public class TilingProblemTest {
             final int numWays = solver.numWays(n, m);
             Assert.assertEquals(String.format("%d * %d", n, m), expected, numWays);
         }
+        {
+            final int n = 8;
+            final int m = 2;
+            final int expected = 34;
+            final int numWays = solver.numWays(n, m);
+            Assert.assertEquals(String.format("%d * %d", n, m), expected, numWays);
+        }
     }
 }

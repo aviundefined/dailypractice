@@ -7,6 +7,10 @@ package com.avi.paradigms.dp;
  */
 final class TilingProblem {
 
+    /**
+     * Time:  O(n)
+     * Space: O(n)
+     */
     final int numWays(final int n, final int m) {
         if (n == 0) {
             return 0;

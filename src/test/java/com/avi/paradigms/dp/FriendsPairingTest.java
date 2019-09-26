@@ -17,43 +17,57 @@ public class FriendsPairingTest {
             final int numberOfPeople = 0;
             final int expected = 0;
             final int actual = solver.pairs(numberOfPeople);
+            final int pairsOptimized = solver.pairsOptimized(numberOfPeople);
             Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, pairsOptimized);
         }
         {
             final int numberOfPeople = 1;
             final int expected = 1;
             final int actual = solver.pairs(numberOfPeople);
+            final int pairsOptimized = solver.pairsOptimized(numberOfPeople);
             Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, pairsOptimized);
         }
         {
             final int numberOfPeople = 2;
             final int expected = 2;
             final int actual = solver.pairs(numberOfPeople);
+            final int pairsOptimized = solver.pairsOptimized(numberOfPeople);
             Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, pairsOptimized);
         }
         {
             final int numberOfPeople = 3;
             final int expected = 4;
             final int actual = solver.pairs(numberOfPeople);
+            final int pairsOptimized = solver.pairsOptimized(numberOfPeople);
             Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, pairsOptimized);
         }
         {
             final int numberOfPeople = 4;
             final int expected = 10;
             final int actual = solver.pairs(numberOfPeople);
+            final int pairsOptimized = solver.pairsOptimized(numberOfPeople);
             Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, pairsOptimized);
         }
         {
             final int numberOfPeople = 5;
             final int expected = 26;
             final int actual = solver.pairs(numberOfPeople);
+            final int pairsOptimized = solver.pairsOptimized(numberOfPeople);
             Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, pairsOptimized);
         }
         {
             final int numberOfPeople = 6;
             final int expected = 76;
             final int actual = solver.pairs(numberOfPeople);
+            final int pairsOptimized = solver.pairsOptimized(numberOfPeople);
             Assert.assertEquals(String.valueOf(numberOfPeople), expected, actual);
+            Assert.assertEquals(String.valueOf(numberOfPeople), expected, pairsOptimized);
         }
     }
 }

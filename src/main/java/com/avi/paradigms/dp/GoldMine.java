@@ -19,6 +19,10 @@ final class GoldMine {
         this.n = mat[0].length;
     }
 
+    /**
+     * Time:  O(m * n)
+     * Space: O(m * n)
+     */
     final int maxGold() {
         final int[][] dp = new int[m][n];
         int maxGold = Integer.MIN_VALUE;

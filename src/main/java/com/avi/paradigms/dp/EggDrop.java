@@ -7,6 +7,10 @@ package com.avi.paradigms.dp;
  */
 final class EggDrop {
 
+    /**
+     * Time:  O(eggs * floors * floors)
+     * Space:  O(eggs * floors)
+     */
     final int solve(final int eggs, final int floors) {
         final int[][] c = new int[eggs + 1][floors + 1];
         for (int i = 0; i <= eggs; i++) {

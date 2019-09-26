@@ -7,6 +7,10 @@ package com.avi.paradigms.dp;
  */
 final class FibonacciNumber {
 
+    /**
+     * Time:  O(n)
+     * Space: O(n)
+     */
     final int fibonacci(final int n) {
         if (n <= 1) {
             return n;
@@ -20,6 +24,10 @@ final class FibonacciNumber {
         return fib[n];
     }
 
+    /**
+     * Time:  O(n)
+     * Space: O(1)
+     */
     final int fibonacciConstantSpace(final int n) {
         if (n == 0) {
             return 0;
