@@ -263,4 +263,17 @@ public class SubsetProblemTest {
             Assert.assertEquals(String.valueOf(sum), expected, solutionExists);
         }
     }
+
+    @Test
+    public void solutionExists1() {
+        final int[] a = {1, 2, 7, 5};
+        CommonUtils.printArr(a);
+        final SubsetProblem solver = new SubsetProblem(a);
+        {
+            final int sum = 8;
+            final boolean expected = true;
+            final boolean solutionExists = solver.isSolutionExists(sum);
+            Assert.assertEquals(String.valueOf(sum), expected, solutionExists);
+        }
+    }
 }

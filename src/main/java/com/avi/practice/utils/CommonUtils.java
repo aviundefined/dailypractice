@@ -62,6 +62,22 @@ public final class CommonUtils {
         System.out.println();
     }
 
+    public static void printMatrix(final boolean[][] matrix) {
+        final int m = matrix.length;
+        final int n = matrix[0].length;
+        for (boolean[] rows : matrix) {
+            for (int j = 0; j < n; j++) {
+                if (j == n - 1) {
+                    System.out.print(rows[j]);
+                } else {
+                    System.out.print(rows[j] + ",");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
     public static void printMatrix(final int[][] matrix) {
         final int m = matrix.length;
         final int n = matrix[0].length;
@@ -81,6 +97,11 @@ public final class CommonUtils {
     public static boolean isEmpty(int[] arr) {
         return arr == null || arr.length == 0;
     }
+
+    public static boolean isEmpty(String arr) {
+        return arr == null || arr.trim().length() == 0;
+    }
+
 
     public static void swap(final int[] arr, int i, int j) {
         final int tmp = arr[i];

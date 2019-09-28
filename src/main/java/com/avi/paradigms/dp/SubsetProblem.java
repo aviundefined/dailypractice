@@ -44,6 +44,14 @@ final class SubsetProblem {
                 }
             }
         }
+/*
+        for (boolean[] rows : dp) {
+            for (int j = 0; j < dp[0].length; j++) {
+                System.out.print((rows[j] ? 1 : 0) + " ");
+            }
+            System.out.println();
+        }*/
+        System.out.println();
         return dp[n][sum];
     }
 }
