@@ -34,14 +34,14 @@ final class MaximumSumRectangle {
             for (int i = 0; i < rows; i++) {
                 runningSum[i] = 0;
             }
-            for (int R = 0; R < cols; R++) {
+            for (int R = L; R < cols; R++) {
                 // Update the running sum
                 for (int i = 0; i < rows; i++) {
                     runningSum[i] = runningSum[i] + mat[i][R];
                 }
                 // Apply Kadane's algorithm on runningSum to find best top and bottom
                 final MaximumSumSubArray kadane = new MaximumSumSubArray(runningSum);
-                final MaximumSumSubArray.Result result = kadane.kadane();
+                final MaximumSumSubArray.Result result = kadane.maxSumSubArray();
                 if (result != null && result.sum > maxSoFar) {
                     maxSoFar = result.sum;
                     maxL = L;
