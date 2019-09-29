@@ -276,4 +276,83 @@ public class SubsetProblemTest {
             Assert.assertEquals(String.valueOf(sum), expected, solutionExists);
         }
     }
+
+    @Test
+    public void count() {
+        final int[] a = {3, 34, 4, 1, 12, 5, 2, 8};
+        CommonUtils.printArr(a);
+        final SubsetProblem solver = new SubsetProblem(a);
+        {
+            final int sum = 9;
+            final int expected = 4;
+            final int actual = solver.countSubSetForGivenSum(sum);
+            Assert.assertEquals(String.valueOf(sum), expected, actual);
+        }
+        {
+            final int sum = 5;
+            final int expected = 3;
+            final int actual = solver.countSubSetForGivenSum(sum);
+            Assert.assertEquals(String.valueOf(sum), expected, actual);
+        }
+        {
+            final int sum = 7;
+            final int expected = 3;
+            final int actual = solver.countSubSetForGivenSum(sum);
+            Assert.assertEquals(String.valueOf(sum), expected, actual);
+        }
+    }
+
+    @Test
+    public void countDivisibleByM() {
+        {
+            final int[] a = {3, 1, 7, 5};
+            CommonUtils.printArr(a);
+            final SubsetProblem solver = new SubsetProblem(a);
+            {
+                final int m = 6;
+                final int expected = 2;
+                final int actual = solver.countDivisibleByM(m);
+                Assert.assertEquals(String.valueOf(m), expected, actual);
+            }
+            {
+                final int m = 3;
+                final int expected = 5;
+                final int actual = solver.countDivisibleByM(m);
+                Assert.assertEquals(String.valueOf(m), expected, actual);
+            }
+        }
+    }
+
+    @Test
+    public void isDivisibleByMSumExists() {
+        {
+            final int[] a = {3, 1, 7, 5};
+            CommonUtils.printArr(a);
+            final SubsetProblem solver = new SubsetProblem(a);
+            {
+                final int m = 6;
+                final boolean expected = true;
+                final boolean actual = solver.isDivisibleByMSumExists(m);
+                Assert.assertEquals(String.valueOf(m), expected, actual);
+            }
+            {
+                final int m = 4;
+                final boolean expected = true;
+                final boolean actual = solver.isDivisibleByMSumExists(m);
+                Assert.assertEquals(String.valueOf(m), expected, actual);
+            }
+            {
+                final int m = 9;
+                final boolean expected = true;
+                final boolean actual = solver.isDivisibleByMSumExists(m);
+                Assert.assertEquals(String.valueOf(m), expected, actual);
+            }
+            {
+                final int m = 14;
+                final boolean expected = false;
+                final boolean actual = solver.isDivisibleByMSumExists(m);
+                Assert.assertEquals(String.valueOf(m), expected, actual);
+            }
+        }
+    }
 }
