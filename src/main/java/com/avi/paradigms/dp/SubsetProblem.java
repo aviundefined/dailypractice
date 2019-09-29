@@ -85,7 +85,7 @@ final class SubsetProblem {
     }
 
     /**
-     * Time:  O(m*m*n)
+     * Time:  O(m * n)
      * Space: O(m)
      */
     final boolean isDivisibleByMSumExists(final int m) {
@@ -121,6 +121,10 @@ final class SubsetProblem {
         return dp[0];
     }
 
+    /**
+     * Time:  O(n*n)
+     * Space: O(n)
+     */
     final int maxSubsetDivisiblePairs() {
         Arrays.sort(a);
         final int[] dp = new int[n];
