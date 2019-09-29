@@ -57,6 +57,10 @@ final class SubsetProblem {
         return dp[n][sum];
     }
 
+    /**
+     * Time:  O(n * sum)
+     * Space: O(n * sum)
+     */
     final int countSubSetForGivenSum(final int sum) {
         return _count(sum)[n][sum];
     }
