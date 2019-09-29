@@ -122,7 +122,7 @@ final class SubsetProblem {
     }
 
     /**
-     * Time:  O(n*n)
+     * Time:  O(n * n)
      * Space: O(n)
      */
     final int maxSubsetDivisiblePairs() {
