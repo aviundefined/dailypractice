@@ -40,7 +40,7 @@ final class MaximumSumSubArray {
             }
         }
 
-        int start = 0;
+        int start = overAllMaxEndIdx;
         for (int i = overAllMaxEndIdx; i >= 0; i--) {
             if (maxSum[i] >= 0) {
                 start = i;
@@ -83,7 +83,7 @@ final class MaximumSumSubArray {
 
         //all numbers in a are negative
         if (result[2] == -1) {
-            result[0] = 0;
+            result[0] = a[0];
             for (int i = 0; i < a.length; i++) {
                 if (a[i] > result[0]) {
                     result[0] = a[i];
