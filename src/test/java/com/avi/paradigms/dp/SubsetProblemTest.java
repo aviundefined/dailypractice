@@ -355,4 +355,24 @@ public class SubsetProblemTest {
             }
         }
     }
+
+    @Test
+    public void maxSubsetDivisiblePairs() {
+        {
+            final int[] a = {1, 3, 6, 13, 17, 18};
+            CommonUtils.printArr(a);
+            final SubsetProblem solver = new SubsetProblem(a);
+            final int expected = 4;
+            final int actual = solver.maxSubsetDivisiblePairs();
+            Assert.assertEquals(expected, actual);
+        }
+        {
+            final int[] a = {3, 15, 5, 10, 20};
+            CommonUtils.printArr(a);
+            final SubsetProblem solver = new SubsetProblem(a);
+            final int expected = 3;
+            final int actual = solver.maxSubsetDivisiblePairs();
+            Assert.assertEquals(expected, actual);
+        }
+    }
 }

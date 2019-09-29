@@ -121,6 +121,26 @@ final class SubsetProblem {
         return dp[0];
     }
 
+    final int maxSubsetDivisiblePairs() {
+        Arrays.sort(a);
+        final int[] dp = new int[n];
+        dp[n - 1] = 1;
+        int overallMax = 0;
+        for (int i = n - 2; i >= 0; i--) {
+            int currMax = 0;
+            for (int j = i + 1; j < n; j++) {
+                if (a[j] % a[i] == 0) {
+                    currMax = Math.max(currMax, dp[j]);
+                }
+                dp[i] = 1 + currMax;
+                if (overallMax < dp[i]) {
+                    overallMax = dp[i];
+                }
+            }
+        }
+        return overallMax;
+    }
+
     private int[][] _count(final int sum) {
         final int[][] count = new int[n + 1][sum + 1];
         for (int i = 0; i <= n; i++) {
