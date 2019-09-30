@@ -1,8 +1,10 @@
 package com.avi.paradigms.dp;
 
-import com.avi.practice.utils.CommonUtils;
-
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.avi.practice.utils.CommonUtils.isEmpty;
 
 /**
  * Created by navinash on 26/09/19.
@@ -16,7 +18,7 @@ final class SubsetProblem {
 
     SubsetProblem(int[] a) {
         this.a = a;
-        this.n = CommonUtils.isEmpty(a) ? 0 : a.length;
+        this.n = isEmpty(a) ? 0 : a.length;
     }
 
     /**
@@ -145,6 +147,70 @@ final class SubsetProblem {
         return overallMax;
     }
 
+
+    final Result subsetsSum(final int sum) {
+        if (n == 0) {
+            return null;
+        }
+        final Result[][] dp = new Result[n + 1][sum + 1];
+        // 0 elements any sum -> not possible
+        for (int j = 0; j <= sum; j++) {
+            dp[0][j] = emptyFalseResult();
+        }
+        // any elements 0 sum -> always possible
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = emptyTrueResult();
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= sum; j++) {
+                final int element = a[i - 1];
+                if (j >= a[i - 1]) {
+                    if (dp[i - 1][j].found || dp[i - 1][j - a[i - 1]].found) {
+                        final Result result = new Result();
+                        result.found = true;
+                        if (dp[i - 1][j].found) {
+                            final Set<Set<Integer>> oldSets = isEmpty(dp[i - 1][j].subsets) ? new HashSet<>() : new HashSet<>(dp[i - 1][j].subsets);
+                            result.subsets.addAll(_getNewSets(oldSets, element));
+                        }
+                        if (dp[i - 1][j - a[i - 1]].found) {
+                            final Set<Set<Integer>> oldSets = isEmpty(dp[i - 1][j - a[i - 1]].subsets) ? new HashSet<>() : new HashSet<>(dp[i - 1][j - a[i - 1]].subsets);
+                            result.subsets.addAll(_getNewSets(oldSets, element));
+                        }
+                        dp[i][j] = result;
+                    } else {
+                        dp[i][j] = emptyFalseResult();
+                    }
+                } else {
+                    final Result result = new Result();
+                    if (dp[i - 1][j].found) {
+                        result.found = true;
+                        final Set<Set<Integer>> oldSets = isEmpty(dp[i - 1][j].subsets) ? new HashSet<>() : new HashSet<>(dp[i - 1][j].subsets);
+                        result.subsets.addAll(_getNewSets(oldSets, element));
+                        dp[i][j] = result;
+                    } else {
+                        dp[i][j] = emptyFalseResult();
+                    }
+                }
+            }
+        }
+        return dp[n][sum];
+    }
+
+    private Set<Set<Integer>> _getNewSets(final Set<Set<Integer>> oldSubsets, final int element) {
+        final Set<Set<Integer>> newSubsets = new HashSet<>();
+        final Set<Integer> newSet = new HashSet<>();
+        newSet.add(element);
+        if (isEmpty(oldSubsets)) {
+            newSubsets.add(newSet);
+        } else {
+            for (final Set<Integer> subset : oldSubsets) {
+                subset.addAll(newSet);
+                newSubsets.add(newSet);
+            }
+        }
+        return newSubsets;
+    }
+
     private int[][] _count(final int sum) {
         final int[][] count = new int[n + 1][sum + 1];
         for (int i = 0; i <= n; i++) {
@@ -170,5 +236,32 @@ final class SubsetProblem {
         }
 //        CommonUtils.printMatrix(count);
         return count;
+    }
+
+    static final class Result {
+        boolean found;
+        final Set<Set<Integer>> subsets = new HashSet<>();
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Sum exists: ").append(found).append('\n');
+            for (final Set<Integer> subset : subsets) {
+                sb.append(subset).append('\n');
+            }
+            return sb.toString();
+        }
+    }
+
+    Result emptyFalseResult() {
+        final Result r = new Result();
+        r.found = false;
+        return r;
+    }
+
+    Result emptyTrueResult() {
+        final Result r = new Result();
+        r.found = true;
+        return r;
     }
 }

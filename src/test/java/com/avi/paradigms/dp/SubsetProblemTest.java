@@ -375,4 +375,131 @@ public class SubsetProblemTest {
             Assert.assertEquals(expected, actual);
         }
     }
+
+    @Test
+    public void subsetsSum() {
+        final int[] a = {3, 34, 4, 1, 12, 5, 2, 8};
+        CommonUtils.printArr(a);
+        final SubsetProblem solver = new SubsetProblem(a);
+        {
+            final int sum = 9;
+            final int expected = 4;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 5;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 7;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+    }
+
+    @Test
+    public void subsetsSum1() {
+        final int[] a = {1, 2, 3, 4, 5};
+        CommonUtils.printArr(a);
+        final SubsetProblem solver = new SubsetProblem(a);
+        {
+            final int sum = 1;
+            final int expected = 1;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 2;
+            final int expected = 1;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 3;
+            final int expected = 2;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 4;
+            final int expected = 2;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 5;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 5;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 6;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 7;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 8;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 9;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+        {
+            final int sum = 10;
+            final int expected = 3;
+            final SubsetProblem.Result actual = solver.subsetsSum(sum);
+            Assert.assertNotNull(actual);
+            System.out.println(sum + " -> " + actual);
+            Assert.assertEquals(String.valueOf(sum), expected, actual.subsets.size());
+        }
+    }
+
 }

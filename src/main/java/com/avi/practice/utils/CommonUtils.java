@@ -125,7 +125,7 @@ public final class CommonUtils {
         arr[j] = tmp;
     }
 
-    public static boolean isEmpty(final Collection<Integer> col) {
+    public static boolean isEmpty(final Collection<?> col) {
         return col == null || col.isEmpty();
     }
 
