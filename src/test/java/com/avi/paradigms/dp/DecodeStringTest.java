@@ -21,11 +21,14 @@ public class DecodeStringTest {
             final int countRecursive = solver.countRecursive();
             final int countIterative = solver.countIterative();
             final List<String> allDecodings = solver.getAllDecodings();
+            final List<String> allDecodingsIterative = solver.getAllDecodingsIterative();
             System.out.println("allDecodings: " + allDecodings);
+            System.out.println("allDecodings: " + allDecodingsIterative);
             solver.printAllDecodings();
             Assert.assertEquals(s, expected, countRecursive);
             Assert.assertEquals(s, expected, countIterative);
             Assert.assertEquals(s, expected, allDecodings.size());
+            Assert.assertEquals(s, expected, allDecodingsIterative.size());
             System.out.println("------------------------------");
         }
 
@@ -36,11 +39,14 @@ public class DecodeStringTest {
             final int countRecursive = solver.countRecursive();
             final int countIterative = solver.countIterative();
             final List<String> allDecodings = solver.getAllDecodings();
+            final List<String> allDecodingsIterative = solver.getAllDecodingsIterative();
             System.out.println("allDecodings: " + allDecodings);
+            System.out.println("allDecodings: " + allDecodingsIterative);
             solver.printAllDecodings();
             Assert.assertEquals(s, expected, countRecursive);
             Assert.assertEquals(s, expected, countIterative);
             Assert.assertEquals(s, expected, allDecodings.size());
+            Assert.assertEquals(s, expected, allDecodingsIterative.size());
             System.out.println("------------------------------");
         }
         {
@@ -50,11 +56,14 @@ public class DecodeStringTest {
             final int countRecursive = solver.countRecursive();
             final int countIterative = solver.countIterative();
             final List<String> allDecodings = solver.getAllDecodings();
+            final List<String> allDecodingsIterative = solver.getAllDecodingsIterative();
             System.out.println("allDecodings: " + allDecodings);
+            System.out.println("allDecodings: " + allDecodingsIterative);
             solver.printAllDecodings();
             Assert.assertEquals(s, expected, countRecursive);
             Assert.assertEquals(s, expected, countIterative);
             Assert.assertEquals(s, expected, allDecodings.size());
+            Assert.assertEquals(s, expected, allDecodingsIterative.size());
             System.out.println("------------------------------");
         }
 
@@ -65,11 +74,14 @@ public class DecodeStringTest {
             final int countRecursive = solver.countRecursive();
             final int countIterative = solver.countIterative();
             final List<String> allDecodings = solver.getAllDecodings();
+            final List<String> allDecodingsIterative = solver.getAllDecodingsIterative();
             System.out.println("allDecodings: " + allDecodings);
+            System.out.println("allDecodings: " + allDecodingsIterative);
             solver.printAllDecodings();
             Assert.assertEquals(s, expected, countRecursive);
             Assert.assertEquals(s, expected, countIterative);
             Assert.assertEquals(s, expected, allDecodings.size());
+            Assert.assertEquals(s, expected, allDecodingsIterative.size());
             System.out.println("------------------------------");
         }
     }

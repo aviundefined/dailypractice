@@ -1,6 +1,7 @@
 package com.avi.paradigms.dp;
 
 import com.avi.practice.utils.CommonUtils;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -98,6 +99,49 @@ public class DecodeString {
         final List<String> result = new ArrayList<>();
         _getAllDecodings(0, "", result);
         return result;
+    }
+
+    final List<String> getAllDecodingsIterative() {
+        if (n == 0) {
+            return Collections.emptyList();
+        }
+        if (n == 1) {
+            return Collections.singletonList(s);
+        }
+        final Map<Integer, List<String>> decodingsByIndex = new HashMap<>();
+        decodingsByIndex.put(0, Lists.newArrayList());
+        if (chars[0] > '0') {
+            decodingsByIndex.put(1, Lists.newArrayList(decodings.get(String.valueOf(chars[0]))));
+        } else {
+            decodingsByIndex.put(1, Lists.newArrayList());
+        }
+
+        for (int i = 2; i <= n; i++) {
+            final List<String> allDecodings = new ArrayList<>();
+            final String singleChar = decodings.get(String.valueOf(chars[i - 1]));
+            if (!CommonUtils.isEmpty(singleChar)) {
+                if (CommonUtils.isEmpty(decodingsByIndex.get(i - 1))) {
+                    allDecodings.addAll(Lists.newArrayList(singleChar));
+                } else {
+                    for (final String str : decodingsByIndex.get(i - 1)) {
+                        allDecodings.add(str + singleChar);
+                    }
+                }
+            }
+
+            final String twoChar = decodings.get(String.valueOf(chars[i - 2]) + String.valueOf(chars[i - 1]));
+            if (!CommonUtils.isEmpty(twoChar)) {
+                if (CommonUtils.isEmpty(decodingsByIndex.get(i - 2))) {
+                    allDecodings.addAll(Lists.newArrayList(twoChar));
+                } else {
+                    for (final String str : decodingsByIndex.get(i - 2)) {
+                        allDecodings.add(str + twoChar);
+                    }
+                }
+            }
+            decodingsByIndex.put(i, allDecodings);
+        }
+        return decodingsByIndex.get(n);
     }
 
     private void _printAllDecodings(
