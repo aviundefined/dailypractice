@@ -9,6 +9,10 @@ import com.avi.practice.utils.CommonUtils;
  */
 final class NextPermutation {
 
+    /**
+     * Time:  O(length of string)
+     * Space: O(1)
+     */
     final String next(final String s) {
         if (CommonUtils.isEmpty(s)) {
             return s;

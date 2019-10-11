@@ -42,6 +42,10 @@ final class CoinChange {
         return change[m][sum];
     }
 
+    /**
+     * Time:  O(coins * sum)
+     * Space: O(sum)
+     */
     final int minNumberOfCoinsForChange(final int sum) {
         if (sum == 0) {
             return 0;
