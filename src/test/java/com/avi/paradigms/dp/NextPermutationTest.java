@@ -33,5 +33,14 @@ public class NextPermutationTest {
         next = solver.next(s);
         Assert.assertEquals(s, expected, next);
 
+        s = next;
+        expected = "12543";
+        next = solver.next(s);
+        Assert.assertEquals(s, expected, next);
+
+        s = "6215430";
+        expected = "6230145";
+        next = solver.next(s);
+        Assert.assertEquals(s, expected, next);
     }
 }
