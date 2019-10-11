@@ -10,6 +10,10 @@ import java.util.Map;
  */
 final class StringsPractice {
 
+    /**
+     * Time:  O(length of string)
+     * Space: O(length of string)
+     */
     static String maximumLengthSubstringWithNoDuplicates(final String str) {
         if (str == null || str.length() == 0 || str.trim().equals("")) {
             return str;
