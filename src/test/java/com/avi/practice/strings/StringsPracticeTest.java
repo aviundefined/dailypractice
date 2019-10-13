@@ -37,14 +37,14 @@ public class StringsPracticeTest {
     @Test
     public void getSentence() {
         {
-            final String str = "thehappydogwenttotheparkonasunnyday";
-            final String expected = "the happy dog went to the park on a sunny day";
+            final String str = "thisisteststring";
+            final String expected = "this is test string";
             final String sentence = StringsPractice.getSentence(str);
             Assert.assertEquals(str, expected, sentence);
         }
         {
-            final String str = "thisisteststring";
-            final String expected = "this is test string";
+            final String str = "thehappydogwenttotheparkonasunnyday";
+            final String expected = "the happy dog went to the park on a sunny day";
             final String sentence = StringsPractice.getSentence(str);
             Assert.assertEquals(str, expected, sentence);
         }
