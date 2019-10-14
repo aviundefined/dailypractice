@@ -13,7 +13,7 @@ final class PartitionArray {
     private final int n;
     private final long totalSum;
 
-    public PartitionArray(final int[] a) {
+    PartitionArray(final int[] a) {
         this.a = a;
         this.n = CommonUtils.isEmpty(a) ? 0 : a.length;
         totalSum = sum();
