@@ -12,7 +12,7 @@ import java.util.Set;
  */
 final class StringBalancer {
 
-    private Map<Character, Integer> init(final char[] chars) {
+    private Map<Character, Integer> getExtraCharacterMap(final char[] chars) {
         final int n = chars.length;
         if (n % 4 != 0) {
             throw new RuntimeException("Invalid argument:: String length should be multiple of 4. Length: " + n);
@@ -50,7 +50,7 @@ final class StringBalancer {
             return 0;
         }
         final char[] chars = s.toUpperCase().toCharArray();
-        final Map<Character, Integer> extras = init(chars);
+        final Map<Character, Integer> extras = getExtraCharacterMap(chars);
         if (extras.size() == 0) {
             return 0;
         }
