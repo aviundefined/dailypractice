@@ -39,15 +39,18 @@ final class IntervalScheduling {
         while (curIdx < n && !stack.isEmpty()) {
             final Interval lastJob = stack.peek();
             final Interval currJob = this.intervals.get(curIdx);
+            // If non conflicting then add in the stack, else ignore
             if (currJob.start >= lastJob.end) {
                 stack.add(currJob);
             }
             curIdx++;
         }
+        // prepare the result
         final List<Interval> result = new ArrayList<>(stack.size());
         while (!stack.isEmpty()) {
             result.add(stack.pop());
         }
+        // reverse the result
         Collections.reverse(result);
         return result;
     }
