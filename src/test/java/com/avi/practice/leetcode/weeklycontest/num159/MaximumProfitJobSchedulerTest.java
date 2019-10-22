@@ -21,23 +21,29 @@ public class MaximumProfitJobSchedulerTest {
             final int[] profit = {50, 10, 40, 70};
             final int expected = 120;
             final int maxProfit = solver.jobScheduling(startTime, endTime, profit);
+            final int jobSchedulingApproach2 = solver.jobSchedulingApproach2(startTime, endTime, profit);
             Assert.assertEquals(expected, maxProfit);
+            Assert.assertEquals(expected, jobSchedulingApproach2);
         }
         {
             final int[] startTime = {1, 2, 3, 4, 6};
             final int[] endTime = {3, 5, 10, 6, 9};
             final int[] profit = {20, 20, 100, 70, 60};
             final int expected = 150;
-            final int maxProfit = solver.jobScheduling(startTime, endTime, profit);
+           final int maxProfit = solver.jobScheduling(startTime, endTime, profit);
+            final int jobSchedulingApproach2 = solver.jobSchedulingApproach2(startTime, endTime, profit);
             Assert.assertEquals(expected, maxProfit);
+            Assert.assertEquals(expected, jobSchedulingApproach2);
         }
         {
             final int[] startTime = {1, 1, 1};
             final int[] endTime = {2, 3, 4};
             final int[] profit = {5, 6, 4};
             final int expected = 6;
-            final int maxProfit = solver.jobScheduling(startTime, endTime, profit);
+           final int maxProfit = solver.jobScheduling(startTime, endTime, profit);
+            final int jobSchedulingApproach2 = solver.jobSchedulingApproach2(startTime, endTime, profit);
             Assert.assertEquals(expected, maxProfit);
+            Assert.assertEquals(expected, jobSchedulingApproach2);
         }
     }
 }

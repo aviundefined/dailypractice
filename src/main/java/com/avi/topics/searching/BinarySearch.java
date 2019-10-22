@@ -7,13 +7,13 @@ import com.avi.practice.utils.CommonUtils;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-final class BinarySearch {
+public final class BinarySearch {
 
     private static final int NOT_FOUND = -1;
     private final int[] arr;
     private final int n;
 
-    BinarySearch(final int[] arr) {
+    public BinarySearch(final int[] arr) {
         if (CommonUtils.isEmpty(arr)) {
             throw new IllegalArgumentException("Array is null or empty");
         }
@@ -192,7 +192,7 @@ final class BinarySearch {
         return NOT_FOUND;
     }
 
-    private int _floorIndex(int x) {
+    public int _floorIndex(int x) {
         int left = 0;
         int right = n - 1;
 

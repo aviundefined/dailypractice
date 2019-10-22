@@ -1,5 +1,7 @@
 package com.avi.practice.leetcode.weeklycontest.num159;
 
+import com.avi.topics.searching.BinarySearch;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
@@ -33,6 +35,30 @@ final class MaximumProfitJobScheduler {
         return profitByEndTime.lastEntry().getValue();
     }
 
+    final int jobSchedulingApproach2(int[] startTime, int[] endTime, int[] profit) {
+        final Job[] jobs = new Job[startTime.length];
+        for (int i = 0; i < startTime.length; i++) {
+            jobs[i] = new Job(startTime[i], endTime[i], profit[i]);
+        }
+        Arrays.sort(jobs, Comparator.comparingInt(o -> o.end));
+        final int[] dpProfit = new int[jobs.length];
+        final int[] dpEndTime = new int[jobs.length];
+        Arrays.fill(dpEndTime, Integer.MAX_VALUE);
+        dpProfit[0] = jobs[0].profit;
+        dpEndTime[0] = jobs[0].end;
+        for (int i = 1; i < jobs.length; i++) {
+            final Job job = jobs[i];
+            final BinarySearch search = new BinarySearch(dpEndTime);
+            final int floorIdx = search._floorIndex(job.start);
+            if (floorIdx == -1) {
+                dpProfit[i] = Math.max(job.profit, dpProfit[i - 1]);
+            } else {
+                dpProfit[i] = Math.max(dpProfit[floorIdx] + job.profit, dpProfit[i - 1]);
+            }
+            dpEndTime[i] = job.end;
+        }
+        return dpProfit[jobs.length - 1];
+    }
 
     private static final class Job {
         private final int start;
