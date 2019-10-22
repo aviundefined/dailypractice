@@ -1,6 +1,7 @@
 package com.avi.practice.utils;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * Created by navinash on 19/09/19.
@@ -135,6 +136,10 @@ public final class CommonUtils {
 
     public static boolean isEmpty(final Collection<?> col) {
         return col == null || col.isEmpty();
+    }
+
+    public static boolean isEmpty(final Map<?, ?> map) {
+        return map == null || map.isEmpty();
     }
 
     public static int max(final int a, final int b, final int c) {
