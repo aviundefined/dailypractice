@@ -14,6 +14,28 @@ public class PlayWithChips {
         if (chips == null || chips.length <= 1) {
             return 0; // null or length 0 or 1 all at one place return 0;
         }
+
+        // even to even move free
+        // odd to odd move free
+        // odd to even cost 1
+        // even to odd cost 1
+        // simply count number of chips at even position and number of chips at odd position and return the minimum
+        // as if odd chips are less then move all odd chips to even position then even to even free and vice versa
+        int numberOfChipsAtOddPosition = 0, numberOfChipsAtEvenPosition = 0;
+        for (final int pos : chips) {
+            if (pos % 2 == 0) {
+                numberOfChipsAtEvenPosition++;
+            } else {
+                numberOfChipsAtOddPosition++;
+            }
+        }
+        return Math.min(numberOfChipsAtEvenPosition, numberOfChipsAtOddPosition);
+    }
+
+    public int minCostToMoveChipsSlow(int[] chips) {
+        if (chips == null || chips.length <= 1) {
+            return 0; // null or length 0 or 1 all at one place return 0;
+        }
         final int n = chips.length;
         final Map<Integer, Integer> chipsByPosition = new HashMap<>();
         for (int i = 0; i < n; i++) {
