@@ -42,6 +42,14 @@ public class SubfolderRemoverTest {
             Assert.assertEquals(expected, actual);
         }
         {
+            final String[] folders = {"/a", "/a/b", "/c/d", "/c/d/e", "/c/f", "/c"};
+            CommonUtils.printArr(folders);
+            final List<String> expected = Arrays.asList("/a", "/c");
+            final List<String> actual = SubfolderRemover.solve(folders);
+            System.out.println(actual);
+            Assert.assertEquals(expected, actual);
+        }
+        {
             final String[] folders = {"/a/b", "/a", "/c/d", "/c/d/e", "/c/f"};
             CommonUtils.printArr(folders);
             final List<String> expected = Arrays.asList("/a", "/c/d", "/c/f");
