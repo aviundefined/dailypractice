@@ -94,8 +94,16 @@ public final class CommonUtils {
         System.out.println();
     }
 
+    public static boolean isEmpty(Object[][] arr) {
+        return arr == null || arr.length == 0 || arr[0].length == 0;
+    }
+
     public static boolean isEmpty(int[][] arr) {
         return arr == null || arr.length == 0 || arr[0].length == 0;
+    }
+
+    public static boolean isEmpty(Object[] arr) {
+        return arr == null || arr.length == 0;
     }
 
     public static boolean isEmpty(int[] arr) {
