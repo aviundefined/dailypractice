@@ -54,31 +54,31 @@ final class StringBalancer {
         if (extras.size() == 0) {
             return 0;
         }
-        return min(chars, extras);
+        return minLengthSubStringWithGivenCharacters(chars, extras);
     }
 
-    private int min(final char[] chars, final Map<Character, Integer> frequency) {
+    private int minLengthSubStringWithGivenCharacters(final char[] chars, final Map<Character, Integer> characters) {
         int s = 0, e = -1, min = Integer.MAX_VALUE;
         while (e < chars.length) {
             e++;
             if (e == chars.length) {
                 break;
             }
-            if (!isFound(frequency)) {
+            if (!isFound(characters)) {
                 final char curr = chars[e];
-                if (frequency.containsKey(curr)) {
-                    final int freq = frequency.get(curr);
-                    frequency.put(curr, freq - 1);
+                if (characters.containsKey(curr)) {
+                    final int freq = characters.get(curr);
+                    characters.put(curr, freq - 1);
                 }
             }
-            while (isFound(frequency) && s <= e) {
+            while (isFound(characters) && s <= e) {
                 if (e - s + 1 < min) {
                     min = e - s + 1;
                 }
                 final char remove = chars[s];
-                if (frequency.containsKey(remove)) {
-                    final int freq = frequency.get(remove);
-                    frequency.put(remove, freq + 1);
+                if (characters.containsKey(remove)) {
+                    final int freq = characters.get(remove);
+                    characters.put(remove, freq + 1);
                 }
                 s++;
             }
