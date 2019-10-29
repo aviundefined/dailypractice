@@ -29,7 +29,7 @@ public final class CircularPermutationInBinaryRepresentation {
         final MathPractice practice = new MathPractice();
         for (int i = 0; i <= 15; i++) {
             final int greyCode = solver.greyCode(i);
-            System.out.println(String.format("Grey code %s position is %s [%s]", i, greyCode, practice.decimalToBinary(greyCode)));
+            System.out.println(String.format("Grey code at index %s is %s [%s]", i, greyCode, practice.decimalToBinary(greyCode)));
         }
 
     }
