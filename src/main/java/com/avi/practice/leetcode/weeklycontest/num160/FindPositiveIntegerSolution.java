@@ -51,10 +51,27 @@ public final class FindPositiveIntegerSolution {
         return results;
     }
 
-    public List<List<Integer>> findSolutionOptimized(final CustomFunction customfunction, final int z) {
+    public final List<List<Integer>> findSolutionOptimized(final CustomFunction customfunction, final int z) {
+        final int MAX_INPUT = 1000;
+        int maxX = 1;
+        int maxY = 1;
+        // As function is increasing find maxX by fixing y = 1
+        for (int x = 1; x <= MAX_INPUT; x++) {
+            if (customfunction.f(x, 1) > z) {
+                break;
+            }
+            maxX = x;
+        }
+        // As function is increasing find maxY by fixing x = 1
+        for (int y = 1; y <= MAX_INPUT; y++) {
+            if (customfunction.f(1, y) > z) {
+                break;
+            }
+            maxY = y;
+        }
         final List<List<Integer>> results = new ArrayList<>();
-        int x = 1, y = 1000;
-        while (x <= 1000 && y >= 1) {
+        int x = 1, y = maxY;
+        while (x <= maxX && y >= 1) {
             int v = customfunction.f(x, y);
             if (v > z) {
                 y--; // current is greater than expected decrease the y

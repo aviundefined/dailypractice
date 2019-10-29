@@ -12,7 +12,7 @@ import java.util.Stack;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-final class MathPractice {
+public final class MathPractice {
 
     private static final Map<String, Integer> charToVal = new HashMap<>();
 
@@ -156,7 +156,7 @@ final class MathPractice {
         return primes;
     }
 
-    final String decimalToBinary(int A) {
+    public final String decimalToBinary(int A) {
         if (A == 0) {
             return "0";
         }
