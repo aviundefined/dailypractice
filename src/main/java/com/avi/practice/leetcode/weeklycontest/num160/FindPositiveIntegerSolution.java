@@ -111,4 +111,11 @@ public final class FindPositiveIntegerSolution {
         }
     }
 
+    static final class CustomEquation implements CustomFunction {
+        @Override
+        public int f(int x, int y) {
+            return (2 * x) + (3 * y);
+        }
+    }
+
 }
