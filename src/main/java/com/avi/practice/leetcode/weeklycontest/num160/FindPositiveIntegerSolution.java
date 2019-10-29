@@ -52,19 +52,21 @@ public final class FindPositiveIntegerSolution {
     }
 
     public List<List<Integer>> findSolutionOptimized(final CustomFunction customfunction, final int z) {
-        final List<List<Integer>> res = new ArrayList<>();
+        final List<List<Integer>> results = new ArrayList<>();
         int x = 1, y = 1000;
         while (x <= 1000 && y >= 1) {
             int v = customfunction.f(x, y);
             if (v > z) {
-                --y; // current is greater than expected decrease the y
+                y--; // current is greater than expected decrease the y
             } else if (v < z) {
-                ++x; // current is lower than expected increase the x
+                x++; // current is lower than expected increase the x
             } else {
-                res.add(Arrays.asList(x++, y--)); // found add
+                results.add(Arrays.asList(x, y)); // found add
+                x++;
+                y--;
             }
         }
-        return res;
+        return results;
     }
 
     // This is the custom function interface.
