@@ -4,6 +4,8 @@ import com.avi.practice.utils.CommonUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * Created by navinash on 21/09/19.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -976,5 +978,63 @@ public class BinarySearchTest {
             final int actual = solver.occurrences(x);
             Assert.assertEquals(String.valueOf(x), expected, actual);
         }
+    }
+
+
+    @Test
+    public void findFistLastBoundaryCases() {
+        {
+            final int iterations = randInt();
+            for (int i = 0; i <= iterations; i++) {
+                final int value = randInt();
+                final int size = randInt();
+                final int[] arr = new int[size];
+                Arrays.fill(arr, value);
+                final BinarySearch solver = new BinarySearch(arr);
+                System.out.print("Find First and Last Index in arr: ");
+                CommonUtils.printArr(arr);
+                final int firstIterative = solver.findFirstIterative(value);
+                final int lastIterative = solver.findLastIterative(value);
+                Assert.assertEquals(0, firstIterative);
+                Assert.assertEquals(size - 1, lastIterative);
+            }
+        }
+
+        {
+            final int iterations = randInt();
+            for (int i = 0; i <= iterations; i++) {
+                final int value1 = randInt();
+                final int value2 = value1 + randInt();
+                final int size = randInt();
+                final int[] arr = new int[size];
+                int mid = size / 2;
+                for (int j = 0; j < mid; j++) {
+                    arr[j] = value1;
+                }
+                for (int j = mid; j < size; j++) {
+                    arr[j] = value2;
+                }
+                final BinarySearch solver = new BinarySearch(arr);
+                System.out.print("Find First and Last Index in arr: ");
+                CommonUtils.printArr(arr);
+                final int firstIterativeValue1 = solver.findFirstIterative(value1);
+                final int lastIterativeValue1 = solver.findLastIterative(value1);
+                final int firstIterativeValue2 = solver.findFirstIterative(value2);
+                final int lastIterativeValue2 = solver.findLastIterative(value2);
+                Assert.assertEquals(String.format("First index of : %s", value1), 0, firstIterativeValue1);
+                Assert.assertEquals(String.format("Last index of : %s", value1), mid - 1, lastIterativeValue1);
+                Assert.assertEquals(String.format("First index of : %s", value2), mid, firstIterativeValue2);
+                Assert.assertEquals(String.format("Last index of : %s", value2), size - 1, lastIterativeValue2);
+            }
+        }
+
+    }
+
+    private static int randInt() {
+        return randInt(1000);
+    }
+
+    private static int randInt(final int n) {
+        return (int) (Math.random() * n) + 5;
     }
 }
