@@ -1,6 +1,7 @@
 package com.avi.practice.leetcode.weeklycontest.num160;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,6 +49,22 @@ public final class FindPositiveIntegerSolution {
             }
         }
         return results;
+    }
+
+    public List<List<Integer>> findSolutionOptimized(final CustomFunction customfunction, final int z) {
+        final List<List<Integer>> res = new ArrayList<>();
+        int x = 1, y = 1000;
+        while (x <= 1000 && y >= 1) {
+            int v = customfunction.f(x, y);
+            if (v > z) {
+                --y; // current is greater than expected decrease the y
+            } else if (v < z) {
+                ++x; // current is lower than expected increase the x
+            } else {
+                res.add(Arrays.asList(x++, y--)); // found add
+            }
+        }
+        return res;
     }
 
     // This is the custom function interface.

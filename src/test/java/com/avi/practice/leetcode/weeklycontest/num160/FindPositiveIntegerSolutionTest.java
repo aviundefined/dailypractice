@@ -19,7 +19,7 @@ public class FindPositiveIntegerSolutionTest {
 
     @Test
     public void findSolutionAddition() {
-        final CustomFunction additionFunction = new AdditionFunction();
+        final CustomFunction customFunction = new AdditionFunction();
         final FindPositiveIntegerSolution solver = new FindPositiveIntegerSolution();
         {
             final int z = 5;
@@ -28,22 +28,26 @@ public class FindPositiveIntegerSolutionTest {
             expected.add(Lists.newArrayList(2, 3));
             expected.add(Lists.newArrayList(3, 2));
             expected.add(Lists.newArrayList(4, 1));
-            final List<List<Integer>> solution = solver.findSolution(additionFunction, z);
-            Assert.assertEquals("Addition Function: "+z, expected, solution);
+            final List<List<Integer>> solution = solver.findSolution(customFunction, z);
+            final List<List<Integer>> solutionOptimized = solver.findSolutionOptimized(customFunction, z);
+            Assert.assertEquals("Addition Function: " + z, expected, solution);
+            Assert.assertEquals("Addition Function: " + z, expected, solutionOptimized);
         }
     }
 
     @Test
     public void findSolutionMultiplication() {
-        final CustomFunction multiplicationFunction = new MultiplicationFunction();
+        final CustomFunction customFunction = new MultiplicationFunction();
         final FindPositiveIntegerSolution solver = new FindPositiveIntegerSolution();
         {
             final int z = 5;
             final List<List<Integer>> expected = new ArrayList<>();
             expected.add(Lists.newArrayList(1, 5));
             expected.add(Lists.newArrayList(5, 1));
-            final List<List<Integer>> solution = solver.findSolution(multiplicationFunction, z);
-            Assert.assertEquals("Addition Function: "+z, expected, solution);
+            final List<List<Integer>> solution = solver.findSolution(customFunction, z);
+            final List<List<Integer>> solutionOptimized = solver.findSolutionOptimized(customFunction, z);
+            Assert.assertEquals("Addition Function: " + z, expected, solution);
+            Assert.assertEquals("Addition Function: " + z, expected, solutionOptimized);
         }
     }
 }
