@@ -11,6 +11,25 @@ import static com.avi.paradigms.bitmanipulation.BitWiseOperations.kthBitSet;
  */
 final class SingleNumber {
 
+    public static int missingNumber(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            throw new IllegalArgumentException("Empty array");
+        }
+
+        final int n = nums.length;
+        int allXor = 0;
+        for (int i = 0; i <= n; i++) {
+            allXor ^= i;
+        }
+
+        int numXor = nums[0];
+        for (int i = 1; i < n; i++) {
+            numXor ^= nums[i];
+        }
+
+        return (allXor ^ numXor);
+    }
+
     /**
      * Given a non-empty array of integers, every element appears twice except for one. Find that single one.
      * <p>

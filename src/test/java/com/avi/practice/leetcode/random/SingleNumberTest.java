@@ -12,6 +12,23 @@ import org.junit.Test;
 public class SingleNumberTest {
 
     @Test
+    public void missingNumber() {
+        {
+            final int[] nums = {3,0,1};
+            final int expected = 2;
+            CommonUtils.printArr(nums);
+            final int singleNumber = SingleNumber.missingNumber(nums);
+            Assert.assertEquals(expected, singleNumber);
+        }
+        {
+            final int[] nums = {9,6,4,2,3,5,7,0,1};
+            final int expected = 8;
+            CommonUtils.printArr(nums);
+            final int singleNumber = SingleNumber.missingNumber(nums);
+            Assert.assertEquals(expected, singleNumber);
+        }
+    }
+    @Test
     public void singleNumber1() {
         {
             final int[] nums = {2,2,1};
