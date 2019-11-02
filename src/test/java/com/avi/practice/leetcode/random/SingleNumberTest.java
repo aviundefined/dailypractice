@@ -28,6 +28,44 @@ public class SingleNumberTest {
             Assert.assertEquals(expected, singleNumber);
         }
     }
+
+    @Test
+    public void findTheDifference() {
+        {
+            final String s = "abcd";
+            final String t = "abcde";
+            final char expected = 'e';
+            final char actual = SingleNumber.findTheDifference(s, t);
+            Assert.assertEquals(String.format("Difference in %s & %s", s, t), expected, actual);
+        }
+    }
+
+
+    @Test
+    public void findDuplicate() {
+        {
+            final int[] nums = {1,3,4,2,2};
+            final int expected = 2;
+            CommonUtils.printArr(nums);
+            final int singleNumber = SingleNumber.findDuplicate(nums);
+            Assert.assertEquals(expected, singleNumber);
+        }
+        {
+            final int[] nums = {3,1,3,4,2};
+            final int expected = 3;
+            CommonUtils.printArr(nums);
+            final int singleNumber = SingleNumber.findDuplicate(nums);
+            Assert.assertEquals(expected, singleNumber);
+        }
+        {
+            final int[] nums = {2,2,2,2,2};
+            final int expected = 2;
+            CommonUtils.printArr(nums);
+            final int singleNumber = SingleNumber.findDuplicate(nums);
+            Assert.assertEquals(expected, singleNumber);
+        }
+    }
+
     @Test
     public void singleNumber1() {
         {
