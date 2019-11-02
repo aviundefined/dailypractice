@@ -27,7 +27,7 @@ final class SingleNumber {
      * Input: [0,1,0,1,0,1,99]
      * Output: 99
      */
-    static long singleNumber(final int[] nums) {
+    static long singleNumber2(final int[] nums) {
         if (nums == null || nums.length == 0) {
             throw new IllegalArgumentException("Empty array");
         }
