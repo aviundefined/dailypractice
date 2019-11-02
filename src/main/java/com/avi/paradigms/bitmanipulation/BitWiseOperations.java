@@ -23,7 +23,7 @@ public final class BitWiseOperations {
         return a;
     }
 
-    public static boolean kthBitSet(final int num, final int k) {
+    public static boolean kthBitSet(final long num, final int k) {
         return (1 & num >> (k - 1)) == 1;
     }
 }

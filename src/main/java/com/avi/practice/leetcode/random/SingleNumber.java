@@ -1,7 +1,5 @@
 package com.avi.practice.leetcode.random;
 
-import com.avi.practice.maths.MathPractice;
-
 import java.util.Arrays;
 
 import static com.avi.paradigms.bitmanipulation.BitWiseOperations.kthBitSet;
@@ -29,7 +27,7 @@ final class SingleNumber {
      * Input: [0,1,0,1,0,1,99]
      * Output: 99
      */
-    static int singleNumber(final int[] nums) {
+    static long singleNumber(final int[] nums) {
         if (nums == null || nums.length == 0) {
             throw new IllegalArgumentException("Empty array");
         }
@@ -45,13 +43,12 @@ final class SingleNumber {
         final int bitLength = 32;
         final int[] bitMap = new int[bitLength];
         Arrays.fill(bitMap, 0);
-        final MathPractice math = new MathPractice();
         int countNegatives = 0;
         // iterate over each number and check for each bit, if bit is set then increase the count for that bit by 1
-        for (int num : nums) {
+        for (long num : nums) {
             if (num < 0) {
                 countNegatives++;
-                num = -1 * num;
+                num = (-1L * num);
             }
             for (int i = 0; i < bitLength; i++) {
                 if (kthBitSet(num, i + 1)) {
@@ -60,12 +57,12 @@ final class SingleNumber {
             }
         }
         // in the end binary number's binary digits will be the bits where bitMap[i] is of 3 * n  + 1
-        int singleNumber = 0;
+        long singleNumber = 0;
         for (int i = 0; i < bitLength; i++) {
             if (bitMap[i] % 3 == 1) {
-                singleNumber = singleNumber + (int) Math.pow(2, i);
+                singleNumber = singleNumber + (long) Math.pow(2, i);
             }
         }
-        return countNegatives % 3 == 1 ? -1 * singleNumber : singleNumber;
+        return (int) (countNegatives % 3 == 1 ?  (-1 * singleNumber) : singleNumber);
     }
 }
