@@ -1,9 +1,10 @@
 package com.avi.practice.leetcode.random;
 
-import com.avi.paradigms.bitmanipulation.BitWiseOperations;
 import com.avi.practice.maths.MathPractice;
 
 import java.util.Arrays;
+
+import static com.avi.paradigms.bitmanipulation.BitWiseOperations.kthBitSet;
 
 /**
  * Created by navinash on 02/11/19.
@@ -53,7 +54,7 @@ final class SingleNumber {
                 num = -1 * num;
             }
             for (int i = 0; i < bitLength; i++) {
-                if (BitWiseOperations.kthBitSet(num, i + 1)) {
+                if (kthBitSet(num, i + 1)) {
                     bitMap[i] = bitMap[i] + 1;
                 }
             }
