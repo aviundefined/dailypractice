@@ -12,47 +12,65 @@ import org.junit.Test;
 public class SingleNumberTest {
 
     @Test
-    public void singleNumber() {
+    public void singleNumber1() {
+        {
+            final int[] nums = {2,2,1};
+            final int expected = 1;
+            CommonUtils.printArr(nums);
+            final int singleNumber = SingleNumber.singleNumber1(nums);
+            Assert.assertEquals(expected, singleNumber);
+        }
+        {
+            final int[] nums = {4,1,2,1,2};
+            final int expected = 4;
+            CommonUtils.printArr(nums);
+            final int singleNumber = SingleNumber.singleNumber1(nums);
+            Assert.assertEquals(expected, singleNumber);
+        }
+    }
+
+    @Test
+    public void singleNumber2() {
         {
             final int[] nums = {2, 2, 2, 3};
-            final long expected = 3L;
+            final int expected = 3;
             CommonUtils.printArr(nums);
-            final long singleNumber = SingleNumber.singleNumber2(nums);
+            final int singleNumber = SingleNumber.singleNumber2(nums);
             Assert.assertEquals(expected, singleNumber);
         }
         {
             final int[] nums = {0, 1, 0, 1, 0, 1, 99};
-            final long expected = 99L;
+            final int expected = 99;
             CommonUtils.printArr(nums);
-            final long singleNumber = SingleNumber.singleNumber2(nums);
+            final int singleNumber = SingleNumber.singleNumber2(nums);
             Assert.assertEquals(expected, singleNumber);
         }
         {
             final int[] nums = {0, 1, 99, 1, 99, 1, 99};
-            final long expected = 0L;
+            final int expected = 0;
             CommonUtils.printArr(nums);
-            final long singleNumber = SingleNumber.singleNumber2(nums);
+            final int singleNumber = SingleNumber.singleNumber2(nums);
             Assert.assertEquals(expected, singleNumber);
         }
         {
             final int[] nums = {2, 99, 99, 2, -3, 99, 2};
-            final long expected = -3L;
+            final int expected = -3;
             CommonUtils.printArr(nums);
-            final long singleNumber = SingleNumber.singleNumber2(nums);
+            final int singleNumber = SingleNumber.singleNumber2(nums);
             Assert.assertEquals(expected, singleNumber);
         }
         {
             final int[] nums = {-1,-1,-1,-2147483648};
-            final long expected = -2147483648L;
+            final int expected = -2147483648;
             CommonUtils.printArr(nums);
-            final long singleNumber = SingleNumber.singleNumber2(nums);
+            final int singleNumber = SingleNumber.singleNumber2(nums);
             Assert.assertEquals(expected, singleNumber);
         }
         {
             final int[] nums = {-401451,-177656,-2147483646,-473874,-814645,-2147483646,-852036,-457533,-401451,-473874,-401451,-216555,-917279,-457533,-852036,-457533,-177656,-2147483646,-177656,-917279,-473874,-852036,-917279,-216555,-814645,2147483645,-2147483648,2147483645,-814645,2147483645,-216555};
-            final long expected = -2147483648L;
+            final int expected = -2147483648;
             CommonUtils.printArr(nums);
-            final long singleNumber = SingleNumber.singleNumber2(nums);
+            final int singleNumber = SingleNumber.singleNumber2(nums);
             Assert.assertEquals(expected, singleNumber);
         }
     }
