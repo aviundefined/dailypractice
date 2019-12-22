@@ -3,8 +3,10 @@ package com.avi.practice.maths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -387,4 +389,113 @@ public final class MathPractice {
         }
         return result;
     }
+
+    public int isPower(int A) {
+        if (A < 1) {
+            return 0;
+        }
+
+        if (A == 1) {
+            return 1;
+        }
+
+        final double sqrt = Math.sqrt(A);
+        for (int a = 2; a <= sqrt; a++) {
+            for (int p = 2; p <= sqrt; p++) {
+                final double power = Math.pow(a, p);
+                if (power == A) {
+                    return 1;
+                }
+                if (power > A) {
+                    break;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public int uniquePaths(int A, int B) {
+        if (A == 1 || B == 1) {
+            return 1;
+        }
+        final int[][] dp = new int[A][B];
+        for (int i = 0; i < A; i++) {
+            dp[i][0] = 1;
+        }
+        for (int j = 0; j < B; j++) {
+            dp[0][j] = 1;
+        }
+
+        for (int i = 1; i < A; i++) {
+            for (int j = 1; j < B; j++) {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        return dp[A - 1][B - 1];
+    }
+
+    public int cityTour(int A, ArrayList<Integer> B) {
+        if (B.size() == A) {
+            return 0;
+        }
+
+        final Set<Integer> remaining = new HashSet<>();
+        final Set<Integer> initialVisited = new HashSet<>(B);
+        for (int i = 0, size = B.size(); i < size; i++) {
+            final int curr = B.get(i);
+            if (curr >= 2) {
+                if (!initialVisited.contains(curr - 1)) {
+                    remaining.add(curr - 1);
+                }
+            }
+            if (curr < A) {
+                if (!initialVisited.contains(curr + 1)) {
+                    remaining.add(curr + 1);
+                }
+            }
+        }
+        final long factorial = factorial(remaining.size());
+        return (int) (factorial % (10 ^ 9 + 7));
+    }
+
+    public static long factorial(int number) {
+        long result = 1;
+
+        for (int factor = 2; factor <= number; factor++) {
+            result *= factor;
+        }
+
+        return result;
+    }
+
+    public int maximumGap(final List<Integer> A) {
+        if(A == null || A.size() == 0) {
+            return -1;
+        }
+
+        final int n = A.size();
+        final int[] dp = new int[n];
+        dp[0] = 0;
+        for(int i = 1; i < n; i++) {
+            if(A.get(i - 1) <= A.get(i)) {
+                dp[i] = dp[i - 1] + 1;
+                continue;
+            }
+            dp[i] = 0;
+            for(int j = i - 1; j >= 0; j--) {
+                if(A.get(j) <= A.get(i)) {
+                    dp[i] = Math.max(dp[i], dp[j] + (i - j));
+                }
+            }
+        }
+
+        int max = 0;
+        for(int a : dp) {
+            if(a > max) {
+                max = a;
+            }
+        }
+        return max;
+    }
+
 }

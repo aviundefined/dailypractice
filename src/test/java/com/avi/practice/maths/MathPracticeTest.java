@@ -763,7 +763,7 @@ public class MathPracticeTest {
     }
 
     @Test
-    public void primeSum(){
+    public void primeSum() {
         {
             final int a = 4;
             final ArrayList<Integer> expected = new ArrayList<>();
@@ -800,6 +800,104 @@ public class MathPracticeTest {
             Assert.assertEquals(expected, actual);
         }
     }
+
+    @Test
+    public void isPower() {
+        final MathPractice solver = new MathPractice();
+        {
+            final int A = 4;
+            final int expected = 1;
+            final int actual = solver.isPower(A);
+            Assert.assertEquals(String.valueOf(A), expected, actual);
+        }
+        {
+            final int A = 2;
+            final int expected = 0;
+            final int actual = solver.isPower(A);
+            Assert.assertEquals(String.valueOf(A), expected, actual);
+        }
+        {
+            final int A = 343;
+            final int expected = 1;
+            final int actual = solver.isPower(A);
+            Assert.assertEquals(String.valueOf(A), expected, actual);
+        }
+        {
+            final int A = 536870912;
+            final int expected = 1;
+            final int actual = solver.isPower(A);
+            Assert.assertEquals(String.valueOf(A), expected, actual);
+        }
+    }
+
+    @Test
+    public void uniquePaths() {
+        final MathPractice solver = new MathPractice();
+        {
+            final int A = 1;
+            final int B = 1;
+            final int expected = 1;
+            final int actual = solver.uniquePaths(A, B);
+            Assert.assertEquals(String.format("%s, %s", A, B), expected, actual);
+        }
+        {
+            final int A = 5;
+            final int B = 1;
+            final int expected = 1;
+            final int actual = solver.uniquePaths(A, B);
+            Assert.assertEquals(String.format("%s, %s", A, B), expected, actual);
+        }
+        {
+            final int A = 1;
+            final int B = 4;
+            final int expected = 1;
+            final int actual = solver.uniquePaths(A, B);
+            Assert.assertEquals(String.format("%s, %s", A, B), expected, actual);
+        }
+        {
+            final int A = 2;
+            final int B = 2;
+            final int expected = 2;
+            final int actual = solver.uniquePaths(A, B);
+            Assert.assertEquals(String.format("%s, %s", A, B), expected, actual);
+        }
+        {
+            final int A = 3;
+            final int B = 4;
+            final int expected = 10;
+            final int actual = solver.uniquePaths(A, B);
+            Assert.assertEquals(String.format("%s, %s", A, B), expected, actual);
+        }
+
+    }
+
+    @Test
+    public void cityTour() {
+        final MathPractice solver = new MathPractice();
+        {
+            final int A = 5;
+            final ArrayList<Integer> B = new ArrayList<>();
+            B.add(2);
+            B.add(5);
+            System.out.println(A);
+            System.out.println(B);
+            final int expected = 6;
+            final int actual = solver.cityTour(A, B);
+            Assert.assertEquals(expected, actual);
+        }
+
+        {
+            final int A = 5;
+            final ArrayList<Integer> B = new ArrayList<>();
+            B.add(3);
+            System.out.println(A);
+            System.out.println(B);
+            final int expected = 6;
+            final int actual = solver.cityTour(A, B);
+            Assert.assertEquals(expected, actual);
+        }
+    }
+
     private static int randInt() {
         return randInt(1000);
     }
