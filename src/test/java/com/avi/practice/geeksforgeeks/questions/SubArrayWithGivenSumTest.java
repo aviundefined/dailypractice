@@ -28,6 +28,7 @@ public class SubArrayWithGivenSumTest {
             Assert.assertNotNull(actual);
             Assert.assertEquals(expected, actual);
             CommonUtils.printArr(arr, expected.getStart(), expected.getEnd());
+            System.out.println("-------------------------------------");
         }
         {
             final int[] arr = {1, 5, 8, 2, 6, 7};
@@ -39,6 +40,7 @@ public class SubArrayWithGivenSumTest {
             Assert.assertNotNull(actual);
             Assert.assertEquals(actual.toString(), expected, actual);
             CommonUtils.printArr(arr, expected.getStart(), expected.getEnd());
+            System.out.println("-------------------------------------");
         }
         {
             final int[] arr = {13, 5, 8, 2, 6, 7};
@@ -50,6 +52,20 @@ public class SubArrayWithGivenSumTest {
             Assert.assertNotNull(actual);
             Assert.assertEquals(actual.toString(), expected, actual);
             CommonUtils.printArr(arr, expected.getStart(), expected.getEnd());
+            System.out.println("-------------------------------------");
+        }
+
+        {
+            final int[] arr = {13, 5, 0, 0, 8, 2, 6, 7};
+            final int sum = 16;
+            CommonUtils.printArr(arr);
+            System.out.println("Sum: " + sum);
+            final StartEnd expected = new StartEnd(2, 6);
+            final StartEnd actual = solver.solve(arr, sum);
+            Assert.assertNotNull(actual);
+            Assert.assertEquals(actual.toString(), expected, actual);
+            CommonUtils.printArr(arr, expected.getStart(), expected.getEnd());
+            System.out.println("-------------------------------------");
         }
     }
 }
