@@ -1,4 +1,4 @@
-package com.avi.practice.geeksforgeeks.questions;
+package com.avi.practice.geeksforgeeks.questions.arrays;
 
 import java.util.Objects;
 

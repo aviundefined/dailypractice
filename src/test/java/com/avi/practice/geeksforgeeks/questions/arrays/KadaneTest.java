@@ -1,11 +1,9 @@
-package com.avi.practice.geeksforgeeks.questions;
+package com.avi.practice.geeksforgeeks.questions.arrays;
 
-import com.avi.practice.geeksforgeeks.questions.Kadane.Result;
+import com.avi.practice.geeksforgeeks.questions.arrays.Kadane.Result;
 import com.avi.practice.utils.CommonUtils;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 24/12/19.
