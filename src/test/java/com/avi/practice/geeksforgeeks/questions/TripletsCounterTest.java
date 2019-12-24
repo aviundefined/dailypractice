@@ -18,6 +18,7 @@ public class TripletsCounterTest {
     public void count() {
         {
             final int[] a = {1, 5, 3, 2};
+            // 1, 2, 3, 5
             final int expected = 2;
             CommonUtils.printArr(a);
             final int actual = solver.count(a);
@@ -26,9 +27,30 @@ public class TripletsCounterTest {
         }
         {
             final int[] a = {3, 2, 7 };
-            final int expected = 0;
+            final int expected = -1;
             CommonUtils.printArr(a);
             final int actual = solver.count(a);
+            Assert.assertEquals(expected, actual);
+            System.out.println("------------------------------");
+        }
+    }
+
+    @Test
+    public void countOptimized() {
+        {
+            final int[] a = {1, 5, 3, 2};
+            // 1, 2, 3, 5
+            final int expected = 2;
+            CommonUtils.printArr(a);
+            final int actual = solver.countOptimized(a);
+            Assert.assertEquals(expected, actual);
+            System.out.println("------------------------------");
+        }
+        {
+            final int[] a = {3, 2, 7 };
+            final int expected = -1;
+            CommonUtils.printArr(a);
+            final int actual = solver.countOptimized(a);
             Assert.assertEquals(expected, actual);
             System.out.println("------------------------------");
         }

@@ -30,8 +30,43 @@ public final class TripletsCounter {
                 }
             }
         }
+        if (count == 0) {
+            return -1;
+        }
         return count;
         // Total: n * n * log(n)
+    }
+
+    public final int countOptimized(final int[] a) {
+        // assumptions:
+        // 1) unique elements
+        if (a == null || a.length < 3) {
+            return -1;
+        }
+        // Sort the array: n* log(n)
+        Arrays.sort(a);
+        int count = 0;
+        final int n = a.length;
+        for (int i = n - 1; i >= 0; i--) { // n
+            int s = 0;
+            int e = i - 1;
+            while (s <= e && e > 0 && s <= i - 1) { // n
+                final int sum = a[s] + a[e];
+                if (a[i] == sum) {
+                    count++;
+                    s++;
+                    e--;
+                } else if (sum > a[i]) {
+                    e--;
+                } else if (sum < a[i]) {
+                    s++;
+                }
+            }
+        }
+        if (count == 0) {
+            return -1;
+        }
+        return count;
     }
 
 
