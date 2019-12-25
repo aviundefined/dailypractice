@@ -17,11 +17,11 @@ public final class DutchFlagSort {
         int zero = 0;
         int one = a.length - 1;
         while (zero < one) {
-            if (a[zero] == 1) {
+            if (a[zero] == 0) {
+                zero++;
+            } else {
                 CommonUtils.swap(a, zero, one);
                 one--;
-            } else {
-                zero++;
             }
         }
     }
