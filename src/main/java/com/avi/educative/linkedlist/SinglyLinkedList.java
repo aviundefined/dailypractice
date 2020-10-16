@@ -5,7 +5,7 @@ package com.avi.educative.linkedlist;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public final class SinglyLinkedList<T> {
+public class SinglyLinkedList<T> {
 
     private Node<T> head;
     private int size;
@@ -15,15 +15,15 @@ public final class SinglyLinkedList<T> {
         this.size = 0;
     }
 
-    public final Node<T> getHead() {
+    public Node<T> getHead() {
         return head;
     }
 
-    public final void setHead(Node<T> head) {
+    public void setHead(Node<T> head) {
         this.head = head;
     }
 
-    public final int getSize() {
+    public int getSize() {
         return size;
     }
 
@@ -31,11 +31,11 @@ public final class SinglyLinkedList<T> {
         this.size = size;
     }
 
-    public final boolean isEmpty() {
+    public boolean isEmpty() {
         return head == null;
     }
 
-    public final void insertAtHead(final T data) {
+    public void insertAtHead(final T data) {
         final Node<T> node = new Node<>(data);
         if (this.head != null) {
             node.setNext(this.head);
@@ -44,7 +44,7 @@ public final class SinglyLinkedList<T> {
         this.size++;
     }
 
-    public final void insertAtEnd(final T data) {
+    public void insertAtEnd(final T data) {
         final Node<T> node = new Node<>(data);
         if (this.head == null) {
             this.head = node;
@@ -60,7 +60,7 @@ public final class SinglyLinkedList<T> {
         this.size++;
     }
 
-    public final void insertAfter(final T data, final T after) {
+    public void insertAfter(final T data, final T after) {
         Node<T> n = this.head;
         while (n != null) {
             if (after.equals(n.getData())) {
@@ -75,7 +75,7 @@ public final class SinglyLinkedList<T> {
         throw new IllegalArgumentException("No node found with value: " + after);
     }
 
-    public final boolean searchNode(final T data) {
+    public boolean searchNode(final T data) {
         if (isEmpty()) {
             return false;
         }
@@ -90,7 +90,7 @@ public final class SinglyLinkedList<T> {
         return false;
     }
 
-    public final void deleteAtHead() {
+    public void deleteAtHead() {
         if (isEmpty()) {
             return;
         }
@@ -98,7 +98,7 @@ public final class SinglyLinkedList<T> {
         this.size--;
     }
 
-    public final void deleteAtEnd() {
+    public void deleteAtEnd() {
         if (isEmpty()) {
             return;
         }
@@ -119,8 +119,8 @@ public final class SinglyLinkedList<T> {
         this.size--;
     }
 
-    public final void deleteByValue(final T data) {
-       // Base cases:
+    public void deleteByValue(final T data) {
+        // Base cases:
         // 1. List is empty
         if (isEmpty()) {
             return;
@@ -146,7 +146,7 @@ public final class SinglyLinkedList<T> {
         }
     }
 
-    public final void print() {
+    public void print() {
         Node<T> n = head;
         while (n != null) {
             System.out.print(n.getData() + ",");
