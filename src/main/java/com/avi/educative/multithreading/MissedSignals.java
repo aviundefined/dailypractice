@@ -13,7 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MissedSignals {
 
     public static void main(String[] args) throws InterruptedException {
-        correctMissedSignalsUsingMonitor();
+        correctMissedSignalsUsingSemaphore();
     }
 
     private static void correctMissedSignalsUsingMonitor() throws InterruptedException {
@@ -46,17 +46,18 @@ public class MissedSignals {
         });
 
 
-        signaller.start();
-        signaller.join();
-
         waiter.start();
+        signaller.start();
+
         waiter.join();
+        signaller.join();
     }
 
     private static void correctMissedSignalsUsingSemaphore() throws InterruptedException {
         final Semaphore semaphore = new Semaphore(1);
 
         final Thread signaller = new Thread(() -> {
+            System.out.println("Going to sent signal");
             semaphore.release();
             System.out.println("Signal Sent");
         });
@@ -77,6 +78,7 @@ public class MissedSignals {
 
         waiter.start();
         waiter.join();
+
     }
 
     private static void incorrectMissedSignals() throws Exception {
