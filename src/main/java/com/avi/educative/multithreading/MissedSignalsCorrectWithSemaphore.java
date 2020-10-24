@@ -7,7 +7,7 @@ import java.util.concurrent.Semaphore;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class MissedSignalsCorrect {
+public class MissedSignalsCorrectWithSemaphore {
 
     public static void main(String[] args) throws InterruptedException {
         final Semaphore semaphore = new Semaphore(1);
