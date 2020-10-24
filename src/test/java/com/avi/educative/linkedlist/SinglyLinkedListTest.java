@@ -136,6 +136,14 @@ public class SinglyLinkedListTest {
 
     }
 
+    @Test
+    public void reverse() {
+        final SinglyLinkedList<Integer> sll = createSLL();
+        sll.print();
+        sll.reverse();
+        sll.print();
+    }
+
     private SinglyLinkedList<Integer> createSLL() {
         final SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
         list.insertAtHead(5);

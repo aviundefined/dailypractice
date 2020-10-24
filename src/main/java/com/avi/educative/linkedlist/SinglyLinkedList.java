@@ -146,6 +146,22 @@ public class SinglyLinkedList<T> {
         }
     }
 
+    public void reverse() {
+        if (isEmpty()) {
+            return;
+        }
+        Node<T> prev = null;
+        Node<T> curr = this.head;
+        Node<T> next;
+        while (curr != null) {
+            next = curr.getNext();
+            curr.setNext(prev);
+            prev = curr;
+            curr = next;
+        }
+        this.head = prev;
+    }
+
     public void print() {
         Node<T> n = head;
         while (n != null) {
