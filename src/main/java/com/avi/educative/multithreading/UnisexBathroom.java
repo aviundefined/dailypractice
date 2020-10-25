@@ -1,4 +1,4 @@
-package com.avi.educative;
+package com.avi.educative.multithreading;
 
 import com.avi.educative.multithreading.semaphore.CountingSemaphore;
 
