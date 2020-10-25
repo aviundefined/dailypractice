@@ -14,6 +14,11 @@ public final class CountingSemaphore {
         this.maxPermits = maxPermits;
     }
 
+    public CountingSemaphore(final int maxPermits, final int initialPermits) {
+        this.maxPermits = maxPermits;
+        this.usedPermits = maxPermits - initialPermits;
+    }
+
     public final synchronized void acquire() throws InterruptedException {
         while (usedPermits == maxPermits) {
             this.wait();

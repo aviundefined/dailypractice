@@ -12,6 +12,27 @@ import static org.junit.Assert.*;
 public class BlockingQueueTest {
 
     @Test
+    public void usingSemaphore() throws Exception {
+        final IBlockingQueue<Integer> queue = new BlockingQueueUsingSemaphore<>(5);
+        final Thread producer1 = new Thread(producerRunnable(queue));
+        final Thread producer2 = new Thread(producerRunnable(queue));
+        final Thread consumer1 = new Thread(consumerRunnable(queue));
+        final Thread consumer2 = new Thread(consumerRunnable(queue));
+        final Thread consumer3 = new Thread(consumerRunnable(queue));
+        producer1.start();
+        producer2.start();
+        consumer1.start();
+        consumer2.start();
+        consumer3.start();
+
+        producer1.join();
+        producer2.join();
+        consumer1.join();
+        consumer3.join();
+        consumer3.join();
+    }
+
+    @Test
     public void usingReentrantLock() throws Exception {
         final IBlockingQueue<Integer> queue = new BlockingQueueReentrantLock<>(5);
         final Thread producer1 = new Thread(producerRunnable(queue));
