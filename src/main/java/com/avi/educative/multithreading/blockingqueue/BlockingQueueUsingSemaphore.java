@@ -38,7 +38,6 @@ public class BlockingQueueUsingSemaphore<T> implements IBlockingQueue<T> {
         size++;
         lock.release();
         consumer.release();
-
     }
 
     @Override
