@@ -13,7 +13,7 @@ public class TokenBucketFilterFIFO {
     private final int MAX_TOKENS;
     private volatile long lastRequestTime = System.currentTimeMillis();
     private volatile long possibleLocks = 0;
-    private ReentrantLock lock = new ReentrantLock(true);
+    private final ReentrantLock lock = new ReentrantLock(true);
 
     public TokenBucketFilterFIFO(final int maxTokens) {
         this.MAX_TOKENS = maxTokens;
