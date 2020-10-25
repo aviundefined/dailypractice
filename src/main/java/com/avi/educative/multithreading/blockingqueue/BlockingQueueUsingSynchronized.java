@@ -10,7 +10,7 @@ public class BlockingQueueUsingSynchronized<T> implements IBlockingQueue<T> {
     private int size;
     private int head;
     private int tail;
-    private int capacity;
+    private final int capacity;
     private final T[] arr;
 
     public BlockingQueueUsingSynchronized(final int capacity) {

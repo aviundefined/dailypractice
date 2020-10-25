@@ -10,7 +10,7 @@ public class BlockingQueueUsingObjectLock<T> implements IBlockingQueue<T> {
     private int size;
     private int head;
     private int tail;
-    private int capacity;
+    private final int capacity;
     private final T[] arr;
     private final Object lock = new Object();
 
