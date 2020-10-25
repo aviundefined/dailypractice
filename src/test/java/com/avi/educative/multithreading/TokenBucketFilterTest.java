@@ -1,8 +1,8 @@
 package com.avi.educative.multithreading;
 
+import com.avi.educative.multithreading.tokenbucketfilter.TokenBucketFilter;
+import com.avi.educative.multithreading.tokenbucketfilter.TokenBucketFilterFIFO;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 25/10/20.
@@ -27,6 +27,31 @@ public class TokenBucketFilterTest {
         }
         for (Thread consumer : consumers) {
             consumer.start();
+        }
+        for (Thread consumer : consumers) {
+            consumer.join();
+        }
+    }
+
+    @Test
+    public void testFIFO() throws InterruptedException {
+        final TokenBucketFilterFIFO filter = new TokenBucketFilterFIFO(5);
+        Thread.sleep(3000L);
+        final Thread[] consumers = new Thread[10];
+        for (int i = 0; i < consumers.length; i++) {
+            final String threadName = "Avinash-" + i;
+            consumers[i] = new Thread(() -> {
+                try {
+                    Thread.currentThread().setName(threadName);
+                    filter.getToken();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        for (Thread consumer : consumers) {
+            consumer.start();
+            Thread.sleep(10);
         }
         for (Thread consumer : consumers) {
             consumer.join();

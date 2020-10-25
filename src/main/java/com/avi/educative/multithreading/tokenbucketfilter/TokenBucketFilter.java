@@ -1,4 +1,4 @@
-package com.avi.educative.multithreading;
+package com.avi.educative.multithreading.tokenbucketfilter;
 
 /**
  * Created by navinash on 25/10/20.
