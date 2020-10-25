@@ -1,8 +1,8 @@
 package com.avi.educative.locks;
 
+import com.avi.educative.multithreading.locks.IReadWriteLock;
+import com.avi.educative.multithreading.locks.ReadWriteLock;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 25/10/20.
@@ -71,9 +71,9 @@ public class ReadWriteLockTest {
     }
 
     @Test
-    public void testWritePreferred() throws Exception {
+    public void testWriterPreferred() throws Exception {
 
-        final IReadWriteLock rwl = new ReadWriteLockWritePreferred();
+        final IReadWriteLock rwl = new ReadWriteLock();
 
         Thread t1 = new Thread(() -> {
             try {
@@ -128,4 +128,57 @@ public class ReadWriteLockTest {
         tReader2.join();
         t2.join();
     }
+
+    @Test
+    public void testWriterPreferred1() throws Exception {
+
+        final IReadWriteLock rwl = new ReadWriteLock();
+
+        Thread t1 = new Thread(() -> {
+            try {
+
+                System.out.println("Attempting to acquire write lock in t1: " + System.currentTimeMillis());
+                rwl.acquireWriteLock();
+                System.out.println("write lock acquired t1: " + +System.currentTimeMillis());
+
+                rwl.releaseWriteLock();
+
+            } catch (InterruptedException ie) {
+
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            try {
+
+                System.out.println("Attempting to acquire write lock in t2: " + System.currentTimeMillis());
+                rwl.acquireWriteLock();
+                System.out.println("write lock acquired t2: " + System.currentTimeMillis());
+                rwl.releaseWriteLock();
+            } catch (InterruptedException ie) {
+
+            }
+        });
+
+        Thread t3 = new Thread(() -> {
+            try {
+
+                System.out.println("Attempting to acquire write lock in t3: " + System.currentTimeMillis());
+                rwl.acquireWriteLock();
+                System.out.println("write lock acquired t2: " + System.currentTimeMillis());
+                rwl.releaseWriteLock();
+            } catch (InterruptedException ie) {
+
+            }
+        });
+
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t1.join();
+        t2.join();
+        t3.join();
+    }
+
 }

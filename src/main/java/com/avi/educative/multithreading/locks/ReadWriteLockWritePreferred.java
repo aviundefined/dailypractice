@@ -1,4 +1,4 @@
-package com.avi.educative.locks;
+package com.avi.educative.multithreading.locks;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -15,11 +15,13 @@ public class ReadWriteLockWritePreferred implements IReadWriteLock {
     private ReentrantLock lock = new ReentrantLock();
     private Condition writeCondition = lock.newCondition();
     private Condition readCondition = lock.newCondition();
+    private final Object writerWaitingLock = new Object();
+    private volatile int numWritersWaiting = 0;
 
     @Override
     public void acquireReadLock() throws InterruptedException {
         lock.lock();
-        while (isWriteLocked) {
+        while (isWriteLocked || numWritersWaiting > 0) {
             readCondition.await();
         }
         readers++;
@@ -37,9 +39,16 @@ public class ReadWriteLockWritePreferred implements IReadWriteLock {
 
     @Override
     public void acquireWriteLock() throws InterruptedException {
+        synchronized (writerWaitingLock) {
+            numWritersWaiting++;
+        }
         lock.lock();
         while (isWriteLocked || readers != 0) {
             writeCondition.await();
+        }
+        synchronized (writerWaitingLock) {
+            numWritersWaiting--;
+            writerWaitingLock.notify();
         }
         isWriteLocked = true;
         lock.unlock();

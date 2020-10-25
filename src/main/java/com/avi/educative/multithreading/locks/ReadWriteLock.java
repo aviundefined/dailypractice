@@ -1,4 +1,4 @@
-package com.avi.educative.locks;
+package com.avi.educative.multithreading.locks;
 
 /**
  * Created by navinash on 25/10/20.
