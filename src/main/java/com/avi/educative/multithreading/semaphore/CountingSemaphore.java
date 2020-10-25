@@ -5,7 +5,7 @@ package com.avi.educative.multithreading.semaphore;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class CountingSemaphore {
+public final class CountingSemaphore {
 
     private final int maxPermits;
     private int usedPermits;
