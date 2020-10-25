@@ -19,7 +19,7 @@ public class TokenBucketFilterFIFO {
         this.MAX_TOKENS = maxTokens;
     }
 
-    public final synchronized void getToken() throws InterruptedException {
+    public final void getToken() throws InterruptedException {
         lock.lock();
         possibleLocks += (System.currentTimeMillis() - lastRequestTime) / LOCK_GENERATION_FREQ;
 

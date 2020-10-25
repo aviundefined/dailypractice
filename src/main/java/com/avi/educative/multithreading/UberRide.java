@@ -13,6 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class UberRide {
 
     private final ReentrantLock lock = new ReentrantLock();
+    // IMPORTANT: This is important to initialize this as 0 as all threads are blocked until release explicitly by someone
     private final Semaphore democratsWaiting = new Semaphore(0);
     private final Semaphore republicansWaiting = new Semaphore(0);
     private final CyclicBarrier barrier = new CyclicBarrier(4);
