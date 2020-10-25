@@ -12,7 +12,7 @@ public class BlockingQueueUsingObjectLock<T> implements IBlockingQueue<T> {
     private int tail;
     private int capacity;
     private final T[] arr;
-    private Object lock = new Object();
+    private final Object lock = new Object();
 
     public BlockingQueueUsingObjectLock(final int capacity) {
         this.capacity = capacity;
