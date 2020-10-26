@@ -1,7 +1,8 @@
 package com.avi.educative.multithreading;
 
 import com.avi.educative.multithreading.AsynchronousToSynchronousExecutor.Executor;
-import com.avi.educative.multithreading.AsynchronousToSynchronousExecutor.SynchronousExecutor;
+import com.avi.educative.multithreading.AsynchronousToSynchronousExecutor.SynchronousExecutorUsingMonitor;
+import com.avi.educative.multithreading.AsynchronousToSynchronousExecutor.SynchronousExecutorUsingSemaphore;
 import org.junit.Test;
 
 /**
@@ -12,8 +13,17 @@ import org.junit.Test;
 public class AsynchronousToSynchronousExecutorTest {
 
     @Test
-    public void testSynchronous() throws Exception {
-        final SynchronousExecutor executor = new SynchronousExecutor();
+    public void testSynchronousUsingSemaphore() throws Exception {
+        final SynchronousExecutorUsingSemaphore executor = new SynchronousExecutorUsingSemaphore();
+        executor.asynchronousExecution(() -> {
+            System.out.println("I am done");
+        });
+        System.out.println("main thread exiting...");
+    }
+
+    @Test
+    public void testSynchronousUsingMonitor() throws Exception {
+        final SynchronousExecutorUsingMonitor executor = new SynchronousExecutorUsingMonitor();
         executor.asynchronousExecution(() -> {
             System.out.println("I am done");
         });
