@@ -2,6 +2,7 @@ package com.avi.educative.locks;
 
 import com.avi.educative.multithreading.locks.IReadWriteLock;
 import com.avi.educative.multithreading.locks.ReadWriteLock;
+import com.avi.educative.multithreading.locks.ReadWriteLockWritePreferred;
 import org.junit.Test;
 
 /**
@@ -73,7 +74,7 @@ public class ReadWriteLockTest {
     @Test
     public void testWriterPreferred() throws Exception {
 
-        final IReadWriteLock rwl = new ReadWriteLock();
+        final IReadWriteLock rwl = new ReadWriteLockWritePreferred();
 
         Thread t1 = new Thread(() -> {
             try {
@@ -132,53 +133,61 @@ public class ReadWriteLockTest {
     @Test
     public void testWriterPreferred1() throws Exception {
 
-        final IReadWriteLock rwl = new ReadWriteLock();
+        final IReadWriteLock rwl = new ReadWriteLockWritePreferred();
 
-        Thread t1 = new Thread(() -> {
-            try {
+        final int numWriters = 1000;
+        final Thread[] writers = new Thread[numWriters];
+        for (int i = 0; i < numWriters; i++) {
+            final String name = "Writer-" + i;
+            final Thread thread = new Thread(() -> {
+                try {
+                    System.out.println("Attempting : " + name);
+                    rwl.acquireWriteLock();
+                    System.out.println("Acquired: " + name);
+                    rwl.releaseWriteLock();
+                    System.out.println("Released: " + name);
+                } catch (InterruptedException ie) {
 
-                System.out.println("Attempting to acquire write lock in t1: " + System.currentTimeMillis());
-                rwl.acquireWriteLock();
-                System.out.println("write lock acquired t1: " + +System.currentTimeMillis());
+                }
+            });
+            thread.setName(name);
+            writers[i] = thread;
+        }
 
-                rwl.releaseWriteLock();
+        final int numReaders = 1000;
+        final Thread[] readers = new Thread[numReaders];
+        for (int i = 0; i < numReaders; i++) {
+            final String name = "Reader-" + i;
+            final Thread thread = new Thread(() -> {
+                try {
+                    System.out.println("Attempting : " + name);
+                    rwl.acquireReadLock();
+                    System.out.println("Acquired: " + name);
+                    rwl.releaseReadLock();
+                    System.out.println("Released: " + name);
+                } catch (InterruptedException ie) {
 
-            } catch (InterruptedException ie) {
+                }
+            });
+            thread.setName(name);
+            readers[i] = thread;
+        }
+        for (final Thread writer : writers) {
+            writer.start();
+        }
 
-            }
-        });
+        for (final Thread reader : readers) {
+            reader.start();
+        }
 
-        Thread t2 = new Thread(() -> {
-            try {
+        for (final Thread writer : writers) {
+            writer.join();
+        }
 
-                System.out.println("Attempting to acquire write lock in t2: " + System.currentTimeMillis());
-                rwl.acquireWriteLock();
-                System.out.println("write lock acquired t2: " + System.currentTimeMillis());
-                rwl.releaseWriteLock();
-            } catch (InterruptedException ie) {
+        for (final Thread reader : readers) {
+            reader.join();
+        }
 
-            }
-        });
-
-        Thread t3 = new Thread(() -> {
-            try {
-
-                System.out.println("Attempting to acquire write lock in t3: " + System.currentTimeMillis());
-                rwl.acquireWriteLock();
-                System.out.println("write lock acquired t2: " + System.currentTimeMillis());
-                rwl.releaseWriteLock();
-            } catch (InterruptedException ie) {
-
-            }
-        });
-
-
-        t1.start();
-        t2.start();
-        t3.start();
-        t1.join();
-        t2.join();
-        t3.join();
     }
 
 }

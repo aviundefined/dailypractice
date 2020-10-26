@@ -12,10 +12,10 @@ public class ReadWriteLockWritePreferred implements IReadWriteLock {
 
     private volatile boolean isWriteLocked = false;
     private volatile int readers = 0;
-    private ReentrantLock lock = new ReentrantLock();
-    private Condition writeCondition = lock.newCondition();
-    private Condition readCondition = lock.newCondition();
-    private final Object writerWaitingLock = new Object();
+    private final ReentrantLock lock = new ReentrantLock();
+    private final Condition writeCondition = lock.newCondition();
+    private final Condition readCondition = lock.newCondition();
+    private final ReentrantLock writerWaitingLock = new ReentrantLock();
     private volatile int numWritersWaiting = 0;
 
     @Override
@@ -33,23 +33,23 @@ public class ReadWriteLockWritePreferred implements IReadWriteLock {
         lock.lock();
         readers--;
         writeCondition.signal();
+        readCondition.signal();
         lock.unlock();
 
     }
 
     @Override
     public void acquireWriteLock() throws InterruptedException {
-        synchronized (writerWaitingLock) {
-            numWritersWaiting++;
-        }
+        writerWaitingLock.lock();
+        numWritersWaiting++;
+        writerWaitingLock.unlock();
         lock.lock();
         while (isWriteLocked || readers != 0) {
             writeCondition.await();
         }
-        synchronized (writerWaitingLock) {
-            numWritersWaiting--;
-            writerWaitingLock.notify();
-        }
+        writerWaitingLock.lock();
+        numWritersWaiting--;
+        writerWaitingLock.unlock();
         isWriteLocked = true;
         lock.unlock();
     }

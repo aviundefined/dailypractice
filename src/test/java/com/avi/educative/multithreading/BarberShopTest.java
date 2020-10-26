@@ -24,9 +24,11 @@ public class BarberShopTest {
 
             }
         });
+        barberThread.setName("Barber");
         barberThread.start();
 
         for (int i = 0; i < 10; i++) {
+            final String name = "Customer-" + i;
             Thread t = new Thread(() -> {
                 try {
                     barberShopProblem.customer();
@@ -34,6 +36,7 @@ public class BarberShopTest {
 
                 }
             });
+            t.setName(name);
             set.add(t);
         }
 
@@ -49,6 +52,7 @@ public class BarberShopTest {
         Thread.sleep(800);
 
         for (int i = 0; i < 5; i++) {
+            final String name = "Customer-" + i;
             Thread t = new Thread(() -> {
                 try {
                     barberShopProblem.customer();
@@ -56,6 +60,7 @@ public class BarberShopTest {
 
                 }
             });
+            t.setName(name);
             set.add(t);
         }
         for (Thread t : set) {

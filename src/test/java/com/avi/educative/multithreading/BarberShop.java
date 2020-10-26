@@ -13,7 +13,7 @@ public class BarberShop {
     private static final int HAIR_CUT_TIME_MS = 100;
     private final int maxWaitingSeats;
 
-    private volatile int numWaitingCustomers;
+    private volatile int numWaitingCustomers = 0;
     private final ReentrantLock lock = new ReentrantLock();
     private final Semaphore barberWaitingForCustomer = new Semaphore(0);
     private final Semaphore barberCuttingHair = new Semaphore(0);
@@ -25,17 +25,18 @@ public class BarberShop {
     public void customer() throws InterruptedException {
         lock.lock();
         if (numWaitingCustomers == maxWaitingSeats) {
-            System.out.println("No waiting charis available. Customer is going back");
+            System.out.println("Customer is going back: " + Thread.currentThread().getName());
             lock.unlock();
             return;
         }
+        System.out.println("Customer waiting: " + Thread.currentThread().getName());
         numWaitingCustomers++;
         lock.unlock();
 
         barberWaitingForCustomer.release();
 
         barberCuttingHair.acquire();
-
+        System.out.println("Haircut done: " + Thread.currentThread().getName());
         lock.lock();
         numWaitingCustomers--;
         lock.unlock();
@@ -44,11 +45,7 @@ public class BarberShop {
     public void barber() throws InterruptedException {
         while (true) {
             barberWaitingForCustomer.acquire();
-
-            System.out.println("Barber cutting hair");
-
             Thread.sleep(HAIR_CUT_TIME_MS);
-
             barberCuttingHair.release();
         }
     }
