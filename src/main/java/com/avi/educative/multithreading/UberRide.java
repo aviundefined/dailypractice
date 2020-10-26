@@ -1,7 +1,6 @@
 package com.avi.educative.multithreading;
 
 import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -16,7 +15,7 @@ public class UberRide {
     // IMPORTANT: This is important to initialize this as 0 as all threads are blocked until release explicitly by someone
     private final Semaphore democratsWaiting = new Semaphore(0);
     private final Semaphore republicansWaiting = new Semaphore(0);
-    private final CyclicBarrier barrier = new CyclicBarrier(4);
+    private final Barrier barrier = new Barrier(4);
     int numDemocrats = 0;
     int numRepublicans = 0;
 
