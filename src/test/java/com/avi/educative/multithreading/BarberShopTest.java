@@ -69,4 +69,45 @@ public class BarberShopTest {
 
         barberThread.join();
     }
+
+
+    @Test
+    public void basic() throws Exception {
+        final int numSeats = 5;
+        final BarberShop barberShop = new BarberShop(numSeats);
+        final Thread barberThread = new Thread(() -> {
+            try {
+                barberShop.barber();
+            } catch (InterruptedException ignored) {
+
+            }
+        });
+        barberThread.setName("Barber");
+        barberThread.start();
+
+        sendCustomers(barberShop, 10);
+        Thread.sleep(1000);
+        sendCustomers(barberShop, 10);
+        barberThread.join();
+    }
+
+    private void sendCustomers(BarberShop barberShop, int numCustomers) {
+        final Thread[] customers = new Thread[numCustomers];
+        for (int i = 0; i < numCustomers; i++) {
+            final String name = "Customer-" + i;
+            final Thread customer = new Thread(() -> {
+                try {
+                    barberShop.customer();
+                } catch (InterruptedException ignored) {
+
+                }
+            });
+            customer.setName(name);
+            customers[i] = customer;
+        }
+
+        for (final Thread customer : customers) {
+            customer.start();
+        }
+    }
 }
