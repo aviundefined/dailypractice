@@ -10,7 +10,7 @@ import java.util.concurrent.Semaphore;
 public class PrintFooBar {
 
     private final int n;
-    private final Semaphore foo = new Semaphore(0);
+    private final Semaphore foo = new Semaphore(1);
     private final Semaphore bar = new Semaphore(0);
 
     public PrintFooBar(final int n) {
@@ -19,9 +19,9 @@ public class PrintFooBar {
 
     public void printFoo() throws InterruptedException {
         for (int i = 1; i <= n; i++) {
+            foo.acquire();
             System.out.println("Foo-" + i);
             bar.release(1);
-            foo.acquire();
         }
     }
 
