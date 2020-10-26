@@ -17,53 +17,43 @@ public class UnisexBathroomTest {
 
         final UnisexBathroom unisexBathroom = new UnisexBathroom(3);
 
-        Thread female1 = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    unisexBathroom.femaleUseBathroom("Lisa");
-                } catch (InterruptedException ie) {
+        Thread female1 = new Thread(() -> {
+            try {
+                unisexBathroom.femaleUseBathroom("Lisa");
+            } catch (InterruptedException ignored) {
 
-                }
             }
         });
 
-        Thread male1 = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    unisexBathroom.maleUseBathroom("John");
-                } catch (InterruptedException ie) {
+        Thread male1 = new Thread(() -> {
+            try {
+                unisexBathroom.maleUseBathroom("John");
+            } catch (InterruptedException ignored) {
 
-                }
             }
         });
 
-        Thread male2 = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    unisexBathroom.maleUseBathroom("Bob");
-                } catch (InterruptedException ie) {
+        Thread male2 = new Thread(() -> {
+            try {
+                unisexBathroom.maleUseBathroom("Bob");
+            } catch (InterruptedException ignored) {
 
-                }
             }
         });
 
-        Thread male3 = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    unisexBathroom.maleUseBathroom("Anil");
-                } catch (InterruptedException ie) {
+        Thread male3 = new Thread(() -> {
+            try {
+                unisexBathroom.maleUseBathroom("Anil");
+            } catch (InterruptedException ignored) {
 
-                }
             }
         });
 
-        Thread male4 = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    unisexBathroom.maleUseBathroom("Wentao");
-                } catch (InterruptedException ie) {
+        Thread male4 = new Thread(() -> {
+            try {
+                unisexBathroom.maleUseBathroom("Wentao");
+            } catch (InterruptedException ignored) {
 
-                }
             }
         });
 
