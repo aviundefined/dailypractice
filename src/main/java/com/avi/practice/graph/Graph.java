@@ -29,6 +29,8 @@ public abstract class Graph {
 
     public abstract void addEdge(final Vertex src, final Vertex dst);
 
+    public abstract int numEdges();
+
     public final void bfs() {
         final Map<Vertex, Boolean> visited = new HashMap<>();
         for (final Vertex v : adjList.keySet()) {

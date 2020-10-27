@@ -1,6 +1,7 @@
 package com.avi.practice.graph;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by navinash on 27/10/20.
@@ -16,5 +17,13 @@ public class GraphUndirected extends Graph {
     public void addEdge(final Vertex src, final Vertex dst) {
         this.adjList.computeIfAbsent(src, k -> new LinkedList<>()).add(dst);
         this.adjList.computeIfAbsent(dst, k -> new LinkedList<>()).add(src);
+    }
+
+    public int numEdges() {
+        int numEdges = 0;
+        for (final List<Vertex> vertices : adjList.values()) {
+            numEdges =+ vertices.size();
+        }
+        return (numEdges / 2);
     }
 }
