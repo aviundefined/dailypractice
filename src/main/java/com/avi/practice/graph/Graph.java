@@ -22,6 +22,10 @@ public abstract class Graph {
         this.adjList = new LinkedHashMap<>(numVertices);
     }
 
+    public Map<Vertex, List<Vertex>> getAdjList() {
+        return adjList;
+    }
+
     public abstract void addEdge(final Vertex src, final Vertex dst);
 
     public final void bfs() {
