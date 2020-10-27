@@ -12,6 +12,7 @@ import java.util.Map;
  * -- VMware Confidential
  */
 public class GraphUtils {
+
     public static boolean detectCycle(final Graph graph) {
         final Map<Vertex, Boolean> visited = new HashMap<>();
         final Map<Vertex, Boolean> currentStack = new HashMap<>();
@@ -21,6 +22,10 @@ public class GraphUtils {
             }
         }
         return false;
+    }
+
+    public static Vertex findMotherVertx(final Graph graph) {
+        return graph.findMotherVertx();
     }
 
     private static boolean _detectCycle(

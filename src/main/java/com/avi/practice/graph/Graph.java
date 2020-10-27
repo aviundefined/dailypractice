@@ -26,6 +26,7 @@ public abstract class Graph {
         return adjList;
     }
 
+
     public abstract void addEdge(final Vertex src, final Vertex dst);
 
     public final void bfs() {
@@ -42,6 +43,26 @@ public abstract class Graph {
             dfs(v, visited);
         }
         System.out.println();
+    }
+
+    public Vertex findMotherVertx() {
+        final Map<Vertex, Boolean> visited = new HashMap<>();
+        Vertex lastVertex = null;
+        for (final Vertex v : this.getAdjList().keySet()) {
+            if (!visited.containsKey(v) || !visited.get(v)) {
+                dfs(v, visited);
+                lastVertex = v;
+            }
+        }
+        visited.clear();
+        dfs(lastVertex, visited);
+
+        for (final Vertex v : this.getAdjList().keySet()) {
+            if (!visited.containsKey(v) || !visited.get(v)) {
+                return null;
+            }
+        }
+        return lastVertex;
     }
 
     private void bfs(final Vertex v, final Map<Vertex, Boolean> visited) {
@@ -87,6 +108,10 @@ public abstract class Graph {
 
         public Vertex(final String id) {
             this.id = id;
+        }
+
+        public String getId() {
+            return id;
         }
 
         @Override
