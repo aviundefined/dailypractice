@@ -31,6 +31,33 @@ public abstract class Graph {
 
     public abstract int numEdges();
 
+    public boolean checkPath(final Vertex src, final Vertex dst) {
+        if (src.equals(dst)) {
+            return true;
+        }
+        final Map<Vertex, Boolean> visited = new HashMap<>();
+        final Stack<Vertex> s = new Stack<>();
+        s.add(src);
+        visited.put(src, true);
+        while (!s.isEmpty()) {
+            final Vertex curr = s.pop();
+            final List<Vertex> vertices = this.getAdjList().get(curr);
+            if (vertices != null && vertices.size() != 0) {
+                for (final Vertex neighbour : vertices) {
+                    if (!visited.getOrDefault(neighbour, false)) {
+                        if (neighbour.equals(dst)) {
+                            return true;
+                        }
+                        s.push(neighbour);
+                        visited.put(neighbour, true);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
     public final void bfs() {
         final Map<Vertex, Boolean> visited = new HashMap<>();
         for (final Vertex v : adjList.keySet()) {
@@ -99,7 +126,9 @@ public abstract class Graph {
                 System.out.print(peek.id + ",");
                 final List<Vertex> vertices = this.adjList.get(peek);
                 if (vertices != null && vertices.size() != 0) {
-                    s.addAll(vertices);
+                    for (final Vertex n : vertices) {
+                        s.push(n);
+                    }
                 }
             }
         }
