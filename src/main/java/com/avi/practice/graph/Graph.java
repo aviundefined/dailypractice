@@ -31,6 +31,40 @@ public abstract class Graph {
 
     public abstract int numEdges();
 
+    public abstract Graph newInstance(final int size);
+
+    public final Graph clone() {
+        final Map<Vertex,
+                Vertex> newNodeByOld = new HashMap<>();
+        final Graph cloned = newInstance(this.adjList.size());
+        for (final Vertex v : adjList.keySet()) {
+            _clone(v, cloned, newNodeByOld);
+        }
+        return cloned;
+    }
+
+    private Vertex _clone(final Vertex oldVertex, final Graph cloned, final Map<Vertex, Vertex> newNodeByOld) {
+        Vertex newVertex = newNodeByOld.get(oldVertex);
+        if (newVertex != null) {
+            return newVertex;
+        }
+        newVertex = new Vertex(oldVertex.getId());
+        newNodeByOld.put(oldVertex, newVertex);
+        final List<Vertex> oldNeighbours = this.getAdjList().get(oldVertex);
+        if (oldNeighbours != null && oldNeighbours.size() > 0) {
+            for (final Vertex oldNeighbour : oldNeighbours) {
+                Vertex newNeighbour = newNodeByOld.get(oldNeighbour);
+                if (newNeighbour == null) {
+                    newNeighbour = _clone(oldNeighbour, cloned, newNodeByOld);
+                    cloned.addEdge(newVertex, newNeighbour);
+                } else {
+                    cloned.addEdge(newVertex, newNeighbour);
+                }
+            }
+        }
+        return newVertex;
+    }
+
     public boolean checkPath(final Vertex src, final Vertex dst) {
         if (src.equals(dst)) {
             return true;

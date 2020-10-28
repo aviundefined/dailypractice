@@ -25,4 +25,9 @@ public class GraphDirected extends Graph {
         }
         return numEdges;
     }
+
+    @Override
+    public Graph newInstance(int size) {
+        return new GraphDirected(size);
+    }
 }

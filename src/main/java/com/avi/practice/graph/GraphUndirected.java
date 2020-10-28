@@ -22,8 +22,13 @@ public class GraphUndirected extends Graph {
     public int numEdges() {
         int numEdges = 0;
         for (final List<Vertex> vertices : adjList.values()) {
-            numEdges =+ vertices.size();
+            numEdges = +vertices.size();
         }
         return (numEdges / 2);
+    }
+
+    @Override
+    public Graph newInstance(int size) {
+        return new GraphUndirected(size);
     }
 }

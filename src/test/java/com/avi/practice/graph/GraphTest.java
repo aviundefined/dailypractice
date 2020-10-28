@@ -1,6 +1,7 @@
 package com.avi.practice.graph;
 
 import com.avi.practice.graph.Graph.Vertex;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -91,6 +92,22 @@ public class GraphTest {
             final Graph graph = generateTestGraphDirected2();
             graph.dfs();
             System.out.println("-------------");
+        }
+    }
+
+    @Test
+    public void testClone() {
+        {
+            final Graph graph = generateTestGraphDirected1();
+            final Graph cloned = graph.clone();
+            Assert.assertEquals(graph.adjList.size(), cloned.adjList.size());
+            Assert.assertEquals(graph.adjList, cloned.adjList);
+        }
+        {
+            final Graph graph = generateTestGraphDirected2();
+            final Graph cloned = graph.clone();
+            Assert.assertEquals(graph.adjList.size(), cloned.adjList.size());
+            Assert.assertEquals(graph.adjList, cloned.adjList);
         }
     }
 }
