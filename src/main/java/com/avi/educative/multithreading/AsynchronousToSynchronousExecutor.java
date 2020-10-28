@@ -34,8 +34,8 @@ public class AsynchronousToSynchronousExecutor {
             final Callback cb = () -> {
                 callback.done();
                 synchronized (lock) {
-                    lock.notify();
                     isDone[0] = true;
+                    lock.notify();
                 }
             };
             super.asynchronousExecution(cb);
