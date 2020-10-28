@@ -11,7 +11,7 @@ public class EvenOddTest {
 
     @Test
     public void testSemaphore() throws InterruptedException {
-        final EvenOddSemaphore evenOdd = new EvenOddSemaphore(10);
+        final EvenOddSemaphore evenOdd = new EvenOddSemaphore(100);
         final Thread odd = new Thread(() -> {
             try {
                 evenOdd.odd();
@@ -32,7 +32,7 @@ public class EvenOddTest {
 
     @Test
     public void testLock() throws InterruptedException {
-        final EvenOddLock evenOdd = new EvenOddLock(10);
+        final EvenOddLock evenOdd = new EvenOddLock(100);
         final Thread odd = new Thread(() -> {
             try {
                 evenOdd.odd();
