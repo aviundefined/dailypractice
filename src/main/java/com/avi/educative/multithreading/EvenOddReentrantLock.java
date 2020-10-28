@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class EvenOddLock {
+public class EvenOddReentrantLock {
 
 
     private final int n;
@@ -16,7 +16,7 @@ public class EvenOddLock {
     private final Condition cond = lock.newCondition();
     private volatile int curr = 1;
 
-    public EvenOddLock(final int n) {
+    public EvenOddReentrantLock(final int n) {
         this.n = n;
     }
 

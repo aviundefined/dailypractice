@@ -28,11 +28,12 @@ public class EvenOddTest {
         even.start();
         odd.join();
         even.join();
+        System.out.println("----------------");
     }
 
     @Test
-    public void testLock() throws InterruptedException {
-        final EvenOddLock evenOdd = new EvenOddLock(100);
+    public void testReentrantLock() throws InterruptedException {
+        final EvenOddReentrantLock evenOdd = new EvenOddReentrantLock(100);
         final Thread odd = new Thread(() -> {
             try {
                 evenOdd.odd();
@@ -49,5 +50,28 @@ public class EvenOddTest {
         even.start();
         odd.join();
         even.join();
+        System.out.println("----------------");
+    }
+
+    @Test
+    public void testObjectLock() throws InterruptedException {
+        final EvenOddLockObject evenOdd = new EvenOddLockObject(100);
+        final Thread odd = new Thread(() -> {
+            try {
+                evenOdd.odd();
+            } catch (InterruptedException ignored) {
+            }
+        });
+        final Thread even = new Thread(() -> {
+            try {
+                evenOdd.even();
+            } catch (InterruptedException ignored) {
+            }
+        });
+        odd.start();
+        even.start();
+        odd.join();
+        even.join();
+        System.out.println("----------------");
     }
 }
