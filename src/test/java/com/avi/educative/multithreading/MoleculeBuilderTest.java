@@ -38,13 +38,12 @@ public class MoleculeBuilderTest {
             oxygens[i].setName(name);
         }
 
-        for (final Thread hydrogen : hydrogens) {
-            hydrogen.start();
-        }
         for (final Thread oxygen : oxygens) {
             oxygen.start();
         }
-
+        for (final Thread hydrogen : hydrogens) {
+            hydrogen.start();
+        }
         for (final Thread hydrogen : hydrogens) {
             hydrogen.join();
         }
