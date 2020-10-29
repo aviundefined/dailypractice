@@ -40,7 +40,6 @@ public class MoleculeBuilder {
             }
             lock.notifyAll();
         }
-
     }
 
     private void buildMolecule() {
