@@ -1,6 +1,5 @@
-package com.avi.practice.leetcode.weeklycontest.num213;
+package com.avi.practice.leetcode.weeklycontest.num212;
 
-import com.avi.practice.leetcode.weeklycontest.num212.ArithmeticSubArrays;
 import org.junit.Assert;
 import org.junit.Test;
 
