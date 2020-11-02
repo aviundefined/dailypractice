@@ -1,12 +1,11 @@
 package com.avi.practice.leetcode.weeklycontest.num213;
 
+import com.avi.practice.leetcode.weeklycontest.num212.ArithmeticSubArrays;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 28/10/20.
