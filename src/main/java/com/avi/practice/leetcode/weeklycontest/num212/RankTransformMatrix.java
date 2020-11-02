@@ -80,12 +80,15 @@ public class RankTransformMatrix {
 
         final int[][] ranks = new int[n][m];
         for (final Cell cell : cells) {
-            final RankValue currRowMax = rowMax.computeIfAbsent(cell.row, k -> new RankValue(Integer.MIN_VALUE, 0));
-            final RankValue currColMax = colMax.computeIfAbsent(cell.col, k -> new RankValue(Integer.MIN_VALUE, 0));
+            final RankValue currRowMax = rowMax.computeIfAbsent(cell.row, k -> new RankValue(Integer.MIN_VALUE, 0, -1, -1));
+            final RankValue currColMax = colMax.computeIfAbsent(cell.col, k -> new RankValue(Integer.MIN_VALUE, 0, -1, -1));
 
             final int rowRank;
+            boolean rowValueEqual = false;
+            boolean colValueEqual = false;
             if (currRowMax.value == cell.value) {
                 rowRank = currRowMax.rank;
+                rowValueEqual = true;
             } else {
                 rowRank = currRowMax.rank + 1;
             }
@@ -93,13 +96,20 @@ public class RankTransformMatrix {
             final int colRank;
             if (currColMax.value == cell.value) {
                 colRank = currColMax.rank;
+                colValueEqual = true;
             } else {
                 colRank = currColMax.rank + 1;
             }
             final int rank = Math.max(rowRank, colRank);
             ranks[cell.row][cell.col] = rank;
-            rowMax.put(cell.row, new RankValue(cell.value, rank));
-            colMax.put(cell.col, new RankValue(cell.value, rank));
+            if (rowValueEqual && currRowMax.row != -1 && currRowMax.col != -1) {
+                ranks[currRowMax.row][currRowMax.col] = rank;
+            }
+            if (colValueEqual && currColMax.row != -1 && currColMax.col != -1) {
+                ranks[currColMax.row][currColMax.col] = rank;
+            }
+            rowMax.put(cell.row, new RankValue(cell.value, rank, cell.row, cell.col));
+            colMax.put(cell.col, new RankValue(cell.value, rank, cell.row, cell.col));
         }
         return ranks;
     }
@@ -143,11 +153,16 @@ public class RankTransformMatrix {
     private static class RankValue {
         private final int value;
         private final int rank;
+        private final int row;
+        private final int col;
 
-        public RankValue(int value, int rank) {
+        public RankValue(int value, int rank, int row, int col) {
             this.value = value;
             this.rank = rank;
+            this.row = row;
+            this.col = col;
         }
+
 
         @Override
         public String toString() {
