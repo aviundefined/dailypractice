@@ -2,6 +2,7 @@ package com.avi.practice.leetcode.weeklycontest.num213;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.PriorityQueue;
 
 /**
  * Created by navinash on 03/11/20.
@@ -46,6 +47,24 @@ import java.util.Collections;
 public class FurthestBuildingYouCanReach {
 
     public int furthestBuilding(int[] heights, int bricks, int ladders) {
+        final PriorityQueue<Integer> pq = new PriorityQueue<>(heights.length);
+        for (int i = 0; i < heights.length - 1; i++) {
+            final int diff = heights[i + 1] - heights[i];
+            if (diff <= 0) {
+                continue;
+            }
+            pq.add(diff);
+            if (pq.size() > ladders) {
+                bricks -= pq.poll();
+            }
+            if (bricks < 0) {
+                return i;
+            }
+        }
+        return heights.length - 1;
+    }
+
+    public int furthestBuildingBadSolution(int[] heights, int bricks, int ladders) {
         if (heights == null || heights.length == 0) {
             return 0;
         }
