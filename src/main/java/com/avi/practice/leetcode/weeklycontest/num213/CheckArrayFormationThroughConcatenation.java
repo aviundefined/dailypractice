@@ -1,5 +1,8 @@
 package com.avi.practice.leetcode.weeklycontest.num213;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by navinash on 02/11/20.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -48,6 +51,28 @@ package com.avi.practice.leetcode.weeklycontest.num213;
 public class CheckArrayFormationThroughConcatenation {
 
     public boolean canFormArray(int[] arr, int[][] pieces) {
+        final Map<Integer, Integer> elementByIdx = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            elementByIdx.put(arr[i], i);
+        }
+        for (final int[] piece : pieces) {
+            final int start = elementByIdx.getOrDefault(piece[0], -1);
+            if (start == -1) {
+                return false;
+            }
+            for (int i = 1; i < piece.length; i++) {
+                if (start + i >= arr.length) {
+                    return false;
+                }
+                if (piece[i] != arr[start + i]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean canFormArrayOld(int[] arr, int[][] pieces) {
         for (final int[] a : pieces) {
             int start = -1;
             for (int j = 0; j < arr.length; j++) {
