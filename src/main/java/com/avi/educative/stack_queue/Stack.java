@@ -10,6 +10,7 @@ public class Stack<T> {
     private final int maxSize;
     private T[] arr;
     private int top = -1;
+    private int currentSize;
 
     public Stack(int maxSize) {
         this.maxSize = maxSize;
@@ -29,6 +30,7 @@ public class Stack<T> {
             throw new RuntimeException("Stack is full. Max Size: " + maxSize);
         }
         top++;
+        currentSize++;
         arr[top] = data;
     }
 
@@ -39,6 +41,18 @@ public class Stack<T> {
         final T data = arr[top];
         arr[top] = null;
         top--;
+        currentSize--;
         return data;
+    }
+
+    public T top() {
+        if (isEmpty()) {
+            throw new RuntimeException("Stack is Empty");
+        }
+        return arr[top];
+    }
+
+    public int getCurrentSize() {
+        return this.currentSize;
     }
 }
