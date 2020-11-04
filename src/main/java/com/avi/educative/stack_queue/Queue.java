@@ -52,4 +52,8 @@ public class Queue<T> {
         }
         return arr[head];
     }
+
+    public int getMaxSize() {
+        return this.maxSize;
+    }
 }
