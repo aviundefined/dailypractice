@@ -72,4 +72,20 @@ public class QueueStackChallengesTest {
             System.out.println("------------------------");
         }
     }
+
+    @Test
+    public void isBalanced() {
+        {
+            final String exp = "{[()]}";
+            final boolean expected = true;
+            final boolean actual  = QueueStackChallenges.isBalanced(exp);
+            Assert.assertEquals(exp, expected, actual);
+        }
+        {
+            final String exp = "[{(}]";
+            final boolean expected = false;
+            final boolean actual  = QueueStackChallenges.isBalanced(exp);
+            Assert.assertEquals(exp, expected, actual);
+        }
+    }
 }

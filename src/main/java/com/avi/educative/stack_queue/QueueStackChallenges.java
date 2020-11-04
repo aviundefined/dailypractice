@@ -83,6 +83,62 @@ public class QueueStackChallenges {
         return numbers.pop();
     }
 
+    public static boolean isBalanced(final String exp) {
+        if (exp == null || exp.trim().equals("")) {
+            return true;
+        }
+        final char[] chars = exp.toCharArray();
+        final Stack<Character> s = new Stack<>(chars.length);
+        for (final char c : chars) {
+            if (!isBracket(c)) {
+                return false;
+            }
+
+            if (isOpenBracket(c)) {
+                s.push(c);
+                continue;
+            }
+            if (s.isEmpty()) {
+                return false;
+            }
+            final char top = s.pop();
+            switch (c) {
+                case ']':
+                    if (top != '[') {
+                        return false;
+                    }
+                    break;
+                case '}':
+                    if (top != '{') {
+                        return false;
+                    }
+                    break;
+                case ')':
+                    if (top != '(') {
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+
+        }
+        return true;
+    }
+
+
+    private static boolean isBracket(final char c) {
+        return isOpenBracket(c) || isCloseBracket(c);
+    }
+
+    private static boolean isOpenBracket(final char c) {
+        return c == '[' || c == '{' || c == '(';
+    }
+
+    private static boolean isCloseBracket(final char c) {
+        return c == ']' || c == '}' || c == ')';
+    }
+
     private enum Operator {
         PLUS('+'),
         MINUS('-'),
