@@ -106,4 +106,33 @@ public class NextPermutationTest {
         }
 
     }
+
+
+    @Test
+    public void kthSmallestPath() {
+        final NextPermutation solver = new NextPermutation();
+        {
+            final int[] destination  = {2,3};
+            final int k = 1;
+            final String expected = "HHHVV";
+            final String actual = solver.kthSmallestPath(destination, k);
+            Assert.assertEquals(String.valueOf(k), expected, actual);
+        }
+
+        {
+            final int[] destination  = {2,3};
+            final int k = 2;
+            final String expected = "HHVHV";
+            final String actual = solver.kthSmallestPath(destination, k);
+            Assert.assertEquals(String.valueOf(k), expected, actual);
+        }
+
+        {
+            final int[] destination  = {15,15};
+            final int k = 155117520;
+            final String expected = "VVVVVVVVVVVVVVVHHHHHHHHHHHHHHH";
+            final String actual = solver.kthSmallestPath(destination, k);
+            Assert.assertEquals(String.valueOf(k), expected, actual);
+        }
+    }
 }
