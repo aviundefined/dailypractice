@@ -56,4 +56,54 @@ public class NextPermutationTest {
             s = next;
         }
     }
+
+
+    @Test
+    public void all_Duplicates() {
+        final NextPermutation solver = new NextPermutation();
+        {
+            String s = "11233";
+            System.out.println(s);
+            while (!CommonUtils.isEmpty(s)) {
+                final String next = solver.next(s);
+                System.out.println(next);
+                s = next;
+            }
+
+        }
+
+        {
+            String s = "HHHVV";
+            System.out.println(s);
+            while (!CommonUtils.isEmpty(s)) {
+                final String next = solver.next(s);
+                System.out.println(next);
+                s = next;
+            }
+
+        }
+
+    }
+
+
+    @Test
+    public void kthPermutation() {
+        final NextPermutation solver = new NextPermutation();
+        {
+            final String s = "HHHVV";
+            final int k = 1;
+            final String expected = "HHHVV";
+            final String actual = solver.kthPermutation(s, k);
+            Assert.assertEquals(String.format("%s : %d", s, k), expected, actual);
+        }
+
+        {
+            final String s = "HHHVV";
+            final int k = 2;
+            final String expected = "HHVHV";
+            final String actual = solver.kthPermutation(s, k);
+            Assert.assertEquals(String.format("%s : %d", s, k), expected, actual);
+        }
+
+    }
 }

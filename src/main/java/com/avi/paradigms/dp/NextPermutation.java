@@ -20,19 +20,19 @@ final class NextPermutation {
 
         final char[] chars = s.toCharArray();
         final int n = chars.length;
-        int start = 0;
+        int start = -1;
         for (int i = 1; i < n; i++) {
             if (chars[i] > chars[i - 1]) {
                 start = i;
             }
         }
         // Corner case, whole string is reversed
-        if (start == 0) {
+        if (start == -1) {
             return "";
         }
         int minIdx = -1, min = Integer.MAX_VALUE;
         for (int i = start; i < n; i++) {
-            if (chars[i] > chars[start - 1] && chars[i] < min) {
+            if (chars[i] > chars[start - 1] && chars[i] <= min) {
                 min = chars[i];
                 minIdx = i;
             }
@@ -45,5 +45,25 @@ final class NextPermutation {
             r--;
         }
         return String.valueOf(chars);
+    }
+
+    public String kthSmallestPath(int[] destination, int k) {
+        String s = "";
+        for (int i = 0; i < destination[1]; i++) {
+            s = s + "H";
+        }
+        for (int i = 0; i < destination[0]; i++) {
+            s = s + "V";
+        }
+
+        return kthPermutation(s, k);
+    }
+
+     final String kthPermutation(String s, final int k) {
+        for (int i = 2; i <= k; i++) {
+            s = next(s);
+        }
+
+        return s;
     }
 }
