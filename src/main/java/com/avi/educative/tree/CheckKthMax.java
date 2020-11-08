@@ -40,7 +40,6 @@ public class CheckKthMax {
 
         if (counter.incrementGet() == k) {
             return root.getData();
-
         }
         return _findKthMaxSolution2(root.getLeft(), k, counter);
     }
