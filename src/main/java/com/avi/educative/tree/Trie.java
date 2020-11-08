@@ -18,8 +18,12 @@ public class Trie {
     }
 
     public void insert(final String key) {
+        if (root == null) {
+            throw new IllegalArgumentException("Trie is null");
+        }
+
         if (key == null || key.trim().length() == 0) {
-            throw new IllegalArgumentException("Null or Empty Key insertion is not allowed");
+            throw new IllegalArgumentException("Can't insert null or empty key in trie");
         }
 
         final char[] chars = key.toLowerCase().toCharArray();
@@ -35,10 +39,13 @@ public class Trie {
     }
 
     public boolean search(final String key) {
-        if (key == null || key.trim().length() == 0) {
-            throw new IllegalArgumentException("Key is null or empty");
+        if (root == null) {
+            throw new IllegalArgumentException("Trie is null");
         }
 
+        if (key == null || key.trim().length() == 0) {
+            throw new IllegalArgumentException("Can't insert null or empty key in trie");
+        }
         final char[] chars = key.toLowerCase().toCharArray();
         TrieNode current = root;
         for (final char c : chars) {
@@ -53,47 +60,48 @@ public class Trie {
 
     public boolean delete(final String key) {
         if (root == null) {
-            throw new IllegalArgumentException("Trie is empty");
+            throw new IllegalArgumentException("Trie is null");
         }
+
         if (key == null || key.trim().length() == 0) {
-            throw new IllegalArgumentException("Key is null or empty");
+            throw new IllegalArgumentException("Can't insert null or empty key in trie");
         }
         final char[] chars = key.toLowerCase().toCharArray();
+
         return _delete(root, chars, chars.length, 0);
     }
 
-    private boolean _delete(TrieNode current, char[] chars, int keyLength, int level) {
+    private boolean _delete(TrieNode current, char[] chars, int length, int level) {
         if (current == null) {
-            return false; // Word not present in trie
+            return false;
         }
-
-        if (keyLength == level) {
-            // reached at end
+        if (length == level) {
             if (hasNoChildren(current)) {
                 current = null;
-                return true; // delete self
+                return true;
             } else {
-                current.markAsLeaf();
-                return false; // delete self not required
+                current.unMarkAsLeaf();
+                return false;
             }
         } else {
-            final TrieNode child = current.children[getIndex(chars[level])];
-            final boolean childDeleted = _delete(child, chars, keyLength, level + 1);
-            if (childDeleted) {
+            final int index = getIndex(chars[level]);
+            final boolean isChildDeleted = _delete(current.children[index], chars, length, level + 1);
+            if (isChildDeleted) {
                 current.children[getIndex(chars[level])] = null;
                 if (current.isEndWord) {
                     return false;
                 } else if (!hasNoChildren(current)) {
-                    return false;
-                } else {
                     current = null;
                     return true;
+                } else {
+                    return false;
                 }
             } else {
                 return false;
             }
         }
     }
+
 
     public int totalWords() {
         if (root == null) {
@@ -116,7 +124,7 @@ public class Trie {
     private void _getWords(final TrieNode current, final int level, final List<String> words, final List<Character> chars) {
         if (current.isEndWord) {
             // found the word
-            StringBuilder word = new StringBuilder();
+            final StringBuilder word = new StringBuilder();
             for (int i = 0; i < level; i++) {
                 word.append(chars.get(i));
             }
@@ -125,7 +133,7 @@ public class Trie {
         int i = 0;
         for (final TrieNode child : current.children) {
             if (child != null) {
-                chars.add(level, (char) (i + 'a'));
+                chars.add(level, getChar(i));
                 _getWords(child, level + 1, words, chars);
             }
             i++;
@@ -156,5 +164,9 @@ public class Trie {
 
     private static int getIndex(final char c) {
         return c - 'a';
+    }
+
+    private static char getChar(final int c) {
+        return (char) (c + 'a');
     }
 }
