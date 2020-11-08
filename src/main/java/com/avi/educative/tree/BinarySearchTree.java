@@ -45,6 +45,7 @@ public class BinarySearchTree {
         while (current != null) {
             if (current.getData() == value) {
                 return current;
+
             }
             if (value < current.getData()) {
                 current = current.getLeftChild();

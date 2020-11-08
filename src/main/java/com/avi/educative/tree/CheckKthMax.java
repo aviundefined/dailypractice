@@ -35,8 +35,10 @@ public class CheckKthMax {
             return Integer.MIN_VALUE;
         }
 
-        _findKthMaxSolution2(root.getRightChild(), k, counter);
-
+        final int right = _findKthMaxSolution2(root.getRightChild(), k, counter);
+        if (right != Integer.MAX_VALUE) {
+            return right;
+        }
 
         if (counter.incrementGet() == k) {
             return root.getData();
