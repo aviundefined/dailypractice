@@ -8,8 +8,8 @@ package com.avi.educative.tree;
 public class Node {
 
     private int data;
-    private Node left;
-    private Node right;
+    private Node leftChild;
+    private Node rightChild;
 
     public Node(int data) {
         this.data = data;
@@ -23,19 +23,19 @@ public class Node {
         this.data = data;
     }
 
-    public Node getLeft() {
-        return left;
+    public Node getLeftChild() {
+        return leftChild;
     }
 
-    public void setLeft(Node left) {
-        this.left = left;
+    public void setLeftChild(Node left) {
+        this.leftChild = left;
     }
 
-    public Node getRight() {
-        return right;
+    public Node getRightChild() {
+        return rightChild;
     }
 
-    public void setRight(Node right) {
-        this.right = right;
+    public void setRightChild(Node right) {
+        this.rightChild = right;
     }
 }

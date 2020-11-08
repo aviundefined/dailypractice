@@ -19,16 +19,16 @@ public class BinarySearchTree {
         while (current != null) {
             // Value is less then current node so should be inserted in left
             if (value < current.getData()) {
-                final Node left = current.getLeft();
+                final Node left = current.getLeftChild();
                 if (left == null) {
-                    current.setLeft(new Node(value));
+                    current.setLeftChild(new Node(value));
                     return true;
                 }
                 current = left;
             } else {
-                final Node right = current.getRight();
+                final Node right = current.getRightChild();
                 if (right == null) {
-                    current.setRight(new Node(value));
+                    current.setRightChild(new Node(value));
                     return true;
                 }
                 current = right;
@@ -47,9 +47,9 @@ public class BinarySearchTree {
                 return current;
             }
             if (value < current.getData()) {
-                current = current.getLeft();
+                current = current.getLeftChild();
             } else {
-                current = current.getRight();
+                current = current.getRightChild();
             }
         }
         return null;
@@ -68,9 +68,9 @@ public class BinarySearchTree {
             }
             parent = current;
             if (value < current.getData()) {
-                current = current.getLeft();
+                current = current.getLeftChild();
             } else {
-                current = current.getRight();
+                current = current.getRightChild();
             }
         }
 
@@ -78,33 +78,33 @@ public class BinarySearchTree {
             return false;
         }
         // leaft
-        if (current.getLeft() == null && current.getRight() == null) {
+        if (current.getLeftChild() == null && current.getRightChild() == null) {
             // leaf and root
             if (current.getData() == root.getData()) {
                 root = null;
             } else if (current.getData() < parent.getData()) {
-                parent.setLeft(null);
+                parent.setLeftChild(null);
             } else if (current.getData() > parent.getData()) {
-                parent.setRight(null);
+                parent.setRightChild(null);
             }
-        } else if (current.getLeft() == null) { // single child - only right
+        } else if (current.getLeftChild() == null) { // single child - only right
             if (current.getData() == root.getData()) {
-                root = current.getRight();
+                root = current.getRightChild();
             } else if (current.getData() < parent.getData()) {
-                parent.setLeft(current.getRight());
+                parent.setLeftChild(current.getRightChild());
             } else {
-                parent.setRight(current.getRight());
+                parent.setRightChild(current.getRightChild());
             }
-        } else if (current.getRight() == null) { // single child - only left
+        } else if (current.getRightChild() == null) { // single child - only left
             if (current.getData() == root.getData()) {
-                root = current.getLeft();
+                root = current.getLeftChild();
             } else if (current.getData() < parent.getData()) {
-                parent.setLeft(current.getLeft());
+                parent.setLeftChild(current.getLeftChild());
             } else {
-                parent.setRight(current.getLeft());
+                parent.setRightChild(current.getLeftChild());
             }
         } else {
-            final Node min = findMinimum(current.getRight());
+            final Node min = findMinimum(current.getRightChild());
             final int newValue = min.getData();
             delete(newValue);
             current.setData(newValue);
@@ -119,10 +119,10 @@ public class BinarySearchTree {
         Node min = node;
         Node current = node;
         while (current != null) {
-            if (current.getLeft() != null) {
-                min = current.getLeft();
+            if (current.getLeftChild() != null) {
+                min = current.getLeftChild();
             }
-            current = node.getLeft();
+            current = node.getLeftChild();
         }
         return min;
     }
@@ -141,7 +141,7 @@ public class BinarySearchTree {
             return;
         }
         System.out.print(current.getData() + ",");
-        printTree(current.getLeft());
-        printTree(current.getRight());
+        printTree(current.getLeftChild());
+        printTree(current.getRightChild());
     }
 }

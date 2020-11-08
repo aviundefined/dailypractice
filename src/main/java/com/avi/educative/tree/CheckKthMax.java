@@ -35,22 +35,22 @@ public class CheckKthMax {
             return Integer.MIN_VALUE;
         }
 
-        _findKthMaxSolution2(root.getRight(), k, counter);
+        _findKthMaxSolution2(root.getRightChild(), k, counter);
 
 
         if (counter.incrementGet() == k) {
             return root.getData();
         }
-        return _findKthMaxSolution2(root.getLeft(), k, counter);
+        return _findKthMaxSolution2(root.getLeftChild(), k, counter);
     }
 
     private static void _inOrderTraversal(Node root, List<Integer> list) {
         if (root == null) {
             return;
         }
-        _inOrderTraversal(root.getLeft(), list);
+        _inOrderTraversal(root.getLeftChild(), list);
         list.add(root.getData());
-        _inOrderTraversal(root.getRight(), list);
+        _inOrderTraversal(root.getRightChild(), list);
     }
 
     private static final class Counter {
@@ -77,6 +77,5 @@ public class CheckKthMax {
         private int get() {
             return this.count;
         }
-
     }
 }
