@@ -21,6 +21,16 @@ public class InversionCountTest {
             CommonUtils.printArr(arr);
             final int actual = InversionCount.inversionCount(arr);
             Assert.assertEquals(expected, actual);
+            System.out.println("---------------------");
+        }
+
+        {
+            final int[] arr = {8, 4, 9, 2, 8};
+            final int expected = 5;
+            CommonUtils.printArr(arr);
+            final int actual = InversionCount.inversionCount(arr);
+            Assert.assertEquals(expected, actual);
+            System.out.println("---------------------");
         }
     }
 }
