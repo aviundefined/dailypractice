@@ -55,51 +55,18 @@ public class SellDiminishingValuedColoredBalls {
             return 0;
         }
         Arrays.sort(inventory);
-        int profit = 0;
-        int right = inventory.length - 1;
-        int left = right - 1;
-        while (orders > 0 && left >= 0) {
-            final int delta = Math.min(inventory[right] - inventory[left], orders);
-            profit += profit(inventory, left + 1, right, delta);
-            orders = orders - delta;
-            left--;
+        long profit = 0L;
+        final int n = inventory.length;
+        for (int i = n - 1; i >= 0; i--) {
+            final long diff = inventory[i] - (i > 0 ? inventory[i - 1] : 0);
+            final long consumeOrders = Math.min(orders, diff * (n - i));
+            final long right = inventory[i];
+            final long left = right - consumeOrders / (n - i);
+            profit += ((right * (right + 1) / 2) - (left * (left + 1) / 2)) * (n - i);
+            profit += left * (consumeOrders % (n - i));
+            orders -= consumeOrders;
+            inventory[i] = inventory[i] - (int) (right - left);
         }
-        if (orders <= 0) {
-            return profit;
-        }
-        left = 0;
-        boolean isItemLeft = true;
-        while (orders > 0 && isItemLeft) {
-            if (orders >= inventory.length) {
-                profit += profit(inventory, left, right, 1);
-                orders = orders - inventory.length;
-                if (inventory[left] == 0) {
-                    isItemLeft = false;
-                }
-            } else {
-                left = inventory.length - orders;
-                profit += profit(inventory, left, right, 1);
-                orders = 0;
-            }
-        }
-        return profit % (10 ^ 9 + 7);
-    }
-
-    private int profit(final int[] inventory, final int start, final int end, final int delta) {
-        int profit = 0;
-        int multiplier = end - start + 1;
-        final int currVal = inventory[end];
-        for (int i = 0; i < delta; i++) {
-            if (currVal - i >= 0) {
-                profit = profit + (currVal - i);
-            }
-        }
-        for (int i = start; i <= end; i++) {
-            if (inventory[i] > 0) {
-                inventory[i] = inventory[i] - delta;
-            }
-        }
-        profit = profit * multiplier;
-        return profit;
+        return (int) (profit % 1000_000_007);
     }
 }
