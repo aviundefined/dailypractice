@@ -10,13 +10,21 @@ import java.util.Arrays;
 public class FenwickTree {
     private final int[] bit;
     private final int n;
+    private final int[] arr;
 
     public FenwickTree(int[] arr) {
+        this(arr, true);
+    }
+
+    public FenwickTree(int[] arr, boolean initialize) {
+        this.arr = arr;
         this.n = arr.length;
         this.bit = new int[n + 1]; // 1-indexed
         Arrays.fill(bit, 0);
-        for (int i = 0; i < n; i++) {
-            update(i, arr[i]);
+        if (initialize) {
+            for (int i = 0; i < n; i++) {
+                update(i, arr[i]);
+            }
         }
     }
 
