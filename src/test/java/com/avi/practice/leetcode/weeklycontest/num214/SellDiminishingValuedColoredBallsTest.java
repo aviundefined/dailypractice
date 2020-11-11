@@ -1,10 +1,8 @@
-package com.avi.practice.leetcode.weeklycontest.num215;
+package com.avi.practice.leetcode.weeklycontest.num214;
 
 import com.avi.practice.utils.CommonUtils;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 09/11/20.
