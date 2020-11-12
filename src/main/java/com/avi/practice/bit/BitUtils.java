@@ -37,4 +37,8 @@ public class BitUtils {
     public static int unsetRightMostSetBit(final int number) {
         return number - (number & twosComplement(number));
     }
+
+    public static int extractKthBit(final int number, final int k) {
+        return (number & 1 << (k - 1)) > 0 ? 1 : 0;
+    }
 }
