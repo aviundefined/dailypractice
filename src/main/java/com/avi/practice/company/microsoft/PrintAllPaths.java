@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class PrintAllPaths {
 
-    public final List<List<Integer>> getPaths(final int[][] a) {
+    public final List<List<Integer>> getPathsDP(final int[][] a) {
         if (a == null || a.length == 0) {
             return Collections.emptyList();
         }

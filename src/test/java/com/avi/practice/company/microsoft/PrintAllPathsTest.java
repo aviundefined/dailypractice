@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by navinash on 12/11/20.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -15,13 +13,13 @@ public class PrintAllPathsTest {
 
     private static final PrintAllPaths solver = new PrintAllPaths();
     @Test
-    public void getPaths() {
+    public void getPathsDP() {
         {
             final int[][] a = {
                     {1, 2},
                     {3, 4}
             };
-            final List<List<Integer>> paths = solver.getPaths(a);
+            final List<List<Integer>> paths = solver.getPathsDP(a);
             System.out.println(paths);
             System.out.println("----------------------");
         }
@@ -30,7 +28,7 @@ public class PrintAllPathsTest {
                     {1, 2, 3},
                     {4, 5, 6}
             };
-            final List<List<Integer>> paths = solver.getPaths(a);
+            final List<List<Integer>> paths = solver.getPathsDP(a);
             System.out.println(paths);
             System.out.println("----------------------");
         }
