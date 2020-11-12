@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 public class RomanNumberTest {
 
     private final RomanNumber solver = new RomanNumber();
+
     @Test
     public void romanNumber() {
         {
@@ -30,6 +31,12 @@ public class RomanNumberTest {
         {
             final int number = 1904;
             final String expected = "MCMIV";
+            final String actual = solver.romanNumber(number);
+            Assert.assertEquals(String.valueOf(number), expected, actual);
+        }
+        {
+            final int number = 3549;
+            final String expected = "MMMDXLIX";
             final String actual = solver.romanNumber(number);
             Assert.assertEquals(String.valueOf(number), expected, actual);
         }
