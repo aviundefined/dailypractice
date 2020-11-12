@@ -46,6 +46,7 @@ public abstract class Heap implements IHeap {
             heapifyHelper(i, n);
         }
         this.currentSize = n;
+        this.lastIndex = n - 1;
     }
 
     protected final void heapify(int index) {
