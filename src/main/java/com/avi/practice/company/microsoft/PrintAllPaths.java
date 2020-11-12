@@ -78,12 +78,13 @@ public class PrintAllPaths {
             for(int k = 0; k < idx + n - j; k++) {
 
             }
+            return;
         }
         if (j == n - 1) {
             for(int k = i + 1; k < m; k++) {
                 path[idx + k - j] = a[k][j];
             }
-
+            return;
         }
         _getPathsRecursive(a, m, n, i + 1, j, idx + 1, path, paths);
         _getPathsRecursive(a, m, n, i, j + 1, idx + 1, path, paths);
