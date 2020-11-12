@@ -34,11 +34,11 @@ public class MaxHeapTest {
         maxHeap.insert(9);
 
         maxHeap.print();
-        System.out.println("The max val is " + maxHeap.extractMax());
+        System.out.println("The max val is " + maxHeap.poll());
 
-        System.out.println("The max val is " + maxHeap.getMax());
+        System.out.println("The max val is " + maxHeap.peek());
         System.out.println("Delete 0 " + maxHeap.delete(0));
-        System.out.println("New Max " + maxHeap.getMax());
+        System.out.println("New Max " + maxHeap.peek());
 
         maxHeap.print();
         System.out.println("Delete 2 " + maxHeap.delete(2));

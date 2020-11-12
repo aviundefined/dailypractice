@@ -5,14 +5,36 @@ package com.avi.educative.tree;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class MaxHeap extends Heap {
+public class MinHeap extends Heap {
 
-    public MaxHeap(int n) {
+    public MinHeap(int n) {
         super(n);
     }
 
-    public MaxHeap(int[] arr) {
+    public MinHeap(int[] arr) {
         super(arr);
+    }
+
+    @Override
+    protected void heapifyHelper(int index, int currentSize) {
+        int smallest = index;
+        while (index < (currentSize / 2)) {
+            final int left = leftChildIndex(index);
+            final int right = rightChildIndex(index);
+
+            if (left < currentSize && arr[left] < arr[smallest]) {
+                smallest = left;
+            }
+            if (right < currentSize && arr[right] < arr[smallest]) {
+                smallest = right;
+            }
+            if (smallest != index) {
+                swap(index, smallest);
+                index = smallest;
+            } else {
+                break;
+            }
+        }
     }
 
     @Override
@@ -20,20 +42,18 @@ public class MaxHeap extends Heap {
         if (isFull()) {
             throw new RuntimeException("Heal is full. Max size: " + n);
         }
-        // Increment size
         currentSize++;
         lastIndex++;
-        // insert value at end
         arr[lastIndex] = num;
         int current = lastIndex;
-        while (arr[current] > arr[parentIndex(current)]) {
+        while (arr[current] < arr[parentIndex(current)]) {
             swap(current, parentIndex(current));
             current = parentIndex(current);
         }
     }
 
     @Override
-    public int delete(final int index) {
+    public int delete(int index) {
         if (isEmpty()) {
             throw new RuntimeException("Heap is empty");
         }
@@ -45,31 +65,10 @@ public class MaxHeap extends Heap {
         }
         final int deleted = arr[index];
         arr[index] = arr[lastIndex];
-        arr[lastIndex] = Integer.MIN_VALUE;
+        arr[lastIndex] = Integer.MAX_VALUE;
         currentSize--;
         lastIndex--;
         heapify(index);
         return deleted;
     }
-
-    protected final void heapifyHelper(int index, int heapSize) {
-        int largest = index;
-        while (largest < heapSize / 2) {
-            final int left = leftChildIndex(index);
-            final int right = rightChildIndex(index);
-            if (left < heapSize && arr[left] > arr[largest]) {
-                largest = left;
-            }
-            if (right < heapSize && arr[right] > arr[largest]) {
-                largest = right;
-            }
-            if (largest != index) {
-                swap(index, largest);
-                index = largest;
-            } else {
-                break;
-            }
-        }
-    }
-
 }
