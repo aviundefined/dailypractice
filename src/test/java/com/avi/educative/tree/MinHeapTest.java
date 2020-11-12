@@ -23,7 +23,7 @@ public class MinHeapTest {
             for (final int a : heapArray) {
                 heap.insert(a);
             }
-          //  heap.print();
+            //  heap.print();
         }
     }
 
@@ -59,7 +59,7 @@ public class MinHeapTest {
         int[] input = {9, 4, 7, 1, -2, 6, 5};
         final Heap heap = new MinHeap(input);
         final int k = 2;
-        for(int i = 0; i < k; i++){
+        for (int i = 0; i < k; i++) {
             System.out.println(heap.poll());
         }
     }

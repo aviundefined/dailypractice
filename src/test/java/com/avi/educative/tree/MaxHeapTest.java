@@ -13,10 +13,10 @@ public class MaxHeapTest {
 
     @Test
     public void heapArray() {
-        int[] heapArray = { 1, 4, 7, 12, 15, 14, 9, 2, 3, 16 };
-        System.out.println("Before heapify: "+ Arrays.toString(heapArray));
+        int[] heapArray = {1, 4, 7, 12, 15, 14, 9, 2, 3, 16};
+        System.out.println("Before heapify: " + Arrays.toString(heapArray));
         final MaxHeap heap = new MaxHeap(heapArray);
-        System.out.println("After heapify: "+Arrays.toString(heapArray));
+        System.out.println("After heapify: " + Arrays.toString(heapArray));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class MaxHeapTest {
         int[] input = {9, 4, 7, 1, -2, 6, 5};
         final Heap heap = new MaxHeap(input);
         final int k = 2;
-        for(int i = 0; i < k; i++){
+        for (int i = 0; i < k; i++) {
             System.out.println(heap.poll());
         }
     }
