@@ -8,60 +8,59 @@ package com.avi.practice.leetcode.problems.medium;
 public class StringToInteger_Problem_8 {
 
     public int myAtoi(String s) {
-        if(s == null || s.trim().length() == 0) {
+        if (s == null || s.trim().length() == 0) {
             return 0;
         }
 
-        s = s.replaceAll("\\s", "");
-        boolean isNegative = false;
-        boolean isSignFound = false;
-        boolean isDigitFound = false;
+        s = s.trim();
+        Sign sign = Sign.NONE;
         final char[] chars = s.toCharArray();
         final StringBuilder sb = new StringBuilder();
-        for(final char c : chars) {
-            if(isSignFound && isPlusMinus(c)) {
+        for (int i = 0; i < chars.length; i++) {
+            final char c = chars[i];
+            if (i == 0 && isPlusMinus(c)) {
+                if (c == '+') {
+                    sign = Sign.PLUS;
+                } else if (c == '-') {
+                    sign = Sign.MINUS;
+                }
+                continue;
+            }
+            if (i > 0 && isPlusMinus(c)) {
                 break;
             }
-            if(isDigitFound &&  isPlusMinus(c)) {
+            if (!isDigit(c)) {
                 break;
             }
-            if(c == '-') {
-                isNegative = true;
-                isSignFound = true;
-                continue;
-            }
-            if (c == '+') {
-                isNegative = false;
-                isSignFound = true;
-                continue;
-            }
-            if (isDigit(c)) {
-                sb.append(c);
-                isDigitFound = true;
-                continue;
-            }else if(c == ' ') {
-                continue;
-            }
-            break;
+            sb.append(c);
         }
         final String numStr = sb.toString();
-        if("".equals(numStr) || numStr.trim().length() == 0) {
+        if ("".equals(numStr) || numStr.trim().length() == 0) {
             return 0;
         }
-        final long l = Long.parseLong(numStr);
-        if(isNegative) {
-            final long num = l * -1L;
-            if(num < Integer.MIN_VALUE) {
-                return Integer.MIN_VALUE;
-            }else{
-                return (int) (num);
+        try {
+            final long l = Long.parseLong(numStr);
+            if (sign == Sign.MINUS) {
+                final long num = l * -1L;
+                if (num < Integer.MIN_VALUE) {
+                    return Integer.MIN_VALUE;
+                } else {
+                    return (int) (num);
+                }
+            } else {
+                if (l > Integer.MAX_VALUE) {
+                    return Integer.MAX_VALUE;
+                } else {
+                    return (int) (l);
+                }
             }
-        }else{
-            if(l > Integer.MAX_VALUE) {
-                return Integer.MAX_VALUE;
-            }else{
-                return (int) (l);
-            }
+        } catch (final Exception e) {
+            System.out.printf("Number format exception: %s", numStr);
+        }
+        if (sign == Sign.MINUS) {
+            return Integer.MIN_VALUE;
+        } else {
+            return Integer.MAX_VALUE;
         }
     }
 
@@ -71,5 +70,11 @@ public class StringToInteger_Problem_8 {
 
     private static boolean isDigit(final char c) {
         return (c >= '0' && c <= '9');
+    }
+
+    private enum Sign {
+        PLUS,
+        MINUS,
+        NONE
     }
 }

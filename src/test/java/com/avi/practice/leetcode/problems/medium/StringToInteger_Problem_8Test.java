@@ -24,7 +24,13 @@ public class StringToInteger_Problem_8Test {
 
         {
             final String s = "+0 12";
-            final int expected = 12;
+            final int expected = 0;
+            final int actual = solver.myAtoi(s);
+            Assert.assertEquals(s, expected, actual);
+        }
+        {
+            final String s = "20000000000000000000";
+            final int expected = 0;
             final int actual = solver.myAtoi(s);
             Assert.assertEquals(s, expected, actual);
         }
