@@ -14,7 +14,8 @@ public class StringToInteger_Problem_8Test {
 
     @Test
     public void myAtoi() {
-
+        int i = -1;
+        i = -i;
         {
             final String s = "+-12";
             final int expected = 0;
