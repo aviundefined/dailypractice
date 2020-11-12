@@ -56,6 +56,39 @@ public class PrintAllPaths {
         return dp[m - 1][n - 1].paths;
     }
 
+    public final List<List<Integer>> getPathsRecursive(final int[][] a) {
+        if (a == null || a.length == 0) {
+            return Collections.emptyList();
+        }
+
+        final int m = a.length;
+        final int n = a[0].length;
+        final List<List<Integer>> paths = new ArrayList<>();
+        final int[] path = new int[m + n - 1];
+        _getPathsRecursive(a, m, n, 0, 0, 0, path, paths);
+        return paths;
+    }
+
+    private void _getPathsRecursive(int[][] a, int m, int n, int i, int j, int idx, int[] path, List<List<Integer>> paths) {
+        path[idx] = a[i][j];
+        if (i == m - 1) {
+            for(int k = j + 1; k < n; k++) {
+                path[idx + k - j] = a[i][k];
+            }
+            for(int k = 0; k < idx + n - j; k++) {
+
+            }
+        }
+        if (j == n - 1) {
+            for(int k = i + 1; k < m; k++) {
+                path[idx + k - j] = a[k][j];
+            }
+
+        }
+        _getPathsRecursive(a, m, n, i + 1, j, idx + 1, path, paths);
+        _getPathsRecursive(a, m, n, i, j + 1, idx + 1, path, paths);
+    }
+
     private static final class Paths {
         private final List<List<Integer>> paths = new ArrayList<>();
     }
