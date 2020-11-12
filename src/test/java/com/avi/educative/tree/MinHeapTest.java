@@ -53,4 +53,14 @@ public class MinHeapTest {
         System.out.println("Delete 2 " + minHeap.delete(2));
         minHeap.print();
     }
+
+    @Test
+    public void kSmallest() {
+        int[] input = {9, 4, 7, 1, -2, 6, 5};
+        final Heap heap = new MinHeap(input);
+        final int k = 2;
+        for(int i = 0; i < k; i++){
+            System.out.println(heap.poll());
+        }
+    }
 }
