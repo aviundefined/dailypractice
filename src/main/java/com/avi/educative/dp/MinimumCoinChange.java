@@ -82,7 +82,7 @@ public class MinimumCoinChange {
             return Integer.MAX_VALUE;
         }
         if (dp[index][total] == null) {
-            int include = coins[index] <= total ? _coinChangeRecursive(coins, total - coins[index], index) : Integer.MAX_VALUE;
+            int include = coins[index] <= total ? _coinChangeTopDown(coins, total - coins[index], index, dp) : Integer.MAX_VALUE;
             if (include != Integer.MAX_VALUE) {
                 include = 1 + include;
             }
