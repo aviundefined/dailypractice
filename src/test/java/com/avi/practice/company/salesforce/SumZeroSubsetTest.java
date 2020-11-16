@@ -30,5 +30,20 @@ public class SumZeroSubsetTest {
             final Set<SubArray> actual = solver.zeroSumSubArray(arr);
             Assert.assertEquals(Arrays.toString(arr), expected, actual);
         }
+
+        {
+            final int[] arr = {6, 3, -1, -3, 4, -2, 2, 4, 6, -12, -7, 5, -5};
+            final Set<SubArray> expected = new HashSet<>();
+            expected.add(new SubArray(2, 4));
+            expected.add(new SubArray(2, 6));
+            expected.add(new SubArray(5, 6));
+            expected.add(new SubArray(6, 9));
+            expected.add(new SubArray(4, 11));
+            expected.add(new SubArray(0, 10));
+            expected.add(new SubArray(11, 12));
+            expected.add(new SubArray(0, 12));
+            final Set<SubArray> actual = solver.zeroSumSubArray(arr);
+            Assert.assertEquals(Arrays.toString(arr), expected, actual);
+        }
     }
 }
