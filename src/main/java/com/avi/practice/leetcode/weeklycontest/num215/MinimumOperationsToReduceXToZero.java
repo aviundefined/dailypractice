@@ -40,66 +40,45 @@ import java.util.Map;
 public class MinimumOperationsToReduceXToZero {
 
     public int minOperations(int[] nums, int x) {
-        int min = Integer.MAX_VALUE;
+        if (nums == null || nums.length == 0 || x == 0) {
+            return 0;
+        }
         final int n = nums.length;
-        final Map<Integer, State> states = new HashMap<>();
-        int left = -1;
-
+        final Map<Integer, Integer> leftSumMap = new HashMap<>();
         int leftSum = 0;
-        while (left < n - 1) {
-            leftSum = leftSum + (left == -1 ? 0 : nums[left]);
-            int remainingSum = x - leftSum;
-            if (remainingSum == 0) {
-                final State state = new State(left, -1);
-                states.put(remainingSum, state);
-                if (min > state.length(n)) {
-                    min = state.length(n);
-                }
-            } else if (remainingSum > 0) {
-                int lastRightIndex = -1;
-                for (int i = n - 1; i > left && i >= 0; i--) {
-                    remainingSum -= nums[i];
-                    if (remainingSum == 0) {
-                        lastRightIndex = i;
-                        break;
-                    }
-                    if (remainingSum < 0) {
-                        break;
-                    }
-                }
-
-                if (lastRightIndex != -1) {
-                    final State state = new State(left, lastRightIndex);
-                    states.put(remainingSum, state);
-                    if (min > state.length(n)) {
-                        min = state.length(n);
-                    }
-                }
-            } else {
-                break;
+        leftSumMap.put(leftSum, -1);
+        for (int i = 0; i < n; i++) {
+            leftSum += nums[i];
+            if (leftSum <= x) {
+                leftSumMap.put(leftSum, i);
+                continue;
             }
-            left++;
+            break;
         }
-        if (min == Integer.MAX_VALUE) {
-            return -1;
+        int rightSum = 0;
+        final Map<Integer, Integer> rightSumMap = new HashMap<>();
+        rightSumMap.put(rightSum, n);
+        for (int i = n - 1; i >= 0; i--) {
+            rightSum += nums[i];
+            if (rightSum <= x) {
+                rightSumMap.put(rightSum, i);
+                continue;
+            }
+            break;
         }
-        return min;
+
+        int min = Integer.MAX_VALUE;
+        for (final Map.Entry<Integer, Integer> e : leftSumMap.entrySet()) {
+            if (rightSumMap.containsKey(x - e.getKey())) {
+                final int left = e.getValue();
+                final int right = rightSumMap.get(x - e.getKey());
+                if (left < right && min > (left + 1 + n - right)) {
+                    min = (left + 1 + n - right);
+                }
+            }
+        }
+        return min == Integer.MAX_VALUE ? -1 : min;
     }
 
-    private static final class State {
-        private final int left;
-        private final int right;
 
-        public State(int left, int right) {
-            this.left = left;
-            this.right = right;
-        }
-
-        private int length(final int n) {
-            final int leftLen = left == -1 ? 0 : left + 1;
-            final int rightLen = right == -1 ? 0 : n - right;
-            return leftLen + rightLen;
-        }
-
-    }
 }

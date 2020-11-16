@@ -44,5 +44,19 @@ public class MinimumOperationsToReduceXToZeroTest {
             final int actual = solver.minOperations(nums, x);
             Assert.assertEquals(String.format("arr: %s, sum: [%d]", Arrays.toString(nums), x), expected, actual);
         }
+        {
+            final int[] nums = {5,2,3,1,1};
+            final int x = 5;
+            final int expected = 1;
+            final int actual = solver.minOperations(nums, x);
+            Assert.assertEquals(String.format("arr: %s, sum: [%d]", Arrays.toString(nums), x), expected, actual);
+        }
+        {
+            final int[] nums = {1,1};
+            final int x = 3;
+            final int expected = -1;
+            final int actual = solver.minOperations(nums, x);
+            Assert.assertEquals(String.format("arr: %s, sum: [%d]", Arrays.toString(nums), x), expected, actual);
+        }
     }
 }
