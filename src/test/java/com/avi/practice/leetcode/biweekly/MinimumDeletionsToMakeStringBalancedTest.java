@@ -28,5 +28,29 @@ public class MinimumDeletionsToMakeStringBalancedTest {
             final int actual = solver.minimumDeletions(s);
             Assert.assertEquals(s, expected, actual);
         }
+        {
+            final String s = "aaaa";
+            final int expected = 0;
+            final int actual = solver.minimumDeletions(s);
+            Assert.assertEquals(s, expected, actual);
+        }
+        {
+            final String s = "bbbbb";
+            final int expected = 0;
+            final int actual = solver.minimumDeletions(s);
+            Assert.assertEquals(s, expected, actual);
+        }
+        {
+            final String s = "aaaabbb";
+            final int expected = 0;
+            final int actual = solver.minimumDeletions(s);
+            Assert.assertEquals(s, expected, actual);
+        }
+        {
+            final String s = "bbbaaaaa";
+            final int expected = 3;
+            final int actual = solver.minimumDeletions(s);
+            Assert.assertEquals(s, expected, actual);
+        }
     }
 }
