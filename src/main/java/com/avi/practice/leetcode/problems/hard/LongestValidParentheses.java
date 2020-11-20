@@ -1,6 +1,6 @@
 package com.avi.practice.leetcode.problems.hard;
 
-import com.avi.educative.stack_queue.Stack;
+import java.util.Stack;
 
 /**
  * Created by navinash on 17/11/20.
@@ -65,12 +65,12 @@ public class LongestValidParentheses {
     }
 
     private static boolean isValid(final char[] chars, int start, int end) {
-        final Stack<Character> s = new Stack<>(end - start + 1);
+        final Stack<Character> s = new Stack<>();
         for (int i = start; i <= end; i++) {
             final char c = chars[i];
             if (c == '(') {
                 s.push(c);
-            } else if (!s.isEmpty() && s.top() == '(') {
+            } else if (!s.isEmpty() && s.peek() == '(') {
                 s.pop();
             } else {
                 return false;
