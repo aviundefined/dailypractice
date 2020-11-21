@@ -1,12 +1,10 @@
 package com.avi.practice.leetcode.biweekly.num39;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by navinash on 21/11/20.
@@ -80,37 +78,25 @@ public class DistributeRepeatingIntegers {
                 return v + 1;
             });
         }
-        final List<Integer> frequencies = frequencyMap.
-                values().
-                stream()
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
+        final List<Integer> frequencies = new ArrayList<>(frequencyMap.values());
         Arrays.sort(quantity);
+        return backtrack(quantity, quantity.length - 1, frequencies);
+    }
 
-        int curr = 0;
-        final int n = frequencies.size();
-        boolean isPossible = true;
-        final int numQuantity = quantity.length;
-        for (int i = numQuantity - 1; i >= 0; i--) {
-            if (curr >= n) {
-                isPossible = false;
-                break;
-            }
-            final int numOrder = quantity[i];
-            final int maxCurrentOrder = frequencies.get(curr);
-            if (numOrder <= maxCurrentOrder) {
-                final int leftOverOrder = maxCurrentOrder - numOrder;
-                if (leftOverOrder == 0) {
-                    curr++;
-                } else {
-                    frequencies.set(curr, leftOverOrder);
-                    frequencies.sort(Collections.reverseOrder());
+    private boolean backtrack(int[] quantity, int quantityIndex, List<Integer> frequencies) {
+        if (quantityIndex < 0) {
+            return true;
+        }
+        for (int i = 0; i < frequencies.size(); i++) {
+            final int currOrder = frequencies.get(i);
+            if (currOrder >= quantity[quantityIndex]) {
+                frequencies.set(i, currOrder - quantity[quantityIndex]);
+                if (backtrack(quantity, quantityIndex - 1, frequencies)) {
+                    return true;
                 }
-            } else {
-                isPossible = false;
-                break;
+                frequencies.set(i, currOrder);
             }
         }
-        return isPossible;
+        return false;
     }
 }

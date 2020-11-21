@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class DistributeRepeatingIntegersTest {
 
-    private static DistributeRepeatingIntegers solver = new DistributeRepeatingIntegers();
+    private static final DistributeRepeatingIntegers solver = new DistributeRepeatingIntegers();
 
     @Test
     public void canDistribute() {
