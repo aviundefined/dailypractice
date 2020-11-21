@@ -1,4 +1,4 @@
-package com.avi.practice.leetcode.biweekly;
+package com.avi.practice.leetcode.biweekly.num39;
 
 import org.junit.Assert;
 import org.junit.Test;

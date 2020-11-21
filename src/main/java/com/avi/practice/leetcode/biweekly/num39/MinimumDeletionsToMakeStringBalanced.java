@@ -1,4 +1,4 @@
-package com.avi.practice.leetcode.biweekly;
+package com.avi.practice.leetcode.biweekly.num39;
 
 /**
  * Created by navinash on 20/11/20.
