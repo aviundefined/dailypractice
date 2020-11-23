@@ -38,6 +38,7 @@ import java.util.Map;
 public class SmallestStringWithAGivenNumericValue {
 
     private static final Map<Integer, Character> CHARS = new HashMap<>();
+
     static {
         char c = 'a';
         for (int i = 1; i <= 26; i++) {
@@ -60,7 +61,6 @@ public class SmallestStringWithAGivenNumericValue {
             if (k < 26) {
                 final int tmp = a[ptr];
                 a[ptr] = k + tmp;
-                k = 0;
                 break;
             }
             k = k + a[ptr] - 26;
