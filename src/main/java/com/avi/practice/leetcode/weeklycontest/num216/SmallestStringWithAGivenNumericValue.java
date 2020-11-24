@@ -50,8 +50,6 @@ public class SmallestStringWithAGivenNumericValue {
     public String getSmallestString(int n, int k) {
         final int[] a = new int[n];
         Arrays.fill(a, 1);
-
-        int i = n - 1;
         k = k - n;
         if (k == 0) {
             return convert(a);
