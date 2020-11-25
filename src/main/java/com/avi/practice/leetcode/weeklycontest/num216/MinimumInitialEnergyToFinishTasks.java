@@ -69,16 +69,20 @@ public class MinimumInitialEnergyToFinishTasks {
         }
         final int n = tasks.length;
         Arrays.sort(tasks, (o1, o2) -> (o1[1] - o1[0]) - (o2[1] - o2[0]));
+        int curr = max;
         while (min < max) {
             final int mid = min + (max - min) / 2;
             final boolean isPossible = _minimumEffortHelper(tasks, mid, n);
             if (isPossible) {
+                if (mid < curr) {
+                    curr = mid;
+                }
                 max = mid;
             } else {
                 min = mid + 1;
             }
         }
-        return min;
+        return curr;
     }
 
     private boolean _minimumEffortHelper(int[][] tasks, int effort, final int n) {
