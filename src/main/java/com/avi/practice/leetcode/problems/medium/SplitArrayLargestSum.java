@@ -54,7 +54,7 @@ public class SplitArrayLargestSum {
         int curr = max;
         while (min < max) {
             final int mid = min + (max - min) / 2;
-            if (isPossible(nums, m, mid)) {
+            if (isPossibleSimple(nums, m, mid)) {
                 if (mid < curr) {
                     curr = mid;
                 }
@@ -88,5 +88,23 @@ public class SplitArrayLargestSum {
             }
         }
         return numSubArrays <= m;
+    }
+
+    final boolean isPossibleSimple(final int[] nums, final int m, final int sum) {
+        int numSubArrays = 0;
+        int currSum = 0;
+        for (int num : nums) {
+            if (num > sum) {
+                return false;
+            }
+            if (currSum + num <= sum) {
+                currSum += num;
+            } else {
+                currSum = num;
+                numSubArrays++;
+            }
+        }
+
+        return numSubArrays + 1 <= m;
     }
 }
