@@ -27,6 +27,35 @@ public class ExpressionTree extends BinaryTree<Character> {
         return s.pop();
     }
 
+    public int eval() {
+        System.out.println();
+        return _eval(root);
+    }
+
+    private int _eval(Node<Character> root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.getLeft() == null && root.getRight() == null) {
+            return Character.getNumericValue(root.getData());
+        }
+
+        final int leftValue = _eval(root.getLeft());
+        final int rightValue = _eval(root.getRight());
+        final Character operator = root.getData();
+        switch (operator) {
+            case '+':
+                return leftValue + rightValue;
+            case '-':
+                return leftValue - rightValue;
+            case '*':
+                return leftValue * rightValue;
+            case '/':
+                return leftValue / rightValue;
+        }
+        return 0;
+    }
+
     private boolean isOperator(final char c) {
         switch (c) {
             case '+':
