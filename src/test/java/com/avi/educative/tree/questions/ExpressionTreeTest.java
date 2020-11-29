@@ -19,6 +19,10 @@ public class ExpressionTreeTest {
         System.out.println();
         System.out.println("infix expression is");
         et.inOrder();
+        et.preOrder();
+        et.postOrder();
+        System.out.println("inOrderIterative");
+        et.inOrderIterative();
     }
 
     @Test
@@ -33,7 +37,7 @@ public class ExpressionTreeTest {
         final int actual = et.eval();
         System.out.println();
         System.out.println(actual);
-        final int expected  = -203;
+        final int expected = -203;
         Assert.assertEquals(expected, actual);
     }
 }
