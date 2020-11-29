@@ -8,18 +8,16 @@ package com.avi.practice.leetcode.problems.medium;
 public class GasStation {
 
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        int tank = 0;
+        int subSum = Integer.MAX_VALUE;
         int total = 0;
         int index = 0;
-        for(int i = 0; i < gas.length; i++) {
-            final int consumed = gas[i] - cost[i];
-            tank += consumed;
-            if(tank <= 0) {
-                index = index + 1;
-                tank = 0;
+        for (int i = 0; i < gas.length; i++) {
+            total += (gas[i] - cost[i]);
+            if (total < subSum) {
+                index = (i + 1) % gas.length;
+                subSum = total;
             }
-            total += consumed;
         }
-        return total < 0  ? -1 : index;
+        return total >= 0 ? index % gas.length : -1;
     }
 }
