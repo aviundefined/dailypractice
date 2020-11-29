@@ -35,9 +35,7 @@ public class ConstructTree<T> {
         if (start > end) {
             return null;
         }
-
         final Node<T> root = new Node<>(preorder[preIndex++]);
-
         if (start == end) {
             return root;
         }
