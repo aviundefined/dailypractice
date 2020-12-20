@@ -66,6 +66,25 @@ public class SplitArrayLargestSum {
         return curr;
     }
 
+
+    final boolean isPossibleSimple(final int[] nums, final int m, final int sum) {
+        int numSubArrays = 0;
+        int currSum = 0;
+        for (int num : nums) {
+            if (num > sum) {
+                return false;
+            }
+            if (currSum + num <= sum) {
+                currSum += num;
+            } else {
+                currSum = num;
+                numSubArrays++;
+            }
+        }
+
+        return numSubArrays + 1 <= m;
+    }
+
     final boolean isPossible(int[] nums, int m, int sum) {
         int l = -1;
         final int n = nums.length;
@@ -88,23 +107,5 @@ public class SplitArrayLargestSum {
             }
         }
         return numSubArrays <= m;
-    }
-
-    final boolean isPossibleSimple(final int[] nums, final int m, final int sum) {
-        int numSubArrays = 0;
-        int currSum = 0;
-        for (int num : nums) {
-            if (num > sum) {
-                return false;
-            }
-            if (currSum + num <= sum) {
-                currSum += num;
-            } else {
-                currSum = num;
-                numSubArrays++;
-            }
-        }
-
-        return numSubArrays + 1 <= m;
     }
 }
