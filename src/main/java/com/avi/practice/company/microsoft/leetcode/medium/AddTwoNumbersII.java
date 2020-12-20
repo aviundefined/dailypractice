@@ -41,14 +41,7 @@ public class AddTwoNumbersII {
             revers1 = revers1.next;
             revers2 = revers2.next;
         }
-        if (revers1 == null && revers2 == null && carry != 0) {
-            final ListNode curr = new ListNode();
-            value = carry % 10;
-            curr.val = value;
-            head.next = curr;
-            head = head.next;
-            carry = carry / 10;
-        }
+
         while (revers1 != null) {
             final ListNode curr = new ListNode();
             sum = revers1.val + carry;
