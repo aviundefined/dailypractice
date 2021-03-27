@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<employee>
+    <id>1</id>
+    <firstName>Avinash</firstName>
+    <lastName>Nigam</lastName>
+    <department>
+        <id>1</id>
+        <name>Engineering</name>
+    </department>
+    <hobbies>
+        <hobby>Cricket</hobby>
+        <hobby>Guitar</hobby>
+        <hobby>Music</hobby>
+    </hobbies>
+</employee>

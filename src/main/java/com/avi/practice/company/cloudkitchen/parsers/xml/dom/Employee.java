@@ -1,12 +1,20 @@
-package com.avi.practice.company.cloudkitchen.parsers.xml;
+package com.avi.practice.company.cloudkitchen.parsers.xml.dom;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * Created by navinash on 17/03/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class Employee {
+@XmlRootElement(name = "Employee")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Employee implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private String name;
     private String gender;
     private int age;
