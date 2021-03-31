@@ -1,4 +1,4 @@
-package com.avi.practice.company.cloudkitchen.parsers.xml.jaxb.model;
+package com.avi.practice.company.cloudkitchen.parsers.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

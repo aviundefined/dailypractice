@@ -1,7 +1,7 @@
 package com.avi.practice.company.cloudkitchen.parsers.xml.jaxb;
 
 
-import com.avi.practice.company.cloudkitchen.parsers.xml.jaxb.model.Employee;
+import com.avi.practice.company.cloudkitchen.parsers.model.Employee;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

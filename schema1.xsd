@@ -5,6 +5,8 @@
 
   <xs:element name="employee" type="employee"/>
 
+
+
   <xs:element name="employees" type="employeeMap"/>
 
   <xs:element name="hobbies" type="hobbies"/>
@@ -16,6 +18,26 @@
       <xs:element name="lastName" type="xs:string" minOccurs="0"/>
       <xs:element ref="department" minOccurs="0"/>
       <xs:element ref="hobbies" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="row" type="row"/>
+
+  <xs:element name="root" type="root"/>
+
+  <xs:complexType name="row">
+    <xs:sequence>
+      <xs:element name="id" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="temp" type="xs:string" minOccurs="0"/>
+      <xs:element name="shelfLife" type="xs:double" minOccurs="0"/>
+      <xs:element name="decayRate" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="root">
+    <xs:sequence>
+      <xs:element name="row" type="row" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 

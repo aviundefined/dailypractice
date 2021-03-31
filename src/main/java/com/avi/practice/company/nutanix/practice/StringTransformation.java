@@ -120,4 +120,10 @@ public class StringTransformation {
             return this.adjacencyList.get(source);
         }
     }
+
+    public static void main(String[] args) {
+       final String s1 = "";
+       final String s2 = "";
+        System.out.println("---" + s1 + s2 + "----");
+    }
 }
