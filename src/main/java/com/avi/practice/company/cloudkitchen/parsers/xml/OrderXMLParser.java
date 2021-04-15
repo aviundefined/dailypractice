@@ -45,11 +45,12 @@ public class OrderXMLParser {
         unmarshaller.setSchema(schema);
 
         final Orders orders = (Orders) unmarshaller.unmarshal(file);
-        for(final Order o : orders.getOrder()) {
+        for (final Order o : orders.getOrder()) {
             System.out.println(o);
         }
         System.out.println("--------------");
     }
+
     private static void readOrderXMLViaSTaxParser() throws XMLStreamException, FileNotFoundException {
         File file = new File("/Users/navinash/repos/dailypractice/src/main/resources/orders.xml");
 
@@ -67,16 +68,14 @@ public class OrderXMLParser {
         Order Order = null;
 
         // Checking the availability of the next tag
-        while (eventReader.hasNext())
-        {
+        while (eventReader.hasNext()) {
             XMLEvent xmlEvent = eventReader.nextEvent();
 
-            if (xmlEvent.isStartElement())
-            {
+            if (xmlEvent.isStartElement()) {
                 StartElement startElement = xmlEvent.asStartElement();
 
                 //As soo as Order tag is opened, create new Order object
-                if("row".equalsIgnoreCase(startElement.getName().getLocalPart())) {
+                if ("row".equalsIgnoreCase(startElement.getName().getLocalPart())) {
                     Order = new Order();
                 }
 
@@ -84,8 +83,7 @@ public class OrderXMLParser {
 
                 //Now everytime content tags are found;
                 //Move the iterator and read data
-                switch (startElement.getName().getLocalPart())
-                {
+                switch (startElement.getName().getLocalPart()) {
                     case "id":
                         Characters idDataEvent = (Characters) eventReader.nextEvent();
                         Order.setId(idDataEvent.getData());
@@ -111,13 +109,12 @@ public class OrderXMLParser {
                 }
             }
 
-            if (xmlEvent.isEndElement())
-            {
+            if (xmlEvent.isEndElement()) {
                 EndElement endElement = xmlEvent.asEndElement();
 
                 //If Order tag is closed then add the Order object to list;
                 //and be ready to read next Order data
-                if("row".equalsIgnoreCase(endElement.getName().getLocalPart())) {
+                if ("row".equalsIgnoreCase(endElement.getName().getLocalPart())) {
                     OrderList.add(Order);
                 }
             }
