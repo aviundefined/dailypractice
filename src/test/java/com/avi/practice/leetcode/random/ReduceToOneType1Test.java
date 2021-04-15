@@ -13,10 +13,28 @@ import static org.junit.Assert.*;
 public class ReduceToOneType1Test {
 
     @Test
-    public void minSteps() {
+    public void minSteps1() {
         final ReduceToOneType1 solver = new ReduceToOneType1();
         final int n = 11;
         final int expected = 4;
+        final int actual = solver.minSteps(n);
+        Assert.assertEquals(n +"", expected, actual);
+    }
+
+    @Test
+    public void minSteps2() {
+        final ReduceToOneType1 solver = new ReduceToOneType1();
+        final int n = 5;
+        final int expected = 3;
+        final int actual = solver.minSteps(n);
+        Assert.assertEquals(n +"", expected, actual);
+    }
+
+    @Test
+    public void minSteps3() {
+        final ReduceToOneType1 solver = new ReduceToOneType1();
+        final int n = 12;
+        final int expected = 3;
         final int actual = solver.minSteps(n);
         Assert.assertEquals(n +"", expected, actual);
     }
