@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class GraphTestUtils {
 
-    public static Graph getTestGraph1() {
+    public static Graph getTestUndirectedGraph1() {
         final Graph graph = new Graph();
         graph.addEdge(1, 2);
         graph.addEdge(1, 3);
@@ -37,7 +37,7 @@ public class GraphTestUtils {
         return graph;
     }
 
-    public static Graph getTestGraph2() {
+    public static Graph getTestUndirectedGraph2() {
         final Graph graph = new Graph();
         graph.addEdge(1, 2);
 
@@ -55,6 +55,40 @@ public class GraphTestUtils {
 
         graph.addEdge(7, 5);
         graph.addEdge(7, 6);
+        return graph;
+    }
+
+    public static Graph getTestDirectedGraph1() {
+        final Graph graph = new Graph();
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 3);
+
+        graph.addEdge(2, 4);
+
+
+        graph.addEdge(3, 4);
+        graph.addEdge(3, 5);
+
+
+        graph.addEdge(5, 6);
+        graph.addEdge(5, 7);
+
+        graph.addEdge(6, 7);
+
+        return graph;
+    }
+
+    public static Graph getTestDirectedGraph2() {
+        final Graph graph = new Graph();
+        graph.addEdge(1, 2);
+
+        graph.addEdge(3, 4);
+
+        graph.addEdge(5, 6);
+        graph.addEdge(5, 7);
+
+        graph.addEdge(6, 7);
+
         return graph;
     }
 

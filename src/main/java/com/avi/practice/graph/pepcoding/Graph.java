@@ -31,6 +31,7 @@ public class Graph {
         this.edges.computeIfAbsent(src, s -> new ArrayList<>()).add(new Edge(src, dst, weight));
     }
 
+
     public static final class Edge {
         private static final int DEFAULT_WEIGHT = 1;
         private final int src;
