@@ -86,9 +86,6 @@ public class GraphTestUtils {
 
         graph.addEdge(5, 6);
         graph.addEdge(5, 7);
-
-        graph.addEdge(6, 7);
-
         return graph;
     }
 

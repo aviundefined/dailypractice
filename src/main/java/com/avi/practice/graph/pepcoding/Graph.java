@@ -2,6 +2,7 @@ package com.avi.practice.graph.pepcoding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,9 +15,9 @@ import java.util.Set;
 public class Graph {
 
     private final Map<Integer, List<Edge>> edges = new HashMap<>();
-
+    private final Set<Integer> nodes = new HashSet<>();
     public Set<Integer> getAllNodes() {
-        return this.edges.keySet();
+        return this.nodes;
     }
 
     public List<Edge> getEdges(final int src) {
@@ -29,6 +30,8 @@ public class Graph {
 
     public void addEdge(final int src, final int dst, final int weight) {
         this.edges.computeIfAbsent(src, s -> new ArrayList<>()).add(new Edge(src, dst, weight));
+        this.nodes.add(src);
+        this.nodes.add(dst);
     }
 
 
