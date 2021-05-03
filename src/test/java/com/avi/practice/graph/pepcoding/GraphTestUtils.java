@@ -136,6 +136,14 @@ public class GraphTestUtils {
 
 
     public static Graph getTestDirectedGraph1() {
+        /*
+         *
+         *   1 -----> 3 ----> 5
+         *   |        |      |  \
+         *   |        |      |   \
+         *   v        v      v    v
+         *   2 -----> 4      6---->7
+         */
         final Graph graph = new Graph();
         graph.addEdge(1, 2);
         graph.addEdge(1, 3);
@@ -156,6 +164,14 @@ public class GraphTestUtils {
     }
 
     public static Graph getTestDirectedGraph2() {
+        /*
+         *
+         *   1        3       5
+         *   |        |      |  \
+         *   |        |      |   \
+         *   v        v      v    v
+         *   2        4      6---->7
+         */
         final Graph graph = new Graph();
         graph.addEdge(1, 2);
 
@@ -163,9 +179,67 @@ public class GraphTestUtils {
 
         graph.addEdge(5, 6);
         graph.addEdge(5, 7);
+
+        graph.addEdge(6, 7);
+
         return graph;
     }
 
+
+    public static Graph getTestDirectedGraph3() {
+        /*
+         *
+         *   1 -----> 3 <---- 5
+         *   |        |      |  \
+         *   |        |      |   \
+         *   v        v      v    v
+         *   2 -----> 4      6---->7
+         */
+        final Graph graph = new Graph();
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 3);
+
+        graph.addEdge(2, 4);
+
+
+        graph.addEdge(3, 4);
+
+
+        graph.addEdge(5, 3);
+        graph.addEdge(5, 6);
+        graph.addEdge(5, 7);
+
+        graph.addEdge(6, 7);
+
+        return graph;
+    }
+
+    public static Graph getTestDirectedGraph4() {
+        /*
+         *
+         *   0 -----> 3 ------> 4
+         *   |        ^       |  \
+         *   |        |       |   \
+         *   v        |       v    v
+         *   1 -----> 2       5---->6
+         */
+        final Graph graph = new Graph();
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 3);
+
+        graph.addEdge(1, 2);
+
+
+        graph.addEdge(2, 3);
+
+
+        graph.addEdge(4, 5);
+        graph.addEdge(4, 6);
+
+        graph.addEdge(5, 6);
+
+        return graph;
+    }
     public static Graph getTestUndirectedWeightedGraph1() {
 
         /*      40       2
