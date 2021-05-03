@@ -166,6 +166,43 @@ public class GraphTestUtils {
         return graph;
     }
 
+    public static Graph getTestUndirectedWeightedGraph1() {
+
+        /*      40       2
+         *   1 ------ 3 ----- 5
+         *   |        |      |  \
+         * 10|     10 |     3|   \ 8
+         *   |        |      | 3  \
+         *   2 ------ 4      6---- 7
+         *       10
+         */
+        final Graph graph = new Graph();
+        graph.addEdge(1, 2, 10);
+        graph.addEdge(1, 3, 40);
+
+        graph.addEdge(2, 1, 10);
+        graph.addEdge(2, 4, 10);
+
+
+        graph.addEdge(3, 1, 40);
+        graph.addEdge(3, 4, 10);
+        graph.addEdge(3, 5, 2);
+
+        graph.addEdge(4, 2, 10);
+        graph.addEdge(4, 3, 10);
+
+        graph.addEdge(5, 3, 2);
+        graph.addEdge(5, 6, 3);
+        graph.addEdge(5, 7, 8);
+
+        graph.addEdge(6, 5, 3);
+        graph.addEdge(6, 7, 3);
+
+        graph.addEdge(7, 5, 8);
+        graph.addEdge(7, 6, 3);
+        return graph;
+    }
+
     public static int[][] matrix1() {
         final int m = 5;
         final int n = 5;
