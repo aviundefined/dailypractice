@@ -203,6 +203,72 @@ public class GraphTestUtils {
         return graph;
     }
 
+    public static Graph getTestUndirectedWeightedGraph2() {
+
+        /*
+         *        5
+         *   1 ------- 2
+         *   |        /|
+         *   |       / |
+         *   |      /  |
+         * 4 |   2 /   | 3
+         *   |    /    |
+         *   |   /     |
+         *   |  /      |
+         *   | /       |
+         *   3 ------- 4
+         *       6
+         */
+        final Graph graph = new Graph();
+        graph.addEdge(1, 2, 5);
+        graph.addEdge(1, 3, 4);
+
+        graph.addEdge(2, 1, 5);
+        graph.addEdge(2, 3, 2);
+        graph.addEdge(2, 4, 3);
+
+        graph.addEdge(3, 1, 4);
+        graph.addEdge(3, 2, 2);
+        graph.addEdge(3, 4, 6);
+
+        graph.addEdge(4, 2, 3);
+        graph.addEdge(4, 3, 6);
+
+
+        return graph;
+    }
+
+    public static Graph getTestUndirectedWeightedGraph3() {
+
+        final Graph graph = new Graph();
+        graph.addEdge(1, 2, 28);
+        graph.addEdge(1, 6, 10);
+
+        graph.addEdge(2, 1, 28);
+        graph.addEdge(2, 7, 14);
+        graph.addEdge(2, 3, 16);
+
+        graph.addEdge(3, 2, 16);
+        graph.addEdge(3, 4, 12);
+
+        graph.addEdge(4, 3, 12);
+        graph.addEdge(4, 7, 18);
+        graph.addEdge(4, 5, 22);
+
+        graph.addEdge(5, 4, 22);
+        graph.addEdge(5, 7, 24);
+        graph.addEdge(5, 6, 25);
+
+        graph.addEdge(6, 5, 25);
+        graph.addEdge(6, 1, 10);
+
+        graph.addEdge(7, 2, 14);
+        graph.addEdge(7, 4, 18);
+        graph.addEdge(7, 5, 24);
+
+        return graph;
+    }
+
     public static int[][] matrix1() {
         final int m = 5;
         final int n = 5;
