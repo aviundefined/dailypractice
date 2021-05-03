@@ -1,17 +1,18 @@
 package com.avi.practice.graph.pepcoding;
 
+import com.avi.practice.graph.pepcoding.Kruskal.Result;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by navinash on 03/05/21.
+ * Created by navinash on 04/05/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class PrimsTest {
+public class KruskalTest {
 
-    private static final Prims solver  = new Prims();
+    private static final Kruskal solver = new Kruskal();
     private static final BFS bfs = new BFS();
 
     @Test
@@ -26,9 +27,9 @@ public class PrimsTest {
          *       10
          */
         final Graph graph = GraphTestUtils.getTestUndirectedWeightedGraph1();
-        final Prims.Result result = solver.minimumSpanningTree(graph);
+        final Result result = solver.minimumSpanningTree(graph);
 
-        System.out.println("Weight: "+ result.getWeight());
+        System.out.println("Weight: " + result.getWeight());
         bfs.bfs(result.getMst(), graph.getAllNodes().iterator().next());
     }
 
@@ -50,18 +51,18 @@ public class PrimsTest {
          *       6
          */
         final Graph graph = GraphTestUtils.getTestUndirectedWeightedGraph2();
-        final Prims.Result result = solver.minimumSpanningTree(graph);
+        final Result result = solver.minimumSpanningTree(graph);
 
-        System.out.println("Weight: "+ result.getWeight());
+        System.out.println("Weight: " + result.getWeight());
         bfs.bfs(result.getMst(), graph.getAllNodes().iterator().next());
     }
 
     @Test
     public void minimumSpanningTree3() {
         final Graph graph = GraphTestUtils.getTestUndirectedWeightedGraph3();
-        final Prims.Result result = solver.minimumSpanningTree(graph);
+        final Result result = solver.minimumSpanningTree(graph);
 
-        System.out.println("Weight: "+ result.getWeight());
+        System.out.println("Weight: " + result.getWeight());
         bfs.bfs(result.getMst(), graph.getAllNodes().iterator().next());
     }
 }
