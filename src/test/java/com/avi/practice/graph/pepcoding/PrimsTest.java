@@ -2,8 +2,6 @@ package com.avi.practice.graph.pepcoding;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by navinash on 03/05/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -30,6 +28,24 @@ public class PrimsTest {
 
         System.out.println("Weight: "+ result.getWeight());
         bfs.bfs(result.getMst(), graph.getAllNodes().iterator().next());
+
+
+        /*       25       2
+         *   1 ------ 3 ----- 5
+         *   |        |      |  \
+         * 10|     10 |     3|   \ 8
+         *   |        |      | 3  \
+         *   2 ------ 4      6---- 7
+         *       10
+         *
+         *       25      2
+         *  1 ------ 3 ----- 5
+         *   |              |
+         * 10|             3|
+         *   |              |  3
+         *   2 ------ 4     6 ---- 7
+         *        10
+         */
     }
 
     @Test
