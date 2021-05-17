@@ -209,6 +209,44 @@ public class GenericTreeProblems {
         }
     }
 
+    public void mirror(final GenericNode root) {
+        if (root == null) {
+            return;
+        }
+        for (final GenericNode child : root.getChildren()) {
+            mirror(child);
+        }
+        Collections.reverse(root.getChildren());
+    }
+
+    public void removeLeaves(final GenericNode root) {
+        if (root == null) {
+            return;
+        }
+        for (int i = root.getChildren().size() - 1; i >= 0; i--) {
+            final GenericNode child = root.getChildren().get(i);
+            if (child.getChildren().size() == 0) {
+                root.getChildren().remove(i);
+            }
+        }
+        for (final GenericNode child : root.getChildren()) {
+            removeLeaves(child);
+        }
+    }
+
+    public GenericNode linearize(final GenericNode root) {
+        if (root == null || root.getChildren().size() == 0) {
+            return root;
+        }
+        final GenericNode lastTail = linearize(root.getChildren().get(root.getChildren().size() - 1));
+        while (root.getChildren().size() > 1) {
+            final GenericNode last = root.getChildren().remove(root.getChildren().size() - 1);
+            final GenericNode secondLastTail = linearize(root.getChildren().get(root.getChildren().size() - 1));
+            secondLastTail.getChildren().add(last);
+        }
+        return lastTail;
+    }
+
     private void _levelOrderWithLevels(GenericNode root, int level, Map<Integer, List<Integer>> nodesByLevel) {
         if (root == null) {
             return;
