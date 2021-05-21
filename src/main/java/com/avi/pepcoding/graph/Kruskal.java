@@ -53,7 +53,7 @@ public class Kruskal {
         return new Result(mst, weight);
     }
 
-    static final class Result {
+    public static final class Result {
         private final Graph mst;
         private final int weight;
 
