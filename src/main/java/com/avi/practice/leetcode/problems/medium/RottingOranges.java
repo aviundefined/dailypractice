@@ -31,7 +31,7 @@ public class RottingOranges {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 2) {
-                    q.offer(new Cell(i, j));
+                    q.offer(new Cell(i, j, 0));
                 } else if (grid[i][j] == 1) {
                     countOfFreshOranges++;
                 }
