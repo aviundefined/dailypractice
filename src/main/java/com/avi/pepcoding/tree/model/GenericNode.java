@@ -1,4 +1,4 @@
-package com.avi.practice.tree.model;
+package com.avi.pepcoding.tree.model;
 
 import java.util.ArrayList;
 import java.util.List;

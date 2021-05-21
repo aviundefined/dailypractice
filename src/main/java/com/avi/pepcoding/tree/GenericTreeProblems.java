@@ -1,6 +1,6 @@
-package com.avi.practice.tree.pepcoding;
+package com.avi.pepcoding.tree;
 
-import com.avi.practice.tree.model.GenericNode;
+import com.avi.pepcoding.tree.model.GenericNode;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
