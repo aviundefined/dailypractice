@@ -1,10 +1,10 @@
 package com.avi.practice.graph.pepcoding;
 
+import com.avi.pepcoding.graph.Graph;
+import com.avi.pepcoding.graph.TopologicalSort;
 import org.junit.Test;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 03/05/21.

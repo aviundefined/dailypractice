@@ -1,9 +1,9 @@
 package com.avi.practice.graph.pepcoding;
 
+import com.avi.pepcoding.graph.Graph;
+import com.avi.pepcoding.graph.SpreadInfection;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 03/05/21.

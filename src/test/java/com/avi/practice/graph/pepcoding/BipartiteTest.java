@@ -1,9 +1,9 @@
 package com.avi.practice.graph.pepcoding;
 
+import com.avi.pepcoding.graph.Bipartite;
+import com.avi.pepcoding.graph.Graph;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 02/05/21.

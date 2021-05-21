@@ -1,6 +1,6 @@
-package com.avi.practice.graph.pepcoding;
+package com.avi.pepcoding.graph;
 
-import com.avi.practice.graph.pepcoding.Graph.Edge;
+import com.avi.pepcoding.graph.Graph.Edge;
 
 import java.util.ArrayList;
 import java.util.HashSet;

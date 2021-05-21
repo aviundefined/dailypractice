@@ -1,8 +1,8 @@
 package com.avi.practice.graph.pepcoding;
 
+import com.avi.pepcoding.graph.DFS;
+import com.avi.pepcoding.graph.Graph;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 04/05/21.

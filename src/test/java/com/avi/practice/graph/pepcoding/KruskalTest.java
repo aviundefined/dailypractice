@@ -1,9 +1,10 @@
 package com.avi.practice.graph.pepcoding;
 
-import com.avi.practice.graph.pepcoding.Kruskal.Result;
+import com.avi.pepcoding.graph.BFS;
+import com.avi.pepcoding.graph.Graph;
+import com.avi.pepcoding.graph.Kruskal;
+import com.avi.pepcoding.graph.Kruskal.Result;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 04/05/21.

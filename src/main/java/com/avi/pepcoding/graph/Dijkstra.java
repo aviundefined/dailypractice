@@ -1,4 +1,4 @@
-package com.avi.practice.graph.pepcoding;
+package com.avi.pepcoding.graph;
 
 import java.util.Comparator;
 import java.util.HashSet;

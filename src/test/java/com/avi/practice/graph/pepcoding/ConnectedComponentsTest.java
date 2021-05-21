@@ -1,5 +1,7 @@
 package com.avi.practice.graph.pepcoding;
 
+import com.avi.pepcoding.graph.ConnectedComponents;
+import com.avi.pepcoding.graph.Graph;
 import org.junit.Test;
 
 import java.util.List;

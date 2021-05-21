@@ -1,5 +1,8 @@
 package com.avi.practice.graph.pepcoding;
 
+import com.avi.pepcoding.graph.BFS;
+import com.avi.pepcoding.graph.Graph;
+import com.avi.pepcoding.graph.Prims;
 import org.junit.Test;
 
 /**

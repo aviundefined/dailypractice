@@ -1,5 +1,6 @@
 package com.avi.practice.graph.pepcoding;
 
+import com.avi.pepcoding.graph.KnightsTour;
 import org.junit.Test;
 
 import java.util.Arrays;
