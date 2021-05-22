@@ -55,4 +55,8 @@ public final class TrieNode {
     private static int index(final char c) {
         return c - 'a';
     }
+
+    public static char getChar(final int index) {
+        return (char) (index + 'a');
+    }
 }

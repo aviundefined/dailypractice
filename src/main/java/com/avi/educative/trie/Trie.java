@@ -1,5 +1,8 @@
 package com.avi.educative.trie;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by navinash on 22/05/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -87,5 +90,30 @@ public final class Trie {
             return true;
         }
         return false;
+    }
+
+    public List<String> getAllWords() {
+        final List<String> words = new ArrayList<>();
+        dfs(root, new StringBuilder(), 0, '.', words);
+        return words;
+    }
+
+    private void dfs(TrieNode node, StringBuilder sb, int level, char c, List<String> words) {
+        if (node == null) {
+            return;
+        }
+        sb.append(c);
+        if (node.isEndWord()) {
+            words.add(sb.toString());
+        }
+        int i = 0;
+        for (final TrieNode child : node.getAllChildren()) {
+            if (child != null) {
+                final char childChar = TrieNode.getChar(i);
+                dfs(child, sb, level + 1, childChar, words);
+            }
+            i++;
+        }
+        sb.setLength(level);
     }
 }
