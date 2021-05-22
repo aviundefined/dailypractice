@@ -16,7 +16,7 @@ public class GetAllPathsTest {
     private static final GetAllPaths solver = new GetAllPaths();
 
     @Test
-    public void allPaths1() {
+    public void allPaths11() {
         final Graph graph = GraphTestUtils.getTestUndirectedGraph1();
         final int src = 1;
         final int dst = 7;
@@ -24,10 +24,11 @@ public class GetAllPathsTest {
         for(final List<Integer> path : allPaths) {
             System.out.println(path);
         }
+        System.out.println("-------------");
     }
 
     @Test
-    public void allPaths2() {
+    public void allPaths12() {
         final Graph graph = GraphTestUtils.getTestUndirectedGraph2();
         final int src = 1;
         final int dst = 7;
@@ -35,6 +36,31 @@ public class GetAllPathsTest {
         for(final List<Integer> path : allPaths) {
             System.out.println(path);
         }
+        System.out.println("-------------");
+    }
+
+    @Test
+    public void allPaths21() {
+        final Graph graph = GraphTestUtils.getTestUndirectedGraph1();
+        final int src = 1;
+        final int dst = 7;
+        final List<List<Integer>> allPaths = solver.allPaths2(graph, src, dst);
+        for(final List<Integer> path : allPaths) {
+            System.out.println(path);
+        }
+        System.out.println("-------------");
+    }
+
+    @Test
+    public void allPaths22() {
+        final Graph graph = GraphTestUtils.getTestUndirectedGraph2();
+        final int src = 1;
+        final int dst = 7;
+        final List<List<Integer>> allPaths = solver.allPaths2(graph, src, dst);
+        for(final List<Integer> path : allPaths) {
+            System.out.println(path);
+        }
+        System.out.println("-------------");
     }
 
 }

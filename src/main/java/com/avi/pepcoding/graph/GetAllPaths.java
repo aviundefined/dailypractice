@@ -25,6 +25,16 @@ public class GetAllPaths {
         return paths;
     }
 
+    public List<List<Integer>> allPaths2(final Graph graph, final int src, final int dst) {
+
+        final List<List<Integer>> paths = new ArrayList<>();
+
+        final Set<Integer> visited = new HashSet<>();
+        final List<Integer> pathSoFar = new ArrayList<>();
+        helper2(graph, src, dst, pathSoFar, visited, paths);
+        return paths;
+    }
+
     private void helper(Graph graph, int src, int dst, List<Integer> pathSoFar, Set<Integer> visited, List<List<Integer>> paths) {
         if (src == dst) {
             paths.add(new ArrayList<>(pathSoFar));
@@ -40,5 +50,25 @@ public class GetAllPaths {
             }
         }
         visited.remove(src);
+    }
+
+
+    private void helper2(Graph graph, int src, int dst, List<Integer> pathSoFar, Set<Integer> visited, List<List<Integer>> paths) {
+        if (src == dst) {
+            pathSoFar.add(src);
+            paths.add(new ArrayList<>(pathSoFar));
+            pathSoFar.remove(pathSoFar.size() - 1);
+            return;
+        }
+        visited.add(src);
+        pathSoFar.add(src);
+        final List<Edge> edges = graph.getEdges(src);
+        for (final Edge edge : edges) {
+            if (!visited.contains(edge.getDst())) {
+                helper2(graph, edge.getDst(), dst, pathSoFar, visited, paths);
+            }
+        }
+        visited.remove(src);
+        pathSoFar.remove(pathSoFar.size() - 1);
     }
 }
