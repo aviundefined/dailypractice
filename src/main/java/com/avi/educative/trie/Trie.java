@@ -92,7 +92,10 @@ public final class Trie {
         return false;
     }
 
-    public List<String> getAllWords() {
+    /**
+     * @return Get All the words present in {@link Trie}
+     */
+    public final List<String> getAllWords() {
         final List<String> words = new ArrayList<>();
         dfs(root, new StringBuilder(), 0, '.', words);
         return words;
