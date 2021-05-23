@@ -1,6 +1,7 @@
 package com.avi.educative.trie;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -114,6 +115,74 @@ public final class Trie {
             if (child != null) {
                 final char childChar = TrieNode.getChar(i);
                 dfs(child, sb, level + 1, childChar, words);
+            }
+            i++;
+        }
+        sb.setLength(level);
+    }
+
+    public List<List<String>> allSuggestions(final String word, final int max) {
+        final List<List<String>> allSuggestions = new ArrayList<>();
+        final StringBuilder sb = new StringBuilder();
+        for (final char c : word.toCharArray()) {
+            sb.append(c);
+            allSuggestions.add(this.suggestions(sb.toString(), max));
+
+        }
+        return allSuggestions;
+    }
+
+    public List<String> suggestions(final String word, final int max) {
+        if (word == null || "".equals(word.trim())) {
+            return Collections.emptyList();
+        }
+        // first search the start node from root
+        TrieNode node = root;
+        char start = '.';
+        int level = 0;
+        for (final char c : word.toCharArray()) {
+            final TrieNode child = node.getChild(c);
+            if (child == null) {
+                node = child;
+                break;
+            }
+            level++;
+            node = child;
+            start = c;
+        }
+        if (node == null) {
+            return Collections.emptyList();
+        }
+
+        final List<String> words = new ArrayList<>();
+        final StringBuilder sb = new StringBuilder();
+        sb.append(word, 0, word.length() - 1);
+        suggestionHelper(node, start, sb.toString().length(), sb, words, max);
+        return words;
+    }
+
+    private void suggestionHelper(
+            final TrieNode node,
+            final char start,
+            final int level,
+            final StringBuilder sb,
+            final List<String> words,
+            final int max) {
+        if (node == null) {
+            return;
+        }
+        if (words.size() >= max) {
+            return;
+        }
+        sb.append(start);
+        if (node.isEndWord()) {
+            words.add(sb.toString());
+        }
+        int i = 0;
+        for (final TrieNode child : node.getAllChildren()) {
+            if (child != null) {
+                final char childChar = TrieNode.getChar(i);
+                suggestionHelper(child, childChar, level + 1, sb, words, max);
             }
             i++;
         }
