@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * -- VMware Confidential
  */
 public class SudokuSolverTest {
-    private static SudokuSolver solver = new SudokuSolver();
+    private static final SudokuSolver solver = new SudokuSolver();
 
     @Test
     public void solve1() {
