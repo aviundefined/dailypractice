@@ -41,9 +41,9 @@ public class LongestRepeatingSubstring {
             } else if (i == patternLen - 1) {
                 slidingHashCode = hashCode(chars);
             } else {
-                final long v1 = (long) Math.pow(BASE, patternLen - 1) * (s.charAt(i - patternLen) - 'a' + 1);
+                final long v1 = (long) Math.pow(BASE, patternLen - 1) * (s.charAt(i - patternLen) - 'a');
                 final long v2 = (slidingHashCode - v1);
-                slidingHashCode = v2 * BASE + (s.charAt(i) - 'a' + 1);
+                slidingHashCode = v2 * BASE + (s.charAt(i) - 'a');
             }
             if (slidingHashCode == hash) {
                 if (match(s, pattern, patternLen, i)) {
@@ -69,7 +69,7 @@ public class LongestRepeatingSubstring {
         long hash = 0L;
         final int n = chars.length;
         for (int i = n - 1; i >= 0; i--) {
-            final long val = (long) ((chars[i] - 'a' + 1) * Math.pow(BASE, n - i - 1));
+            final long val = (long) ((chars[i] - 'a') * Math.pow(BASE, n - i - 1));
             hash += val;
         }
         return hash;
