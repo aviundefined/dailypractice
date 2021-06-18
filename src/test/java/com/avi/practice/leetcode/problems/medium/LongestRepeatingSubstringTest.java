@@ -3,8 +3,6 @@ package com.avi.practice.leetcode.problems.medium;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by navinash on 18/06/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -13,6 +11,7 @@ import static org.junit.Assert.*;
 public class LongestRepeatingSubstringTest {
 
     private static final LongestRepeatingSubstring solver  = new LongestRepeatingSubstring();
+
 
     @Test
     public void longestRepeatingSubstring1() {
@@ -27,6 +26,22 @@ public class LongestRepeatingSubstringTest {
         final String s = "aabcaabdaab";
         final int expected = 3;
         final int actual = solver.longestRepeatingSubstring(s);
+        Assert.assertEquals(s, expected, actual);
+    }
+
+    @Test
+    public void longestRepeatingSubstringTLE1() {
+        final String s = "abbaba";
+        final int expected = 2;
+        final int actual = solver.longestRepeatingSubstringTLE(s);
+        Assert.assertEquals(s, expected, actual);
+    }
+
+    @Test
+    public void longestRepeatingSubstringTLE2() {
+        final String s = "aabcaabdaab";
+        final int expected = 3;
+        final int actual = solver.longestRepeatingSubstringTLE(s);
         Assert.assertEquals(s, expected, actual);
     }
 

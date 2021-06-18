@@ -1,5 +1,8 @@
 package com.avi.practice.leetcode.problems.medium;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by navinash on 18/06/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -9,7 +12,42 @@ public class LongestRepeatingSubstring {
 
     private static final long BASE = 26L;
 
+
     public int longestRepeatingSubstring(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        int maxLen = 0;
+        int left = 1, right = s.length();
+        while (left <= right) {
+            final int mid = left + (right - left) / 2;
+            if (search(s, mid)) {
+                if (mid > maxLen) {
+                    maxLen = mid;
+                }
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return maxLen;
+    }
+
+    private boolean search(final String s, final int length) {
+        // check if substrings of length s exist in s
+        final Set<String> seen = new HashSet<>();
+        for (int i = 0; i < s.length() - length + 1; i++) {
+            final String substring = s.substring(i, i + length);
+            if (seen.contains(substring)) {
+                return true;
+            }
+            seen.add(substring);
+        }
+        return false;
+    }
+
+    public int longestRepeatingSubstringTLE(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
@@ -19,7 +57,7 @@ public class LongestRepeatingSubstring {
             for (int i = 0, j = gap; j < s.length(); i++, j++) {
                 final String pattern = s.substring(i, j + 1);
                 final String str = s.substring(i + 1);
-                if(rabinKarp(str, pattern) && (j - i + 1) > maxLen) {
+                if (rabinKarp(str, pattern) && (j - i + 1) > maxLen) {
                     maxLen = (j - i + 1);
                 }
             }
