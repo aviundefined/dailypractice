@@ -44,7 +44,6 @@ import java.util.Set;
  * words[i] only consists of lowercase English letters.
  */
 public class LongestStringChain {
-    private final List<String> max = new ArrayList<>();
 
     public int longestStrChain(String[] words) {
         if (words == null || words.length == 0) {
@@ -68,49 +67,171 @@ public class LongestStringChain {
                 maxLength = size;
             }
         }
-
-        final Set<String> startWords = stringsByLength.get(maxLength);
-        for (final String word : startWords) {
-            final List<String> currentResult = new ArrayList<>();
-            dfs(word, maxLength, stringsByLength, currentResult, minLength);
-        }
-        return max.size();
-    }
-
-    private void dfs(String word, int currentLength, Map<Integer, Set<String>> stringsByLength, List<String> currentResult, int minLength) {
-        if (currentLength < minLength) {
-            if (max.size() < currentResult.size()) {
-                max.clear();
-                max.addAll(new ArrayList<>(currentResult));
-            }
-            return;
-        }
-        // add current word in chain
-        currentResult.add(word);
-        final Set<String> nextLevelWords = stringsByLength.getOrDefault(currentLength - 1, new HashSet<>());
-        for (int i = 0; i < word.length(); i++) {
-            final String candidate;
-            if (i == 0) {
-                candidate = word.substring(i + 1);
-            } else if (i == word.length() - 1) {
-                candidate = word.substring(0, i);
-            } else {
-                candidate = word.substring(0, i) + word.substring(i + 1);
-            }
-            if (nextLevelWords.contains(candidate)) {
-                dfs(candidate, currentLength - 1, stringsByLength, currentResult, minLength);
-            } else {
-                if (max.size() < currentResult.size()) {
-                    max.clear();
-                    max.addAll(new ArrayList<>(currentResult));
+        int max = 1;
+        final Map<String, Integer> dp = new HashMap<>();
+        for (int i = maxLength; i >= minLength; i--) {
+            if (stringsByLength.containsKey(i)) {
+                final Set<String> startWords = stringsByLength.get(i);
+                for (final String word : startWords) {
+                    final int curr = dfs(null, word, i, stringsByLength, minLength, dp);
+                    if (curr > max) {
+                       max = curr;
+                    }
                 }
             }
         }
-        currentResult.remove(currentResult.size() - 1);
+        System.out.println(max);
+        return max;
+    }
 
-        // without adding current word
-        for (final String newWord : nextLevelWords) {
-            dfs(newWord, currentLength - 1, stringsByLength, new ArrayList<>(), minLength);
+    private int dfs(
+            final String lastWord,
+            final String word,
+            final int currentLength,
+            final Map<Integer, Set<String>> stringsByLength,
+            final int minLength,
+            final Map<String, Integer> dp) {
+        if (currentLength < minLength) {
+            return 0;
         }
+        if (lastWord != null && !isPredecessor(word, lastWord)) {
+            return 0;
+        }
+        if (dp.containsKey(word)) {
+            return dp.get(word);
+        }
+        int max = 1;
+
+        final Set<String> nextCandidates = stringsByLength.getOrDefault(currentLength - 1, new HashSet<>());
+        for (final String candidate : nextCandidates) {
+            int count = 1 + dfs(word, candidate, currentLength - 1, stringsByLength, minLength, dp);
+            if (max < count) {
+                max = count;
+            }
+        }
+        dp.put(word, max);
+        return dp.get(word);
+    }
+
+    public int longestStrChainAndPrintResult(String[] words) {
+        if (words == null || words.length == 0) {
+            return 0;
+        }
+        if (words.length == 1) {
+            return 1;
+        }
+
+        final Map<Integer, Set<String>> stringsByLength = new HashMap<>();
+        int maxLength = Integer.MIN_VALUE;
+        int minLength = Integer.MAX_VALUE;
+
+        for (final String word : words) {
+            final int size = word.length();
+            stringsByLength.computeIfAbsent(size, k -> new HashSet<>()).add(word);
+            if (size < minLength) {
+                minLength = size;
+            }
+            if (size > maxLength) {
+                maxLength = size;
+            }
+        }
+        final List<String> max = new ArrayList<>();
+        final Map<String, Set<String>> dp = new HashMap<>();
+        for (int i = maxLength; i >= minLength; i--) {
+            if (stringsByLength.containsKey(i)) {
+                final Set<String> startWords = stringsByLength.get(i);
+                for (final String word : startWords) {
+                    final Set<String> curr = dfsTrackResult(null, word, i, stringsByLength, minLength, dp);
+                    if (curr.size() > max.size()) {
+                        max.clear();
+                        max.addAll(new HashSet<>(curr));
+                    }
+                }
+            }
+        }
+        System.out.println(max);
+        return max.size();
+    }
+
+    private Set<String> dfsTrackResult(
+            final String lastWord,
+            final String word,
+            final int currentLength,
+            final Map<Integer, Set<String>> stringsByLength,
+            final int minLength,
+            final Map<String, Set<String>> dp) {
+        if (currentLength < minLength) {
+            return new HashSet<>();
+        }
+        if (lastWord != null && !isPredecessor(word, lastWord)) {
+            return new HashSet<>();
+        }
+        if (dp.containsKey(word)) {
+            return dp.get(word);
+        }
+        final Set<String> max = new HashSet<>();
+
+        final Set<String> nextCandidates = stringsByLength.getOrDefault(currentLength - 1, new HashSet<>());
+        for (final String candidate : nextCandidates) {
+            final Set<String> current = dfsTrackResult(word, candidate, currentLength - 1, stringsByLength, minLength, dp);
+            if (max.size() < current.size()) {
+                max.clear();
+                max.addAll(current);
+            }
+        }
+        max.add(word);
+        dp.put(word, max);
+        return dp.get(word);
+    }
+
+    final boolean isPredecessor(final String smallWord, final String largeWord) {
+        if (smallWord == null && largeWord == null) {
+            return false;
+        }
+        if (smallWord == null && largeWord.length() == 1) {
+            return true;
+        }
+        if (smallWord == null || largeWord == null) {
+            return false;
+        }
+
+        if (smallWord.length() + 1 != largeWord.length()) {
+            return false;
+        }
+
+        int i = 0;
+        int j = 0;
+        int mismatch = 0;
+        while (i < smallWord.length() && j < largeWord.length()) {
+            if (smallWord.charAt(i) == largeWord.charAt(j)) {
+                i++;
+                j++;
+                continue;
+            }
+
+            if (smallWord.charAt(i) != largeWord.charAt(j)) {
+                mismatch++;
+                // Case1: r, C1r
+                // Case 2: r, rC1
+                // Case 3: r1r2, r1C1r2
+                if (mismatch > 1) {
+                    return false;
+                }
+                if (mismatch == 1) {
+                    if (j == 0) {
+                        final String remaining = largeWord.substring(1);
+                        if (remaining.equals(smallWord)) {
+                            return true;
+                        }
+                    }
+                    if (j == largeWord.length() - 1) {
+                        return true;
+                    }
+                }
+                j++;
+
+            }
+        }
+        return mismatch <= 1;
     }
 }
