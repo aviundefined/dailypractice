@@ -58,11 +58,56 @@ public class LongestStringChainTest {
     }
 
     @Test
-    public void longestStrChainAndPrintResult6() {
-        final LongestStringChain solver = new LongestStringChain();
+    public void longestStrChainAndPrintResultV21() {
+        final LongestStringChainV2 solver = new LongestStringChainV2();
+        final String[] words = {"a", "b", "ba", "bca", "bda", "bdca"};
+        final int expected = 4;
+        final int actual = solver.longestStrChain(words);
+        Assert.assertEquals(Arrays.toString(words), expected, actual);
+    }
+
+    @Test
+    public void longestStrChainAndPrintResultV22() {
+        final LongestStringChainV2 solver = new LongestStringChainV2();
+        final String[] words = {"xbc","pcxbcf","xb","cxbc","pcxbc"};
+        final int expected = 5;
+        final int actual = solver.longestStrChain(words);
+        Assert.assertEquals(Arrays.toString(words), expected, actual);
+    }
+
+    @Test
+    public void longestStrChainAndPrintResultV23() {
+        final LongestStringChainV2 solver = new LongestStringChainV2();
+        final String[] words = {"abcd","dbqca"};
+        final int expected = 1;
+        final int actual = solver.longestStrChain(words);
+        Assert.assertEquals(Arrays.toString(words), expected, actual);
+    }
+
+    @Test
+    public void longestStrChainAndPrintResultV24() {
+        final LongestStringChainV2 solver = new LongestStringChainV2();
+        final String[] words = {"bdca","bda","ca","dca","a"};
+        final int expected = 4;
+        final int actual = solver.longestStrChain(words);
+        Assert.assertEquals(Arrays.toString(words), expected, actual);
+    }
+
+    @Test
+    public void longestStrChainAndPrintResultV25() {
+        final LongestStringChainV2 solver = new LongestStringChainV2();
+        final String[] words = {"ksqvsyq","ks","kss","czvh","zczpzvdhx","zczpzvh","zczpzvhx","zcpzvh","zczvh","gr","grukmj","ksqvsq","gruj","kssq","ksqsq","grukkmj","grukj","zczpzfvdhx","gru"};
+        final int expected = 7;
+        final int actual = solver.longestStrChain(words);
+        Assert.assertEquals(Arrays.toString(words), expected, actual);
+    }
+
+    @Test
+    public void longestStrChainAndPrintResultV26() {
+        final LongestStringChainV2 solver = new LongestStringChainV2();
         final String[] words = {"a","b","ab","bac"};
         final int expected = 2;
-        final int actual = solver.longestStrChainAndPrintResult(words);
+        final int actual = solver.longestStrChain(words);
         Assert.assertEquals(Arrays.toString(words), expected, actual);
     }
 
