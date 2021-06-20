@@ -73,7 +73,8 @@ public class LongestIncreasingPathInMatrix {
         for (int[] direction : directions) {
             final int newI = i + direction[0];
             final int newJ = j + direction[1];
-            if (newI < 0 || newJ < 0 || newI >= matrix.length || newJ >= matrix[0].length || visited[newI][newJ] || matrix[newI][newJ] <= matrix[i][j]) {
+            if (newI < 0 || newJ < 0 || newI >= matrix.length || newJ >= matrix[0].length || visited[newI][newJ]
+                    || matrix[newI][newJ] <= matrix[i][j]) {
                 continue;
             }
             final int val = 1 + backtrack(newI, newJ, matrix, visited, dp);
