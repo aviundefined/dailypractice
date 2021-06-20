@@ -40,7 +40,7 @@ public class LongestIncreasingPathInMatrix {
             {0, 1}
     };
 
-    public int longestIncreasingPathBruteForce(int[][] matrix) {
+    public int longestIncreasingPath(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {
             return 0;
         }
@@ -51,7 +51,8 @@ public class LongestIncreasingPathInMatrix {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 final boolean[][] visited = new boolean[m][n];
-                final int curr = backtrack(i, j, matrix, visited);
+                final Integer[][] dp = new Integer[m][n];
+                final int curr = backtrack(i, j, matrix, visited, dp);
                 if (max < curr) {
                     max = curr;
                 }
@@ -60,9 +61,12 @@ public class LongestIncreasingPathInMatrix {
         return max;
     }
 
-    private int backtrack(int i, int j, int[][] matrix, boolean[][] visited) {
+    private int backtrack(int i, int j, int[][] matrix, boolean[][] visited, Integer[][] dp) {
         if (i < 0 || j < 0 || i >= matrix.length || j >= matrix[0].length || visited[i][j]) {
             return 0;
+        }
+        if(dp[i][j] != null) {
+            return dp[i][j];
         }
         visited[i][j] = true;
         int currMax = 1;
@@ -72,12 +76,13 @@ public class LongestIncreasingPathInMatrix {
             if (newI < 0 || newJ < 0 || newI >= matrix.length || newJ >= matrix[0].length || visited[newI][newJ] || matrix[newI][newJ] <= matrix[i][j]) {
                 continue;
             }
-            final int val = 1 + backtrack(newI, newJ, matrix, visited);
+            final int val = 1 + backtrack(newI, newJ, matrix, visited, dp);
             if (val > currMax) {
                 currMax = val;
             }
         }
         visited[i][j] = false;
+        dp[i][j] = currMax;
         return currMax;
     }
 }

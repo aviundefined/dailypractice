@@ -15,14 +15,14 @@ public class LongestIncreasingPathInMatrixTest {
     private final static LongestIncreasingPathInMatrix solver = new LongestIncreasingPathInMatrix();
 
     @Test
-    public void longestIncreasingPathBruteForce1() {
+    public void longestIncreasingPath1() {
         final int[][] matrix = {
                 {9, 9, 4},
                 {6, 6, 8},
                 {2, 1, 1}
         };
         final int expected = 4;
-        final int actual = solver.longestIncreasingPathBruteForce(matrix);
+        final int actual = solver.longestIncreasingPath(matrix);
         for (final int[] row : matrix) {
             System.out.println(Arrays.toString(row));
         }
@@ -31,14 +31,14 @@ public class LongestIncreasingPathInMatrixTest {
     }
 
     @Test
-    public void longestIncreasingPathBruteForce2() {
+    public void longestIncreasingPath2() {
         final int[][] matrix = {
                 {3, 4, 5},
                 {3, 2, 6},
                 {2, 2, 1}
         };
         final int expected = 4;
-        final int actual = solver.longestIncreasingPathBruteForce(matrix);
+        final int actual = solver.longestIncreasingPath(matrix);
         for (final int[] row : matrix) {
             System.out.println(Arrays.toString(row));
         }
@@ -47,12 +47,12 @@ public class LongestIncreasingPathInMatrixTest {
     }
 
     @Test
-    public void longestIncreasingPathBruteForce3() {
+    public void longestIncreasingPath3() {
         final int[][] matrix = {
                 {1}
         };
         final int expected = 1;
-        final int actual = solver.longestIncreasingPathBruteForce(matrix);
+        final int actual = solver.longestIncreasingPath(matrix);
         for (final int[] row : matrix) {
             System.out.println(Arrays.toString(row));
         }
