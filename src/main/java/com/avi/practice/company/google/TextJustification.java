@@ -79,9 +79,9 @@ public class TextJustification {
 
         final List<String> result = new ArrayList<>();
         int startIndex = 0;
-        int lastIndex = -1;
-        while (startIndex < n && lastIndex <= n) {
-            lastIndex = indexes[startIndex];
+
+        while (startIndex < n ) {
+            final int lastIndex = indexes[startIndex];
             final String sb = arrange(words, startIndex, lastIndex, badness, maxWidth);
             result.add(sb);
             startIndex = lastIndex;
