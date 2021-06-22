@@ -38,26 +38,26 @@ public class MinPathWithMaxDistancesFromLion {
         q.offer(marker);
 
         boolean[][] visited = new boolean[m][n];
-        int level = 0;
+        int distanceFromLion = 0;
         while (!q.isEmpty()) {
             // remove mark* work add*
             final Cell curr = q.poll();
             if (curr.equals(marker)) {
                 if (!q.isEmpty()) {
-                    level++;
+                    distanceFromLion++;
                     q.offer(marker);
                 }
             } else {
                 if (visited[curr.x][curr.y]) {
                     continue;
                 }
-                minDistanceFromLion[curr.x][curr.y] = level;
+                minDistanceFromLion[curr.x][curr.y] = distanceFromLion;
                 visited[curr.x][curr.y] = true;
                 for (final int[] direction : directions) {
                     final int newX = curr.x + direction[0];
                     final int newY = curr.y + direction[1];
                     if (newX >= 0 && newY >= 0 && newX < m && newY < n && !visited[newX][newY] && arr[newX][newY] != 0) {
-                        q.offer(new Cell(newX, newY, level));
+                        q.offer(new Cell(newX, newY, distanceFromLion));
                     }
                 }
             }
@@ -98,17 +98,17 @@ public class MinPathWithMaxDistancesFromLion {
     private static final class Cell {
         private final int x;
         private final int y;
-        private final int level;
+        private final int distanceFromLion;
 
-        private Cell(int x, int y, int level) {
+        private Cell(int x, int y, int distanceFromLion) {
             this.x = x;
             this.y = y;
-            this.level = level;
+            this.distanceFromLion = distanceFromLion;
         }
 
         @Override
         public String toString() {
-            return "" + level;
+            return "" + distanceFromLion;
         }
     }
 
@@ -123,10 +123,10 @@ public class MinPathWithMaxDistancesFromLion {
 
         @Override
         public int compareTo(CellWithWeight o) {
-            if (o.cell.level == this.cell.level) {
+            if (o.cell.distanceFromLion == this.cell.distanceFromLion) {
                 return this.weight - o.weight;
             }
-            return o.cell.level - this.cell.level;
+            return o.cell.distanceFromLion - this.cell.distanceFromLion;
         }
     }
 }
