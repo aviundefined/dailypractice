@@ -123,10 +123,10 @@ public class MinPathWithMaxDistancesFromLion {
 
         @Override
         public int compareTo(CellWithWeight o) {
-            if (o.weight == this.weight) {
-                return o.cell.level - this.cell.level;
+            if (o.cell.level == this.cell.level) {
+                return this.weight - o.weight;
             }
-            return this.weight - o.weight;
+            return o.cell.level - this.cell.level;
         }
     }
 }
