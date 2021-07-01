@@ -1,4 +1,4 @@
-package com.avi.educative.tree;
+package com.avi.educative.tree.segment_tree;
 
 import java.util.Arrays;
 

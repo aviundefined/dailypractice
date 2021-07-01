@@ -1,4 +1,4 @@
-package com.avi.educative.tree;
+package com.avi.educative.tree.segment_tree;
 
 import org.junit.Assert;
 import org.junit.Test;
