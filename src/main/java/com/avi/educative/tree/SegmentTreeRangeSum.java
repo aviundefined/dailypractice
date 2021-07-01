@@ -7,13 +7,13 @@ import java.util.Arrays;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class SegmentTree {
+public class SegmentTreeRangeSum {
 
     private final int[] st;
     private final int[] arr;
     private final int n;
 
-    public SegmentTree(final int[] arr) {
+    public SegmentTreeRangeSum(final int[] arr) {
         this.n = arr.length;
         this.arr = arr;
         this.st = new int[4 * n];
