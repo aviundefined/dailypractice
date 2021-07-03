@@ -54,33 +54,20 @@ public class VerifyingAlienDictionary {
     }
 
     private boolean inOrder(String currWord, String nextWord, Map<Character, Integer> orderMap) {
-        if (currWord == null && nextWord == null) {
-            return true;
-        }
-
-        if (currWord == null && nextWord != null) {
-            return true;
-        }
-        if (currWord != null && nextWord == null) {
-            return false;
-        }
-
-        if (currWord.equals(nextWord)) {
-            return true;
-        }
-
-        final int currWordLength = currWord.length();
-        final int nextWordLength = nextWord.length();
-        int curr = 0;
-        int next = 0;
-        while (curr < currWordLength && next < nextWordLength) {
-            final int currIdx = orderMap.get(currWord.charAt(curr));
-            final int nextIdx = orderMap.get(nextWord.charAt(next));
-            if (nextIdx < currIdx) {
-                return false;
+        for(int i  = 0; i < currWord.length() && i < nextWord.length(); i++) {
+            final char c1 = currWord.charAt(i);
+            final char c2 = nextWord.charAt(i);
+            if(c1 == c2) {
+                continue;
             }
-            curr++;
-            next++;
+
+            final int currWordIdx = orderMap.get(c1);
+            final int nextWordIdx = orderMap.get(c2);
+            return currWordIdx < nextWordIdx;
+        }
+
+        if(currWord.length() > nextWord.length()){
+            return false;
         }
         return true;
     }
