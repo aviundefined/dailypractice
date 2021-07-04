@@ -16,6 +16,8 @@ import java.util.Set;
  */
 public class CriticalConnectionsNetwork {
 
+    Integer counter = 0;
+
     public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
         if (n == 0) {
             return Collections.emptyList();
@@ -26,23 +28,35 @@ public class CriticalConnectionsNetwork {
         }
 
         final Set<List<Integer>> result = new HashSet<>();
+        final Map<Integer, Integer> nodeIds = new HashMap<>();
         for (int i = 0; i < n; i++) {
-            final Set<Integer> neighbours = graph.getNeighbours(i);
-            final Set<Integer> visited = new HashSet<>();
-            for (final int neighbour : neighbours) {
-                graph.removeEdge(i, neighbour);
-                dfsBruteForce(i, graph, visited);
-                graph.addEdge(i, neighbour);
-                if (visited.size() < n) {
-                    if (i > neighbour) {
-                        result.add(Arrays.asList(neighbour, i));
-                    } else {
-                        result.add(Arrays.asList(i, neighbour));
-                    }
-                }
-            }
+            dfs(i, -1, graph, nodeIds, result);
         }
         return new ArrayList<>(result);
+    }
+
+    private int dfs(int node, int from, Graph graph, Map<Integer, Integer> nodeIds, Set<List<Integer>> result) {
+        if (nodeIds.containsKey(node)) {
+            return nodeIds.get(node);
+        }
+        nodeIds.put(node, counter);
+        counter++;
+        final int currentValue = nodeIds.get(node);
+        int min = Integer.MAX_VALUE;
+        for (final int neighbour : graph.getNeighbours(node)) {
+            if (from == neighbour) {
+                continue;
+            }
+            final int neighbourValue = dfs(neighbour, node, graph, nodeIds, result);
+            min = Math.min(neighbourValue, min);
+        }
+        if (currentValue > min) {
+            nodeIds.put(node, min);
+        }
+        if (from != -1 && currentValue < min) {
+            result.add(Arrays.asList(from, node));
+        }
+        return Math.min(currentValue, min);
     }
 
     public List<List<Integer>> criticalConnectionsBruteForce(int n, List<List<Integer>> connections) {
