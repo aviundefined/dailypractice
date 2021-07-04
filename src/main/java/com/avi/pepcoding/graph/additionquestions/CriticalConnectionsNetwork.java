@@ -16,6 +16,35 @@ import java.util.Set;
  */
 public class CriticalConnectionsNetwork {
 
+    public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
+        if (n == 0) {
+            return Collections.emptyList();
+        }
+        final Graph graph = new Graph();
+        for (final List<Integer> connection : connections) {
+            graph.addEdge(connection.get(0), connection.get(1));
+        }
+
+        final Set<List<Integer>> result = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            final Set<Integer> neighbours = graph.getNeighbours(i);
+            final Set<Integer> visited = new HashSet<>();
+            for (final int neighbour : neighbours) {
+                graph.removeEdge(i, neighbour);
+                dfsBruteForce(i, graph, visited);
+                graph.addEdge(i, neighbour);
+                if (visited.size() < n) {
+                    if (i > neighbour) {
+                        result.add(Arrays.asList(neighbour, i));
+                    } else {
+                        result.add(Arrays.asList(i, neighbour));
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(result);
+    }
+
     public List<List<Integer>> criticalConnectionsBruteForce(int n, List<List<Integer>> connections) {
         if (n == 0) {
             return Collections.emptyList();
@@ -31,7 +60,7 @@ public class CriticalConnectionsNetwork {
             final Set<Integer> visited = new HashSet<>();
             for (final int neighbour : neighbours) {
                 graph.removeEdge(i, neighbour);
-                dfs(i, graph, visited);
+                dfsBruteForce(i, graph, visited);
                 graph.addEdge(i, neighbour);
                 if (visited.size() < n) {
                     if (i > neighbour) {
@@ -45,13 +74,13 @@ public class CriticalConnectionsNetwork {
         return new ArrayList<>(result);
     }
 
-    private void dfs(int node, Graph graph, Set<Integer> visited) {
+    private void dfsBruteForce(int node, Graph graph, Set<Integer> visited) {
         visited.add(node);
         for (final int neighbour : graph.getNeighbours(node)) {
             if (visited.contains(neighbour)) {
                 continue;
             }
-            dfs(neighbour, graph, visited);
+            dfsBruteForce(neighbour, graph, visited);
         }
     }
 
