@@ -28,36 +28,37 @@ public class CriticalConnectionsNetwork {
         }
 
         final Set<List<Integer>> result = new HashSet<>();
-        final Map<Integer, Integer> nodeIds = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            dfs(i, -1, graph, nodeIds, result);
-        }
+        final int[] discovery = new int[n];
+        final int[] low = new int[n];
+        Arrays.fill(discovery, -1);
+        Arrays.fill(low, -1);
+        dfs(0, -1, graph, discovery, low, result);
         return new ArrayList<>(result);
     }
 
-    private int dfs(int node, int from, Graph graph, Map<Integer, Integer> nodeIds, Set<List<Integer>> result) {
-        if (nodeIds.containsKey(node)) {
-            return nodeIds.get(node);
-        }
-        nodeIds.put(node, counter);
+    private int dfs(int current, int parent, Graph graph, int[] discovery, int[] low, Set<List<Integer>> result) {
+        discovery[current] = counter;
+        low[current] = counter;
         counter++;
-        final int currentValue = nodeIds.get(node);
-        int min = Integer.MAX_VALUE;
-        for (final int neighbour : graph.getNeighbours(node)) {
-            if (from == neighbour) {
+        for (final int neighbour : graph.getNeighbours(current)) {
+            if (neighbour == parent) {
+                continue; // skip parent edge
+            }
+            if (discovery[neighbour] != -1) {
+                // back edge found and back edge can't critical edge
+                low[current] = Math.min(low[current], discovery[neighbour]);
                 continue;
             }
-            final int neighbourValue = dfs(neighbour, node, graph, nodeIds, result);
-            min = Math.min(neighbourValue, min);
+            final int neighbourLowValue = dfs(neighbour, current, graph, discovery, low, result);
+            low[current] = Math.min(neighbourLowValue, low[current]);
+            if (neighbourLowValue > discovery[current]) {
+                result.add(Arrays.asList(current, neighbour));
+            }
         }
-        if (currentValue > min) {
-            nodeIds.put(node, min);
-        }
-        if (from != -1 && currentValue < min) {
-            result.add(Arrays.asList(from, node));
-        }
-        return Math.min(currentValue, min);
+
+        return low[current];
     }
+
 
     public List<List<Integer>> criticalConnectionsBruteForce(int n, List<List<Integer>> connections) {
         if (n == 0) {
