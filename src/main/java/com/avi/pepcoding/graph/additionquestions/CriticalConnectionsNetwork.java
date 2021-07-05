@@ -22,21 +22,23 @@ public class CriticalConnectionsNetwork {
         if (n == 0) {
             return Collections.emptyList();
         }
+        // Create a graph from connections
         final Graph graph = new Graph();
         for (final List<Integer> connection : connections) {
             graph.addEdge(connection.get(0), connection.get(1));
         }
 
-        final Set<List<Integer>> result = new HashSet<>();
-        final int[] discovery = new int[n];
-        final int[] low = new int[n];
-        Arrays.fill(discovery, -1);
+        final Set<List<Integer>> result = new HashSet<>(); // result to store data
+        final int[] discovery = new int[n]; // array to store discovery time
+        final int[] low = new int[n]; // array to store low time
+        Arrays.fill(discovery, -1); // fill both with -1
         Arrays.fill(low, -1);
-        dfs(0, -1, graph, discovery, low, result);
+        dfs(0, -1, graph, discovery, low, result); // start dfs
         return new ArrayList<>(result);
     }
 
     private int dfs(int current, int parent, Graph graph, int[] discovery, int[] low, Set<List<Integer>> result) {
+        // initial put the counter value for both discovery and low time and increase the counter
         discovery[current] = counter;
         low[current] = counter;
         counter++;
@@ -44,18 +46,20 @@ public class CriticalConnectionsNetwork {
             if (neighbour == parent) {
                 continue; // skip parent edge
             }
-            if (discovery[neighbour] != -1) {
+            if (discovery[neighbour] != -1) { // back edge found
                 // back edge found and back edge can't critical edge
                 low[current] = Math.min(low[current], discovery[neighbour]);
                 continue;
             }
+            // get the low value for neighbour and update current value is it's greater than the neighbours low value
             final int neighbourLowValue = dfs(neighbour, current, graph, discovery, low, result);
             low[current] = Math.min(neighbourLowValue, low[current]);
+            // if neighbour's low value > discover time of current then it's a critical edge
             if (neighbourLowValue > discovery[current]) {
                 result.add(Arrays.asList(current, neighbour));
             }
         }
-
+        // return low value of the current node
         return low[current];
     }
 
