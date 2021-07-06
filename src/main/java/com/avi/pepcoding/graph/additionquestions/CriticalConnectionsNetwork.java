@@ -48,7 +48,7 @@ public class CriticalConnectionsNetwork {
             }
             if (discovery[neighbour] != -1) { // back edge found
                 // back edge found and back edge can't critical edge
-                low[current] = Math.min(low[current], discovery[neighbour]);
+                low[current] = Math.min(low[current], low[neighbour]);
                 continue;
             }
             // get the low value for neighbour and update current value is it's greater than the neighbours low value
