@@ -17,15 +17,63 @@ public class TheMaze {
             {0, -1}
     };
 
+
+    public boolean hasPath(int[][] maze, int[] start, int[] destination) {
+        if (maze == null || maze.length == 0) {
+            return false;
+        }
+        final Set<Cell> visited = new HashSet<>();
+        return dfs(start[0], start[1], destination[0], destination[1], visited, maze);
+    }
+
+    private boolean dfs(int sr, int sc, int ds, int dc, Set<Cell> visited, int[][] maze) {
+        if (sr == ds && sc == dc) {
+            return true;
+        }
+        if (visited.contains(new Cell(sr, sc))) {
+            return false;
+        }
+        visited.add(new Cell(sr, sc));
+        int right = sc + 1;
+        int left = sc - 1;
+        int up = sr - 1;
+        int down = sr + 1;
+        while (right < maze[0].length && maze[sr][right] == 0) {
+            right++;
+        }
+        if (dfs(sr, right - 1, ds, dc, visited, maze)) {
+            return true;
+        }
+        while (left >= 0 && maze[sr][left] == 0) {
+            left--;
+        }
+        if (dfs(sr, left + 1, ds, dc, visited, maze)) {
+            return true;
+        }
+        while (up >= 0 && maze[up][sc] == 0) {
+            up--;
+        }
+        if (dfs(up + 1, sc, ds, dc, visited, maze)) {
+            return true;
+        }
+        while (down < maze.length && maze[down][sc] == 0) {
+            down++;
+        }
+        if (dfs(down - 1, sc, ds, dc, visited, maze)) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean hasPath_MyApproach(int[][] maze, int[] start, int[] destination) {
         if (maze == null || maze.length == 0) {
             return false;
         }
         final Set<Cell> visited = new HashSet<>();
-        return dfs(start[0], start[1], destination[0], destination[1], visited, maze, 0);
+        return dfs_MyApproach(start[0], start[1], destination[0], destination[1], visited, maze, 0);
     }
 
-    private boolean dfs(
+    private boolean dfs_MyApproach(
             final int sr,
             final int sc,
             final int dr,
@@ -35,7 +83,6 @@ public class TheMaze {
             int currentDirection) {
 
         if (sr == dr && sc == dc) {
-            System.out.println("Reached destination from dir: " + currentDirection);
             // reached destination now check if ball will stop here
             if (canStop(dr, dc, currentDirection, maze)) {
                 return true;
@@ -54,7 +101,7 @@ public class TheMaze {
                     && newSR < maze.length && newSC < maze[0].length
                     && !visited.contains(new Cell(newSR, newSC))
                     && maze[newSR][newSC] != 1) {
-                final boolean reached = dfs(newSR, newSC, dr, dc, visited, maze, currentDirection);
+                final boolean reached = dfs_MyApproach(newSR, newSC, dr, dc, visited, maze, currentDirection);
                 if (reached) {
                     return true;
                 }
