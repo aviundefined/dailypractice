@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by navinash on 06/07/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -15,13 +13,13 @@ import static org.junit.Assert.*;
 public class TheMazeTest {
 
     @Test
-    public void hasPath1() {
+    public void hasPath_MyApproach1() {
         final TheMaze solver = new TheMaze();
         final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
         final int[] start = {0, 4};
         final int[] destination = {4, 4};
         final boolean expected = true;
-        final boolean actual = solver.hasPath(maze, start, destination);
+        final boolean actual = solver.hasPath_MyApproach(maze, start, destination);
         for (final int[] row : maze) {
             System.out.println(Arrays.toString(row));
         }
@@ -33,13 +31,13 @@ public class TheMazeTest {
     }
 
     @Test
-    public void hasPath2() {
+    public void hasPath_MyApproach2() {
         final TheMaze solver = new TheMaze();
         final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
         final int[] start = {0, 4};
         final int[] destination = {3, 2};
         final boolean expected = false;
-        final boolean actual = solver.hasPath(maze, start, destination);
+        final boolean actual = solver.hasPath_MyApproach(maze, start, destination);
         for (final int[] row : maze) {
             System.out.println(Arrays.toString(row));
         }
@@ -51,13 +49,13 @@ public class TheMazeTest {
     }
 
     @Test
-    public void hasPath3() {
+    public void hasPath_MyApproach3() {
         final TheMaze solver = new TheMaze();
         final int[][] maze = {{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}};
         final int[] start = {4, 3};
         final int[] destination = {0, 1};
         final boolean expected = false;
-        final boolean actual = solver.hasPath(maze, start, destination);
+        final boolean actual = solver.hasPath_MyApproach(maze, start, destination);
         for (final int[] row : maze) {
             System.out.println(Arrays.toString(row));
         }
@@ -69,13 +67,13 @@ public class TheMazeTest {
     }
 
     @Test
-    public void hasPath4() {
+    public void hasPath_MyApproach4() {
         final TheMaze solver = new TheMaze();
         final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
         final int[] start = {0, 4};
         final int[] destination = {1, 2};
         final boolean expected = true;
-        final boolean actual = solver.hasPath(maze, start, destination);
+        final boolean actual = solver.hasPath_MyApproach(maze, start, destination);
         for (final int[] row : maze) {
             System.out.println(Arrays.toString(row));
         }

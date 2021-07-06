@@ -17,7 +17,7 @@ public class TheMaze {
             {0, -1}
     };
 
-    public boolean hasPath(int[][] maze, int[] start, int[] destination) {
+    public boolean hasPath_MyApproach(int[][] maze, int[] start, int[] destination) {
         if (maze == null || maze.length == 0) {
             return false;
         }
@@ -35,8 +35,11 @@ public class TheMaze {
             int currentDirection) {
 
         if (sr == dr && sc == dc) {
+            System.out.println("Reached destination from dir: " + currentDirection);
             // reached destination now check if ball will stop here
-            return canStop(dr, dc, currentDirection, maze);
+            if (canStop(dr, dc, currentDirection, maze)) {
+                return true;
+            }
         }
         if (sr < 0 || sc < 0 || sr >= maze.length || sc >= maze[0].length || maze[sr][sc] != 0 || visited.contains(new Cell(sr, sc))) {
             return false;
