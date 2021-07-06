@@ -11,9 +11,9 @@ import java.util.Set;
  */
 public class TheMaze {
     private static final int[][] directions = {
-            {1, 0},
             {-1, 0},
             {0, 1},
+            {1, 0},
             {0, -1}
     };
 
