@@ -45,7 +45,6 @@ public class TheMaze {
 
         visited.add(new Cell(sr, sc));
         for (int n = 0; n < directions.length; n++) {
-            currentDirection = (currentDirection + n) % directions.length;
             final int newSR = sr + directions[currentDirection][0];
             final int newSC = sc + directions[currentDirection][1];
             if (newSR >= 0 && newSC >= 0
@@ -57,6 +56,7 @@ public class TheMaze {
                     return true;
                 }
             }
+            currentDirection = (currentDirection + 1) % directions.length;
         }
         return false;
     }
