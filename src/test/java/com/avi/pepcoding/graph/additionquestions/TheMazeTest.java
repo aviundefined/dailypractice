@@ -85,13 +85,13 @@ public class TheMazeTest {
     }
 
     @Test
-    public void hasPath1() {
+    public void hasPath_DFS1() {
         final TheMaze solver = new TheMaze();
         final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
         final int[] start = {0, 4};
         final int[] destination = {4, 4};
         final boolean expected = true;
-        final boolean actual = solver.hasPath(maze, start, destination);
+        final boolean actual = solver.hasPath_DFS(maze, start, destination);
         for (final int[] row : maze) {
             System.out.println(Arrays.toString(row));
         }
@@ -103,13 +103,13 @@ public class TheMazeTest {
     }
 
     @Test
-    public void hasPath2() {
+    public void hasPath_DFS2() {
         final TheMaze solver = new TheMaze();
         final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
         final int[] start = {0, 4};
         final int[] destination = {3, 2};
         final boolean expected = false;
-        final boolean actual = solver.hasPath(maze, start, destination);
+        final boolean actual = solver.hasPath_DFS(maze, start, destination);
         for (final int[] row : maze) {
             System.out.println(Arrays.toString(row));
         }
@@ -121,13 +121,13 @@ public class TheMazeTest {
     }
 
     @Test
-    public void hasPath3() {
+    public void hasPath_DFS3() {
         final TheMaze solver = new TheMaze();
         final int[][] maze = {{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}};
         final int[] start = {4, 3};
         final int[] destination = {0, 1};
         final boolean expected = false;
-        final boolean actual = solver.hasPath(maze, start, destination);
+        final boolean actual = solver.hasPath_DFS(maze, start, destination);
         for (final int[] row : maze) {
             System.out.println(Arrays.toString(row));
         }
@@ -139,13 +139,85 @@ public class TheMazeTest {
     }
 
     @Test
-    public void hasPath4() {
+    public void hasPath_DFS4() {
         final TheMaze solver = new TheMaze();
         final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
         final int[] start = {0, 4};
         final int[] destination = {1, 2};
         final boolean expected = true;
-        final boolean actual = solver.hasPath(maze, start, destination);
+        final boolean actual = solver.hasPath_DFS(maze, start, destination);
+        for (final int[] row : maze) {
+            System.out.println(Arrays.toString(row));
+        }
+        System.out.println("------------");
+        System.out.println("Start:" + Arrays.toString(start));
+        System.out.println("Destination:" + Arrays.toString(destination));
+        Assert.assertEquals(expected, actual);
+        System.out.println("------------");
+    }
+
+    @Test
+    public void hasPath_BFS1() {
+        final TheMaze solver = new TheMaze();
+        final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
+        final int[] start = {0, 4};
+        final int[] destination = {4, 4};
+        final boolean expected = true;
+        final boolean actual = solver.hasPath_BFS(maze, start, destination);
+        for (final int[] row : maze) {
+            System.out.println(Arrays.toString(row));
+        }
+        System.out.println("------------");
+        System.out.println("Start:" + Arrays.toString(start));
+        System.out.println("Destination:" + Arrays.toString(destination));
+        Assert.assertEquals(expected, actual);
+        System.out.println("------------");
+    }
+
+    @Test
+    public void hasPath_BFS2() {
+        final TheMaze solver = new TheMaze();
+        final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
+        final int[] start = {0, 4};
+        final int[] destination = {3, 2};
+        final boolean expected = false;
+        final boolean actual = solver.hasPath_BFS(maze, start, destination);
+        for (final int[] row : maze) {
+            System.out.println(Arrays.toString(row));
+        }
+        System.out.println("------------");
+        System.out.println("Start:" + Arrays.toString(start));
+        System.out.println("Destination:" + Arrays.toString(destination));
+        Assert.assertEquals(expected, actual);
+        System.out.println("------------");
+    }
+
+    @Test
+    public void hasPath_BFS3() {
+        final TheMaze solver = new TheMaze();
+        final int[][] maze = {{0, 0, 0, 0, 0}, {1, 1, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 1, 0, 0, 1}, {0, 1, 0, 0, 0}};
+        final int[] start = {4, 3};
+        final int[] destination = {0, 1};
+        final boolean expected = false;
+        final boolean actual = solver.hasPath_BFS(maze, start, destination);
+        for (final int[] row : maze) {
+            System.out.println(Arrays.toString(row));
+        }
+        System.out.println("------------");
+        System.out.println("Start:" + Arrays.toString(start));
+        System.out.println("Destination:" + Arrays.toString(destination));
+        Assert.assertEquals(expected, actual);
+        System.out.println("------------");
+    }
+
+    @Test
+    public void hasPath_BFS4() {
+        final TheMaze solver = new TheMaze();
+        final int[][] maze = {{0, 0, 1, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 1, 0}, {1, 1, 0, 1, 1}, {0, 0, 0, 0, 0}};
+        final int[] start = {0, 4};
+        final int[] destination = {1, 2};
+        final boolean expected = true;
+        final boolean actual = solver.hasPath_BFS(maze, start, destination);
         for (final int[] row : maze) {
             System.out.println(Arrays.toString(row));
         }

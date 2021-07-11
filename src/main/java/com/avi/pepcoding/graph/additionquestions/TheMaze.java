@@ -1,7 +1,9 @@
 package com.avi.pepcoding.graph.additionquestions;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -17,8 +19,39 @@ public class TheMaze {
             {0, -1}
     };
 
+    public boolean hasPath_BFS(int[][] maze, int[] start, int[] destination) {
+        if (maze == null || maze.length == 0) {
+            return false;
+        }
+        final Set<Cell> visited = new HashSet<>();
+        final Queue<Cell> q = new LinkedList<>();
+        final Cell startCell = new Cell(start[0], start[1]);
+        q.offer(startCell);
+        visited.add(startCell);
+        while (!q.isEmpty()) {
+            final Cell curr = q.poll();
+            if (curr.i == destination[0] && curr.j == destination[1]) {
+                return true;
+            }
+            for (final int[] dir : directions) {
+                int x = curr.i + dir[0];
+                int y = curr.j + dir[1];
+                while (x >= 0 && y >= 0 && x < maze.length && y < maze[0].length && maze[x][y] == 0) {
+                    x += dir[0];
+                    y += dir[1];
+                }
+                // reach to the first blocked cell, so come back to get the valid cell
+                final Cell cell = new Cell(x - dir[0], y - dir[1]);
+                if (!visited.contains(cell)) {
+                    q.offer(cell);
+                    visited.add(cell);
+                }
+            }
+        }
+        return false;
+    }
 
-    public boolean hasPath(int[][] maze, int[] start, int[] destination) {
+    public boolean hasPath_DFS(int[][] maze, int[] start, int[] destination) {
         if (maze == null || maze.length == 0) {
             return false;
         }
@@ -128,6 +161,7 @@ public class TheMaze {
             this.i = i;
             this.j = j;
         }
+
 
         @Override
         public boolean equals(Object o) {
