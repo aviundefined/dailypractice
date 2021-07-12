@@ -10,6 +10,22 @@ import java.util.Arrays;
 public class SudokuSolver {
 
 
+    public static void main(String[] args) {
+        final Solution solver = new Solution();
+        final char[][] board = {
+                {'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+                {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+                {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+                {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+                {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+                {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+                {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+                {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+                {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
+        };
+        solver.solveSudoku(board);
+    }
+
     public void solve(final int[][] sudoku) {
         if (sudoku == null || sudoku.length == 0) {
             System.out.println("Invalid Sudoku: null or empty");
@@ -103,5 +119,92 @@ public class SudokuSolver {
             System.out.println(Arrays.toString(row));
         }
 
+    }
+
+    private static final class Solution {
+        private static final char EMPTY = '.';
+        private final char[] chars = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
+        public void solveSudoku(char[][] board) {
+            final int n = board.length;
+            final int gridSize = (int) Math.sqrt(n);
+
+            backtrack(0, 0, board, n, gridSize);
+        }
+
+        private boolean backtrack(
+                final int row,
+                final int col,
+                final char[][] board,
+                final int n,
+                final int gridSize) {
+            if (row == n) {
+                print(board);
+                return true;
+            }
+
+            final int nextRow;
+            final int nextCol;
+            if (col == n - 1) {
+                nextRow = row + 1;
+                nextCol = 0;
+            } else {
+                nextRow = row;
+                nextCol = col + 1;
+            }
+            boolean solved = false;
+            if (board[row][col] == EMPTY) {
+                for (char c : chars) {
+                    if (canPlace(c, row, col, board, n, gridSize)) {
+                        board[row][col] = c;
+                        solved = backtrack(nextRow, nextCol, board, n, gridSize);
+                        board[row][col] = EMPTY;
+                    }
+                }
+            } else {
+                solved = backtrack(nextRow, nextCol, board, n, gridSize);
+            }
+            return solved;
+        }
+
+        private boolean canPlace(
+                final char c,
+                final int row,
+                final int col,
+                final char[][] board,
+                final int n,
+                final int gridSize) {
+            // check if same row doesn't have same char already
+            for (int j = 0; j < n; j++) {
+                if (board[row][j] == c) {
+                    return false;
+                }
+            }
+
+            // check if same col doesn't have same char already
+            for (int i = 0; i < n; i++) {
+                if (board[i][col] == c) {
+                    return false;
+                }
+            }
+
+            // check if same col doesn't have same char already
+            final int gridStartRow = (row / gridSize) * gridSize;
+            final int gridStartCol = (col / gridSize) * gridSize;
+            for (int i = 0; i < gridSize; i++) {
+                for (int j = 0; j < gridSize; j++) {
+                    if (board[gridStartRow + i][gridStartCol + j] == c) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private void print(final char[][] board) {
+            for (char[] row : board) {
+                System.out.println(row);
+            }
+        }
     }
 }
