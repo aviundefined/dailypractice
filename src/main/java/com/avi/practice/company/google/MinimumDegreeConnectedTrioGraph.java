@@ -47,6 +47,42 @@ import java.util.Set;
 public class MinimumDegreeConnectedTrioGraph {
 
     public int minTrioDegree(int n, int[][] edges) {
+        final boolean[][] isEdge = new boolean[n + 1][n + 1];
+        final Map<Integer, Integer> degrees = new HashMap<>();
+        for (final int[] edge : edges) {
+            degrees.compute(edge[0], (k, v) -> {
+                if (v == null) {
+                    return 1;
+                }
+                return v + 1;
+            });
+            degrees.compute(edge[1], (k, v) -> {
+                if (v == null) {
+                    return 1;
+                }
+                return v + 1;
+            });
+            isEdge[edge[0]][edge[1]] = true;
+            isEdge[edge[1]][edge[0]] = true;
+        }
+        int min = Integer.MAX_VALUE;
+        for (final int[] edge : edges) {
+            for (int i = 1; i <= n; i++) {
+                if (isEdge[i][edge[0]] && isEdge[i][edge[1]]) {
+                    final int trioDegree = degrees.getOrDefault(i, 0) + degrees.getOrDefault(edge[0], 0) + degrees.getOrDefault(edge[1], 0) - 6;
+                    if (trioDegree < min) {
+                        min = trioDegree;
+                    }
+                }
+            }
+        }
+        if (min == Integer.MAX_VALUE) {
+            return -1;
+        }
+        return min;
+    }
+
+    public int minTrioDegree_TLE(int n, int[][] edges) {
         final Graph graph = new Graph();
         for (final int[] edge : edges) {
             graph.addEdge(edge[0], edge[1]);
@@ -99,6 +135,7 @@ public class MinimumDegreeConnectedTrioGraph {
         }
         return true;
     }
+
 
     private static final class Graph {
         private final Map<Integer, Set<Integer>> edges = new HashMap<>();
