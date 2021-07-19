@@ -9,65 +9,34 @@ import java.util.Stack;
  */
 public class DecodeString {
 
-    private static boolean isDigit(final String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public String decodeString(String str) {
-        if (str == null || str.trim().equals("")) {
-            return str;
+    public String decodeString(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
         }
 
-        final Stack<String> s = new Stack<>();
-        for (final char c : str.toLowerCase().toCharArray()) {
-            if (!"]".equals(String.valueOf(c))) {
-                s.push(String.valueOf(c));
-                continue;
-            }
-
-            final Stack<String> sb = new Stack<>();
-            while (!s.isEmpty()) {
-                final String curr = s.pop();
-                if (curr.equals("[")) {
-                    break;
+        final Stack<Integer> nums = new Stack<>();
+        final Stack<StringBuilder> expressions = new Stack<>();
+        expressions.push(new StringBuilder());
+        int num = 0;
+        for (final char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                num = num * 10 + (c - '0');
+            } else if (c == '[') {
+                nums.push(num);
+                expressions.push(new StringBuilder());
+                num = 0;
+            } else if (c == ']') {
+                final int multi = nums.pop();
+                final StringBuilder sb = expressions.pop();
+                for (int i = 0; i < multi; i++) {
+                    expressions.peek().append(sb);
                 }
-                sb.push(curr);
-            }
-
-            int multi = 1;
-            int k = 0;
-            while (!s.isEmpty()) {
-                final String curr = s.peek();
-                if (!isDigit(curr)) {
-                    break;
-                }
-                k = (Integer.parseInt(String.valueOf(curr)) + k) * multi;
-                multi = multi * 10;
-                s.pop();
-            }
-            final StringBuilder pt = new StringBuilder();
-            while (!sb.isEmpty()) {
-                pt.append(sb.pop());
-            }
-            for (int i = 0; i < k; i++) {
-                s.push(pt.toString());
+            } else {
+                expressions.peek().append(c);
             }
         }
 
+        return expressions.pop().toString();
 
-        final Stack<String> reverse = new Stack<>();
-        while (!s.isEmpty()) {
-            reverse.push(s.pop());
-        }
-        final StringBuilder result = new StringBuilder();
-        while (!reverse.isEmpty()) {
-            result.append(reverse.pop());
-        }
-        return result.toString();
     }
 }
