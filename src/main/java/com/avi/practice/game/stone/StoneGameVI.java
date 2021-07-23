@@ -1,4 +1,4 @@
-package com.avi.practice.game;
+package com.avi.practice.game.stone;
 
 import java.util.Arrays;
 

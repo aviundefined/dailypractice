@@ -1,4 +1,4 @@
-package com.avi.pepcoding.graph.additionquestions;
+package com.avi.practice.game.maze;
 
 import java.util.HashSet;
 import java.util.LinkedList;

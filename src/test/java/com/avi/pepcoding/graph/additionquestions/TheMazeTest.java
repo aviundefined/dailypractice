@@ -1,5 +1,6 @@
 package com.avi.pepcoding.graph.additionquestions;
 
+import com.avi.practice.game.maze.TheMaze;
 import org.junit.Assert;
 import org.junit.Test;
 
