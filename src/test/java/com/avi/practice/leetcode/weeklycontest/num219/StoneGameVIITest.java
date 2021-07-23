@@ -1,11 +1,10 @@
 package com.avi.practice.leetcode.weeklycontest.num219;
 
+import com.avi.practice.game.stone.StoneGameVII;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by navinash on 19/12/20.
@@ -14,9 +13,9 @@ import static org.junit.Assert.*;
  */
 public class StoneGameVIITest {
 
-    private static final StoneGameVII solver = new StoneGameVII();
     @Test
     public void stoneGameVII_1() {
+        final StoneGameVII solver = new StoneGameVII();
         final int[] stones = {5,3,1,4,2};
         final int expected = 6;
         final int actual = solver.stoneGameVII(stones);

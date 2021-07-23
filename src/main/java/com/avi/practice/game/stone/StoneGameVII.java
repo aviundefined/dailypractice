@@ -1,6 +1,4 @@
-package com.avi.practice.leetcode.weeklycontest.num219;
-
-import java.util.Arrays;
+package com.avi.practice.game.stone;
 
 /**
  * Created by navinash on 19/12/20.
@@ -43,35 +41,38 @@ import java.util.Arrays;
  */
 public class StoneGameVII {
 
-    public int stoneGameVII(final int[] stones) {
+    private int[] prefix;
+    private Integer[][] dp;
 
-        // F(i,j, sum)  = max(
-        //                  sum - stones[i] + F(i + 1, j  , sum - stones[i])
-        //                  sum - stones[j] + F(i, j - 1, sum - stones[j]),
-        //              );
-
-        final int n = stones.length;
-        final int[][] dp = new int[n][n];
-        int sum = 0;
-        for (final int stone : stones) {
-            sum += stone;
+    public int stoneGameVII(int[] stones) {
+        prefix = new int[stones.length + 1];
+        prefix[0] = 0;
+        for(int i = 0; i < stones.length; i++) {
+            prefix[i + 1] = prefix[i] + stones[i];
         }
-        for (int i = 0; i < n; i++) {
-            Arrays.fill(dp[i], -1);
-        }
-        return f(0, n - 1, sum, dp, stones);
+        dp = new Integer[stones.length][stones.length];
+        return bruteForce(stones);
     }
 
-    private int f(int i, int j, int sum, int[][] dp, int[] stones) {
-        if (i == j) {
+    private int score(final int left, final int right) {
+        return prefix[right + 1] - prefix[left];
+    }
+
+    private int bruteForce(final int[] stones) {
+        return recurse(stones, 0, stones.length - 1);
+    }
+
+    private int recurse(final int[] stones, final int left, final int right) {
+        if(left > right) {
             return 0;
         }
-        if (dp[i][j] != -1) {
-            return dp[i][j];
+        if(dp[left][right] != null) {
+            return dp[left][right];
         }
 
-        final int val = Math.max(sum - stones[i] - f(i + 1, j, sum - stones[i], dp, stones), sum - stones[j] - f(i, j - 1, sum - stones[j], dp, stones));
-        dp[i][j] = val;
-        return val;
+        final int leftScore = score(left + 1, right) - recurse(stones, left + 1, right);
+        final int rightScore = score(left, right - 1) - recurse(stones, left, right - 1);
+        dp[left][right] =  Math.max(leftScore, rightScore);
+        return dp[left][right];
     }
 }
