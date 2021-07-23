@@ -23,10 +23,11 @@ public class TheMazeIIITest {
         }
         System.out.println("Ball: " + Arrays.toString(ball));
         System.out.println("Hole: " + Arrays.toString(hole));
+        final String expected = "lul";
+        System.out.println("Instructions: "+expected);
         System.out.println("-------------");
-        final String actual = "lul";
-        final String expected = solver.findShortestWay(maze, ball, hole);
-        Assert.assertEquals(actual, expected);
+        final String actual = solver.findShortestWay(maze, ball, hole);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -40,10 +41,11 @@ public class TheMazeIIITest {
         }
         System.out.println("Ball: " + Arrays.toString(ball));
         System.out.println("Hole: " + Arrays.toString(hole));
+        final String expected = "impossible";
+        System.out.println("Instructions: "+expected);
         System.out.println("-------------");
-        final String actual = "impossible";
-        final String expected = solver.findShortestWay(maze, ball, hole);
-        Assert.assertEquals(actual, expected);
+        final String actual = solver.findShortestWay(maze, ball, hole);
+        Assert.assertEquals(expected, actual);
     }
 
 }

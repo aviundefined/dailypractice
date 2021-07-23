@@ -41,19 +41,32 @@ public class TheMazeIII {
             }
             final int currDir = getDirection(curr.path);
             for (int i = 0; i < dirs.length; i++) {
-                final int newX = curr.x + dirs[i][0];
-                final int newY = curr.y + dirs[i][1];
-                if (newX >= 0
+                int newX = curr.x + dirs[i][0];
+                int newY = curr.y + dirs[i][1];
+                int distance = 0;
+                boolean holeFound = false;
+                while (newX >= 0
                         && newY >= 0
                         && newX < maze.length
                         && newY < maze[0].length
-                        && maze[newX][newY] == 0
-                        && !visited[newX][newY]) {
-                    String newPath = curr.path;
-                    if (currDir == -1 || currDir != i) {
-                        newPath += getPath(i);
+                        && maze[newX][newY] == 0) {
+                    if (newX == hole[0] && newY == hole[1]) {
+                        holeFound = true;
+                        distance++;
+                        break;
                     }
-                    q.offer(new Cell(newX, newY, curr.cost + 1, newPath));
+                    newX += dirs[i][0];
+                    newY += dirs[i][1];
+                    distance++;
+                }
+                String newPath = curr.path;
+                if (currDir == -1 || currDir != i) {
+                    newPath += getPath(i);
+                }
+                if (holeFound) {
+                    q.offer(new Cell(newX, newY, curr.cost + distance, newPath));
+                } else if (!visited[newX - dirs[i][0]][newY - dirs[i][1]]) {
+                    q.offer(new Cell(newX - dirs[i][0], newY - dirs[i][1], curr.cost + distance, newPath));
                 }
             }
         }
