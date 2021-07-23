@@ -20,31 +20,39 @@ public class TheMaze {
     };
 
     public boolean hasPath_BFS(int[][] maze, int[] start, int[] destination) {
-        if (maze == null || maze.length == 0) {
+        if (maze == null || maze.length == 0 || start == null || destination == null) {
             return false;
         }
-        final Set<Cell> visited = new HashSet<>();
-        final Queue<Cell> q = new LinkedList<>();
-        final Cell startCell = new Cell(start[0], start[1]);
-        q.offer(startCell);
-        visited.add(startCell);
+        if (start[0] == destination[0] && start[1] == destination[1]) {
+            return true;
+        }
+
+        final Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{start[0], start[1]});
+        final boolean[][] visited = new boolean[maze.length][maze[0].length];
         while (!q.isEmpty()) {
-            final Cell curr = q.poll();
-            if (curr.i == destination[0] && curr.j == destination[1]) {
+            // remove mark* work add*
+            final int[] curr = q.poll();
+            if (visited[curr[0]][curr[1]]) {
+                continue;
+            }
+            visited[curr[0]][curr[1]] = true;
+            if (curr[0] == destination[0] && curr[1] == destination[1]) {
                 return true;
             }
             for (final int[] dir : directions) {
-                int x = curr.i + dir[0];
-                int y = curr.j + dir[1];
-                while (x >= 0 && y >= 0 && x < maze.length && y < maze[0].length && maze[x][y] == 0) {
-                    x += dir[0];
-                    y += dir[1];
+                int newX = curr[0] + dir[0];
+                int newY = curr[1] + dir[1];
+                while (newX >= 0
+                        && newY >= 0
+                        && newX < maze.length
+                        && newY < maze[0].length
+                        && maze[newX][newY] == 0) {
+                    newX += dir[0];
+                    newY += dir[1];
                 }
-                // reach to the first blocked cell, so come back to get the valid cell
-                final Cell cell = new Cell(x - dir[0], y - dir[1]);
-                if (!visited.contains(cell)) {
-                    q.offer(cell);
-                    visited.add(cell);
+                if (!visited[newX - dir[0]][newY - dir[1]]) {
+                    q.offer(new int[]{newX - dir[0], newY - dir[1]});
                 }
             }
         }
