@@ -31,6 +31,9 @@ package com.avi.practice.game.stone;
  */
 public class StoneGameII {
 
+    private int[][] aliceScores;
+    private int[][] bobScores;
+
     public int stoneGameII(int[] piles) {
         if (piles == null || piles.length == 0) {
             return 0;
@@ -43,10 +46,12 @@ public class StoneGameII {
             return Math.max(piles[0], piles[1]);
         }
         final int m = 1;
-        return recurse(piles, 0, m, true, new int[piles.length][piles.length], new int[piles.length][piles.length]);
+        aliceScores = new int[piles.length][piles.length];
+        bobScores = new int[piles.length][piles.length];
+        return recurse(piles, 0, m, true);
     }
 
-    private int recurse(int[] piles, int index, int m, boolean isAliceTurn, int[][] aliceScores, int[][] bobScores) {
+    private int recurse(int[] piles, int index, int m, boolean isAliceTurn) {
         if (index >= piles.length || m >= piles.length) {
             return 0;
         }
@@ -59,7 +64,7 @@ public class StoneGameII {
             int max = Integer.MIN_VALUE;
             for (int i = index; i <= index + 2 * m - 1 && i < piles.length; i++) {
                 sum += piles[i];
-                max = Math.max(max, sum + recurse(piles, i + 1, Math.max(m, i - index + 1), false, aliceScores, bobScores));
+                max = Math.max(max, sum + recurse(piles, i + 1, Math.max(m, i - index + 1), false));
             }
             aliceScores[index][m] = max;
             return max;
@@ -69,7 +74,7 @@ public class StoneGameII {
             }
             int min = Integer.MAX_VALUE;
             for (int i = index; i <= index + 2 * m - 1 && i < piles.length; i++) {
-                min = Math.min(min, recurse(piles, i + 1, Math.max(m, i - index + 1), true, aliceScores, bobScores));
+                min = Math.min(min, recurse(piles, i + 1, Math.max(m, i - index + 1), true));
             }
             bobScores[index][m] = min;
             return min;
