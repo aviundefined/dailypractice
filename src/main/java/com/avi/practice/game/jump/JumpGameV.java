@@ -6,18 +6,14 @@ package com.avi.practice.game.jump;
  * -- VMware Confidential
  */
 public class JumpGameV {
-    private MinSegmentTree tree;
     public int maxJumps(int[] arr, int d) {
-        if (arr == null || arr.length == 0) {
-            return 0;
-        }
-
-        tree = new MinSegmentTree(arr);
-        int max = Integer.MIN_VALUE;
         final int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            final boolean[] visited  = new boolean[n];
-            int count = dfs(i, d, visited);
+        final Integer[] dp = new Integer[n];
+        int max = 1;
+        for(int i = 0; i < arr.length; i++) {
+            // start from i node and see how many nodes can be visited
+            // maintain max node count
+            final int count = dfs(i, d, arr, dp);
             if(count > max) {
                 max = count;
             }
@@ -25,53 +21,33 @@ public class JumpGameV {
         return max;
     }
 
-    private int dfs(int i, int d, boolean[] visited) {
-        visited[i] = true;
-        // from i we can go to [i + 1, i +d]
-        return 0;
-    }
+    private int dfs(
+            final int i,
+            final int d,
+            final int[] arr,
+            final Integer[] dp) {
 
-    private static final class MinSegmentTree {
-        private final int[] arr;
-        private final int[] st;
-        private final int n;
-
-        private MinSegmentTree(final int[] arr) {
-            this.arr = arr;
-            this.n = arr.length;
-            this.st = new int[4 * n];
-            build(0, n - 1, 0);
+        if(i >= arr.length || i < 0) {
+            return 0;
+        }
+        if(dp[i] != null) {
+            return dp[i];
         }
 
-        private void build(int start, int end, int segmentIndex) {
-            if (start == end) {
-                st[segmentIndex] = arr[start];
-                return;
+        int count = 0;
+        for(int j = i + 1; j <= i + d && j < arr.length; j++) {
+            if(arr[i] <= arr[j]) {
+                break;
             }
-
-            final int mid = start + (end - start) / 2;
-            build(start, mid, 2 * segmentIndex + 1);
-            build(mid + 1, end, 2 * segmentIndex + 2);
-            arr[segmentIndex] = Math.min(arr[2 * segmentIndex + 1], arr[2 * segmentIndex + 2]);
+            count = Math.max(count, dfs(j, d, arr, dp));
         }
-
-        private int query(final int qStart, final int qEnd) {
-            return query(qStart, qEnd, 0, n - 1, 0);
-        }
-
-        private int query(int qStart, int qEnd, int start, int end, int segmentIndex) {
-            // complete overlap
-            if (qStart >= start && qEnd <= end) {
-                return this.st[segmentIndex];
+        for(int j = i - 1; j >= i - d && j >= 0; j--) {
+            if(arr[i] <= arr[j]) {
+                break;
             }
-            // no overlap
-            if (qStart > end || qEnd < start) {
-                return Integer.MAX_VALUE;
-            }
-            final int mid = start + (end - start) / 2;
-            final int left = query(qStart, qEnd, start, mid, 2 * segmentIndex + 1);
-            final int right = query(qStart, qEnd, mid + 1, end, 2 * segmentIndex + 2);
-            return Math.max(left, right);
+            count = Math.max(count, dfs(j, d, arr, dp));
         }
+        dp[i] = count + 1;
+        return dp[i];
     }
 }
