@@ -1,5 +1,8 @@
 package com.avi.practice.company.google;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * Given an array of integers nums and an integer limit, return the size of the longest non-empty subarray such that the absolute difference between any two elements of this subarray is less than or equal to limit.
  * <p>
@@ -41,7 +44,7 @@ package com.avi.practice.company.google;
 public class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit {
 
     public int longestSubarray(int[] nums, int limit) {
-       return longestSubarray_Deque(nums, limit);
+        return longestSubarray_Deque(nums, limit);
     }
 
     public int longestSubarray_Deque(int[] nums, int limit) {
@@ -52,26 +55,32 @@ public class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit {
         if (n == 1) {
             return 1;
         }
-        final MaxSegmentTree maxTree = new MaxSegmentTree(nums);
-        final MinSegmentTree minTree = new MinSegmentTree(nums);
-        int left = 0;
-        int right = 1;
 
-        int result = 1;
+        final Deque<Integer> maxQueue = new ArrayDeque<>();
+        final Deque<Integer> minQueue = new ArrayDeque<>();
+        int i = 0;
+        int j;
+        for(j = 0; j < nums.length; j++) {
+            while (!maxQueue.isEmpty() && maxQueue.peekLast() < nums[i]) {
+                maxQueue.removeLast();
+            }
 
-        while (right < n) {
-            final int max = maxTree.query(left, right);
-            final int min = minTree.query(left, right);
-            if (Math.abs(max - min) <= limit) {
-                if (right - left + 1 > result) {
-                    result = (right - left + 1);
+            while (!minQueue.isEmpty() && minQueue.peekLast() > nums[i]) {
+                minQueue.removeLast();
+            }
+            maxQueue.addLast(nums[i]);
+            minQueue.addLast(nums[i]);
+            if(maxQueue.peek() - minQueue.peek() > limit) {
+                if(maxQueue.peek() == nums[i]) {
+                    maxQueue.poll();
                 }
-                right++;
-            } else {
-                left++;
+                if(minQueue.peek() == nums[i]) {
+                    minQueue.poll();
+                }
+                i++;
             }
         }
-        return result;
+         return j - i;
     }
 
     public int longestSubarray_SegmentTree(int[] nums, int limit) {
