@@ -15,32 +15,62 @@ import static org.junit.Assert.*;
 public class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimitTest {
 
     @Test
-    public void longestSubarray1() {
+    public void longestSubarray_SegmentTree1() {
         final LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit solver = new LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
         final int[] nums = {8, 2, 4, 7};
         final int limit = 4;
         final int expected = 2;
-        final int actual = solver.longestSubarray(nums, limit);
+        final int actual = solver.longestSubarray_SegmentTree(nums, limit);
         Assert.assertEquals(String.format("nums: %s, limit: %s", Arrays.toString(nums), limit), expected, actual);
     }
 
     @Test
-    public void longestSubarray2() {
+    public void longestSubarray_SegmentTree2() {
         final LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit solver = new LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
         final int[] nums = {10, 1, 2, 4, 7, 2};
         final int limit = 5;
         final int expected = 4;
-        final int actual = solver.longestSubarray(nums, limit);
+        final int actual = solver.longestSubarray_SegmentTree(nums, limit);
         Assert.assertEquals(String.format("nums: %s, limit: %s", Arrays.toString(nums), limit), expected, actual);
     }
 
     @Test
-    public void longestSubarray3() {
+    public void longestSubarray_SegmentTree3() {
         final LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit solver = new LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
         final int[] nums = {4,2,2,2,4,4,2,2};
         final int limit = 0;
         final int expected = 3;
-        final int actual = solver.longestSubarray(nums, limit);
+        final int actual = solver.longestSubarray_SegmentTree(nums, limit);
+        Assert.assertEquals(String.format("nums: %s, limit: %s", Arrays.toString(nums), limit), expected, actual);
+    }
+
+    @Test
+    public void longestSubarray_Deque1() {
+        final LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit solver = new LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
+        final int[] nums = {8, 2, 4, 7};
+        final int limit = 4;
+        final int expected = 2;
+        final int actual = solver.longestSubarray_Deque(nums, limit);
+        Assert.assertEquals(String.format("nums: %s, limit: %s", Arrays.toString(nums), limit), expected, actual);
+    }
+
+    @Test
+    public void longestSubarray_Deque2() {
+        final LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit solver = new LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
+        final int[] nums = {10, 1, 2, 4, 7, 2};
+        final int limit = 5;
+        final int expected = 4;
+        final int actual = solver.longestSubarray_Deque(nums, limit);
+        Assert.assertEquals(String.format("nums: %s, limit: %s", Arrays.toString(nums), limit), expected, actual);
+    }
+
+    @Test
+    public void longestSubarray_Deque3() {
+        final LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit solver = new LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
+        final int[] nums = {4,2,2,2,4,4,2,2};
+        final int limit = 0;
+        final int expected = 3;
+        final int actual = solver.longestSubarray_Deque(nums, limit);
         Assert.assertEquals(String.format("nums: %s, limit: %s", Arrays.toString(nums), limit), expected, actual);
     }
 }

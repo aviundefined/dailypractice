@@ -41,6 +41,40 @@ package com.avi.practice.company.google;
 public class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit {
 
     public int longestSubarray(int[] nums, int limit) {
+       return longestSubarray_Deque(nums, limit);
+    }
+
+    public int longestSubarray_Deque(int[] nums, int limit) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        final int n = nums.length;
+        if (n == 1) {
+            return 1;
+        }
+        final MaxSegmentTree maxTree = new MaxSegmentTree(nums);
+        final MinSegmentTree minTree = new MinSegmentTree(nums);
+        int left = 0;
+        int right = 1;
+
+        int result = 1;
+
+        while (right < n) {
+            final int max = maxTree.query(left, right);
+            final int min = minTree.query(left, right);
+            if (Math.abs(max - min) <= limit) {
+                if (right - left + 1 > result) {
+                    result = (right - left + 1);
+                }
+                right++;
+            } else {
+                left++;
+            }
+        }
+        return result;
+    }
+
+    public int longestSubarray_SegmentTree(int[] nums, int limit) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
