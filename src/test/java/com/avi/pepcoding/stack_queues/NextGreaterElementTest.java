@@ -26,7 +26,7 @@ public class NextGreaterElementTest {
         final NextGreaterElement solver = new NextGreaterElement();
         final int[] arr = {2, 5, 9, 3, 1, 12, 6, 8, 7};
         final int[] result = {5, 9, 12, 12, 12, -1, 8, -1, -1};
-        final int [] actual = solver.nextGreaterElements_from_right_to_left(arr);
+        final int [] actual = solver.nextGreaterElements_from_left_to_right(arr);
         Assert.assertArrayEquals(Arrays.toString(arr), result, actual);
     }
 }
