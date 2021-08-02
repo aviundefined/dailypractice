@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by navinash on 02/08/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -19,7 +17,7 @@ public class LargestAreaHistogramTest {
         final LargestAreaHistogram solver = new LargestAreaHistogram();
         final int[] arr = {6, 2, 5, 4, 5, 1, 6};
         final int expected = 12;
-        final int actual = solver.largestArea(arr);
+        final int actual = solver.largestRectangleArea(arr);
         Assert.assertEquals(Arrays.toString(arr), expected, actual);
     }
 
@@ -28,7 +26,7 @@ public class LargestAreaHistogramTest {
         final LargestAreaHistogram solver = new LargestAreaHistogram();
         final int[] arr = {1,1};
         final int expected = 2;
-        final int actual = solver.largestArea(arr);
+        final int actual = solver.largestRectangleArea(arr);
         Assert.assertEquals(Arrays.toString(arr), expected, actual);
     }
 
@@ -37,7 +35,7 @@ public class LargestAreaHistogramTest {
         final LargestAreaHistogram solver = new LargestAreaHistogram();
         final int[] arr = {0, 9};
         final int expected = 9;
-        final int actual = solver.largestArea(arr);
+        final int actual = solver.largestRectangleArea(arr);
         Assert.assertEquals(Arrays.toString(arr), expected, actual);
     }
 }

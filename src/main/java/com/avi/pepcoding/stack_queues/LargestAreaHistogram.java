@@ -1,7 +1,6 @@
 package com.avi.pepcoding.stack_queues;
 
 
-import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -11,19 +10,19 @@ import java.util.Stack;
  */
 public class LargestAreaHistogram {
 
-    public final int largestArea(final int[] arr) {
-        if (arr == null || arr.length == 0) {
+    public final int largestRectangleArea(final int[] heights) {
+        if (heights == null || heights.length == 0) {
             return 0;
         }
 
-        final int n = arr.length;
+        final int n = heights.length;
 
         final int[] nextSmallerRight = new int[n];
         Stack<Integer> st = new Stack<>();
         st.push(n - 1);
         nextSmallerRight[n - 1] = n;
         for(int i = n - 2; i >=0; i--) {
-            while (!st.isEmpty() && arr[st.peek()] >= arr[i]) {
+            while (!st.isEmpty() && heights[st.peek()] >= heights[i]) {
                 st.pop();
             }
             nextSmallerRight[i] = st.isEmpty() ? n : st.peek();
@@ -34,17 +33,16 @@ public class LargestAreaHistogram {
         st.push(0);
         nextSmallerLeft[0] = -1;
         for(int i = 1; i < n; i++) {
-            while (!st.isEmpty() && arr[st.peek()] >= arr[i]) {
+            while (!st.isEmpty() && heights[st.peek()] >= heights[i]) {
                 st.pop();
             }
             nextSmallerLeft[i] = st.isEmpty() ? -1 : st.peek();
             st.push(i);
         }
-        System.out.println("nextSmallerRight: "+ Arrays.toString(nextSmallerRight));
-        System.out.println("nextSmallerLeft: "+ Arrays.toString(nextSmallerLeft));
+
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < n; i++) {
-            final int currArea = arr[i] * (nextSmallerRight[i] - nextSmallerLeft[i] - 1);
+            final int currArea = heights[i] * (nextSmallerRight[i] - nextSmallerLeft[i] - 1);
             max = Math.max(currArea, max);
         }
         return max;
