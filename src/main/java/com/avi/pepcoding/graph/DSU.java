@@ -63,8 +63,10 @@ public class DSU {
         final int parent2NodeCount = Math.abs(parent[parent2 - 1]);
         if (parent1NodeCount >= parent2NodeCount) {
             parent[parent2 - 1] = parent1;
+            parent[parent1 - 1] = -1 * (parent1NodeCount + parent2NodeCount);
         } else {
             parent[parent1 - 1] = parent2;
+            parent[parent2 - 1] = -1 * (parent1NodeCount + parent2NodeCount);
         }
         return true;
     }
