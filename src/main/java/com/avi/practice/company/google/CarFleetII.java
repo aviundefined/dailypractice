@@ -35,59 +35,33 @@ public class CarFleetII {
 
     public double[] getCollisionTimes(int[][] cars) {
         if (cars == null || cars.length == 0) {
-            return new double[0];
+            return new double[]{};
         }
 
         final int n = cars.length;
-        if (n == 1) {
-            final double[] result = new double[1];
-            result[0] = -1;
-            return result;
-        }
-        final double[] dp = new double[n];
-        Arrays.fill(dp, -1.00000D);
-        final Stack<Car> s = new Stack<>();
-        s.push(new Car(cars[0][0], cars[0][1]));
-        for (int i = 1; i < n; i++) {
-            double currentCurrOldPosition = cars[i][0];
-            final int speed = cars[i][1];
-            if (s.peek().speed > speed) {
-                // collision
-                if (i == 1 || dp[i - 2] == -1.00000D) {
-                    final Car prevCar = s.pop();
-                    final double timeToCollide = (currentCurrOldPosition - prevCar.position) * 1.0000D / (prevCar.speed - speed);
-                    final double currCarNewPosition = (timeToCollide * speed) + currentCurrOldPosition;
-                    s.push(new Car(currCarNewPosition, speed));
-                    dp[i - 1] = timeToCollide;
-                } else {
-                    final Car prevCar = s.pop();
-                    currentCurrOldPosition = currentCurrOldPosition + (dp[i - 2] * speed);
-                    final double timeToCollide = (currentCurrOldPosition - prevCar.position) * 1.0000D / (prevCar.speed - speed);
-                    final double currCarNewPosition = (timeToCollide * speed) + currentCurrOldPosition;
-                    s.push(new Car(currCarNewPosition, speed));
-                    dp[i - 1] = timeToCollide;
-                }
-
-            }else {
+        final double[] result = new double[n];
+        Arrays.fill(result, -1.00D);
+        final Stack<Integer> s = new Stack<>();
+        s.push(n - 1);
+        result[n - 1] = -1;
+        for (int i = n - 2; i >= 0; i--) {
+            while (!s.isEmpty() && cars[s.peek()][1] >= cars[i][1]) {
+                // right car is faster so can't collide
                 s.pop();
-                s.push(new Car(currentCurrOldPosition, speed));
             }
-        }
-        return dp;
-    }
 
-    private static final class Car {
-        private double position;
-        private double speed;
+            while (!s.isEmpty()) {
+                // calculate collison time with next car
+                final double collisonTime = (1.00D * (cars[s.peek()][0] - cars[i][0]) / (cars[i][1] - cars[s.peek()][1]));
 
-        public Car(double position, double speed) {
-            this.position = position;
-            this.speed = speed;
+                if (result[s.peek()] == -1.00D || collisonTime <= result[s.peek()]) {
+                    result[i] = collisonTime;
+                    break;
+                }
+                s.pop();
+            }
+            s.push(i);
         }
-
-        @Override
-        public String toString() {
-            return "(" + +position + "," + speed + ")";
-        }
+        return result;
     }
 }

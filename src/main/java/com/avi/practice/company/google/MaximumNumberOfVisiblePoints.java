@@ -1,5 +1,6 @@
 package com.avi.practice.company.google;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,36 +46,40 @@ import java.util.List;
  */
 public class MaximumNumberOfVisiblePoints {
 
-    private List<List<Integer>> points;
-    private List<Integer> location;
+
     public int visiblePoints(List<List<Integer>> points, int angle, List<Integer> location) {
-            if(points == null || points.size() == 0 || location == null ) {
-                return 0;
-            }
-            this.points = points;
-            this.location = location;
+        if (points == null || points.size() == 0 || location == null) {
+            return 0;
+        }
 
-            int max = Integer.MIN_VALUE;
-            for(int move = 0; move < 360; move++) {
-                final int visiblePoints = visiblePoints(angle + move);
-                if(visiblePoints > max) {
-                    max = visiblePoints;
-                }
+        final List<Double> angles = new ArrayList<>();
+        int overlappingPoints = 0;
+        for (final List<Integer> point : points) {
+            final int dy = point.get(1) - location.get(1);
+            final int dx = point.get(0) - location.get(0);
+            // same point
+            if (dy == 0 && dx == 0) {
+                overlappingPoints++;
+                continue;
             }
-            return max;
+
+            final double currentPointAngle = angle(dy, dx);
+            angles.add(currentPointAngle);
+            angles.add(currentPointAngle + 360);
+        }
+
+        angles.sort(Double::compare);
+        int max = 0;
+        for (int right = 0, left = 0; right < angles.size(); right++) {
+            while (angles.get(right) - angles.get(left) > angle) {
+                left++;
+            }
+            max = Math.max(max, right - left + 1);
+        }
+        return max + overlappingPoints;
     }
 
-    private int visiblePoints(final int angle) {
-        return 0;
-    }
-
-    public static void main(String[] args) {
-        int a=1;
-        char c=(char)(a+'0');
-        System.out.println(c);
-
-        final char c1 = '.';
-        final char c2 = '.';
-        System.out.println(c1 == c2);
+    private double angle(final int dy, final int dx) {
+        return Math.atan2(dy, dx) * (180 / Math.PI);
     }
 }
