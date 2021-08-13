@@ -13,7 +13,6 @@ public class PrintKDistanceFarTest {
 
     @Test
     public void getKDistanceFar() {
-
         final ConstructBinaryTree constructor = new ConstructBinaryTree();
         final Integer[] arr = {50, 25, 12, null, null, 37, 30, null, null, 40,null, null, 75, 62, 60, null, null, 70, null, null, 87, null, null};
         final Node root = constructor.construct(arr);
