@@ -22,7 +22,7 @@ public class NodeToRootPathTest {
         for (final Integer node : arr) {
             if (node != null) {
                 System.out.println("Path for: " + node);
-                final List<Node> path = nodeToRootPath.path(root, 62);
+                final List<Node> path = nodeToRootPath.path(root, node);
                 for (final Node n : path) {
                     System.out.print(n.getValue() + "->");
                 }
