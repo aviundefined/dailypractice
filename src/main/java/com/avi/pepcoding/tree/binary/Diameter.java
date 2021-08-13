@@ -23,8 +23,7 @@ public class Diameter {
         final DiameterHeight rightDH = recurse(root.getRight());
         final int dia = Math.max(leftDH.height + rightDH.height + 2, Math.max(leftDH.diameter, rightDH.diameter));
         final int h = Math.max(leftDH.height, rightDH.height) + 1;
-        final DiameterHeight curr = new DiameterHeight(dia, h);
-        return curr;
+        return new DiameterHeight(dia, h);
     }
 
     private static final class DiameterHeight {
