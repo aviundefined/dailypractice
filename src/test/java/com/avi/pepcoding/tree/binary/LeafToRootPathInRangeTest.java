@@ -9,18 +9,18 @@ import java.util.List;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class PrintKDistanceFarTest {
+public class LeafToRootPathInRangeTest {
 
     @Test
-    public void getKDistanceFar() {
+    public void rootToNode() {
 
         final ConstructBinaryTree constructor = new ConstructBinaryTree();
         final Integer[] arr = {50, 25, 12, null, null, 37, 30, null, null, 40,null, null, 75, 62, 60, null, null, 70, null, null, 87, null, null};
         final Node root = constructor.construct(arr);
-        final PrintKDistanceFar solver = new PrintKDistanceFar();
-        final List<Node> nodes = solver.getKDistanceFar(root, 25, 2);
-        for (final Node node : nodes) {
-            System.out.println(node.getValue());
+        final LeafToRootPathInRange solver = new LeafToRootPathInRange();
+        final List<List<Integer>> paths = solver.rootToNode(root, 150, 250);
+        for (final List<Integer> path : paths) {
+            System.out.println(path);
         }
     }
 }
