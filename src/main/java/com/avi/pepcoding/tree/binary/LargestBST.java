@@ -33,11 +33,11 @@ public class LargestBST {
         final int max = Math.max(root.getValue(), Math.max(left.max, right.max));
         final Tuple tuple;
         if (isBst) {
-            tuple = new Tuple(isBst, min, max, left.size + right.size + 1, root);
+            tuple = new Tuple(true, min, max, left.size + right.size + 1, root);
         } else if (left.size > right.size) {
-            tuple = new Tuple(isBst, min, max, left.size, left.root);
+            tuple = new Tuple(false, min, max, left.size, left.root);
         } else {
-            tuple = new Tuple(isBst, min, max, right.size, right.root);
+            tuple = new Tuple(false, min, max, right.size, right.root);
         }
         return tuple;
     }
