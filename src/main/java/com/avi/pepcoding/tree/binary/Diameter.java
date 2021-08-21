@@ -30,7 +30,6 @@ public class Diameter {
         private final int diameter;
         private final int height;
 
-
         private DiameterHeight(int diameter, int height) {
             this.diameter = diameter;
             this.height = height;
