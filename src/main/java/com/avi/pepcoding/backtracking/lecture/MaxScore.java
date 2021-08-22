@@ -83,23 +83,23 @@ public class MaxScore {
         return pair;
     }
 
-     static final class Result {
-         final int score;
-         final List<String> words;
+    static final class Result {
+        final int score;
+        final List<String> words;
 
         private Result(int score, List<String> words) {
             this.score = score;
             this.words = words;
         }
 
-         @Override
-         public String toString() {
-             return "Result{" +
-                     "score=" + score +
-                     ", words=" + words +
-                     '}';
-         }
-     }
+        @Override
+        public String toString() {
+            return "Result{" +
+                    "score=" + score +
+                    ", words=" + words +
+                    '}';
+        }
+    }
 
     private static final class Pair {
         private final boolean canUse;
