@@ -5,7 +5,7 @@ package com.avi.practice.company.google;
  * <p>
  * Implement the Excel class:
  * <p>
- * Excel(int height, char width) Initializes the object with the height and the width of the sheet. The sheet is an integer matrix mat of size height x width with the row index in the range [1, height] and the column index in the range ['A', width]. All the values should be zero initially.
+ * Excel(int height, char width) Initializes the object with the height and the width of the sheet. The sheet is an integer matrix mat of size height x width with the row value in the range [1, height] and the column value in the range ['A', width]. All the values should be zero initially.
  * void set(int row, char column, int val) Changes the value at mat[row][column] to be val.
  * int get(int row, char column) Returns the value at mat[row][column].
  * int sum(int row, char column, List<String> numbers) Sets the value at mat[row][column] to be the sum of cells represented by numbers and returns the value at mat[row][column]. This sum formula should exist until this cell is overlapped by another value or another sum formula. numbers[i] could be on the format:
@@ -68,21 +68,33 @@ package com.avi.practice.company.google;
 public class DesignExcelSumFormula {
 
     public static final class Excel {
-        public Excel(int height, char width) {
 
+        private final int[][] mat;
+        private final int height;
+        private final int width;
+
+        public Excel(int height, char width) {
+            this.height = height;
+            this.width = value(width);
+            this.mat = new int[this.height][this.width];
+        }
+
+        private static int value(final Character c) {
+            return c.toString().toUpperCase().toCharArray()[0] - 'A';
         }
 
         public void set(int row, char column, int val) {
-
+            this.mat[row - 1][value(column)] = val;
         }
 
         public int get(int row, char column) {
-            return -1;
+            return this.mat[row - 1][value(column)];
         }
 
         public int sum(int row, char column, String[] numbers) {
             return -1;
         }
+
     }
 
 }

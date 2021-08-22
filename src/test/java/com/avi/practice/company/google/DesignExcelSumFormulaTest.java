@@ -19,6 +19,10 @@ public class DesignExcelSumFormulaTest {
         final Excel excel = new Excel(height, width);
         excel.set(1, 'A', 2);
         {
+            final int actual = excel.get(1, 'A');
+            Assert.assertEquals(2, actual);
+        }
+        {
             final String[] numbers = {"A1", "A1:B2"};
             final int actual = excel.sum(3, 'C', numbers);
             Assert.assertEquals(4, actual);
