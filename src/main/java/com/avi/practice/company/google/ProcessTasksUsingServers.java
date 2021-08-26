@@ -10,60 +10,85 @@ import java.util.PriorityQueue;
 public class ProcessTasksUsingServers {
 
     public int[] assignTasks(int[] servers, int[] tasks) {
-        if(tasks == null) {
+        if (tasks == null) {
             return null;
         }
 
         final int numTasks = tasks.length;
         final int[] result = new int[numTasks];
-        // (index, weight)
-        final PriorityQueue<int[]> serverQueue = new PriorityQueue<>((a, b) -> {
-            if(a[1] == b[1]) {
-                return a[0] - b[0];
+        final PriorityQueue<Server> serverQueue = new PriorityQueue<>((a, b) -> {
+            if (a.serverWeight != b.serverWeight) {
+                return a.serverWeight - b.serverWeight;
             }
-            return a[1] - b[1];
+            return a.serverId - b.serverId;
         });
-        // {server index, server weight, taskindex, finish time, eneueu time, taskNumer}
-        final PriorityQueue<int[]> taskQueue = new PriorityQueue<>((a, b) -> {
-            // first priority finish time
-            if(a[2] != b[2]) {
-                return a[2] - b[2];
-            }
-            // then server weight
-            if(a[1] != b[1]) {
-                return a[1] - b[1];
-            }
-            // then server index
-            if(a[0] != b[0]) {
-                return a[0] - b[0];
-            }
-
-            // then task enque time
-            return a[3] - b[3];
-        });
-
-        for(int i = 0; i < servers.length; i++) {
-            serverQueue.offer(new int[] {i, servers[i]});
+        for (int i = 0; i < servers.length; i++) {
+            serverQueue.offer(new Server(i, servers[i]));
         }
-        int currentTime = 0;
-        int taskNumber = 0;
-        while(taskNumber < numTasks) {
-            while(!taskQueue.isEmpty() && taskQueue.peek()[2] <= currentTime) {
-                final int[] completedTask = taskQueue.poll(); // complete the task
-                // add the used server in available servers to work
-                serverQueue.offer(new int[]{completedTask[0], completedTask[1]});
+        final PriorityQueue<Task> taskQueue = new PriorityQueue<>((t1, t2) -> {
+            if (t1.finishTime != t2.finishTime) {
+                return t1.finishTime - t2.finishTime;
+            }
+            if (t1.serverWeight != t2.serverWeight) {
+                return t1.serverWeight - t2.serverWeight;
+            }
+            if (t1.serverId != t2.serverId) {
+                return t1.serverId - t2.serverId;
+            }
+            if (t1.enqueueTime != t2.enqueueTime) {
+                return t1.enqueueTime - t2.enqueueTime;
             }
 
-            if(!serverQueue.isEmpty()) {
-                // poll the available server and assign task
-                final int[] server = serverQueue.poll();
-                result[taskNumber] = server[0];
-                taskQueue.offer(new int[]{server[0], server[1], tasks[taskNumber] + currentTime, currentTime});
-                taskNumber++;
+            return t1.taskId - t2.taskId;
+        });
 
+        int currentTime = 0;
+        int numCompletedTask = 0;
+        int taskNumber = 0;
+        while (numCompletedTask < numTasks) {
+            while (!taskQueue.isEmpty() && taskQueue.peek().finishTime <= currentTime) {
+                final Task completedTask = taskQueue.poll();
+                result[completedTask.taskId] = completedTask.serverId;
+                serverQueue.offer(new Server(completedTask.serverId, completedTask.serverWeight));
+                numCompletedTask++;
+            }
+
+
+            while (!serverQueue.isEmpty() && taskNumber <= currentTime && taskNumber < numTasks) {
+                final Server server = serverQueue.poll();
+                final Task inProgressTask = new Task(currentTime, currentTime + tasks[taskNumber], taskNumber, server.serverId, server.serverWeight);
+                taskQueue.offer(inProgressTask);
+                taskNumber++;
             }
             currentTime++;
+
         }
         return result;
+    }
+
+    private static final class Task {
+        private final int enqueueTime;
+        private final int finishTime;
+        private final int taskId;
+        private final int serverId;
+        private final int serverWeight;
+
+        public Task(int enqueueTime, int finishTime, int taskId, int serverId, int serverWeight) {
+            this.enqueueTime = enqueueTime;
+            this.finishTime = finishTime;
+            this.taskId = taskId;
+            this.serverId = serverId;
+            this.serverWeight = serverWeight;
+        }
+    }
+
+    private static final class Server {
+        private final int serverId;
+        private final int serverWeight;
+
+        public Server(int serverId, int serverWeight) {
+            this.serverId = serverId;
+            this.serverWeight = serverWeight;
+        }
     }
 }
