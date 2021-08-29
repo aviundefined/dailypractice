@@ -21,29 +21,29 @@ public class FriendPairing {
         return result;
     }
 
-    private void backtrack(int index, String curr, int n, boolean[] used, List<String> result) {
-        if (index >= n) {
+    private void backtrack(int i, String curr, int n, boolean[] used, List<String> result) {
+        if (i >= n) {
             result.add(curr);
             return;
         }
 
-        if (used[index]) {
-            backtrack(index + 1, curr, n, used, result);
+        if (used[i]) {
+            backtrack(i + 1, curr, n, used, result);
         } else {
-            used[index] = true;
-            backtrack(index + 1, curr + "(" + index + ")", n, used, result);
-            used[index] = false;
+            used[i] = true;
+            backtrack(i + 1, curr + "(" + i + ")", n, used, result);
+            used[i] = false;
 
-            used[index] = true;
-            for (int i = index + 1; i < n; i++) {
-                if (used[i]) {
+            used[i] = true;
+            for (int j = i + 1; j < n; j++) {
+                if (used[j]) {
                     continue;
                 }
-                used[i] = true;
-                backtrack(index + 1, curr + "(" + index + "," + i + ")", n, used, result);
-                used[i] = false;
+                used[j] = true;
+                backtrack(i + 1, curr + "(" + i + "," + j + ")", n, used, result);
+                used[j] = false;
             }
-            used[index] = false;
+            used[i] = false;
         }
     }
 }
