@@ -13,10 +13,18 @@ import java.util.PriorityQueue;
  */
 public class JobSchedulingWithCoolOff {
 
-    public String schedule(final String jobs, final int coolOff) {
+    public String schedule(final String jobs, final int n) {
+        return _leastInterval(jobs.toLowerCase().toCharArray(), n);
+    }
+
+    public int leastInterval(char[] tasks, int n) {
+        return _leastInterval(tasks, n).length();
+    }
+
+    private String _leastInterval(char[] tasks, int n) {
         // aaacc, 1
         // aaacc, 2
-        if (jobs == null || "".equals(jobs)) {
+        if (tasks == null || tasks.length == 0) {
             return "";
         }
 
@@ -29,7 +37,7 @@ public class JobSchedulingWithCoolOff {
         });
         final Map<Character, Integer> freq = new HashMap<>();
         final Map<Character, Integer> canBeExecutedTime = new HashMap<>();
-        for (final char c : jobs.toCharArray()) {
+        for (final char c : tasks) {
             freq.compute(c, (k, v) -> {
                 if (v == null) {
                     return 1;
@@ -56,7 +64,7 @@ public class JobSchedulingWithCoolOff {
                 if (scheduledJob.numJobs > 1) {
                     scheduledJob.numJobs--;
                     pq.offer(scheduledJob);
-                    canBeExecutedTime.put(scheduledJob.jobName, currentTime + coolOff);
+                    canBeExecutedTime.put(scheduledJob.jobName, currentTime + n);
                 }
             }
             for (final Job rejectedJob : rejectedJobs) {
