@@ -57,13 +57,13 @@ public class EqualKSubsetSum {
 
         for (int j = 0; j < subsets.size(); j++) {
             final List<Integer> currentSubset = subsets.get(j);
-            if (currentSubset.size() > 0 && subsetSums[j] + nums[i] <= expectedSum) {
+            if (currentSubset.size() > 0 ) {
                 currentSubset.add(nums[i]);
                 subsetSums[j] += nums[i];
                 backtrack(i + 1, nums, k, subsets, subsetSums);
                 currentSubset.remove(currentSubset.size() - 1);
                 subsetSums[j] -= nums[i];
-            } else if (subsetSums[j] + nums[i] <= expectedSum) {
+            } else  {
                 currentSubset.add(nums[i]);
                 subsetSums[j] += nums[i];
                 backtrack(i + 1, nums, k - 1, subsets, subsetSums);
