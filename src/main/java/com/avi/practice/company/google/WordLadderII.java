@@ -1,6 +1,7 @@
 package com.avi.practice.company.google;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -16,16 +17,120 @@ import java.util.Set;
  */
 public class WordLadderII {
 
-    private static final Pair marker = new Pair("", -1);
+    private static final String marker = "";
 
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
 
         boolean isStartWordInDict = false;
-        final Graph graph = new Graph();
-        for (int i = 0; i < wordList.size(); i++) {
-            if (beginWord.equals(wordList.get(i))) {
+        boolean isEndWordDict = false;
+
+        final Set<String> dict = new HashSet<>(wordList);
+        final Graph graph = buildGraph2(wordList);
+        for (final String word : wordList) {
+            if (!isStartWordInDict && beginWord.equals(word)) {
                 isStartWordInDict = true;
             }
+            if (!isEndWordDict && endWord.equals(word)) {
+                isEndWordDict = true;
+            }
+        }
+
+        if (!isEndWordDict) {
+            return Collections.emptyList();
+        }
+        if (!isStartWordInDict) {
+            updateGraph2(wordList, beginWord, graph);
+        }
+        final Set<String> visited = new HashSet<>();
+
+        int minDistance = 1;
+        final Queue<String> q = new LinkedList<>();
+
+        q.offer(beginWord);
+
+        q.offer(marker);
+        while (!q.isEmpty()) {
+            // remove mark* work add*
+            final String curr = q.poll();
+            if (curr.equals(marker)) {
+                if (!q.isEmpty()) {
+                    q.offer(marker);
+                    minDistance++;
+                }
+                continue;
+            }
+            if (visited.contains(curr)) {
+                continue;
+            }
+            visited.add(curr);
+            if (curr.equals(endWord)) {
+                break;
+            }
+            for (final String nextWord : graph.getNeighbours(curr)) {
+                if (visited.contains(nextWord)) {
+                    continue;
+                }
+                q.offer(nextWord);
+            }
+        }
+
+        final List<List<String>> result = new ArrayList<>();
+        visited.clear();
+        dfs(graph, beginWord, endWord, new ArrayList<>(), minDistance, visited, result);
+        return result;
+    }
+
+    private void updateGraph(Set<String> dict, Graph graph) {
+        for (final String word : dict) {
+            final StringBuilder sb = new StringBuilder(word);
+            for (int i = 0; i < word.length(); i++) {
+                final char curr = word.charAt(i);
+                for (char c = 'a'; c <= 'z'; c++) {
+                    if (curr == c) {
+                        continue;
+                    }
+                    sb.setCharAt(i, c);
+                    final String newWord = sb.toString();
+                    if (dict.contains(newWord)) {
+                        graph.addEdge(word, newWord);
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateGraph2(List<String> wordList, final String beginWord, Graph graph) {
+        for (final String word : wordList) {
+            if (isOneCharDiff(beginWord, word)) {
+                graph.addEdge(beginWord, word);
+            }
+        }
+    }
+
+    private Graph buildGraph(Set<String> dict) {
+        final Graph graph = new Graph();
+        for (final String word : dict) {
+            final StringBuilder sb = new StringBuilder(word);
+            for (int i = 0; i < word.length(); i++) {
+                final char curr = word.charAt(i);
+                for (char c = 'a'; c <= 'z'; c++) {
+                    if (curr == c) {
+                        continue;
+                    }
+                    sb.setCharAt(i, c);
+                    final String newWord = sb.toString();
+                    if (dict.contains(newWord)) {
+                        graph.addEdge(word, newWord);
+                    }
+                }
+            }
+        }
+        return graph;
+    }
+
+    private Graph buildGraph2(List<String> wordList) {
+        final Graph graph = new Graph();
+        for (int i = 0; i < wordList.size(); i++) {
             for (int j = 0; j < wordList.size(); j++) {
                 if (i == j) {
                     continue;
@@ -35,62 +140,41 @@ public class WordLadderII {
                 }
             }
         }
-        if (!isStartWordInDict) {
-            for (final String word : wordList) {
-                if (isOneCharDiff(beginWord, word)) {
-                    graph.addEdge(beginWord, word);
-                }
-            }
-        }
-        final Set<String> visited = new HashSet<>();
-        final List<List<String>> result = new ArrayList<>();
-        int distance = isStartWordInDict ? 0 : 1;
-        final Queue<Pair> q = new LinkedList<>();
-        final Pair start = new Pair(beginWord, distance);
-        final List<String> startPath = new ArrayList<>();
-        startPath.add(beginWord);
-        start.addPath(distance, startPath);
-        q.offer(start);
-        q.offer(marker);
-        int minDistance = -1;
-        while (!q.isEmpty()) {
-            // remove mark* work add*
-            final Pair curr = q.poll();
-            if (marker.node.equals(curr.node)) {
-                if (!q.isEmpty()) {
-                    q.offer(marker);
-                    distance++;
-                }
-            } else {
-                if (endWord.equals(curr.node)) {
-                    if (minDistance == -1) {
-                        minDistance = curr.distance;
-                        final List<List<String>> paths = curr.paths.get(curr.distance);
-                        for(final List<String> path : paths) {
-                            result.add(new ArrayList<>(path));
-                        }
-                    } else if (minDistance == curr.distance) {
-                        final List<List<String>> paths = curr.paths.get(curr.distance);
-                        for(final List<String> path : paths) {
-                            result.add(new ArrayList<>(path));
-                        }
-                    }
-                    continue;
-                }
-                if (visited.contains(curr.node)) {
-                    continue;
-                }
-                visited.add(curr.node);
-                for (final String next : graph.getNeighbours(curr.node)) {
-                    if (visited.contains(next)) {
-                        continue;
-                    }
-                    final Pair nextWord = new Pair(next, distance);
+        return graph;
+    }
 
-                }
-            }
+    private void dfs(
+            final Graph graph,
+            String beginWord,
+            String endWord,
+            ArrayList<String> curr,
+            int minDistance,
+            Set<String> visited,
+            List<List<String>> result) {
+        if (visited.contains(beginWord)) {
+            return;
         }
-        return result;
+        if (curr.size() > minDistance) {
+            return;
+        }
+        if (beginWord.equals(endWord)) {
+            if (curr.size() == minDistance - 1) {
+                curr.add(beginWord);
+                result.add(new ArrayList<>(curr));
+                curr.remove(curr.size() - 1);
+            }
+            return;
+        }
+        visited.add(beginWord);
+        curr.add(beginWord);
+        for (final String nextWord : graph.getNeighbours(beginWord)) {
+            if (visited.contains(nextWord)) {
+                continue;
+            }
+            dfs(graph, nextWord, endWord, curr, minDistance, visited, result);
+        }
+        visited.remove(beginWord);
+        curr.remove(curr.size() - 1);
     }
 
 
@@ -108,21 +192,6 @@ public class WordLadderII {
             }
         }
         return delta == 1;
-    }
-
-    private final static class Pair {
-        private final String node;
-        private final Map<Integer, List<List<String>>> paths = new HashMap<>();
-        private final int distance;
-
-        private Pair(final String node, final int distance) {
-            this.node = node;
-            this.distance = distance;
-        }
-
-        private void addPath(final int level, final List<String> path) {
-            this.paths.computeIfAbsent(level, k -> new ArrayList<>()).add(path);
-        }
     }
 
     private static final class Graph {
