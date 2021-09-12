@@ -61,15 +61,14 @@ public class Solution {
             final String prefix = sentence.substring(0, i + 1); // shesellsseas
             if (dict.contains(prefix)) {
                 dp[i + 1] = true;
-                continue;
-            }
-
-            for (int j = i; j >= 0; j--) { // 3
-                if (dp[j]) {  //
-                    final String suffix = sentence.substring(j, i + 1); // s
-                    if (dict.contains(suffix)) {
-                        dp[i + 1] = true;
-                        break;
+            } else {
+                for (int j = i; j >= 0; j--) { // 3
+                    if (dp[j]) {  //
+                        final String suffix = sentence.substring(j, i + 1); // s
+                        if (dict.contains(suffix)) {
+                            dp[i + 1] = true;
+                            break;
+                        }
                     }
                 }
             }
