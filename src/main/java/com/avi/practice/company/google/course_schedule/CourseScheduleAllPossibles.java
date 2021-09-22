@@ -1,10 +1,11 @@
 package com.avi.practice.company.google.course_schedule;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Created by navinash on 21/09/21.
@@ -13,69 +14,80 @@ import java.util.Stack;
  */
 public class CourseScheduleAllPossibles {
 
-    private static final int W = 0;
-    private static final int G = 1;
-    private static final int B = 2;
 
     private final Graph graph = new Graph();
-    private final Map<Integer, Integer> colors = new HashMap<>();
-    private final Stack<Integer> st = new Stack<>();
+    private final List<List<Integer>> allTopologicalSorts = new ArrayList<>();
+    private boolean[] visited;
+    private int numCourses;
 
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
+    public List<List<Integer>> findOrder(int numCourses, int[][] prerequisites) {
 
-        for(final int[] prereq : prerequisites) {
-            graph.addEdge(prereq[0], prereq[1]);
+        for (int[] preReq : prerequisites) {
+            graph.addEdge(preReq[0], preReq[1]);
         }
+        this.visited = new boolean[numCourses];
+        this.numCourses = numCourses;
 
-
-        for(int i = 0; i < numCourses; i++) {
-            if(colors.containsKey(i)) {
-                continue;
-            }
-            final boolean isPossible = dfs(i);
-            if(!isPossible) {
-                return new int[]{};
-            }
-        }
-        final int[] result = new int[st.size()];
-        int i = st.size() - 1;
-        while(i >= 0) {
-            result[i] = st.pop();
-            i--;
-        }
-        return result;
+        allTopologicalSortPaths(new ArrayList<>());
+        return allTopologicalSorts;
     }
 
-
-    private boolean dfs(final int node) {
-        colors.put(node, G);
-        for(final int ngh : graph.getNeighbours(node)) {
-            if(colors.containsKey(ngh)) {
-                final int color = colors.get(ngh);
-                if(color == G) {
-                    return false;
-                }
+    private void allTopologicalSortPaths(List<Integer> curr) {
+        for (int i = 0; i < numCourses; i++) {
+            if (visited[i] || graph.inDegree(i) != 0) {
                 continue;
             }
-            final boolean isCycle = dfs(ngh);
-            if(!isCycle) {
-                return false;
+
+            curr.add(i);
+            visited[i] = true;
+            for (final int ngh : graph.getNeighbours(i)) {
+                graph.decreaseInDegree(ngh);
+            }
+            allTopologicalSortPaths(curr);
+            curr.remove(curr.size() - 1);
+            visited[i] = false;
+            for (final int ngh : graph.getNeighbours(i)) {
+                graph.increaseInDegree(ngh);
             }
         }
-        colors.put(node, B);
-        st.push(node);
-        return true;
+
+        if (curr.size() == numCourses) {
+            allTopologicalSorts.add(new ArrayList<>(curr));
+        }
     }
 
     private static final class Graph {
-        private Map<Integer, Set<Integer>> adjList = new HashMap<>();
+        private final Map<Integer, Set<Integer>> adjList = new HashMap<>();
+        private final Map<Integer, Integer> inDegrees = new HashMap<>();
 
         private void addEdge(final int src, final int dst) {
             this.adjList.computeIfAbsent(src, k -> new HashSet<>()).add(dst);
+            this.inDegrees.compute(dst, (k, v) -> {
+                if (v == null) {
+                    return 1;
+                }
+                return v + 1;
+            });
         }
 
         private Set<Integer> getNeighbours(final int node) {
             return this.adjList.getOrDefault(node, new HashSet<>());
+        }
+
+        private int inDegree(final int node) {
+            return inDegrees.getOrDefault(node, 0);
+        }
+
+        private void decreaseInDegree(final int node) {
+            final int inDegree = inDegrees.getOrDefault(node, 0);
+            if (inDegree > 0) {
+                inDegrees.put(node, inDegree - 1);
+            }
+        }
+
+        private void increaseInDegree(final int node) {
+            final int inDegree = inDegrees.getOrDefault(node, 0);
+            inDegrees.put(node, inDegree + 1);
         }
     }
 }
