@@ -1,8 +1,11 @@
 package com.avi.practice.company.google.course_schedule;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by navinash on 22/09/21.
@@ -15,7 +18,9 @@ public class CourseSchedule3Test {
     public void getAllCourses() {
         final String[][] courses = getInput1();
         final CourseSchedule3 solver = new CourseSchedule3(courses);
-        System.out.println(solver.getAllCourses());
+        final Set<String> expected = new HashSet<>(Arrays.asList("Data Structures", "Networking", "Creative Writing", "Databases"));
+        final Set<String> actual = solver.getMidTermCourses();
+        Assert.assertEquals(expected, actual);
     }
 
     private static String[][] getInput1() {

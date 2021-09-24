@@ -1,7 +1,9 @@
 package com.avi.practice.company.google.course_schedule;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -82,6 +84,8 @@ import java.util.Set;
 public class CourseSchedule3 {
 
     private final Graph graph = new Graph();
+    private final List<List<String>> allPaths = new ArrayList<>();
+    private final Set<String> visited = new HashSet<>();
 
     public CourseSchedule3(final String[][] courses) {
         for (final String[] course : courses) {
@@ -89,18 +93,88 @@ public class CourseSchedule3 {
         }
     }
 
-    public final Set<String> getAllCourses() {
-        return graph.getAllNodes();
+    public Set<String> getMidTermCourses() {
+        final Set<String> midTermCourses = new HashSet<>();
+        getAllPaths(new ArrayList<>());
+        printAllPaths();
+        for (final List<String> path : allPaths) {
+            final int mid = path.size() / 2;
+            midTermCourses.add(path.get(mid));
+        }
+        return midTermCourses;
+    }
+
+    private void printAllPaths() {
+        int i = 1;
+        for (final List<String> path : allPaths) {
+            System.out.printf("------ %s ------", i);
+            System.out.println(path);
+            i++;
+        }
+    }
+
+    private void getAllPaths(final List<String> curr) {
+
+        for (final String course : graph.getAllNodes()) {
+            if (visited.contains(course) || graph.inDegree(course) != 0) {
+                continue;
+            }
+            visited.add(course);
+            curr.add(course);
+            for (final String nextCourse : graph.getNeighbours(course)) {
+                graph.decInDegree(nextCourse);
+            }
+
+            getAllPaths(curr);
+
+            visited.remove(course);
+            curr.remove(curr.size() - 1);
+            for (final String nextCourse : graph.getNeighbours(course)) {
+                graph.incInDegree(nextCourse);
+            }
+        }
+
+        if (curr.size() == graph.getAllNodes().size()) {
+            allPaths.add(new ArrayList<>(curr));
+        }
     }
 
     private static final class Graph {
         private final Map<String, Set<String>> adJList = new HashMap<>();
         private final Set<String> allNodes = new HashSet<>();
+        private final Map<String, Integer> inDegrees = new HashMap<>();
 
         private void addEdge(final String src, final String dst) {
             this.adJList.computeIfAbsent(src, k -> new HashSet<>()).add(dst);
             this.allNodes.add(src);
             this.allNodes.add(dst);
+
+            this.inDegrees.compute(dst, (k, v) -> {
+                if (v == null) {
+                    return 1;
+                }
+                return 1 + v;
+            });
+        }
+
+        private int inDegree(final String node) {
+            return this.inDegrees.getOrDefault(node, 0);
+        }
+
+        private void incInDegree(final String node) {
+            this.inDegrees.compute(node, (k, v) -> {
+                if (v == null) {
+                    return 1;
+                }
+                return 1 + v;
+            });
+        }
+
+        private void decInDegree(final String node) {
+            final int degree = inDegree(node);
+            if (degree > 0) {
+                this.inDegrees.put(node, degree - 1);
+            }
         }
 
         private Set<String> getAllNodes() {

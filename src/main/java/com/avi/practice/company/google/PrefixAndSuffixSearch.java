@@ -1,9 +1,10 @@
 package com.avi.practice.company.google;
 
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by navinash on 19/09/21.
@@ -28,84 +29,83 @@ public class PrefixAndSuffixSearch {
     }
 
     private static final class TrieNode {
-        private final TrieNode[] children = new TrieNode[26];
-        private final Set<Integer> wordIds = new HashSet<>();
+        private final TrieNode[] children = new TrieNode[27];
+        private final TreeSet<String> words = new TreeSet<>((a, b) -> {
+            if (b.length() != a.length()) {
+                return b.length() - a.length();
+            }
+            return b.compareTo(a);
+        });
     }
 
     private static final class Trie {
+        private static final String SEP = "{";
         private final TrieNode root = new TrieNode();
-        private final Map<String, Integer> idByWord = new HashMap<>();
-        private final Map<Integer, String> wordById = new HashMap<>();
-        private int counter = 0;
+        private final Map<String, Integer> wordIds = new HashMap<>();
+        int counter = 0;
 
-        private void addWord(final String word) {
+        public void addWord(String word) {
             if (word == null || word.length() == 0 || "".equals(word.trim())) {
                 return;
             }
-            final boolean isWordAlreadyExist = idByWord.containsKey(word);
-            idByWord.put(word, counter);
-            wordById.put(counter, word);
-            final int id = counter;
-            counter++;
 
-            if (isWordAlreadyExist) {
+            if (wordIds.containsKey(word)) {
+                wordIds.put(word, counter);
+                counter++;
                 return;
             }
-            TrieNode curr = root;
-            for (final char c : word.toLowerCase().toCharArray()) {
-                final int childIdx = c - 'a';
-                if (curr.children[childIdx] == null) {
-                    curr.children[childIdx] = new TrieNode();
-                }
-                curr.children[childIdx].wordIds.add(id);
-                curr = curr.children[childIdx];
+            wordIds.put(word, counter);
+            counter++;
+            // apple
+            // {apple
+            // e{apple
+            // le{apple
+            // ple{apple
+            // pple{apple
+            // apple{apple
+
+            for (int i = word.length(); i >= 0; i--) {
+                final String prefix = word.substring(i);
+                _addWord(word, prefix + SEP + word);
             }
         }
 
-        private Set<Integer> prefixSearch(final String prefix) {
-            if (prefix == null || prefix.length() == 0 || "".equals(prefix.trim())) {
-                return new HashSet<>();
-            }
-
+        public Set<String> search(final String s) {
             TrieNode curr = root;
-            final Set<Integer> wordIds = new HashSet<>();
-            boolean isFound = true;
-            for (final char c : prefix.toLowerCase().toCharArray()) {
-                final int childIdx = c - 'a';
-                if (curr.children[childIdx] == null) {
-                    isFound = false;
-                    break;
+            for (final char c : s.toCharArray()) {
+                final int idx = c - 'a';
+                if (curr.children[idx] == null) {
+                    return Collections.emptySet();
                 }
-                curr = curr.children[childIdx];
+                curr = curr.children[idx];
             }
-            if (isFound) {
-                wordIds.addAll(curr.wordIds);
-            }
-            return wordIds;
+            // found the word
+            // get ids
+            return new TreeSet<>(curr.words);
+
         }
 
-        private int filter(final String prefix, final String suffix) {
-            final Set<Integer> wordIds = prefixSearch(prefix);
-            if (wordIds.size() == 0) {
+        private void _addWord(final String word, final String s) {
+            TrieNode curr = root;
+            for (final char c : s.toCharArray()) {
+                final int idx = c - 'a';
+                if (curr.children[idx] == null) {
+                    curr.children[idx] = new TrieNode();
+
+                }
+                curr.children[idx].words.add(word);
+                curr = curr.children[idx];
+            }
+        }
+
+        public int filter(String prefix, String suffix) {
+            final Set<String> words = search(suffix + SEP + prefix);
+            if (words.size() == 0) {
                 return -1;
             }
-            String result = "";
-            int maxLen = 0;
-            int id = -1;
-            for (final int wordId : wordIds) {
-                final String word = wordById.get(wordId);
-                if (word.endsWith(suffix)) {
-                    if (maxLen < word.length()) {
-                        result = word;
-                        maxLen = word.length();
-                        id = idByWord.get(word);
-                    } else if (maxLen == word.length() && word.compareTo(result) > 0) {
-                        result = word;
-                        id = idByWord.get(word);
-                    }
-                }
-            }
-            return id;
+
+            return wordIds.get(words.iterator().next());
+
         }
     }
 }
