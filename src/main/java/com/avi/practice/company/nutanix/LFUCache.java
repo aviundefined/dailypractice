@@ -9,160 +9,113 @@ import java.util.Map;
  * -- VMware Confidential
  */
 public class LFUCache {
-    private final int capacity;
-    private final Map<Integer, DoublyLinkedList<Node>> headPtrByFrequency = new HashMap<>();
-    private final Map<Integer, Node> nodesByKey = new HashMap<>();
-    private int size;
-    private int minFrequency = Integer.MAX_VALUE;
 
-    LFUCache(int capacity) {
+    private final Map<Integer, Node> cache = new HashMap<>();
+    private final Map<Integer, LRU> lruByFreq = new HashMap<>();
+    private final int capacity;
+    private int minFreq = 1;
+
+    public LFUCache(int capacity) {
         this.capacity = capacity;
-        size = 0;
-        minFrequency = 0;
     }
 
-    int get(final int key) {
-        // Get the Key
-        final Node node = nodesByKey.get(key);
+    public int get(int key) {
+        final Node node = this.cache.get(key);
         if (node == null) {
             return -1;
         }
-        return updateNode(key, node);
-    }
-
-    private int updateNode(int key, Node node) {
-        final int oldFrequency = node.frequency;
-        // Remove from oldFrequency LRUCache
-        final DoublyLinkedList<Node> oldList = headPtrByFrequency.get(oldFrequency);
-        if (oldList != null) {
-            oldList.remove(node);
-            if (oldList.size == 0) {
-                this.headPtrByFrequency.remove(oldFrequency);
-            }
-            if (minFrequency > oldFrequency && oldList.size > 0) {
-                minFrequency = oldFrequency;
-            }
-        }
-        // if present the,
-        final int newFrequency = node.incrementFrequency();
-        // Add in newFrequency LRUCache
-        final DoublyLinkedList<Node> newList = headPtrByFrequency.computeIfAbsent(newFrequency, f -> new DoublyLinkedList<>());
-        newList.addToHead(key, newFrequency);
-
-        if (minFrequency > newFrequency && newList.size > 0) {
-            minFrequency = newFrequency;
-        }
+        updateNode(node);
         return node.value;
     }
 
-    void put(int key, int value) {
-        // if key is present then
-        // the flow is pretty much same as get
-        // only difference is update the new value then
-        // delete from old frequency doubly linked list
-        // add in new frequency doubly linked list
-        final Node node = nodesByKey.get(key);
-        if (node != null) {
-            node.value = value;
-            updateNode(key, node);
-        } else {
-            // if node not present
-            // then add in frequency 1 list
-            final DoublyLinkedList<Node> newList = headPtrByFrequency.computeIfAbsent(1, f -> new DoublyLinkedList<>());
-            // add node in newList
-            final LFUCache.Node newNode = newList.addToHead(key, value);
-            nodesByKey.put(key, newNode);
-            size++;
-            if (size > capacity) {
-                this.size--;
-                // remove tail from minimumFrequency
-                final DoublyLinkedList<Node> minFreqList = headPtrByFrequency.get(minFrequency);
-                minFreqList.popFromTail();
-                if (minFreqList.size == 0) {
-                    for (final Map.Entry<Integer, DoublyLinkedList<Node>> e : headPtrByFrequency.entrySet()) {
-                        if (e.getValue().size > 0 && e.getKey() < minFrequency) {
-                            minFrequency = e.getKey();
-                        }
-                    }
-                }
+    public void put(int key, int value) {
+        Node node = this.cache.get(key);
+        if (node == null) {
+            node = new Node(key, value);
+            this.cache.put(key, node);
+            this.lruByFreq.computeIfAbsent(node.frequency, k -> new LRU()).addNode(node);
+
+            if (this.cache.size() > capacity) {
+                final LRU minFreqLRU = this.lruByFreq.computeIfAbsent(minFreq, k -> new LRU());
+                final Node deleteNode = minFreqLRU.popTail();
+                this.cache.remove(deleteNode.key);
             }
+            minFreq = 1;
+        } else {
+            node.value = value;
+            updateNode(node);
         }
     }
 
+    private void updateNode(final Node node) {
+        // check current node frequency and inrease it
+        final int oldFreq = node.frequency;
+        // remove node from old freq
+        final LRU oldLRU = lruByFreq.computeIfAbsent(oldFreq, k -> new LRU());
+        oldLRU.deleteNode(node);
+        // increase freqency
+        node.frequency++;
+        // add node in new frequency
+        final LRU newLRU = lruByFreq.computeIfAbsent(node.frequency, k -> new LRU());
+        newLRU.addNode(node);
+
+        // old LRU has no element so now there is a chance that minFreq has to update
+        if (oldLRU.size == 0 && minFreq == oldFreq) {
+            minFreq = node.frequency;
+        }
+    }
+
+    private static final class LRU {
+        private final Node head = new Node(0, 0);
+        private final Node tail = new Node(0, 0);
+        private int size = 0;
+
+        private LRU() {
+            head.next = tail;
+            tail.prev = head;
+        }
+
+        private void addNode(final Node node) {
+            node.prev = head;
+            node.next = head.next;
+            head.next.prev = node;
+            head.next = node;
+            size++;
+        }
+
+        private void deleteNode(final Node node) {
+            final Node prev = node.prev;
+            final Node next = node.next;
+            prev.next = next;
+            next.prev = prev;
+            size--;
+        }
+
+        private void moveToHead(final Node node) {
+            deleteNode(node);
+            addNode(node);
+        }
+
+        private Node popTail() {
+            final Node tailNode = tail.prev;
+            deleteNode(tailNode);
+            return tailNode;
+        }
+
+    }
 
     private static final class Node {
         private final int key;
         private int value;
         private int frequency;
-        private Node prev;
+
         private Node next;
+        private Node prev;
 
-        private Node(final int key) {
+        private Node(final int key, final int value) {
             this.key = key;
+            this.value = value;
             this.frequency = 1;
-        }
-
-        private int incrementFrequency() {
-            return ++this.frequency;
-        }
-    }
-
-    private static final class DoublyLinkedList<Node> {
-        private LFUCache.Node head;
-        private LFUCache.Node tail;
-        private int size = 0;
-
-
-        public LFUCache.Node addToHead(int key, int value) {
-            final LFUCache.Node node = new LFUCache.Node(key);
-            node.value = value;
-            if (this.size == 0) {
-                this.head = node;
-                this.tail = node;
-            } else {
-                this.head.prev = node;
-                node.next = head;
-                this.head = node;
-            }
-            this.size++;
-            return node;
-        }
-
-
-        public LFUCache.Node popFromTail() {
-            if (this.size == 0) {
-                return null;
-            }
-
-            final LFUCache.Node currentTail = this.tail;
-            if (this.size == 1) {
-                this.head = null;
-                this.tail = null;
-            } else {
-                this.tail = currentTail.prev;
-                this.tail.next = null;
-                currentTail.prev = null;
-            }
-            this.size--;
-            return currentTail;
-        }
-
-        public void remove(final LFUCache.Node node) {
-            if (node == null) {
-                return;
-            }
-            if (this.size == 0) {
-                return;
-            }
-            final LFUCache.Node prev = node.prev;
-            final LFUCache.Node next = node.next;
-            if (prev != null) {
-                prev.next = next;
-            }
-            if (next != null) {
-                next.prev = prev;
-            }
-            this.size--;
         }
     }
 
