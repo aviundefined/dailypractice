@@ -17,7 +17,7 @@ public class SnakeGame {
     private final int width;
     private final int height;
     private final Set<Cell> occupied = new HashSet<>();
-    private Deque<Cell> snake = new ArrayDeque<>();
+    private final Deque<Cell> snake = new ArrayDeque<>();
     private int foodIndex = 0;
 
     public SnakeGame(int width, int height, int[][] food) {
@@ -63,10 +63,7 @@ public class SnakeGame {
     }
 
     private boolean hasHitWall(final Cell head) {
-        if (head.x < 0 || head.y < 0 || head.x >= height || head.y >= width) {
-            return true;
-        }
-        return false;
+        return head.x < 0 || head.y < 0 || head.x >= height || head.y >= width;
     }
 
     private enum Dir {
