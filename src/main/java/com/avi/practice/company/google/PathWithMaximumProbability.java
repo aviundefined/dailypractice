@@ -26,6 +26,7 @@ public class PathWithMaximumProbability {
             return Double.compare(b.cost, a.cost);
         });
 
+
         pq.offer(new PathWithCost(start, 1.00D));
         final Set<Integer> visited = new HashSet<>();
         while (!pq.isEmpty()) {
