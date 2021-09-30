@@ -17,7 +17,7 @@ public class SplitLinkedListParts {
         System.out.printf("sizes: %s\n", Arrays.toString(sizes));
         final ListNode[] result = new ListNode[k];
         ListNode curr = head;
-        for(int i = 0; i < k; i++) {
+        for (int i = 0; i < k; i++) {
             final Pair split = split(curr, sizes[i]);
             result[i] = split.newHead;
             curr = split.curr;
@@ -25,34 +25,26 @@ public class SplitLinkedListParts {
         return result;
     }
 
-    public  Pair split(final ListNode head, final int numElements) {
-        if(numElements == 0) {
+    public Pair split(ListNode curr, final int numElements) {
+        if (numElements == 0) {
             return new Pair(null, null);
         }
-        ListNode newHead = new ListNode(head.val);
-        ListNode newCurr = newHead;
-        ListNode curr = head;
+        ListNode root = curr;
         int i = 1;
-        while (i < numElements && curr.next != null) {
-            newCurr.next = new ListNode(curr.next.val);
+        while (i < numElements && curr != null) {
             curr = curr.next;
-            newCurr = newCurr.next;
             i++;
         }
-        return new Pair(newHead, curr.next);
-
-    }
-
-    static final class Pair {
-         final ListNode newHead;
-         final ListNode curr;
-
-
-        private Pair(ListNode newHead, ListNode curr) {
-            this.newHead = newHead;
-            this.curr = curr;
+        if (curr != null) {
+            ListNode prev = curr;
+            curr = curr.next;
+            prev.next = null;
+            return new Pair(root, curr);
+        } else {
+            return new Pair(root, null);
         }
     }
+
     private int size(final ListNode head) {
         int size = 0;
         ListNode curr = head;
@@ -83,6 +75,17 @@ public class SplitLinkedListParts {
         return sizes;
     }
 
+    static final class Pair {
+        final ListNode newHead;
+        final ListNode curr;
+
+
+        private Pair(ListNode newHead, ListNode curr) {
+            this.newHead = newHead;
+            this.curr = curr;
+        }
+    }
+
     public static final class ListNode {
         int val;
         ListNode next;
@@ -100,7 +103,7 @@ public class SplitLinkedListParts {
         }
 
         public static void print(final ListNode head) {
-            if(head == null) {
+            if (head == null) {
                 System.out.println("null");
                 return;
             }
