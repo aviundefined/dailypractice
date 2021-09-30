@@ -21,15 +21,15 @@ public class PartitionKEqualSumSubsets {
         this.arr = arr;
         this.k = k;
 
-        int totalArraySum = 0;
+        int totalSum = 0;
         int n = arr.length;
 
-        for (int i = 0; i < n; ++i) {
-            totalArraySum += arr[i];
+        for (int j : arr) {
+            totalSum += j;
         }
 
         // If total sum not divisible by k, we can't make subsets.
-        if (totalArraySum % k != 0) {
+        if (totalSum % k != 0) {
             return false;
         }
 
@@ -37,7 +37,7 @@ public class PartitionKEqualSumSubsets {
         Arrays.sort(arr);
         reverse(arr);
 
-        this.targetSum = totalArraySum / k;
+        this.targetSum = totalSum / k;
         this.visited = new boolean[n];
 
         return backtrack(0, 0, 0);
