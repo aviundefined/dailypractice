@@ -1,8 +1,6 @@
 package com.avi;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,27 +18,19 @@ public class Solution {
      */
 
     public static void main(String[] args) {
-        final Solution solution = new Solution();
-        final List<String> list = Arrays.asList("in", "sells", "seas", "she", "seashells", "sea");
-        final Set<String> dict = new HashSet<>(list);
-        {
-            final String sentence = "seashells";
-            System.out.println(solution.canMakeSentence(sentence, dict));
-        }
-        {
-            final String sentence = "shesellsseas";
-            System.out.println(solution.canMakeSentence(sentence, dict));
-        }
-        {
-            final String sentence = "shesellsseashellsinseas";
-            // she-sells-seashells-in-seas
-            System.out.println(solution.canMakeSentence(sentence, dict));
-        }
-        // seashells -> true
-        // shesellsseas
-        // shesellseashellsinseas -> true
+       bitPlay();
     }
 
+
+    private static void bitPlay() {
+        final int n  = 5;
+        final int k = 3;
+        final int x = 1 << n;
+        final int y = 1 << (n - k);
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(x - y);
+    }
     private boolean canMakeSentence(final String sentence, final Set<String> dict) {
         if (sentence == null || sentence.length() == 0 || "".equals(sentence.trim())) {
             return true;
