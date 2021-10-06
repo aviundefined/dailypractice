@@ -10,19 +10,19 @@ public class MinimumSpeedToArriveOnTime {
     public int minSpeedOnTime(int[] dist, double hour) {
 
         final int hourInt = (int) Math.ceil(hour);
-        if(hourInt < dist.length) {
+        if (hourInt < dist.length) {
             return -1;
         }
         int low = 1;
         int high = Integer.MAX_VALUE;
         int min = Integer.MAX_VALUE;
 
-        while(low <= high) {
-            final int mid = low + (high - low)/2;
-            if(canReachOffice(mid, hour, dist)) {
+        while (low <= high) {
+            final int mid = low + (high - low) / 2;
+            if (canReachOffice(mid, hour, dist)) {
                 min = Math.min(mid, min);
                 high = mid - 1;
-            }else {
+            } else {
                 low = mid + 1;
             }
         }
@@ -30,23 +30,13 @@ public class MinimumSpeedToArriveOnTime {
     }
 
 
-    private boolean canReachOffice(int speed, double hour, final int[] dist ) {
-        int i = 0;
-        while(i < dist.length - 1) {
-            final int req = dist[i] % speed == 0 ? dist[i]  / speed : (dist[i] / speed) + 1;
-            if(req > hour) {
-                return false;
-            }
-            hour = hour - req;
-            if(hour <= 0) {
-                return false;
-            }
-            i++;
+    private boolean canReachOffice(int speed, double hour, final int[] dist) {
+        double time = 0;
+        for (int i = 0; i < dist.length - 1; i++) {
+            final int curr = dist[i] % speed == 0 ? dist[i] / speed : dist[i] / speed + 1;
+            time += curr;
         }
-        final double lastStopTime = dist[dist.length - 1] * 1.00D / speed;
-        if(lastStopTime <= hour) {
-            return true;
-        }
-        return false;
+        time += (dist[dist.length - 1] * 1.00D / speed);
+        return time <= hour;
     }
 }
