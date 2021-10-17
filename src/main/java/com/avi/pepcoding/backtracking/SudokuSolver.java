@@ -122,78 +122,74 @@ public class SudokuSolver {
     }
 
     private static final class Solution {
-        private static final char EMPTY = '.';
+        private static final char E = '.';
+        private char[][] board;
+        private int n;
+        private int gridSize;
         private final char[] chars = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-
         public void solveSudoku(char[][] board) {
-            final int n = board.length;
+            if(board == null || board.length == 0) {
+                return;
+            }
+            this.board = board;
+            this.n = board.length;
             final int gridSize = (int) Math.sqrt(n);
+            this.gridSize = gridSize;
 
-            backtrack(0, 0, board, n, gridSize);
+            solve(0, 0, board);
         }
 
-        private boolean backtrack(
-                final int row,
-                final int col,
-                final char[][] board,
-                final int n,
-                final int gridSize) {
-            if (row == n) {
-                print(board);
+        private boolean solve(final int row, final int col, final char[][] board) {
+            if(row >= n) {
+                print("solution", board);
                 return true;
             }
-
             final int nextRow;
             final int nextCol;
-            if (col == n - 1) {
+            if(col == n - 1) {
                 nextRow = row + 1;
                 nextCol = 0;
-            } else {
+            }else {
                 nextRow = row;
                 nextCol = col + 1;
             }
+
             boolean solved = false;
-            if (board[row][col] == EMPTY) {
-                for (char c : chars) {
-                    if (canPlace(c, row, col, board, n, gridSize)) {
-                        board[row][col] = c;
-                        solved = backtrack(nextRow, nextCol, board, n, gridSize);
-                        board[row][col] = EMPTY;
+            if(board[row][col] == E) {
+                for(final char val : chars) {
+                    if(canPlace(row, col, val)) {
+                        board[row][col] = val;
+                        solved = solve(nextRow, nextCol, board);
+                        board[row][col] = E;
                     }
                 }
-            } else {
-                solved = backtrack(nextRow, nextCol, board, n, gridSize);
+            }else {
+                solved = solve(nextRow, nextCol, board);
             }
             return solved;
         }
 
-        private boolean canPlace(
-                final char c,
-                final int row,
-                final int col,
-                final char[][] board,
-                final int n,
-                final int gridSize) {
-            // check if same row doesn't have same char already
-            for (int j = 0; j < n; j++) {
-                if (board[row][j] == c) {
+        private boolean canPlace(final int row, final int col, final char val) {
+            // check if same value is not in row
+            for(int j = 0; j < n; j++) {
+                if(board[row][j] == val) {
                     return false;
                 }
             }
 
-            // check if same col doesn't have same char already
-            for (int i = 0; i < n; i++) {
-                if (board[i][col] == c) {
+            // check if same value is not in col
+            for(int i = 0; i < n; i++) {
+                if(board[i][col] == val) {
                     return false;
                 }
             }
 
-            // check if same col doesn't have same char already
-            final int gridStartRow = (row / gridSize) * gridSize;
-            final int gridStartCol = (col / gridSize) * gridSize;
-            for (int i = 0; i < gridSize; i++) {
-                for (int j = 0; j < gridSize; j++) {
-                    if (board[gridStartRow + i][gridStartCol + j] == c) {
+            // check in grid
+            final int startRow = (row / gridSize) * gridSize;
+            final int startCol = (col / gridSize) * gridSize;
+            for(int i = 0; i < gridSize; i++) {
+                for(int j = 0; j < gridSize; j++) {
+                    if(board[startRow + i][startCol + j] == val) {
                         return false;
                     }
                 }
@@ -201,9 +197,10 @@ public class SudokuSolver {
             return true;
         }
 
-        private void print(final char[][] board) {
-            for (char[] row : board) {
-                System.out.println(row);
+        private void print(final String tag, final char[][] grid) {
+            System.out.printf("------ %s -------\n", tag);
+            for(final char[] row : grid) {
+                System.out.println(Arrays.toString(row));
             }
         }
     }
