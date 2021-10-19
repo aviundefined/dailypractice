@@ -1,5 +1,8 @@
 package com.avi.practice.company.google;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by navinash on 18/10/21.
  * Copyright 2019 VMware, Inc.  All rights reserved.
@@ -51,5 +54,51 @@ public class PrintDiagonalZigZag {
                 isDown = !isDown;
             }
         }
+    }
+
+    final int UP = 0;
+    final int DOWN = 1;
+    public List<Integer> getZigZag(int[][] matrix) {
+        final int m = matrix.length;
+        final int n = matrix[0].length;
+        int dir = DOWN;
+        int x = m-1, y = 0;//start
+        List<Integer> list = new ArrayList<>();
+
+        while (true) {
+            list.add(matrix[x][y]);
+            if (x == 0 && y == n-1)
+                break;
+            if (dir == DOWN) {
+                if (x == m-1 && y == n-1) {//right bottom
+                    dir = UP;
+                    x--;//same column, moving up from right bottom
+                } else if (x == m-1) {//hit last row
+                    dir = UP;
+                    y++;//just move column to right
+                } else if (y == n-1) {//hit last column
+                    dir = UP;
+                    x--;//move row up
+                } else {//not boundary condition
+                    x++; y++;//DONT update direction
+                }
+            } else {//dir == UP
+                if (x == 0 && y == 0) {//left up
+                    dir = DOWN;
+                    y++;//same row, moving right from left up
+                } else if (x == 0) {//hit first row
+                    dir = DOWN;
+                    y++;//just move column to right
+                } else if (y == 0) {//hit first column
+                    dir = DOWN;
+                    x--;//move row up
+                } else {//not boundary condition
+                    x--; y--;//DONT update direction
+                }
+            }
+        }//while
+
+
+        return list;
     }
 }

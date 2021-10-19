@@ -2,6 +2,8 @@ package com.avi.practice.company.google;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -34,6 +36,34 @@ public class PrintDiagonalZigZagTest {
 
         };
         solver.print(arr);
+        System.out.println("------------------");
+    }
+
+    @Test
+    public void print_Rahul_Appraoch1() {
+        final PrintDiagonalZigZag solver = new PrintDiagonalZigZag();
+        final int[][] arr = {
+                {4, 9, 10, 12},
+                {3, 5, 8, 11},
+                {1, 2, 6, 7}
+        };
+        final List<Integer> zigZag = solver.getZigZag(arr);
+        System.out.println(zigZag);
+        System.out.println("------------------");
+    }
+
+    @Test
+    public void print_Rahul_Appraoch2() {
+        final PrintDiagonalZigZag solver = new PrintDiagonalZigZag();
+        final int[][] arr = {
+                {10, 11, 17, 18, 20},
+                {4, 9, 12, 16, 19},
+                {3, 5, 8, 13, 15},
+                {1, 2, 6, 7, 14}
+
+        };
+        final List<Integer> zigZag = solver.getZigZag(arr);
+        System.out.println(zigZag);
         System.out.println("------------------");
     }
 }
