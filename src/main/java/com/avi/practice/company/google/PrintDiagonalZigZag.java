@@ -10,6 +10,9 @@ import java.util.List;
  */
 public class PrintDiagonalZigZag {
 
+    final int UP = 0;
+    final int DOWN = 1;
+
     public void print(final int[][] arr) {
         final int m = arr.length;
         final int n = arr[0].length;
@@ -27,6 +30,10 @@ public class PrintDiagonalZigZag {
                     row++;
                     col++;
                 }
+                if (done > m * n) {
+                    break;
+                }
+                // row >= m || col >= n
                 if (row >= m && col < n) {
                     i = row - 1;
                     j = col;
@@ -34,7 +41,7 @@ public class PrintDiagonalZigZag {
                     i = row - 2;
                     j = col - 1;
                 }
-                isDown = !isDown;
+                isDown = false;
             } else {
                 int row = i;
                 int col = j;
@@ -44,6 +51,9 @@ public class PrintDiagonalZigZag {
                     row--;
                     col--;
                 }
+                if (done > m * n) {
+                    break;
+                }
                 if (col < 0 && row >= 0) {
                     i = row;
                     j = col + 1;
@@ -51,36 +61,34 @@ public class PrintDiagonalZigZag {
                     i = row + 1;
                     j = col + 2;
                 }
-                isDown = !isDown;
+                isDown = true;
             }
         }
     }
 
-    final int UP = 0;
-    final int DOWN = 1;
     public List<Integer> getZigZag(int[][] matrix) {
         final int m = matrix.length;
         final int n = matrix[0].length;
         int dir = DOWN;
-        int x = m-1, y = 0;//start
+        int x = m - 1, y = 0;//start
         List<Integer> list = new ArrayList<>();
 
         while (true) {
             list.add(matrix[x][y]);
-            if (x == 0 && y == n-1)
-                break;
+            if (x == 0 && y == n - 1) { break; }
             if (dir == DOWN) {
-                if (x == m-1 && y == n-1) {//right bottom
+                if (x == m - 1 && y == n - 1) {//right bottom
                     dir = UP;
                     x--;//same column, moving up from right bottom
-                } else if (x == m-1) {//hit last row
+                } else if (x == m - 1) {//hit last row
                     dir = UP;
                     y++;//just move column to right
-                } else if (y == n-1) {//hit last column
+                } else if (y == n - 1) {//hit last column
                     dir = UP;
                     x--;//move row up
                 } else {//not boundary condition
-                    x++; y++;//DONT update direction
+                    x++;
+                    y++;//DONT update direction
                 }
             } else {//dir == UP
                 if (x == 0 && y == 0) {//left up
@@ -93,7 +101,8 @@ public class PrintDiagonalZigZag {
                     dir = DOWN;
                     x--;//move row up
                 } else {//not boundary condition
-                    x--; y--;//DONT update direction
+                    x--;
+                    y--;//DONT update direction
                 }
             }
         }//while
