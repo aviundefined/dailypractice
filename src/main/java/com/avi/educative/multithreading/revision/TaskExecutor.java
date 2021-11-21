@@ -59,8 +59,8 @@ public class TaskExecutor {
                     }
                     condition.await(sleep, TimeUnit.MILLISECONDS);
                 }
-                final Task cb = pq.poll();
-                System.out.println(cb.message);
+                final Task task = pq.poll();
+                _execute(task);
                 lock.unlock();
             } catch (final InterruptedException ignore) {
 
@@ -68,6 +68,10 @@ public class TaskExecutor {
                 lock.unlock();
             }
         }
+    }
+
+    private void _execute(Task task) {
+        System.out.println(task.message);
     }
 
     public static final class Task {
