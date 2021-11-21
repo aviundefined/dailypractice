@@ -1,6 +1,7 @@
 package com.avi.educative.multithreading.revision;
 
 import java.util.PriorityQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -11,30 +12,34 @@ import java.util.concurrent.locks.ReentrantLock;
  * Copyright 2019 VMware, Inc.  All rights reserved.
  * -- VMware Confidential
  */
-public class TaskExecutor {
+public class TaskExecutor implements ITaskExecutor {
 
     private final Lock lock;
     private final Condition condition;
-    private final PriorityQueue<Task> pq;
+    private final PriorityQueue<ITaskExecutor.Task> pq;
     private final Thread executor;
+    private final ThreadPool pool;
 
-    public TaskExecutor() {
+    public TaskExecutor(final int maxConcurrentTasks) {
         this.lock = new ReentrantLock();
         this.condition = lock.newCondition();
-        this.pq = new PriorityQueue<>((c1, c2) -> (int) (c1.startTimeInMillis - c2.startTimeInMillis));
+        this.pq = new PriorityQueue<>((c1, c2) -> (int) (c1.getStartTimeInMillis() - c2.getStartTimeInMillis()));
         this.executor = new Thread(this::execute);
         this.executor.setDaemon(true);
+        // Forgot for now
+        this.pool = new ThreadPool(maxConcurrentTasks);
     }
 
     public final void start() {
         this.executor.start();
+        this.pool.start();
     }
 
     public final void stop() {
         this.executor.interrupt();
     }
 
-    public void register(final Task task) {
+    public void register(final ITaskExecutor.Task task) {
         lock.lock();
         try {
             pq.offer(task);
@@ -47,40 +52,82 @@ public class TaskExecutor {
     private void execute() {
         while (true) {
             lock.lock();
+            ITaskExecutor.Task task = null;
             try {
                 while (pq.isEmpty()) {
                     condition.await();
                 }
-
                 while (!pq.isEmpty()) {
-                    final long sleep = (pq.peek().startTimeInMillis - System.currentTimeMillis());
+                    final long sleep = getSleepTime(pq.peek());
                     if (sleep <= 0) {
                         break;
                     }
                     condition.await(sleep, TimeUnit.MILLISECONDS);
                 }
-                final Task task = pq.poll();
-                _execute(task);
-                lock.unlock();
-            } catch (final InterruptedException ignore) {
+                task = pq.poll();
+            } catch (final InterruptedException ignored) {
 
             } finally {
                 lock.unlock();
             }
+            _execute(task);
         }
     }
 
-    private void _execute(Task task) {
-        System.out.println(task.message);
+    private long getSleepTime(Task peek) {
+        return peek.getStartTimeInMillis() - System.currentTimeMillis();
     }
 
-    public static final class Task {
-        private final long startTimeInMillis;
-        private final String message;
+    private void _execute(ITaskExecutor.Task task) {
+        this.pool.execute(task);
+    }
 
-        private Task(final int startAfterMillis, final String message) {
-            this.startTimeInMillis = (startAfterMillis * 1000L) + System.currentTimeMillis();
-            this.message = message;
+    public static final class ThreadPool {
+        private final LinkedBlockingDeque<ITaskExecutor.Task> queue = new LinkedBlockingDeque<>();
+        private final Worker[] workers;
+
+        private ThreadPool(final int size) {
+            this.workers = new Worker[size];
+            for (int i = 0; i < size; i++) {
+                this.workers[i] = new Worker();
+            }
+        }
+
+        public final void start() {
+            for (Worker worker : this.workers) {
+                worker.start();
+            }
+        }
+
+        public final void execute(ITaskExecutor.Task task) {
+            synchronized (queue) {
+                queue.offer(task);
+                queue.notify();
+            }
+        }
+
+        private final class Worker extends Thread {
+            @Override
+            public void run() {
+                while (true) {
+                    ITaskExecutor.Task task;
+                    synchronized (queue) {
+                        while (queue.isEmpty()) {
+                            try {
+                                wait();
+                            } catch (InterruptedException ignored) {
+                                // ignore so that it should be running
+                            }
+                        }
+                        task = queue.poll();
+                    }
+                    try {
+                        task.execute();
+                    } catch (final Exception ignored) {
+                        // ignore so that it should be running
+                    }
+                }
+            }
         }
     }
 }
