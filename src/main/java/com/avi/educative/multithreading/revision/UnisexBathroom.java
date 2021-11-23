@@ -14,7 +14,7 @@ public class UnisexBathroom {
         FEMALE,
         NONE
     }
-
+    
     private int numberOfEmployeesInBathroom = 0;
     private Gender usedBy = Gender.NONE;
 
