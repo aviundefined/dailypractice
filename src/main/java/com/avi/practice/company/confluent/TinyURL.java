@@ -15,7 +15,7 @@ public class TinyURL {
     private static final char[] charSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
     private static final int length = charSet.length;
     private static final int NUM = 26;
-    private final Map<Long, String> shortUrlById = new HashMap<>();
+    private final Map<Long, String> urlById = new HashMap<>();
     private final ReentrantLock encodeLock = new ReentrantLock();
 
     public String encode(final String url) {
@@ -23,7 +23,7 @@ public class TinyURL {
         try {
             final long id = getNewId();
             final String shortUrl = _encode(id);
-            shortUrlById.put(id, url);
+            urlById.put(id, url);
             return shortUrl;
         } finally {
             encodeLock.unlock();
@@ -32,8 +32,8 @@ public class TinyURL {
 
     public String decode(final String shortUrl) {
         final long id = _decode(shortUrl);
-        if (shortUrlById.containsKey(id)) {
-            return shortUrlById.get(id);
+        if (urlById.containsKey(id)) {
+            return urlById.get(id);
         }
         throw new IllegalArgumentException("Invalid shortUrl: " + shortUrl);
     }
@@ -66,7 +66,7 @@ public class TinyURL {
 
     private long getNewId() {
         long id = new Random().nextLong();
-        while (id <= 0 || shortUrlById.containsKey(id)) {
+        while (id <= 0 || urlById.containsKey(id)) {
             id = new Random().nextLong();
         }
         return id;
