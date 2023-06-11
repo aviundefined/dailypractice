@@ -27,7 +27,7 @@ public class RateLimiterWithBackgroundThread {
         this.tokenGenerator.interrupt();
     }
 
-    public final synchronized void getToken() throws InterruptedException {
+    public final void getToken() throws InterruptedException {
         synchronized (lock) {
             while (possibleLocks == 0) {
                 lock.wait();
