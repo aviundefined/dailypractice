@@ -1,7 +1,10 @@
 package com.avi;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 /**
  * Created by navinash on 31/08/21.
@@ -63,6 +66,13 @@ public class Solution {
                 }
             }
         }
+        Map<String, Integer> a = new HashMap<>();
+        a.compute("avi", (k, v) -> {
+            if (v == null) {
+                return 1;
+            }
+            return v + 1;
+        });
         return dp[n];
     }
 }
